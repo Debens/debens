@@ -1,0 +1,34 @@
+{
+  "name": "@training/mobile-testing",
+  "version": "0.0.1",
+  "description": "> TODO: description",
+  "homepage": "",
+  "license": "MIT",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "compile": "yarn build --noEmit",
+    "clean": "yarn build --clean",
+    "test": "jest",
+    "test:coverage": "yarn test --coverage",
+    "test:ci": "yarn test:coverage --ci --maxWorkers 1"
+  },
+  "dependencies": {
+    "@testing-library/jest-native": "^4.0.4",
+    "@testing-library/react-native": "^9.1.0",
+    "@training/theme": "^0.0.1",
+    "deepmerge": "^4.2.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@training/config-typescript": "^0.0.1",
+    "@types/jest": "^27.4.1",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1",
+    "prettier": "^2.6.2",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.3"
+  }
+}

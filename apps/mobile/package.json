@@ -1,0 +1,49 @@
+{
+  "name": "@training/mobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "ios": "react-native run-ios",
+    "bundle:ios": "yarn bundle:base --platform ios --bundle-output ios/main.jsbundle",
+    "bundle:android": "yarn bundle:base --platform android",
+    "bundle:base": "react-native bundle --entry-file index.ts",
+    "android": "react-native run-android",
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "yarn lint --fix",
+    "lint:staged": "lint-staged"
+  },
+  "dependencies": {
+    "@react-navigation/native": "^6.0.6",
+    "@training/mobile-atoms": "^0.0.1",
+    "@training/theme": "^0.0.1",
+    "jest": "^27.5.1",
+    "react": "17.0.2",
+    "react-native": "0.68.1",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/runtime": "^7.17.9",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "@training/config-typescript": "^0.0.1",
+    "@training/eslint-config": "^0.0.1",
+    "@types/jest": "^27.4.1",
+    "@types/react": "^18.0.8",
+    "@types/react-native": "^0.67.3",
+    "@types/react-test-renderer": "^18.0.0",
+    "babel-jest": "^27.5.1",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^8.14.0",
+    "jest": "^27.5.1",
+    "metro-react-native-babel-preset": "^0.70.1",
+    "react-test-renderer": "17.0.2",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

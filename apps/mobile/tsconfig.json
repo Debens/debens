@@ -1,0 +1,23 @@
+{
+    "extends": "@training/config-typescript",
+    "compilerOptions": {
+        "composite": true,
+        "strict": true,
+        "allowJs": true,
+        "noEmit": true,
+        "moduleResolution": "node",
+        "jsx": "react-native",
+        "lib": ["es2017"],
+        "target": "esnext",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "baseUrl": "../../",
+        "paths": {
+            "@training/*": ["apps/*/src", "modules/*/src", "packages/*/src"]
+        }
+    },
+    "references": [{ "path": "../../packages/mobile-atoms" }, { "path": "../../packages/theme" }],
+    "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"],
+    "include": ["src", "index.ts"]
+}

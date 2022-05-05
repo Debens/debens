@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+lerna run test --stream --concurrency 1 --since HEAD

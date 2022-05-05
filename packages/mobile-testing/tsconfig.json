@@ -1,0 +1,23 @@
+{
+    "extends": "@training/config-typescript",
+    "compilerOptions": {
+        "composite": true,
+        "strict": true,
+        "outDir": "build",
+        "rootDir": "src",
+        "moduleResolution": "node",
+        "jsx": "react-native",
+        "lib": ["es2017"],
+        "target": "esnext",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "baseUrl": "../../",
+        "paths": {
+            "@training/*": ["packages/*/src"]
+        }
+    },
+    "references": [{ "path": "../theme" }],
+    "include": ["src", "index.ts"],
+    "exclude": ["node_modules", "*.config.*", "*.spec.*"]
+}
