@@ -16,7 +16,8 @@
     "test:ci": "lerna run test:ci --stream --concurrency 1",
     "lint": "lerna run lint --stream --concurrency 1",
     "lint:staged": "lerna run lint:staged --stream --concurrency 1",
-    "create:package": "yarn hygen package new"
+    "create:package": "yarn hygen package new",
+    "create:module": "yarn hygen module new"
   },
   "devDependencies": {
     "husky": "^7.0.4",

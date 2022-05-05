@@ -1,3 +1,6 @@
+---
+to: modules/<%=name%>/tsconfig.eslint.json
+---
 {
     "extends": "./tsconfig.json",
     "references": [],
