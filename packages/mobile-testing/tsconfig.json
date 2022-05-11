@@ -12,9 +12,17 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "isolatedModules": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "../../node_modules/@types",
+            "./src/@types"
+        ],
         "baseUrl": "../../",
         "paths": {
-            "@training/*": ["packages/*/src"]
+            "@training/*": ["packages/*/src"],
+            "@testing-library/react-native/helpers": [
+                "@testing-library/react-native/build/helpers/makeQueries"
+            ]
         }
     },
     "references": [{ "path": "../theme" }],
