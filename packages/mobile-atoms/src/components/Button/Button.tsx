@@ -94,6 +94,7 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
 
 Button.defaultProps = {
     variant: 'primary',
+    accessibilityRole: 'button',
 };
 
 export default memo(Button);

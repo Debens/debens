@@ -3,7 +3,8 @@
     "compilerOptions": {
         "composite": true,
         "strict": true,
-        "noEmit": true,
+        "outDir": "build",
+        "rootDir": "src",
         "moduleResolution": "node",
         "jsx": "react-native",
         "lib": ["es2017"],
@@ -13,14 +14,10 @@
         "isolatedModules": true,
         "baseUrl": "../../",
         "paths": {
-            "@training/*": ["apps/*/src", "modules/*/src", "packages/*/src"]
+            "@training/*": ["packages/*/src"]
         }
     },
-    "references": [
-        { "path": "../../modules/mobile-onboarding" },
-        { "path": "../../packages/mobile-atoms" },
-        { "path": "../../packages/theme" }
-    ],
-    "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"],
-    "include": ["src", "index.ts"]
+    "references": [{ "path": "../../packages/mobile-atoms" }],
+    "include": ["src", "index.ts"],
+    "exclude": ["node_modules", "*.config.*", "*.spec.*"]
 }

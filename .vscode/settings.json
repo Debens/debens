@@ -66,9 +66,12 @@
     "importSorter.sortConfiguration.joinImportPaths": true,
     "eslint.workingDirectories": [
         { "directory": "apps/mobile", "changeProcessCWD": true },
+        { "directory": "modules/mobile-onboarding", "changeProcessCWD": true },
         { "directory": "packages/mobile-atoms", "changeProcessCWD": true },
         { "directory": "packages/mobile-testing", "changeProcessCWD": true },
         { "directory": "packages/theme", "changeProcessCWD": true }
     ],
-    "eslint.alwaysShowStatus": true
+    "eslint.alwaysShowStatus": true,
+    "cSpell.languageSettings": [],
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "allowJs": true
+    },
+    "references": [{ "path": "../../packages/mobile-atoms" }],
+    "exclude": ["node_modules", "test", "build"],
+    "include": ["src", "*.ts"]
+}

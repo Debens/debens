@@ -1,19 +1,36 @@
 ---
 root: true
 parser: "@typescript-eslint/parser"
-plugins: 
-  - "@typescript-eslint"
-  - jest
-extends: 
-  - eslint:recommended
-  - plugin:import/typescript
-  - plugin:@typescript-eslint/recommended
-  - plugin:jest/recommended
-  - prettier
-rules: 
-  "@typescript-eslint/triple-slash-reference": off
+parserOptions:
+    extraFileExtensions:
+        - .yml
+        - .json
+plugins:
+    - "@typescript-eslint"
+    - jest
+extends:
+    - eslint:recommended
+    - plugin:jest/recommended
+    - plugin:markdown/recommended
+    - plugin:json/recommended
+    - prettier
+rules:
+    "no-unused-vars":
+        - error
+        - destructuredArrayIgnorePattern: "^_"
 overrides:
-  - files: "*.js"
-    rules:
-      "@typescript-eslint/no-var-requires": off
-    
+    - files: "*.js"
+      rules:
+          "@typescript-eslint/no-var-requires": off
+    - files:
+          - "*.ts"
+          - "*.tsx"
+      extends:
+          - plugin:import/typescript
+          - plugin:@typescript-eslint/recommended
+      rules:
+          "@typescript-eslint/triple-slash-reference": off
+    - files:
+          - "*.yaml"
+          - "*.yml"
+      parser: yaml-eslint-parser

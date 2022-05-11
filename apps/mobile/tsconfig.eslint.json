@@ -1,6 +1,13 @@
 {
     "extends": "./tsconfig.json",
-    "references": [{ "path": "../../packages/mobile-atoms" }, { "path": "../../packages/theme" }],
+    "compilerOptions": {
+        "allowJs": true
+    },
+    "references": [
+        { "path": "../../modules/mobile-onboarding" },
+        { "path": "../../packages/mobile-atoms" },
+        { "path": "../../packages/theme" }
+    ],
     "exclude": ["node_modules"],
     "include": ["src", "*.config.*", "index.ts"]
 }
