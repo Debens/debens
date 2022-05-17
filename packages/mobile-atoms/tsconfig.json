@@ -4,7 +4,6 @@
         "composite": true,
         "strict": true,
         "outDir": "build",
-        "rootDir": "src",
         "moduleResolution": "node",
         "jsx": "react-native",
         "lib": ["es2017"],
@@ -17,7 +16,7 @@
             "@training/*": ["packages/*/src"]
         }
     },
-    "references": [{ "path": "../theme" }, { "path": "../mobile-testing" }],
+    "references": [{ "path": "../theme" }, { "path": "../mobile-testing" }, { "path": "../utils" }],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"],
     "include": ["src", "index.ts"]
 }

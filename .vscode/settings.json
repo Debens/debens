@@ -65,11 +65,15 @@
     "importSorter.sortConfiguration.importPaths.order": "caseInsensitive",
     "importSorter.sortConfiguration.joinImportPaths": true,
     "eslint.workingDirectories": [
-        { "directory": "apps/mobile", "changeProcessCWD": true },
-        { "directory": "modules/mobile-onboarding", "changeProcessCWD": true },
-        { "directory": "packages/mobile-atoms", "changeProcessCWD": true },
-        { "directory": "packages/mobile-testing", "changeProcessCWD": true },
-        { "directory": "packages/theme", "changeProcessCWD": true }
+        { "pattern": "apps/*", "changeProcessCWD": true },
+        { "pattern": "modules/*", "changeProcessCWD": true },
+        { "pattern": "packages/*", "changeProcessCWD": true }
+        // { "directory": "apps/mobile", "changeProcessCWD": true },
+        // { "directory": "modules/mobile-onboarding", "changeProcessCWD": true },
+        // { "directory": "packages/mobile-atoms", "changeProcessCWD": true },
+        // { "directory": "packages/mobile-testing", "changeProcessCWD": true },
+        // { "directory": "packages/theme", "changeProcessCWD": true },
+        // { "directory": "packages/utils", "changeProcessCWD": true }
     ],
     "eslint.alwaysShowStatus": true,
     "cSpell.languageSettings": [],

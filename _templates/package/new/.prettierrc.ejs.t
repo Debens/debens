@@ -1,5 +1,5 @@
 ---
-to: pacakges/<%=name%>/prettier.yml
+to: packges/<%=name%>/prettier.yml
 ---
 ---
 arrowParens: 'avoid'

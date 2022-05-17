@@ -7,7 +7,6 @@ to: modules/<%=name%>/tsconfig.json
         "composite": true,
         "strict": true,
         "outDir": "build",
-        "rootDir": "src",
         "moduleResolution": "node",
         "lib": ["es2017"],
         "target": "esnext",

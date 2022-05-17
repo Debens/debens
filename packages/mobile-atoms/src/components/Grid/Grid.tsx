@@ -1,3 +1,7 @@
+import React from 'react';
+import { ViewProps } from 'react-native';
+import Animated from 'react-native-reanimated';
+
 import shouldForwardProp from '@styled-system/should-forward-prop';
 import { Theme } from '@training/theme';
 
@@ -13,9 +17,10 @@ export type GridProps = React.PropsWithChildren<
     | system.BorderProps<Theme>
     | system.FlexboxProps<Theme>
     | custom.DebugProps
+    | Omit<ViewProps, 'style'>
 >;
 
-const Grid = styled.View.withConfig({
+const Component = styled.View.withConfig({
     displayName: 'Grid',
     shouldForwardProp: prop => shouldForwardProp(prop),
 })<GridProps>`
@@ -26,5 +31,13 @@ const Grid = styled.View.withConfig({
     ${system.flexbox}
     ${custom.debug}
 `;
+
+class Grid extends React.PureComponent<GridProps> {
+    static Animated = Animated.createAnimatedComponent(Grid);
+
+    render(): React.ReactNode {
+        return <Component {...this.props} />;
+    }
+}
 
 export default Grid;

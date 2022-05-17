@@ -24,8 +24,6 @@ const getRelative = package =>
 
 module.exports = {
     presets: ['module:metro-react-native-babel-preset'],
-    // env: {
-    //     development: {
     plugins: [
         [
             'module-resolver',
@@ -33,11 +31,9 @@ module.exports = {
                 root: MONOREPO_ROOT,
                 alias: {
                     '^@training/(.+)': ([_, name]) => getRelative(name),
-                    // '^@training/(.+)': '../../packages/\\1/src',
                 },
             },
         ],
+        'react-native-reanimated/plugin',
     ],
-    //     },
-    // },
 };

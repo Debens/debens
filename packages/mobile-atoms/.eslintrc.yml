@@ -7,3 +7,4 @@ overrides:
       parserOptions:
           project: ./tsconfig.eslint.json
           tsconfigRootDir: .
+          debugLevel: true

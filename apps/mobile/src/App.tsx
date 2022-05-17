@@ -3,6 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableFreeze, enableScreens } from 'react-native-screens';
 
 import { NavigationContainer } from '@react-navigation/native';
+import { GhostProvider } from '@training/mobile-atoms';
 import { OnboardingNavigator } from '@training/mobile-onboarding';
 import { ThemeProvider, themes } from '@training/theme';
 
@@ -11,12 +12,14 @@ enableFreeze();
 
 export const App = () => {
     return (
-        <ThemeProvider theme={themes.light}>
-            <SafeAreaProvider>
-                <NavigationContainer>
-                    <OnboardingNavigator />
-                </NavigationContainer>
-            </SafeAreaProvider>
-        </ThemeProvider>
+        <GhostProvider>
+            <ThemeProvider theme={themes.light}>
+                <SafeAreaProvider>
+                    <NavigationContainer>
+                        <OnboardingNavigator />
+                    </NavigationContainer>
+                </SafeAreaProvider>
+            </ThemeProvider>
+        </GhostProvider>
     );
 };
