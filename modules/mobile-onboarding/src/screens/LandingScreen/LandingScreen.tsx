@@ -12,13 +12,21 @@ export const LandingScreen: React.FunctionComponent = () => {
 
     return (
         <Screen bottom="$layer-01">
-            <Grid flex={1} justifyContent="center" alignItems="center" marginX="xlarge">
-                <SVG.Bowtie width="100%" maxWidth={250} height={183} preserveAspectRatio="xMidYMid meet" />
-                <Loader loading={loading}>
+            <Grid flex={1} alignItems="center" margin="medium">
+                <Grid flex={1} width="100%" justifyContent="center" alignItems="center">
+                    <SVG.Bowtie
+                        width="100%"
+                        height="100%"
+                        maxWidth={250}
+                        maxHeight={183}
+                        preserveAspectRatio="xMidYMid meet"
+                    />
+                </Grid>
+                <Loader margin="small" marginTop="auto" loading={loading}>
                     <Loader.Loading>
-                        <Ghost margin="medium" height={17} width={100} />
+                        <Ghost.Text typeset="$body" chars={7} />
                     </Loader.Loading>
-                    <Paragraph margin="medium">Welcome.</Paragraph>
+                    <Paragraph typeset="$body">Welcome</Paragraph>
                 </Loader>
             </Grid>
 

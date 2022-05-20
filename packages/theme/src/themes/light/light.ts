@@ -1,24 +1,11 @@
 import type { Theme } from '../../model';
-import {
-    FontFamily,
-    FontSize,
-    FontWeight,
-    LineHeight,
-    TypeSet,
-} from '../../tokens/typography';
+import { FontFamily, FontSize, FontWeight, LineHeight } from '../../tokens/typography';
 import { Color } from '../../values/colors';
-
-// FIXME: temporary, remove.
-const DEFAULT_TYPE_SET: TypeSet = {
-    family: FontFamily.Unknown,
-    size: FontSize.Small,
-    height: LineHeight.Small,
-    weight: FontWeight.Normal,
-};
 
 export const light: Theme = {
     space: {
         none: 0,
+        auto: 'auto',
         xsmall: 4,
         small: 8,
         medium: 16,
@@ -78,7 +65,17 @@ export const light: Theme = {
         $ghost: Color.Gray30,
     },
     typography: {
-        $body: DEFAULT_TYPE_SET,
-        $heading: DEFAULT_TYPE_SET,
+        $body: {
+            fontFamily: FontFamily.Unknown,
+            fontSize: FontSize.Small,
+            lineHeight: LineHeight.Small,
+            fontWeight: FontWeight.Light,
+        },
+        $heading: {
+            fontFamily: FontFamily.Unknown,
+            fontSize: FontSize.Large,
+            lineHeight: LineHeight.Large,
+            fontWeight: FontWeight.Normal,
+        },
     },
 };

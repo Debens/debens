@@ -4,8 +4,10 @@ import { Theme } from '@training/theme';
 import styled from 'styled-components/native';
 import * as system from 'styled-system';
 
+import * as custom from '../../utils/style-functions';
+
 export type ParagraphProps = React.PropsWithChildren<
-    system.ColorProps<Theme> | system.SpaceProps<Theme> | system.TypographyProps<Theme>
+    system.ColorProps<Theme> | system.SpaceProps<Theme> | custom.TypographyProps
 >;
 
 const Paragraph = styled.Text.withConfig({
@@ -14,7 +16,7 @@ const Paragraph = styled.Text.withConfig({
 })<ParagraphProps>`
     ${system.color}
     ${system.space}
-    ${system.typography}
+    ${custom.typography}
 `;
 
 export default Paragraph;
