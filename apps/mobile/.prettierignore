@@ -1,5 +1,9 @@
 android
 ios
+
 .eslintignore
 .gitignore
 .prettierignore
+
+Gemfile
+Gemfile.lock
