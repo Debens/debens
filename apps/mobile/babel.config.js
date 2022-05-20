@@ -22,29 +22,20 @@ const getRelative = package =>
         ? path.relative(__dirname, getRoute(package))
         : undefined;
 
-/**
- * module-resolver is only used a development workflow improvement.
- *
- * Production should still use TS to ensure latest support combined with strict type checking.
- * The risk of disparity between environments is accepted.
- */
 module.exports = {
+    comments: true,
     presets: ['module:metro-react-native-babel-preset'],
-    plugins: ['react-native-reanimated/plugin'],
-    env: {
-        development: {
-            plugins: [
-                [
-                    'module-resolver',
-                    {
-                        root: MONOREPO_ROOT,
-                        alias: {
-                            '^@training/(.+)': ([_, name]) => getRelative(name),
-                            // '^@training/(.+)': '../../packages/\\1/src',
-                        },
-                    },
-                ],
-            ],
-        },
-    },
+    plugins: [
+        [
+            'module-resolver',
+            {
+                root: MONOREPO_ROOT,
+                alias: {
+                    '^@training/(.+)': ([_, name]) => getRelative(name),
+                    // '^@training/(.+)': '../../packages/\\1/src',
+                },
+            },
+        ],
+        'react-native-reanimated/plugin',
+    ],
 };
