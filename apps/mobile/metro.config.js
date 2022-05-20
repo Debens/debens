@@ -9,17 +9,26 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '../../');
 
-module.exports = {
-    watchFolders: [ROOT],
-    transformer: {
-        getTransformOptions: async () => ({
-            transform: {
-                experimentalImportSupport: false,
-                inlineRequires: true,
-            },
-        }),
-    },
-    resolver: {
-        sourceExts: ['jsx', 'js', 'ts', 'tsx'], //add here
-    },
-};
+const { getDefaultConfig } = require('metro-config');
+
+module.exports = (async () => {
+    const { resolver } = await getDefaultConfig();
+    const { sourceExts, assetExts } = resolver;
+
+    return {
+        watchFolders: [ROOT],
+        transformer: {
+            babelTransformerPath: require.resolve('react-native-svg-transformer'),
+            getTransformOptions: async () => ({
+                transform: {
+                    experimentalImportSupport: false,
+                    inlineRequires: true,
+                },
+            }),
+        },
+        resolver: {
+            assetExts: assetExts.filter(ext => ext !== 'svg'),
+            sourceExts: [...sourceExts, 'svg'],
+        },
+    };
+})();

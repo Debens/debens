@@ -181,7 +181,9 @@ module.exports = {
              * ```
              */
             {
-                test: ReactNative.getAssetExtensionsRegExp(ReactNative.ASSET_EXTENSIONS),
+                test: ReactNative.getAssetExtensionsRegExp(
+                    ReactNative.ASSET_EXTENSIONS.filter(ext => ext !== 'svg'),
+                ),
                 use: {
                     loader: '@callstack/repack/assets-loader',
                     options: {
@@ -195,6 +197,20 @@ module.exports = {
                         scalableAssetExtensions: ReactNative.SCALABLE_ASSETS,
                     },
                 },
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            native: true,
+                            // You might want to uncomment the following line.
+                            // More info: https://react-svgr.com/docs/options/#dimensions
+                            dimensions: false,
+                        },
+                    },
+                ],
             },
         ],
     },

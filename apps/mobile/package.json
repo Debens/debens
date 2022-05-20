@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@react-navigation/native": "^6.0.6",
+        "@svgr/webpack": "^6.2.1",
         "@training/mobile-atoms": "^0.0.1",
         "@training/mobile-onboarding": "^0.0.1",
         "@training/theme": "^0.0.1",
@@ -26,7 +27,9 @@
         "react-native-codegen": "^0.69.1",
         "react-native-reanimated": "^2.8.0",
         "react-native-safe-area-context": "^4.2.5",
-        "react-native-screens": "^3.13.1"
+        "react-native-screens": "^3.13.1",
+        "react-native-svg": "^12.3.0",
+        "react-native-svg-transformer": "^0.20.0"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",
