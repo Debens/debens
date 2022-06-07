@@ -1,0 +1,46 @@
+{
+    "name": "@training/service-graphql",
+    "version": "0.0.1",
+    "description": "graphql frontend service",
+    "license": "MIT",
+    "files": [
+        "build"
+    ],
+    "scripts": {
+        "start": "ts-node src/server.ts",
+        "build": "tsc -b",
+        "compile": "yarn build --noEmit",
+        "clean": "yarn build --clean",
+        "test": "jest --config jest.config.js",
+        "test:coverage": "yarn test --coverage",
+        "test:ci": "yarn test:coverage --ci --maxWorkers 1",
+        "lint": "eslint src",
+        "lint:fix": "yarn lint --fix",
+        "lint:staged": "lint-staged"
+    },
+    "dependencies": {
+        "@graphql-modules/core": "^0.7.17",
+        "apollo-server": "^3.8.1",
+        "dotenv": "^16.0.1",
+        "graphql": "^15.3.0",
+        "graphql-modules": "^2.0.0",
+        "reflect-metadata": "^0.1.13",
+        "ts-node": "^10.8.1",
+        "type-graphql": "^1.1.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.9",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-typescript": "^7.16.7",
+        "@training/config-typescript": "^0.0.1",
+        "@training/eslint-config": "^0.0.1",
+        "@training/utils": "^0.0.1",
+        "@types/jest": "^27.4.1",
+        "babel-jest": "^28.0.3",
+        "jest": "^28.0.3",
+        "lint-staged": "^12.4.1",
+        "prettier": "^2.6.2",
+        "tslib": "^2.4.0",
+        "typescript": "^4.6.3"
+    }
+}
