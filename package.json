@@ -1,29 +1,29 @@
 {
-  "name": "training",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "modules/*",
-    "packages/*"
-  ],
-  "scripts": {
-    "prepare": "husky install",
-    "start": "lerna run start --stream --concurrency 1",
-    "build": "lerna run build --stream --concurrency 1",
-    "compile": "lerna run compile --stream --concurrency 1",
-    "clean": "lerna run clean --stream --concurrency 1",
-    "test": "lerna run test --stream --concurrency 1",
-    "test:ci": "lerna run test:ci --stream --concurrency 1",
-    "lint": "lerna run lint --stream --concurrency 1",
-    "lint:staged": "lerna run lint:staged --stream --concurrency 1",
-    "create:package": "yarn hygen package new",
-    "create:module": "yarn hygen module new"
-  },
-  "devDependencies": {
-    "husky": "^7.0.4",
-    "hygen": "^6.0.4",
-    "lerna": "^4.0.0"
-  },
-  "dependencies": {
-  }
+    "name": "training",
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "modules/*",
+        "packages/*",
+        "services/*"
+    ],
+    "scripts": {
+        "prepare": "husky installs",
+        "start": "lerna run start --stream --concurrency 1",
+        "build": "lerna run build --stream --concurrency 1",
+        "compile": "lerna run compile --stream --concurrency 1",
+        "clean": "lerna run clean --stream --concurrency 1",
+        "test": "lerna run test --stream --concurrency 1",
+        "test:ci": "lerna run test:ci --stream --concurrency 1",
+        "lint": "lerna run lint --stream --concurrency 1",
+        "lint:staged": "lerna run lint:staged --stream --concurrency 1",
+        "create:package": "yarn hygen package new",
+        "create:module": "yarn hygen module new"
+    },
+    "devDependencies": {
+        "husky": "^7.0.4",
+        "hygen": "^6.0.4",
+        "lerna": "^4.0.0"
+    },
+    "dependencies": {}
 }

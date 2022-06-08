@@ -4,6 +4,7 @@
         "allowJs": true
     },
     "references": [
+        { "path": "../../modules/mobile-calendar" },
         { "path": "../../modules/mobile-onboarding" },
         { "path": "../../packages/mobile-atoms" },
         { "path": "../../packages/theme" }

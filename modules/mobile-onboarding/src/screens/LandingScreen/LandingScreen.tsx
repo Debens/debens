@@ -2,9 +2,13 @@ import React, { memo, useCallback, useState } from 'react';
 
 import { Button, Ghost, Grid, Layer, Loader, Paragraph, Screen, SVG } from '@training/mobile-atoms';
 
-export type LandingScreenNavigationProps = never;
+export type LandingScreenNavigationProps = undefined;
 
-export const LandingScreen: React.FunctionComponent = () => {
+export interface LandingScreenProps {
+    onSignUp: () => void;
+}
+
+export const LandingScreen: React.FunctionComponent<LandingScreenProps> = props => {
     const [loading, setLoading] = useState(true);
     const onPress = useCallback(() => {
         setLoading(loading => !loading);
@@ -34,7 +38,9 @@ export const LandingScreen: React.FunctionComponent = () => {
                 <Button marginBottom="small" onPress={onPress}>
                     Login
                 </Button>
-                <Button variant="secondary">Sign up</Button>
+                <Button variant="secondary" onPress={props.onSignUp}>
+                    Sign up
+                </Button>
             </Layer>
         </Screen>
     );

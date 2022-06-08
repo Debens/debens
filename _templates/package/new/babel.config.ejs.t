@@ -1,5 +1,5 @@
 ---
-to: packges/<%=name%>/babel.config.js
+to: packages/<%=name%>/babel.config.js
 ---
 module.exports = {
     presets: ["@babel/preset-env", "@babel/preset-typescript"],

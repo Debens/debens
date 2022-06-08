@@ -1,0 +1,22 @@
+{
+    "extends": "@training/config-typescript",
+    "compilerOptions": {
+        "composite": true,
+        "strict": true,
+        "outDir": "build",
+        "moduleResolution": "node",
+        "lib": ["es2017"],
+        "target": "esnext",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "baseUrl": "../../",
+        "paths": {
+            "@training/*": ["packages/*/src"]
+        }
+    },
+    "references": [{ "path": "../utils" }],
+    "include": ["src", "index.ts"],
+    "exclude": ["node_modules", "*.config.*", "*.spec.*"]
+}

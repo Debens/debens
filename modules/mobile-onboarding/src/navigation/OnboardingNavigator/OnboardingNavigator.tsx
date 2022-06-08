@@ -19,10 +19,16 @@ declare global {
 }
 /* eslint-enable @typescript-eslint/no-namespace, @typescript-eslint/no-empty-interface */
 
-export const OnboardingNavigator = () => (
+interface OnboardingNavigatorProps {
+    onDone: () => void;
+}
+
+export const OnboardingNavigator: React.FunctionComponent<OnboardingNavigatorProps> = props => (
     <Stack.Navigator initialRouteName={OnboardingRoute.Landing}>
         <Stack.Group screenOptions={{ headerShown: false }}>
-            <Stack.Screen name={OnboardingRoute.Landing} component={LandingScreen} />
+            <Stack.Screen name={OnboardingRoute.Landing}>
+                {() => <LandingScreen onSignUp={props.onDone} />}
+            </Stack.Screen>
         </Stack.Group>
     </Stack.Navigator>
 );

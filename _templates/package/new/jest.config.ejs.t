@@ -1,5 +1,5 @@
 ---
-to: packges/<%=name%>/jest.config.js
+to: packages/<%=name%>/jest.config.js
 ---
 module.exports = {
     cacheDirectory: "<rootDir>/test/cache",
