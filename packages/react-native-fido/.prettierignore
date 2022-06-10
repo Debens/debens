@@ -1,0 +1,9 @@
+.eslintignore
+.gitignore
+.prettierignore
+
+android
+ios
+
+.npmrc
+*.podspec

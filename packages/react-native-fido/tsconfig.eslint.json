@@ -1,0 +1,6 @@
+{
+    "extends": "./tsconfig.json",
+    "references": [{ "path": "../../packages/http" }, { "path": "../../services/service-identity" }],
+    "exclude": ["node_modules", "test", "build"],
+    "include": ["src", "*.ts"]
+}

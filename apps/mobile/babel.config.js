@@ -8,7 +8,7 @@ const getPackages = name =>
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name);
 
-const PACKAGE_LOCATIONS = ['apps', 'modules', 'packages']
+const PACKAGE_LOCATIONS = ['apps', 'modules', 'packages', 'services']
     .map(name =>
         getPackages(name).reduce((packages, package) => {
             return Object.assign(packages, { [package]: name });

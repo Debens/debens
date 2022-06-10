@@ -14,7 +14,7 @@
         "isolatedModules": true,
         "baseUrl": "../../",
         "paths": {
-            "@training/*": ["packages/*/src"]
+            "@training/*": ["packages/*/src", "services/*/src"]
         }
     },
     "references": [{ "path": "../../packages/mobile-atoms" }],
