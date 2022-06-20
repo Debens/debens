@@ -5,3 +5,4 @@ Gemfile
 Gemfile.lock
 
 .env.*
+*.svg

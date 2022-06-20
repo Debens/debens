@@ -1,6 +1,6 @@
-<svg stroke="currentColor" color="#000" stroke-width=".5%" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 500 366">
-    <path fill="none" d="m-32.584 8.334 65.168-42.451v68.234L-29.654-7.207V-20.06" stroke-linecap="round" transform="matrix(3.85 0 0 3.78 371.73 233.72)"/>
-    <path fill="currentColor" d="M0-2.604a2.605 2.605 0 0 1 0 5.208 2.605 2.605 0 0 1 0-5.208z" stroke-linecap="round" transform="matrix(-3.85 0 0 3.78 250.5 261.72)"/>
-    <path fill="none" d="m-32.584 8.334 65.168-42.451v68.234L-29.654-7.207V-20.06" stroke-linecap="round" transform="matrix(-3.85 0 0 -3.78 128.45 131.96)"/>
-    <path fill="currentColor" d="M0-2.604a2.605 2.605 0 0 1 0 5.208 2.605 2.605 0 0 1 0-5.208z" stroke-linecap="round" transform="matrix(3.85 0 0 -3.78 250.07 102.72)"/>
+<svg color="#000" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="-0.04 151.02 1024.08 721.97">
+    <path stroke-width="27" stroke-linecap="round" stroke-linejoin="round" d="m491.9846,350.39634l-478.52216,306.04597l0,-491.92577l457.00746,297.92099l0,92.66234" fill="none"/>
+    <path stroke-width="27" stroke-linecap="round" stroke-linejoin="round" d="m507.13065,358.14163a19.12826,-18.78047 0 0 1 0,-37.54652a19.12826,-18.78047 0 0 1 0,37.54652z" fill="currentColor"/>
+    <path stroke-width="27" stroke-linecap="round" stroke-linejoin="round" d="m532.01543,673.60369l478.52216,-306.04597l0,491.92577l-457.00746,-297.92099l0,-92.66234" fill="none"/>
+    <path stroke-width="27" stroke-linecap="round" stroke-linejoin="round" d="m514.21028,663.01329a-19.12826,18.78047 0 0 1 0,37.54652a-19.12826,18.78047 0 0 1 0,-37.54652z" fill="currentColor"/>
 </svg>
