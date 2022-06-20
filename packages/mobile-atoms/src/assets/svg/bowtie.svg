@@ -1,14 +1,6 @@
-<svg stroke="#000000" fill="#000000" stroke-width=".5%"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="500" height="366" viewBox="0 0 500 366" xml:space="preserve">
-<g transform="matrix(3.85 0 0 3.78 371.73 233.72)" id="ukTPDJFGl0yzPfBsOUTm5"  >
-<path fill="none" d="M -32.58429 8.33367 L 32.58429999999999 -34.11697 L 32.58429999999999 34.11697 L -29.65355000000001 -7.20711 L -29.65355000000001 -20.06007" stroke-linecap="round" />
-</g>
-<g transform="matrix(-3.85 0 0 3.78 250.5 261.72)" id="T3dSJwIJgloL3-kfyZ7Ry"  >
-<path d="M 0 -2.60416 C 1.4375 -2.60416 2.60416 -1.4374899999999997 2.60416 0 C 2.60416 1.4375 1.4374899999999997 2.60416 0 2.60416 C -1.4375 2.60416 -2.60416 1.4374899999999997 -2.60416 0 C -2.60416 -1.4375 -1.4374899999999997 -2.60416 0 -2.60416 z" stroke-linecap="round" />
-</g>
-<g transform="matrix(-3.85 0 0 -3.78 128.45 131.96)" id="-t5fesk-Qi-ehNmfTMXUx"  >
-<path fill="none" d="M -32.58429 8.33367 L 32.58429999999999 -34.11697 L 32.58429999999999 34.11697 L -29.65355000000001 -7.20711 L -29.65355000000001 -20.06007" stroke-linecap="round" />
-</g>
-<g transform="matrix(3.85 0 0 -3.78 250.07 102.72)" id="SKRDVLNLgBXHllp8DhGTZ"  >
-<path d="M 0 -2.60416 C 1.4375 -2.60416 2.60416 -1.4374899999999997 2.60416 0 C 2.60416 1.4375 1.4374899999999997 2.60416 0 2.60416 C -1.4375 2.60416 -2.60416 1.4374899999999997 -2.60416 0 C -2.60416 -1.4375 -1.4374899999999997 -2.60416 0 -2.60416 z" stroke-linecap="round" />
-</g>
+<svg stroke="currentColor" color="#000" stroke-width=".5%" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 500 366">
+    <path fill="none" d="m-32.584 8.334 65.168-42.451v68.234L-29.654-7.207V-20.06" stroke-linecap="round" transform="matrix(3.85 0 0 3.78 371.73 233.72)"/>
+    <path fill="currentColor" d="M0-2.604a2.605 2.605 0 0 1 0 5.208 2.605 2.605 0 0 1 0-5.208z" stroke-linecap="round" transform="matrix(-3.85 0 0 3.78 250.5 261.72)"/>
+    <path fill="none" d="m-32.584 8.334 65.168-42.451v68.234L-29.654-7.207V-20.06" stroke-linecap="round" transform="matrix(-3.85 0 0 -3.78 128.45 131.96)"/>
+    <path fill="currentColor" d="M0-2.604a2.605 2.605 0 0 1 0 5.208 2.605 2.605 0 0 1 0-5.208z" stroke-linecap="round" transform="matrix(3.85 0 0 -3.78 250.07 102.72)"/>
 </svg>

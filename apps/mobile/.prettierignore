@@ -9,3 +9,5 @@ Gemfile
 Gemfile.lock
 
 .npmrc
+
+.env.*

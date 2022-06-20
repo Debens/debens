@@ -4,7 +4,13 @@ require_relative '../../../node_modules/@react-native-community/cli-platform-ios
 platform :ios, '11.0'
 install! 'cocoapods', :deterministic_uuids => false
 
-target 'mobile' do
+ENVFILES = {
+  'Development' => '$(PODS_ROOT)/../../.env.development',
+  'Staging' => '$(PODS_ROOT)/../../.env.staging',
+  'Production' => '$(PODS_ROOT)/../../.env.production',
+}
+
+target 'production' do
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -24,6 +30,16 @@ target 'mobile' do
     # Pods for testing
   end
 
+  target 'staging' do
+    inherit! :complete
+    # Pods for stagin
+  end
+
+  target 'development' do
+    inherit! :complete
+    # Pods for development
+  end
+
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
@@ -32,6 +48,15 @@ target 'mobile' do
 
   post_install do |installer|
     react_native_post_install(installer)
+
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        if target.name == 'react-native-config'
+          config.build_settings['ENVFILE'] = ENVFILES[config.name]
+        end
+      end
+    end
   end
 end

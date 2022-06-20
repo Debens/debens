@@ -132,6 +132,15 @@ def reactNativeArchitectures() {
     return value ? value.split(",") : ["armeabi-v7a", "x86", "x86_64", "arm64-v8a"]
 }
 
+project.ext.defaultEnvFile = ".env.development"
+project.ext.envConfigFiles = [
+    development: ".env.development",
+    staging: ".env.staging",
+    production: ".env.production",
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -243,6 +252,22 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        development {
+            dimension "version"
+            applicationIdSuffix ".development"
+            versionNameSuffix "-development"
+        }
+        staging {
+            dimension "version"
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
+        }
+        production {
+
         }
     }
 
