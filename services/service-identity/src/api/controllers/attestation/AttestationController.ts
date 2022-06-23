@@ -1,4 +1,5 @@
-import { Body, Controller, Post, Route } from 'tsoa';
+import { Body, Controller, Post, Route } from '@tsoa/runtime';
+
 import { injectable } from 'tsyringe';
 
 import { AttestationService } from '../../../domain/services/attestation/AttestationService';

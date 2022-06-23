@@ -1,4 +1,5 @@
-import { Controller, Get, Route } from 'tsoa';
+import { Controller, Get, Route } from '@tsoa/runtime';
+
 import { injectable } from 'tsyringe';
 
 import { AppleSiteAssociation, AssetLinks } from '../../models/well-known';

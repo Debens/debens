@@ -23,9 +23,7 @@
     "devDependencies": {
         "husky": "^7.0.4",
         "hygen": "^6.0.4",
-        "lerna": "^4.0.0"
-    },
-    "dependencies": {
+        "lerna": "^4.0.0",
         "turbo": "^1.2.16"
     }
 }

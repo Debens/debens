@@ -1,0 +1,14 @@
+version: "3"
+services:
+    service-identity:
+        build:
+            context: .
+            dockerfile: node.dockerfile
+            args:
+                SCOPE: "@training/service-identity"
+        restart: unless-stopped
+        ports:
+            - 10800:3000
+        env_file: services/service-identity/.env
+        environment:
+            - PORT=3000
