@@ -6,6 +6,7 @@ export const light: Theme = {
     space: {
         none: 0,
         auto: 'auto',
+        miniscule: 2,
         xsmall: 4,
         small: 8,
         medium: 16,
@@ -21,6 +22,8 @@ export const light: Theme = {
         xlarge: 24,
     },
     colors: {
+        $transparent: Color.None,
+
         // background
         '$background-primary': Color.White,
         '$background-active': Color.Gray30,
@@ -61,6 +64,10 @@ export const light: Theme = {
         '$button-danger-active': Color.Red80,
         '$button-disabled': Color.Gray30,
 
+        '$field-01': Color.Gray10,
+        '$field-error-01': Color.Red10,
+        '$field-selected-01': Color.Blue10,
+
         // other
         $ghost: Color.Gray30,
     },
@@ -76,6 +83,15 @@ export const light: Theme = {
             fontSize: FontSize.Large,
             lineHeight: LineHeight.Large,
             fontWeight: FontWeight.Normal,
+        },
+    },
+    contextual: {
+        '$layer-01': {
+            colors: {
+                '$field-01': Color.White,
+                '$field-selected-01': Color.Blue20,
+                '$field-error-01': Color.Red20,
+            },
         },
     },
 };

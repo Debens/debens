@@ -1,4 +1,6 @@
 export enum ColorToken {
+    None = '$transparent',
+
     // background
     BackgroundPrimary = '$background-primary',
     BackgroundActive = '$background-active',
@@ -39,6 +41,15 @@ export enum ColorToken {
     ButtonDangerActive = '$button-danger-active',
     ButtonDisabled = '$button-disabled',
 
+    // fields
+    FieldPrimary = '$field-01',
+    FieldPrimaryError = '$field-error-01',
+    FieldPrimarySelected = '$field-selected-01',
+
     // other
     Ghost = '$ghost',
 }
+
+const TOKENS = Object.values(ColorToken);
+export const isColorToken = (candidate: unknown): candidate is ColorToken =>
+    typeof candidate === 'string' ? TOKENS.includes(candidate) : false;

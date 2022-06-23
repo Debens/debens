@@ -1,7 +1,8 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 
 import http from '@training/http';
-import { Button, Grid, Layer, Screen, SVG } from '@training/mobile-atoms';
+import { Button, Grid, Layer, Screen, SVG, TextInput } from '@training/mobile-atoms';
+import { Break } from '@training/mobile-atoms/src/components/Break/Break';
 import { Assertion, Attestation } from '@training/react-native-fido';
 import { AssertionService, AttestationService } from '@training/service-identity';
 
@@ -18,6 +19,7 @@ const services = {
 };
 
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
+    const [email, setEmail] = useState('');
     const onRegister = useCallback(() => {
         new Attestation(services.attestation)
             .register({ name: 'Training App' })
@@ -46,11 +48,13 @@ export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => 
             </Grid>
 
             <Layer padding="medium">
-                <Button marginBottom="small" onPress={onLogin}>
-                    Login
-                </Button>
-                <Button variant="secondary" onPress={onRegister}>
+                <TextInput label="Email" maxLength={320} onChangeText={setEmail} />
+                <Break />
+                <Button onPress={onRegister} marginBottom="small">
                     Sign up
+                </Button>
+                <Button variant="secondary" onPress={onLogin}>
+                    Login
                 </Button>
             </Layer>
         </Screen>

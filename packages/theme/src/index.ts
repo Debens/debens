@@ -1,7 +1,7 @@
 import { light } from './themes/light/light';
 
 export * from '@styled-system/should-forward-prop';
-export { ThemeProvider } from 'styled-components';
+export { ThemeProvider, useTheme } from 'styled-components';
 
 export const themes = { light };
 

@@ -1,4 +1,5 @@
 export enum Color {
+    None = 'transparent',
     Black = '#000000',
     White = '#ffffff',
     Red100 = '#2d0709',
