@@ -1,3 +1,4 @@
+import { BorderToken } from './tokens/border';
 import { ColorToken } from './tokens/color';
 
 import type { RadiiToken } from './tokens/radii';
@@ -13,6 +14,7 @@ export type SemanticRadii = `${RadiiToken}`;
 export type SemanticSpacing = `${SpacingToken}`;
 
 export interface Theme extends BaseTheme {
+    borderWidths: Record<`${BorderToken}`, number>;
     colors: Record<`${ColorToken}`, string>;
     radii: Record<`${RadiiToken}`, number>;
     space: Record<`${SpacingToken}`, number | string>;

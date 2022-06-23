@@ -1,12 +1,12 @@
-FROM node:10.13.3 as build-env
+FROM node:lts as build-env
 
 COPY . /src
 
 WORKDIR src
 
-RUN npm install
+RUN yarn
 
-FROM node:8.11.3-alpine as run-time
+FROM node:lts-alpine as run-time
 
 COPY --from=build-env src/ src/
 

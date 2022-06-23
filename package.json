@@ -9,14 +9,14 @@
     ],
     "scripts": {
         "prepare": "husky installs",
-        "start": "lerna run start --stream --concurrency 1",
-        "build": "lerna run build --stream --concurrency 1",
-        "compile": "lerna run compile --stream --concurrency 1",
-        "clean": "lerna run clean --stream --concurrency 1",
-        "test": "lerna run test --stream --concurrency 1",
-        "test:ci": "lerna run test:ci --stream --concurrency 1",
-        "lint": "lerna run lint --stream --concurrency 1",
-        "lint:staged": "lerna run lint:staged --stream --concurrency 1",
+        "start": "turbo run start",
+        "build": "turbo run build --concurrency 1",
+        "compile": "turbo run compile --concurrency 1",
+        "clean": "turbo run clean --concurrency 1",
+        "test": "turbo run test --concurrency 1",
+        "test:ci": "turbo run test:ci --concurrency 1",
+        "lint": "turbo run lint --concurrency 1",
+        "lint:staged": "turbo run lint:staged --concurrency 1",
         "create:package": "yarn hygen package new",
         "create:module": "yarn hygen module new"
     },
@@ -25,5 +25,7 @@
         "hygen": "^6.0.4",
         "lerna": "^4.0.0"
     },
-    "dependencies": {}
+    "dependencies": {
+        "turbo": "^1.2.16"
+    }
 }

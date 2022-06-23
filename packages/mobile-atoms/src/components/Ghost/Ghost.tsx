@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { useAnimatedStyle } from 'react-native-reanimated';
 
 import { Theme } from '@training/theme';

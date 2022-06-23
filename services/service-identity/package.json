@@ -10,7 +10,7 @@
         "start": "concurrently \"yarn start:server\" \"yarn start:code-gen\"",
         "start:server": "nodemon",
         "start:code-gen": "nodemon -x tsoa spec-and-routes --watch src/api/controllers/*",
-        "build": "npm-run-all build*",
+        "build": "npm-run-all build:*",
         "build:routes": "tsoa routes",
         "build:specs": "tsoa spec",
         "build:typescript": "tsc -b",

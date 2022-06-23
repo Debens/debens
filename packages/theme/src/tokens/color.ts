@@ -50,6 +50,6 @@ export enum ColorToken {
     Ghost = '$ghost',
 }
 
-const TOKENS = Object.values(ColorToken);
+const TOKENS = Object.values(ColorToken).map(value => value.toString());
 export const isColorToken = (candidate: unknown): candidate is ColorToken =>
     typeof candidate === 'string' ? TOKENS.includes(candidate) : false;

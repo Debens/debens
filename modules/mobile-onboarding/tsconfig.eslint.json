@@ -3,7 +3,11 @@
     "compilerOptions": {
         "allowJs": true
     },
-    "references": [{ "path": "../../packages/mobile-atoms" }],
+    "references": [
+        { "path": "../../packages/http" },
+        { "path": "../../packages/mobile-atoms" },
+        { "path": "../../packages/react-native-fido" }
+    ],
     "exclude": ["node_modules", "test", "build"],
     "include": ["src", "*.ts"]
 }

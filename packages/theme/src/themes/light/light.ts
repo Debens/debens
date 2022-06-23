@@ -71,6 +71,10 @@ export const light: Theme = {
         // other
         $ghost: Color.Gray30,
     },
+    borderWidths: {
+        none: 0,
+        small: 1,
+    },
     typography: {
         $body: {
             fontFamily: FontFamily.Unknown,

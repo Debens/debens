@@ -6,7 +6,7 @@ export const Break: React.FunctionComponent<GridProps> = props => <Grid {...prop
 
 Break.defaultProps = {
     margin: 'medium',
-    borderBottomWidth: 1,
+    borderBottomWidth: 'small',
     borderColor: '$layer-hover-01',
 };
 

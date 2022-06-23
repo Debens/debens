@@ -19,7 +19,7 @@ const services = {
 };
 
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
-    const [email, setEmail] = useState('');
+    const [_, setEmail] = useState('');
     const onRegister = useCallback(() => {
         new Attestation(services.attestation)
             .register({ name: 'Training App' })

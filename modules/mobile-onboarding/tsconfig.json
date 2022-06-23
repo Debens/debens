@@ -17,7 +17,11 @@
             "@training/*": ["packages/*/src", "services/*/src"]
         }
     },
-    "references": [{ "path": "../../packages/mobile-atoms" }],
+    "references": [
+        { "path": "../../packages/http" },
+        { "path": "../../packages/mobile-atoms" },
+        { "path": "../../packages/react-native-fido" }
+    ],
     "include": ["src", "index.ts"],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"]
 }
