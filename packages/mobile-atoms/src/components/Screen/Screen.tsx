@@ -1,7 +1,8 @@
 import React, { memo, useMemo } from 'react';
-import { StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
+import { useHeaderHeight } from '@react-navigation/elements';
 import { SemanticColor } from '@training/theme';
 
 import { useColor } from '../../hooks/use-color/use-color';
@@ -29,13 +30,20 @@ export const Screen: React.FunctionComponent<ScreenProps> = props => {
         };
     }, [props.edges]);
 
+    const headerHeight = useHeaderHeight();
+
     return (
         <>
             <SafeAreaView edges={edges.top} style={[styles.shrink, { backgroundColor: top }]} />
             <SafeAreaView edges={edges.bottom} style={[styles.grow, { backgroundColor: bottom }]}>
-                <Grid flex={1} backgroundColor="$background-primary" {...props}>
-                    {props.children}
-                </Grid>
+                <KeyboardAvoidingView
+                    style={styles.grow}
+                    behavior="padding"
+                    keyboardVerticalOffset={headerHeight}>
+                    <Grid flex={1} backgroundColor="$background-primary" {...props}>
+                        {props.children}
+                    </Grid>
+                </KeyboardAvoidingView>
             </SafeAreaView>
         </>
     );

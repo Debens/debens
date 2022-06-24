@@ -11,3 +11,4 @@ export { default as SVG } from './components/SVG/SVG';
 export { default as Ghost } from './components/Ghost/Ghost';
 export { GhostProvider, useGhosts } from './components/Ghost/GhostProvider';
 export { default as TextInput } from './components/TextInput/TextInput';
+export { default as EmailInput } from './components/EmailInput/EmailInput';

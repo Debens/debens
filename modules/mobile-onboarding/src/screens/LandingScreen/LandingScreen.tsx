@@ -1,15 +1,22 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import http from '@training/http';
-import { Button, Grid, Layer, Screen, SVG, TextInput } from '@training/mobile-atoms';
+import { Button, EmailInput, Grid, Layer, Screen, SVG } from '@training/mobile-atoms';
 import { Break } from '@training/mobile-atoms/src/components/Break/Break';
 import { Assertion, Attestation } from '@training/react-native-fido';
 import { AssertionService, AttestationService } from '@training/service-identity';
+
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 export type LandingScreenNavigationProps = undefined;
 
 export interface LandingScreenProps {
     onSignUp: () => void;
+}
+
+interface FormValues {
+    email: string;
 }
 
 const client = http.client.extend([http.modules.domain('https://api.debens.app/identity')]);
@@ -19,19 +26,25 @@ const services = {
 };
 
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
-    const [_, setEmail] = useState('');
     const onRegister = useCallback(() => {
         new Attestation(services.attestation)
             .register({ name: 'Training App' })
             .then(console.warn.bind(console))
             .catch(console.error.bind(console));
     }, []);
-    const onLogin = useCallback(() => {
+
+    const onSubmit = useCallback((values: FormValues) => {
         new Assertion(services.assertion)
-            .login()
+            .login({ id: values.email })
             .then(console.warn.bind(console))
             .catch(console.error.bind(console));
     }, []);
+
+    const { values, handleSubmit, touched, errors, handleChange, handleBlur } = useFormik<FormValues>({
+        initialValues: { email: '' },
+        onSubmit,
+        validationSchema,
+    });
 
     return (
         <Screen bottom="$layer-01">
@@ -48,17 +61,27 @@ export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => 
             </Grid>
 
             <Layer padding="medium">
-                <TextInput label="Email" maxLength={320} onChangeText={setEmail} />
+                <EmailInput
+                    label="Email"
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    error={touched.email ? errors.email : undefined}
+                />
                 <Break />
                 <Button onPress={onRegister} marginBottom="small">
                     Sign up
                 </Button>
-                <Button variant="secondary" onPress={onLogin}>
+                <Button variant="secondary" onPress={handleSubmit}>
                     Login
                 </Button>
             </Layer>
         </Screen>
     );
 };
+
+const validationSchema = yup.object({
+    email: yup.string().required('Please enter your email').email("This doesn't look right"),
+});
 
 export default memo(LandingScreen);

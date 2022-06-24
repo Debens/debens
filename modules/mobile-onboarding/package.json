@@ -19,7 +19,9 @@
         "@react-navigation/native-stack": "^6.2.5",
         "@training/http": "^0.0.1",
         "@training/mobile-atoms": "^0.0.1",
-        "@training/react-native-fido": "^0.0.1"
+        "@training/react-native-fido": "^0.0.1",
+        "formik": "^2.2.9",
+        "yup": "^0.32.11"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",
@@ -28,6 +30,7 @@
         "@training/config-typescript": "^0.0.1",
         "@training/eslint-config": "^0.0.1",
         "@types/jest": "^27.4.1",
+        "@types/yup": "^0.29.14",
         "babel-jest": "^27.5.1",
         "jest": "^27.5.1",
         "lint-staged": "^12.4.1",
