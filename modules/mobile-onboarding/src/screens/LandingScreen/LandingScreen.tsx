@@ -12,7 +12,7 @@ export interface LandingScreenProps {
     onSignUp: () => void;
 }
 
-const client = http.client.extend([http.modules.domain('https://435a-89-44-41-28.eu.ngrok.io')]);
+const client = http.client.extend([http.modules.domain('https://api.debens.app/identity')]);
 const services = {
     assertion: new AssertionService(client),
     attestation: new AttestationService(client),

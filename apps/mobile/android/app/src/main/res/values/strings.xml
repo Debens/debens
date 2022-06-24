@@ -2,7 +2,7 @@
     <string name="app_name">mobile</string>
     <string name="asset_statements" translatable="false">
     [{
-    \"include\": \"https://435a-89-44-41-28.eu.ngrok.io/.well-known/assetlinks.json\"
+    \"include\": \"https://api.debens.app/.well-known/assetlinks.json\"
     }]
     </string>
 </resources>

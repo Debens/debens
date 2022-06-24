@@ -14,7 +14,7 @@ import com.google.android.gms.fido.fido2.api.common.AuthenticatorSelectionCriter
 class FidoModule(var reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     private var mPromise: Promise? = null;
-    private var domain: String = "435a-89-44-41-28.eu.ngrok.io";
+    private var domain: String = "api.debens.app";
     private var name: String = "Training App";
 
     private val mActivityEventListener: ActivityEventListener = object : BaseActivityEventListener() {
