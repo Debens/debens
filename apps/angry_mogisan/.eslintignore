@@ -1,0 +1,8 @@
+ios
+android
+
+Gemfile
+Gemfile.lock
+
+.env.*
+*.svg

@@ -1,0 +1,47 @@
+{
+    "name": "angry_mogisan",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "install:pods": "cd ios ; arch -x86_64 bundle exec pod install",
+        "start": "react-native start",
+        "ios": "yarn ios:development",
+        "ios:development": "react-native run-ios --scheme Development",
+        "ios:staging": "react-native run-ios --scheme Staging",
+        "ios:production": "react-native run-ios --scheme Production",
+        "android": "yarn android:development",
+        "android:development": "react-native run-android --variant developmentDebug",
+        "android:staging": "react-native run-android --variant stagingDebug",
+        "android:production": "react-native run-android --variant productionDebug",
+        "bundle:ios": "yarn bundle:base --platform ios --bundle-output ios/main.jsbundle",
+        "bundle:android": "yarn bundle:base --platform android",
+        "bundle:base": "react-native bundle --entry-file index.ts",
+        "test": "jest --config jest.config.js",
+        "lint": "eslint .",
+        "lint:fix": "yarn lint --fix",
+        "lint:staged": "lint-staged"
+    },
+    "dependencies": {
+        "react": "18.1.0",
+        "react-native": "0.70.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.9",
+        "@babel/runtime": "^7.12.5",
+        "@training/config-typescript": "^0.0.1",
+        "@training/eslint-config": "^0.0.1",
+        "@types/jest": "^26.0.23",
+        "@types/react-native": "^0.70.0",
+        "@types/react-test-renderer": "^18.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.37.0",
+        "@typescript-eslint/parser": "^5.37.0",
+        "babel-jest": "^26.6.3",
+        "eslint": "^8.14.0",
+        "jest": "^26.6.3",
+        "lint-staged": "^12.4.1",
+        "metro-react-native-babel-preset": "^0.72.1",
+        "react-test-renderer": "18.1.0",
+        "tslib": "^2.4.0",
+        "typescript": "^4.8.3"
+    }
+}
