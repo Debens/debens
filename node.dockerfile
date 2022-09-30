@@ -1,5 +1,7 @@
 FROM node:lts-alpine AS base
+
 RUN apk update
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
@@ -45,6 +47,6 @@ FROM base AS runner
 COPY --from=production /app/ .
 COPY --from=builder /app/ .
 
-CMD yarn workspace ${SCOPE} start
+CMD yarn workspace ${SCOPE} launch
 
 EXPOSE 3000

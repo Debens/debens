@@ -6,7 +6,7 @@ import AuthenticationServices
 class Fido: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     var domain: String = "api.debens.app"
-    var name: String = "debens App"
+    var name: String = "debens"
     
     var resolve: RCTPromiseResolveBlock?
     var reject: RCTPromiseRejectBlock?

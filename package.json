@@ -25,5 +25,8 @@
         "hygen": "^6.0.4",
         "lerna": "^4.0.0",
         "turbo": "^1.2.16"
+    },
+    "dependencies": {
+        "@nestjs/microservices": "9.2.0"
     }
 }

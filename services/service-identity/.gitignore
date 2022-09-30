@@ -206,3 +206,6 @@ Temporary Items
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/git,osx,yarn,node
+
+
+!docker-compose.*

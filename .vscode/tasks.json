@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "start",
+            "path": "apps/mobile",
+            "label": "npm: start - apps/mobile",
+            "detail": "mobile webpack-start",
+            "isBackground": true
+        },
+        {
+            "label": "pod install - apps/mobile",
+            "detail": "Installs Cocoapod dependencies for iOS",
+            "type": "shell",
+            "group": "build",
+            "command": "arch -x86_64 pod install",
+            "options": {
+                "cwd": "${workspaceFolder}/apps/mobile/ios"
+            }
+        }
+    ]
+}

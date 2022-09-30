@@ -11,7 +11,7 @@ import {
     SVG,
 } from '@debens/mobile-atoms';
 import { Assertion, Attestation } from '@debens/react-native-fido';
-import { AssertionService, AttestationService } from '@debens/service-identity';
+import { AssertionAPI, AttestationAPI } from '@debens/service-identity';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -26,23 +26,23 @@ interface FormValues {
     email: string;
 }
 
-const client = http.client.extend([http.modules.domain('https://api.debens.app/identity')]);
-const services = {
-    assertion: new AssertionService(client),
-    attestation: new AttestationService(client),
+const client = http.client.extend([http.modules.domain('https://596a-77-108-159-165.eu.ngrok.io')]);
+const apis = {
+    assertion: new AssertionAPI(client),
+    attestation: new AttestationAPI(client),
 };
 
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
     const onRegister = useCallback(() => {
-        new Attestation(services.attestation)
-            .register({ name: 'debens App' })
+        new Attestation(apis.attestation)
+            .register({ email: 'a.debens@gmail.com' })
             .then(console.warn.bind(console))
             .catch(console.error.bind(console));
     }, []);
 
     const onSubmit = useCallback((values: FormValues) => {
-        new Assertion(services.assertion)
-            .login({ id: values.email })
+        new Assertion(apis.assertion)
+            .login({ email: values.email })
             .then(console.warn.bind(console))
             .catch(console.error.bind(console));
     }, []);

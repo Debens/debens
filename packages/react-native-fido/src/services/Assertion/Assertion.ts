@@ -1,29 +1,25 @@
 import { NativeModules } from 'react-native';
 
-import {
-    AssertionResult,
-    AssertionService,
-    ChallengeRequest,
-} from '@debens/service-identity';
+import { AssertionAPI, ChallengeIdentityDTO, Tokens } from '@debens/service-identity';
 
 import { AssertionRequest } from '../../native-module';
 
 export class Assertion {
-    constructor(private readonly service: AssertionService) {}
+    constructor(private readonly api: AssertionAPI) {}
 
-    async login(params?: ChallengeRequest): Promise<AssertionResult> {
+    async login(params: ChallengeIdentityDTO): Promise<Tokens> {
         const challenge = await this.challenge(params);
         return await this.verify(challenge);
     }
 
-    private async challenge(params?: ChallengeRequest): Promise<AssertionRequest> {
-        const { data: request } = await this.service.create(params);
+    private async challenge(params: ChallengeIdentityDTO): Promise<AssertionRequest> {
+        const { data: request } = await this.api.create(params);
 
         return await NativeModules.Fido.assertion(request);
     }
 
-    private async verify(request: AssertionRequest): Promise<AssertionResult> {
-        const { data: assertion } = await this.service.complete(request);
+    private async verify(request: AssertionRequest): Promise<Tokens> {
+        const { data: assertion } = await this.api.complete(request);
 
         return assertion;
     }
