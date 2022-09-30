@@ -14,8 +14,9 @@ const toQueries = (builders: Query.Builders, instance: ReactTestInstance): Defau
         .map(([key, builder]) => ({ [key]: builder(instance) }))
         .reduce<DefaultQueries>((a, b) => Object.assign(a, b), {} as DefaultQueries);
 
-type Options = library.RenderOptions;
-type Render = (component: React.ReactElement<any>, options?: Options) => library.RenderAPI & Testing.Queries;
+type Options = Parameters<typeof library.render>[1];
+type RenderAPI = ReturnType<typeof library.render>;
+type Render = (component: React.ReactElement<any>, options?: Options) => RenderAPI & Testing.Queries;
 
 const DEFAULT_OPTIONS: Options = { wrapper: Workbench };
 export const render: Render = (component, options) => {
