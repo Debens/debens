@@ -18,6 +18,7 @@ export type GridProps = system.ColorProps<Theme> &
     system.BorderProps<Theme> &
     system.FlexboxProps<Theme> &
     custom.DebugProps &
+    custom.GridsProps &
     Omit<ViewProps, 'style'>;
 
 const Component = styled.View.withConfig({
@@ -30,6 +31,7 @@ const Component = styled.View.withConfig({
     ${system.border}
     ${system.flexbox}
     ${custom.debug}
+    ${custom.grids}
 `;
 
 class Grid extends React.PureComponent<GridProps> {

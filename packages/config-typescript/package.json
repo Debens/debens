@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "base configuration for typescript",
   "license": "MIT",
+  "main": "tsconfig.json",
   "devDependencies": {
     "tslib": "^2.4.0",
     "typescript": "^4.6.3"
