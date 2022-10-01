@@ -12,15 +12,15 @@ interface FaceFacadeProps {
 }
 
 const FaceFacade: React.FunctionComponent<FaceFacadeProps> = props => {
-    const { pack, emotion } = props;
+    const { pack, emotion, ...grid } = props;
 
     switch (pack) {
         case FacePack.Debug:
-            return <DebugFace emotion={emotion} />;
+            return <DebugFace emotion={emotion} {...grid} />;
         case FacePack.Card:
-            return <CardFace emotion={emotion} />;
+            return <CardFace emotion={emotion} {...grid} />;
         case FacePack.Morgan:
-            return <MorganFace emotion={emotion} />;
+            return <MorganFace emotion={emotion} {...grid} />;
     }
 };
 

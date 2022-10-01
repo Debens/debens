@@ -34,6 +34,7 @@ export type StyledPressableProps = PressableProps &
     system.LayoutProps<Theme> &
     system.BorderProps<Theme> &
     system.FlexboxProps<Theme> &
+    system.PositionProps<Theme> &
     custom.PressableProps &
     custom.DebugProps;
 
@@ -46,6 +47,7 @@ const StyledButton = styled(Pressable).withConfig({
     ${system.layout}
     ${system.border}
     ${system.flexbox}
+    ${system.position}
     ${custom.pressable}
     ${custom.debug}
 `;

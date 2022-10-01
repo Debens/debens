@@ -13,12 +13,12 @@ const FACE_SOURCES: Record<FaceEmotion, ImageSourcePropType> = {
 };
 
 const MorganFace: React.FunctionComponent<FaceProps> = props => {
-    const { emotion } = props;
+    const { emotion, ...grid } = props;
 
     const size = emotion === FaceEmotion.Angry ? styles.large : styles.regular;
 
     return (
-        <Grid variant="center" flex={1} margin="small" borderRadius="medium">
+        <Grid variant="center" flex={1} margin="small" borderRadius="medium" {...grid}>
             <Image style={size} source={FACE_SOURCES[emotion]} />
         </Grid>
     );

@@ -20,8 +20,9 @@ const BOTTOM_EDGES: ReadonlyArray<Edge> = ['bottom'];
 const isEdge = (collection: ReadonlyArray<Edge>) => (edge: Edge) => collection.includes(edge);
 
 export const Screen: React.FunctionComponent<ScreenProps> = props => {
-    const top = useColor(props.top!);
-    const bottom = useColor(props.bottom!);
+    const { top: topColor, bottom: bottomColor, ...grid } = props;
+    const top = useColor(topColor!);
+    const bottom = useColor(bottomColor!);
 
     const edges = useMemo(() => {
         return {
@@ -40,7 +41,7 @@ export const Screen: React.FunctionComponent<ScreenProps> = props => {
                     style={styles.grow}
                     behavior="padding"
                     keyboardVerticalOffset={headerHeight}>
-                    <Grid flex={1} backgroundColor="$background-primary" {...props}>
+                    <Grid flex={1} backgroundColor="$background-primary" {...grid}>
                         {props.children}
                     </Grid>
                 </KeyboardAvoidingView>

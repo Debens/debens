@@ -4,7 +4,13 @@ import { useNavigation } from '@react-navigation/core';
 import { Grid, Screen, SVG, Toolbar } from '@training/mobile-atoms';
 
 import Board from '../components/Board/Board';
-import { useBoard, useResetHandler } from '../components/GameProvider/game-hooks';
+import FinalFace from '../components/FinalFace/FinalFace';
+import { GameStatus } from '../components/GameProvider/game-context';
+import {
+    useBoard,
+    useGameStatus,
+    useResetHandler,
+} from '../components/GameProvider/game-hooks';
 import { withGame } from '../components/GameProvider/GameProvider';
 import { AppRoute } from '../navigation/routes';
 
@@ -21,6 +27,7 @@ export const GameScreen: React.FunctionComponent = () => {
 
     const board = useBoard();
     const onReset = useResetHandler();
+    const status = useGameStatus();
 
     return (
         <Screen marginY="medium">
@@ -37,7 +44,8 @@ export const GameScreen: React.FunctionComponent = () => {
             </Toolbar>
             <Grid flex={1} variant="gutter">
                 <Grid flex={1} variant="center">
-                    <Board flex={1} state={board} />
+                    <Board zIndex={0} flex={1} state={board} />
+                    {status === GameStatus.Resolved && <FinalFace zIndex={1} onPress={onReset} />}
                 </Grid>
             </Grid>
         </Screen>
