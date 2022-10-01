@@ -13,3 +13,5 @@ export { GhostProvider, useGhosts } from './components/Ghost/GhostProvider';
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as EmailInput } from './components/EmailInput/EmailInput';
 export { default as Toolbar } from './components/Toolbar/Toolbar';
+
+export * as EASING from './utils/easing';
