@@ -1,86 +1,11 @@
-import React, {
-    createContext,
-    memo,
-    useCallback,
-    useContext,
-    useEffect,
-    useMemo,
-    useState,
-} from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { SemanticColor } from '../../../../../packages/theme/src';
-
-const ROW_COUNT = 4;
-const COLUMN_COUNT = 4;
-
-const ROWS = Array.from<boolean>({ length: COLUMN_COUNT }).map(() => false);
-const START_MATRIX = Array.from<boolean[]>({ length: ROW_COUNT }).map(() => [...ROWS]);
-
-export const getInitialState = (): typeof START_MATRIX => JSON.parse(JSON.stringify(START_MATRIX));
-
-export enum Status {
-    Ready = 'ready',
-    Running = 'running',
-    Resolved = 'resolved',
-}
-
-export enum FaceState {
-    Normal = 'normal',
-    Calm = 'calm',
-    Angry = 'angry',
-}
-
-interface GameState {
-    status: Status;
-    board: boolean[][];
-    current: [number, number] | undefined;
-    final: [number, number];
-    onSelect: (x: number, y: number) => void;
-    onReset: () => void;
-}
-
-const noop = () => void 0;
-const context = createContext<GameState>({
-    status: Status.Ready,
-    board: getInitialState(),
-    current: undefined,
-    final: [0, 0],
-    onSelect: noop,
-    onReset: noop,
-});
-
-export const useGameContext = () => useContext(context);
-
-export const useStatus = () => useGameContext().status;
-
-export const useBoard = () => useGameContext().board;
-
-export const useCurrent = () => useGameContext().current;
-
-export const useFinal = () => useGameContext().final;
-
-export const useResetHandler = () => useGameContext().onReset;
-
-export const useSelectHandler = () => useGameContext().onSelect;
-
-export const useFace = (x: number, y: number) => useBoard()[y]![x];
-
-export const useFaceState = (x: number, y: number) => {
-    const status = useStatus();
-    const selected = useFace(x, y);
-
-    return useMemo<FaceState>(() => {
-        if (selected) {
-            if (status === Status.Resolved) {
-                return FaceState.Angry;
-            } else {
-                return FaceState.Calm;
-            }
-        } else {
-            return FaceState.Normal;
-        }
-    }, [selected, status]);
-};
+import context, {
+    COLUMN_COUNT,
+    GameStatus,
+    getInitialState,
+    ROW_COUNT,
+} from './game-context';
 
 type GameProviderProps = React.PropsWithChildren;
 
@@ -103,15 +28,17 @@ const GameProvider: React.FunctionComponent<GameProviderProps> = props => {
 
     const status = useMemo(() => {
         if (!current) {
-            return Status.Ready;
+            return GameStatus.Ready;
         } else {
-            return JSON.stringify(current) === JSON.stringify(final) ? Status.Resolved : Status.Running;
+            return JSON.stringify(current) === JSON.stringify(final)
+                ? GameStatus.Resolved
+                : GameStatus.Running;
         }
     }, [current, final]);
 
     const onSelect = useCallback(
         (x: number, y: number) => {
-            if (status !== Status.Resolved) setCurrent([x, y]);
+            if (status !== GameStatus.Resolved) setCurrent([x, y]);
         },
         [status],
     );

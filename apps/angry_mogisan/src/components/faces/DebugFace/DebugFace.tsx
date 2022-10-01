@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button, Grid, Paragraph } from '@training/mobile-atoms';
 
-import { useFace } from '../../GameProvider/GameProvider';
+import { useFace } from '../../GameProvider/game-hooks';
 import { FaceProps } from '../model';
 import { withFace } from '../with-face';
 

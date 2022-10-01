@@ -3,7 +3,8 @@ import { SlideOutUp } from 'react-native-reanimated';
 
 import { Button, EASING, Grid } from '@training/mobile-atoms';
 
-import { FaceState, useFaceState, useSelectHandler } from '../GameProvider/GameProvider';
+import { FaceEmotion } from '../GameProvider/game-context';
+import { useFaceEmotion, useSelectHandler } from '../GameProvider/game-hooks';
 
 import { FaceProps } from './model';
 
@@ -19,18 +20,18 @@ export const withFace = <P extends FaceProps>(Component: React.ComponentType<P>)
             onSelect(x, y);
         }, [onSelect, x, y]);
 
-        const state = useFaceState(x, y);
+        const emotion = useFaceEmotion(x, y);
         const [isHidden, setIsHidden] = useState(false);
         /* deferred not next fibre to allow for face change */
         useEffect(() => {
-            switch (state) {
-                case FaceState.Angry:
-                case FaceState.Calm:
+            switch (emotion) {
+                case FaceEmotion.Angry:
+                case FaceEmotion.Calm:
                     return setIsHidden(true);
-                case FaceState.Normal:
+                case FaceEmotion.Neutral:
                     return setIsHidden(false);
             }
-        }, [state]);
+        }, [emotion]);
 
         return (
             <Button.Frame overflow="visible" flex={1} onPress={onPress}>

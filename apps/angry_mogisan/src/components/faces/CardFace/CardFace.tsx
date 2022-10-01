@@ -3,21 +3,22 @@ import React, { useMemo } from 'react';
 import { Grid } from '@training/mobile-atoms/src';
 
 import { SemanticColor } from '../../../../../../packages/theme/src';
-import { FaceState, useFaceState } from '../../GameProvider/GameProvider';
+import { FaceEmotion } from '../../GameProvider/game-context';
+import { useFaceEmotion } from '../../GameProvider/game-hooks';
 import { FaceProps } from '../model';
 import { withFace } from '../with-face';
 
 const CardFace: React.FunctionComponent<FaceProps> = props => {
     const { x, y } = props;
 
-    const state = useFaceState(x, y);
+    const state = useFaceEmotion(x, y);
     const backgroundColor = useMemo<SemanticColor>(() => {
         switch (state) {
-            case FaceState.Normal:
+            case FaceEmotion.Neutral:
                 return '$background-active';
-            case FaceState.Calm:
+            case FaceEmotion.Calm:
                 return '$background-brand';
-            case FaceState.Angry:
+            case FaceEmotion.Angry:
                 return '$button-danger';
         }
     }, [state]);

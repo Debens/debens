@@ -4,11 +4,8 @@ import { useNavigation } from '@react-navigation/core';
 import { Grid, Screen, SVG, Toolbar } from '@training/mobile-atoms';
 
 import Board from '../components/Board/Board';
-import {
-    useBoard,
-    useResetHandler,
-    withGame,
-} from '../components/GameProvider/GameProvider';
+import { useBoard, useResetHandler } from '../components/GameProvider/game-hooks';
+import { withGame } from '../components/GameProvider/GameProvider';
 import { AppRoute } from '../navigation/routes';
 
 export const GameScreen: React.FunctionComponent = () => {
