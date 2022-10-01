@@ -1,6 +1,6 @@
-import { useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 
-import { context, FaceEmotion, GameStatus } from './game-context';
+import { context, FaceEmotion } from './game-context';
 
 export const useGameContext = () => useContext(context);
 
@@ -18,19 +18,26 @@ export const useSelectHandler = () => useGameContext().onSelect;
 
 export const useFace = (x: number, y: number) => useBoard()[y]![x];
 
+export const useFinalCheck = () => {
+    const final = useFinalPosition();
+
+    return useCallback(
+        (x: number, y: number) => {
+            return JSON.stringify([x, y]) === JSON.stringify(final);
+        },
+        [final],
+    );
+};
+
 export const useFaceEmotion = (x: number, y: number) => {
-    const status = useGameStatus();
     const selected = useFace(x, y);
+    const isFinal = useFinalCheck();
 
     return useMemo<FaceEmotion>(() => {
         if (selected) {
-            if (status === GameStatus.Resolved) {
-                return FaceEmotion.Angry;
-            } else {
-                return FaceEmotion.Calm;
-            }
+            return isFinal(x, y) ? FaceEmotion.Angry : FaceEmotion.Calm;
         } else {
             return FaceEmotion.Neutral;
         }
-    }, [selected, status]);
+    }, [selected, x, y, isFinal]);
 };

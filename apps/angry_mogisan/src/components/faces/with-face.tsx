@@ -33,9 +33,9 @@ export const withFace = <P extends FaceProps>(Component: React.ComponentType<P>)
         /* deferred not next fibre to allow for face change */
         useEffect(() => {
             switch (emotion) {
-                case FaceEmotion.Angry:
                 case FaceEmotion.Calm:
                     return setIsHidden(true);
+                case FaceEmotion.Angry:
                 case FaceEmotion.Neutral:
                     return setIsHidden(false);
             }
