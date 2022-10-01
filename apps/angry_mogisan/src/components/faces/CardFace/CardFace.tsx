@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
-import { Grid } from '@training/mobile-atoms/src';
+import { Grid } from '@training/mobile-atoms';
+import { SemanticColor } from '@training/theme';
 
-import { SemanticColor } from '../../../../../../packages/theme/src';
 import { FaceEmotion } from '../../GameProvider/game-context';
 import { FaceProps } from '../model';
 

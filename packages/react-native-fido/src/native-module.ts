@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-import { ChallengeResponse, CreateIdentityResponse } from '@training/service-identity/src';
+import { ChallengeResponse, CreateIdentityResponse } from '@training/service-identity';
 
 export interface AssertionRequest {
     id: string;

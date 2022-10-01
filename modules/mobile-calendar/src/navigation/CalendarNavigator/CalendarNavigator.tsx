@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { GraphQLProvider } from '@training/graphql/src';
+import { GraphQLProvider } from '@training/graphql';
 
 import CalendarScreen, { CalendarScreenNavigationProps } from '../../screens/CalendarScreen/CalendarScreen';
 import { CalendarRoute } from '../routes';

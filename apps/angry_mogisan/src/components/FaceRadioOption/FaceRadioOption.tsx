@@ -9,8 +9,8 @@ import {
     useRadioHandler,
     useRadioStatus,
 } from '@training/mobile-atoms';
+import { SemanticColor } from '@training/theme';
 
-import { SemanticColor } from '../../../../../packages/theme/src';
 import FaceFacade from '../faces/FaceFacade/FaceFacade';
 import { FacePack } from '../faces/model';
 import { FaceEmotion } from '../GameProvider/game-context';

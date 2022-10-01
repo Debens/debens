@@ -5,6 +5,7 @@ import CardFace from '../CardFace/CardFace';
 import DebugFace from '../DebugFace/DebugFace';
 import { FacePack } from '../model';
 import MorganFace from '../MorganFace/MorganFace';
+import TazFace from '../TazFace/TazFace';
 
 interface FaceFacadeProps {
     pack: FacePack;
@@ -21,6 +22,8 @@ const FaceFacade: React.FunctionComponent<FaceFacadeProps> = props => {
             return <CardFace emotion={emotion} {...grid} />;
         case FacePack.Morgan:
             return <MorganFace emotion={emotion} {...grid} />;
+        case FacePack.Taz:
+            return <TazFace emotion={emotion} {...grid} />;
     }
 };
 

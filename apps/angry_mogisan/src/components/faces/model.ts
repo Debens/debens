@@ -10,4 +10,5 @@ export enum FacePack {
     Debug = 'debug',
     Card = 'card',
     Morgan = 'morgan',
+    Taz = 'taz',
 }

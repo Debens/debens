@@ -15,7 +15,7 @@ enableFreeze();
 
 export const App = () => {
     return (
-        <FaceProvider pack={FacePack.Morgan}>
+        <FaceProvider pack={FacePack.Taz}>
             <GhostProvider>
                 <ThemeProvider theme={themes.mógan}>
                     <SafeAreaProvider>
