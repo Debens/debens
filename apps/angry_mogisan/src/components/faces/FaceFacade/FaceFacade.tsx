@@ -1,29 +1,23 @@
 import React, { memo } from 'react';
 
+import { FaceType, Profile } from '../../../face-pack/model';
 import { FaceEmotion } from '../../GameProvider/game-context';
-import CardFace from '../CardFace/CardFace';
-import DebugFace from '../DebugFace/DebugFace';
-import { FacePack } from '../model';
-import MorganFace from '../MorganFace/MorganFace';
-import TazFace from '../TazFace/TazFace';
+import BundledFace from '../BundledFace/BundledFace';
+import ComponentFace from '../ComponentFace/ComponentFace';
 
 interface FaceFacadeProps {
-    pack: FacePack;
+    profile: Profile;
     emotion: FaceEmotion;
 }
 
 const FaceFacade: React.FunctionComponent<FaceFacadeProps> = props => {
-    const { pack, emotion, ...grid } = props;
+    const { profile, emotion, ...grid } = props;
 
-    switch (pack) {
-        case FacePack.Debug:
-            return <DebugFace emotion={emotion} {...grid} />;
-        case FacePack.Card:
-            return <CardFace emotion={emotion} {...grid} />;
-        case FacePack.Morgan:
-            return <MorganFace emotion={emotion} {...grid} />;
-        case FacePack.Taz:
-            return <TazFace emotion={emotion} {...grid} />;
+    switch (profile.type) {
+        case FaceType.Component:
+            return <ComponentFace profile={profile} emotion={emotion} {...grid} />;
+        case FaceType.Bundled:
+            return <BundledFace profile={profile} emotion={emotion} {...grid} />;
     }
 };
 

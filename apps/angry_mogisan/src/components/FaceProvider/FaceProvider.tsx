@@ -1,25 +1,10 @@
-import React, { createContext, memo, useContext, useState } from 'react';
+import React, { memo, useState } from 'react';
 
-import { FacePack } from '../faces/model';
+import { FacePackType } from '../../face-pack/model';
 
-interface FaceState {
-    pack: FacePack;
-    setPack: (pack: FacePack) => void;
-}
+import context from './face-context';
 
-const noop = () => void 0;
-const context = createContext<FaceState>({
-    pack: FacePack.Debug,
-    setPack: noop,
-});
-
-export const useFacePack = () => {
-    const { pack, setPack } = useContext(context);
-
-    return [pack, setPack] as const;
-};
-
-type FaceProviderProps = React.PropsWithChildren<{ pack: FacePack }>;
+type FaceProviderProps = React.PropsWithChildren<{ pack: FacePackType }>;
 
 const FaceProvider: React.FunctionComponent<FaceProviderProps> = props => {
     const [pack, setPack] = useState(props.pack);

@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, StatusBar, StyleSheet } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
 import { useHeaderHeight } from '@react-navigation/elements';
@@ -35,7 +35,9 @@ export const Screen: React.FunctionComponent<ScreenProps> = props => {
 
     return (
         <>
-            <SafeAreaView edges={edges.top} style={[styles.shrink, { backgroundColor: top }]} />
+            <SafeAreaView edges={edges.top} style={[styles.shrink, { backgroundColor: top }]}>
+                <StatusBar backgroundColor={top} animated />
+            </SafeAreaView>
             <SafeAreaView edges={edges.bottom} style={[styles.grow, { backgroundColor: bottom }]}>
                 <KeyboardAvoidingView
                     style={styles.grow}

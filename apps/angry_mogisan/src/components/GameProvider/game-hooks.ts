@@ -33,6 +33,13 @@ export const useEndEffect = (fn: EffectCallback) => {
     }, [status, fn]);
 };
 
+export const useStartEffect = (fn: EffectCallback) => {
+    const status = useGameStatus();
+    useEffect(() => {
+        if (status === GameStatus.Ready) fn();
+    }, [status, fn]);
+};
+
 export const useFinalCheck = () => {
     const final = useFinalPosition();
 

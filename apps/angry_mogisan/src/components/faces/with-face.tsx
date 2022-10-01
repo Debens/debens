@@ -10,7 +10,7 @@ import { FaceProps } from './Face/Face';
 
 const easing = EASING.deceleration.factory();
 
-const useOnExit = (duration = 2000) =>
+const useOnExit = (duration = 1200) =>
     useMemo(() => SlideOutUp.duration(duration).easing(easing), [duration]);
 const useOnEnter = (x: number, y: number, { duration = 400, staggered = true }) =>
     useMemo(() => {
@@ -39,13 +39,13 @@ export const withFace = <P extends FaceProps>(Component: React.ComponentType<P>)
 
         const emotion = useFaceEmotion(x, y);
         const [isHidden, setIsHidden] = useState(false);
-        /* deferred not next fibre to allow for face change */
+        /* deferred to next fibre to allow for face change */
         useEffect(() => {
             switch (emotion) {
                 case FaceEmotion.Calm:
                     return setIsHidden(true);
-                case FaceEmotion.Angry:
                 case FaceEmotion.Neutral:
+                case FaceEmotion.Angry:
                     return setIsHidden(false);
             }
         }, [emotion]);
