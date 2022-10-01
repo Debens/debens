@@ -4,16 +4,13 @@ import { Grid } from '@training/mobile-atoms/src';
 
 import { SemanticColor } from '../../../../../../packages/theme/src';
 import { FaceEmotion } from '../../GameProvider/game-context';
-import { useFaceEmotion } from '../../GameProvider/game-hooks';
 import { FaceProps } from '../model';
-import { withFace } from '../with-face';
 
 const CardFace: React.FunctionComponent<FaceProps> = props => {
-    const { x, y } = props;
+    const { emotion } = props;
 
-    const state = useFaceEmotion(x, y);
     const backgroundColor = useMemo<SemanticColor>(() => {
-        switch (state) {
+        switch (emotion) {
             case FaceEmotion.Neutral:
                 return '$background-active';
             case FaceEmotion.Calm:
@@ -21,9 +18,9 @@ const CardFace: React.FunctionComponent<FaceProps> = props => {
             case FaceEmotion.Angry:
                 return '$button-danger';
         }
-    }, [state]);
+    }, [emotion]);
 
     return <Grid flex={1} backgroundColor={backgroundColor} margin="small" borderRadius="medium" />;
 };
 
-export default withFace(CardFace);
+export default CardFace;

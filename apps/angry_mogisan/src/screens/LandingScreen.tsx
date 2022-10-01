@@ -12,6 +12,10 @@ export const LandingScreen: React.FunctionComponent = () => {
         navigation.navigate(AppRoute.Game);
     }, []);
 
+    const onSettings = useCallback(() => {
+        navigation.navigate(AppRoute.Settings);
+    }, []);
+
     return (
         <Screen>
             <Grid flex={1} variant="gutter" marginBottom="small">
@@ -19,6 +23,9 @@ export const LandingScreen: React.FunctionComponent = () => {
                     <Paragraph typeset="$heading">Angry Mogisán</Paragraph>
                 </Grid>
                 <Button onPress={onStart}>Start</Button>
+                <Button variant="secondary" onPress={onSettings} mt="small">
+                    Settings
+                </Button>
             </Grid>
         </Screen>
     );

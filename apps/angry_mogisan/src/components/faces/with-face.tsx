@@ -1,14 +1,22 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { SlideOutUp } from 'react-native-reanimated';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { SlideInUp, SlideOutUp } from 'react-native-reanimated';
 
 import { Button, EASING, Grid } from '@training/mobile-atoms';
 
-import { FaceEmotion } from '../GameProvider/game-context';
+import { COLUMN_COUNT, FaceEmotion, ROW_COUNT } from '../GameProvider/game-context';
 import { useFaceEmotion, useSelectHandler } from '../GameProvider/game-hooks';
 
-import { FaceProps } from './model';
+import { FaceProps } from './Face/Face';
 
 const easing = EASING.deceleration.factory();
+
+const onExit = SlideOutUp.duration(2000).easing(easing);
+const useOnEnter = (x: number, y: number) =>
+    useMemo(() => {
+        return SlideInUp.duration(400)
+            .easing(easing)
+            .delay((ROW_COUNT - x) * 100 + (COLUMN_COUNT - y) * 100);
+    }, [x, y]);
 
 export const withFace = <P extends FaceProps>(Component: React.ComponentType<P>) => {
     const Wrapped = (props: P) => {
@@ -33,10 +41,12 @@ export const withFace = <P extends FaceProps>(Component: React.ComponentType<P>)
             }
         }, [emotion]);
 
+        const onEnter = useOnEnter(x, y);
+
         return (
             <Button.Frame overflow="visible" flex={1} onPress={onPress}>
                 {!isHidden && (
-                    <Grid.Animated flex={1} exiting={SlideOutUp.duration(2000).easing(easing)}>
+                    <Grid.Animated flex={1} exiting={onExit} entering={onEnter}>
                         <Component {...props} />
                     </Grid.Animated>
                 )}

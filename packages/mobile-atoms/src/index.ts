@@ -13,5 +13,8 @@ export { GhostProvider, useGhosts } from './components/Ghost/GhostProvider';
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as EmailInput } from './components/EmailInput/EmailInput';
 export { default as Toolbar } from './components/Toolbar/Toolbar';
+export { default as RadioGroup, RadioProps } from './components/RadioGroup/RadioGroup';
+
+export * from './components/RadioGroup/radio-hooks';
 
 export * as EASING from './utils/easing';

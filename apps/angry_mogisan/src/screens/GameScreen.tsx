@@ -15,6 +15,10 @@ export const GameScreen: React.FunctionComponent = () => {
         navigate(AppRoute.Landing);
     }, [navigate]);
 
+    const onSettings = useCallback(() => {
+        navigate(AppRoute.Settings);
+    }, [navigate]);
+
     const board = useBoard();
     const onReset = useResetHandler();
 
@@ -23,6 +27,9 @@ export const GameScreen: React.FunctionComponent = () => {
             <Toolbar>
                 <Toolbar.Item onPress={onStop}>
                     <SVG.ChevronLeft />
+                </Toolbar.Item>
+                <Toolbar.Item onPress={onSettings}>
+                    <SVG.Settings />
                 </Toolbar.Item>
                 <Toolbar.Item onPress={onReset}>
                     <SVG.Refresh />

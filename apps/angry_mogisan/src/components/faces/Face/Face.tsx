@@ -1,22 +1,22 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { useFacePack } from '../../FaceProvider/FaceProvider';
-import CardFace from '../CardFace/CardFace';
-import DebugFace from '../DebugFace/DebugFace';
-import { FacePack, FaceProps } from '../model';
-import MorganFace from '../MorganFace/MorganFace';
+import { useFaceEmotion } from '../../GameProvider/game-hooks';
+import FaceFacade from '../FaceFacade/FaceFacade';
+import { withFace } from '../with-face';
+
+export interface FaceProps {
+    x: number;
+    y: number;
+}
 
 const Face: React.FunctionComponent<FaceProps> = props => {
-    const pack = useFacePack();
+    const { x, y } = props;
+    const [pack] = useFacePack();
 
-    switch (pack) {
-        case FacePack.Debug:
-            return <DebugFace {...props} />;
-        case FacePack.Card:
-            return <CardFace {...props} />;
-        case FacePack.Morgan:
-            return <MorganFace {...props} />;
-    }
+    const emotion = useFaceEmotion(x, y);
+
+    return <FaceFacade pack={pack} emotion={emotion} />;
 };
 
-export default memo(Face);
+export default withFace(Face);

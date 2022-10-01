@@ -1,6 +1,7 @@
+import { FaceEmotion } from '../GameProvider/game-context';
+
 export interface FaceProps {
-    x: number;
-    y: number;
+    emotion: FaceEmotion;
 }
 
 export enum FacePack {
