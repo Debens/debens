@@ -1,6 +1,6 @@
-import { useCallback, useContext, useMemo } from 'react';
+import { EffectCallback, useCallback, useContext, useEffect, useMemo } from 'react';
 
-import { context, FaceEmotion } from './game-context';
+import { context, FaceEmotion, GameStatus } from './game-context';
 
 export const useGameContext = () => useContext(context);
 
@@ -17,6 +17,21 @@ export const useResetHandler = () => useGameContext().onReset;
 export const useSelectHandler = () => useGameContext().onSelect;
 
 export const useFace = (x: number, y: number) => useBoard()[y]![x];
+
+export const useSelectEffect = (fn: EffectCallback) => {
+    const status = useGameStatus();
+    const current = useCurrentPosition();
+    useEffect(() => {
+        if (status === GameStatus.Running) fn();
+    }, [status, current, fn]);
+};
+
+export const useEndEffect = (fn: EffectCallback) => {
+    const status = useGameStatus();
+    useEffect(() => {
+        if (status === GameStatus.Resolved) fn();
+    }, [status, fn]);
+};
 
 export const useFinalCheck = () => {
     const final = useFinalPosition();

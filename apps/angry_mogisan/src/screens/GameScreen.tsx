@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import Haptic from 'react-native-haptic-feedback';
 
 import { useNavigation } from '@react-navigation/core';
 import { Grid, Screen, SVG, Toolbar } from '@training/mobile-atoms';
@@ -8,8 +9,10 @@ import FinalFace from '../components/FinalFace/FinalFace';
 import { GameStatus } from '../components/GameProvider/game-context';
 import {
     useBoard,
+    useEndEffect,
     useGameStatus,
     useResetHandler,
+    useSelectEffect,
 } from '../components/GameProvider/game-hooks';
 import { withGame } from '../components/GameProvider/GameProvider';
 import { AppRoute } from '../navigation/routes';
@@ -28,6 +31,14 @@ export const GameScreen: React.FunctionComponent = () => {
     const board = useBoard();
     const onReset = useResetHandler();
     const status = useGameStatus();
+
+    useSelectEffect(() => {
+        Haptic.trigger('soft');
+    });
+
+    useEndEffect(() => {
+        Haptic.trigger('rigid');
+    });
 
     return (
         <Screen marginY="medium">

@@ -79,8 +79,13 @@ import org.apache.tools.ant.taskdefs.condition.Os
  */
 
 project.ext.react = [
-    cliPath: "../../../../node_modules/react-native/local-cli/cli.js",
+    entryFile: "index.ts",
     enableHermes: true,  // clean and rebuild if changing
+
+    cliPath: "../../../../node_modules/react-native/local-cli/cli.js",
+    composeSourceMapsPath: "../../node_modules/react-native/scripts/compose-source-maps.js",
+    hermesCommand: "../../../../node_modules/react-native/sdks/hermesc/%OS-BIN%/hermesc",
+
     bundleInDebug: false
 ]
 
