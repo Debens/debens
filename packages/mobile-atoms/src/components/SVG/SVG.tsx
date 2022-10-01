@@ -2,18 +2,25 @@ import React from 'react';
 import { SvgProps, SvgXml, XmlProps } from 'react-native-svg';
 
 import Bowtie from '../../assets/svg/bowtie.svg';
+import ChevronLeft from '../../assets/svg/chevron-left.svg';
+import Refresh from '../../assets/svg/refresh.svg';
 
 export enum SVGType {
     Bowtie = 'Bowtie',
+    ChevronLeft = 'ChevronLeft',
+    Refresh = 'Refresh',
 }
 
 interface SVGProps extends SvgProps {
     maxWidth?: number;
     maxHeight?: number;
 }
+
 type SVGComponent = React.ComponentType<SVGProps>;
 export const mapping: Record<SVGType, SVGComponent> = {
     [SVGType.Bowtie]: Bowtie,
+    [SVGType.ChevronLeft]: ChevronLeft,
+    [SVGType.Refresh]: Refresh,
 };
 
 export type SVG = React.FunctionComponent<XmlProps> & {

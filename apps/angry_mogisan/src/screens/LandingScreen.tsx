@@ -14,7 +14,7 @@ export const LandingScreen: React.FunctionComponent = () => {
 
     return (
         <Screen>
-            <Grid flex={1} variant="gutter" justifyContent="flex-end" marginBottom="small">
+            <Grid flex={1} variant="gutter" marginBottom="small">
                 <Grid flex={1} variant="center">
                     <Paragraph typeset="$heading">Angry Mogisán</Paragraph>
                 </Grid>

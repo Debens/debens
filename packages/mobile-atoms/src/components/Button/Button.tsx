@@ -1,13 +1,14 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { GestureResponderEvent, Pressable, PressableProps } from 'react-native';
 
 import shouldForwardProp from '@styled-system/should-forward-prop';
-import { Theme } from '@training/theme';
+import { SemanticSpacing, Theme } from '@training/theme';
 
 import styled from 'styled-components/native';
 import * as system from 'styled-system';
 
 import { useColor } from '../../hooks/use-color/use-color';
+import { useSpacing } from '../../hooks/use-spacing/use-spacing';
 import * as custom from '../../utils/style-functions';
 import Paragraph from '../Paragraph/Paragraph';
 
@@ -38,7 +39,7 @@ export type StyledPressableProps = PressableProps &
 
 const StyledButton = styled(Pressable).withConfig({
     displayName: 'StyledButton',
-    shouldForwardProp: prop => shouldForwardProp(prop),
+    shouldForwardProp: prop => prop === 'hitSlop' || shouldForwardProp(prop),
 })<StyledPressableProps>`
     ${system.color}
     ${system.space}
@@ -50,12 +51,14 @@ const StyledButton = styled(Pressable).withConfig({
 `;
 
 type VariantProps<V> = { variant?: keyof V };
-type ButtonProps = React.PropsWithChildren<StyledPressableProps & VariantProps<typeof variants>>;
+export type ButtonProps = React.PropsWithChildren<
+    StyledPressableProps & VariantProps<typeof variants> & { hitSlop?: SemanticSpacing }
+>;
 
 const useVariant = (variant?: keyof typeof variants) =>
     useMemo(() => (variant ? variants[variant] : undefined), [variant]);
 
-export const Button: React.FunctionComponent<ButtonProps> = props => {
+const ButtonFrame: React.FunctionComponent<ButtonProps> = props => {
     const { onPressIn, onPressOut } = props;
     const [active, setActive] = useState(false);
 
@@ -79,16 +82,34 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
     const variant = useVariant(props.variant);
     const button = Object.assign({}, variant, props);
 
+    const hitSlop = useSpacing(props.hitSlop);
+
     return (
         <StyledButton
             active={active}
             android_ripple={{ color: useColor(props.activeColor) }}
             {...button}
-            {...handlers}>
+            {...handlers}
+            hitSlop={hitSlop}>
+            {props.children}
+        </StyledButton>
+    );
+};
+
+export interface Button extends React.FunctionComponent<ButtonProps> {
+    Frame: React.FunctionComponent<ButtonProps>;
+}
+
+export const Button: Button = props => {
+    const variant = useVariant(props.variant);
+    const button = Object.assign({}, variant, props);
+
+    return (
+        <ButtonFrame {...props}>
             <Paragraph textAlign="center" color={button.color} padding="medium">
                 {props.children}
             </Paragraph>
-        </StyledButton>
+        </ButtonFrame>
     );
 };
 
@@ -97,4 +118,6 @@ Button.defaultProps = {
     accessibilityRole: 'button',
 };
 
-export default memo(Button);
+Button.Frame = ButtonFrame;
+
+export default Button;

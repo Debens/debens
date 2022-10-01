@@ -12,3 +12,4 @@ export { default as Ghost } from './components/Ghost/Ghost';
 export { GhostProvider, useGhosts } from './components/Ghost/GhostProvider';
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as EmailInput } from './components/EmailInput/EmailInput';
+export { default as Toolbar } from './components/Toolbar/Toolbar';

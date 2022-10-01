@@ -18,5 +18,5 @@
     },
     "references": [{ "path": "../utils" }],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"],
-    "include": ["src", "index.ts"]
+    "include": ["src", "index.ts", "../mobile-atoms/src/hooks/use-theme/use-spacing.ts"]
 }

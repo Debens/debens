@@ -6,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { GhostProvider } from '@training/mobile-atoms';
 import { ThemeProvider, themes } from '@training/theme';
 
+import FaceProvider from './components/FaceProvider/FaceProvider';
+import { FacePack } from './components/faces/model';
 import AppNavigator from './navigation/AppNavigator';
 
 enableScreens();
@@ -13,15 +15,17 @@ enableFreeze();
 
 export const App = () => {
     return (
-        <GhostProvider>
-            <ThemeProvider theme={themes.light}>
-                <SafeAreaProvider>
-                    <NavigationContainer>
-                        <AppNavigator />
-                    </NavigationContainer>
-                </SafeAreaProvider>
-            </ThemeProvider>
-        </GhostProvider>
+        <FaceProvider pack={FacePack.Card}>
+            <GhostProvider>
+                <ThemeProvider theme={themes.light}>
+                    <SafeAreaProvider>
+                        <NavigationContainer>
+                            <AppNavigator />
+                        </NavigationContainer>
+                    </SafeAreaProvider>
+                </ThemeProvider>
+            </GhostProvider>
+        </FaceProvider>
     );
 };
 
