@@ -16,11 +16,12 @@
         "lint:staged": "lint-staged"
     },
     "dependencies": {
+        "color": "^4.2.3",
         "react": "18.1.0",
         "react-native": "0.70.1",
         "react-native-codegen": "^0.69.1",
         "react-native-haptic-feedback": "^1.14.0",
-        "react-native-reanimated": "2.10.0",
+        "react-native-reanimated": "3.0.0-rc.3",
         "react-native-safe-area-context": "^4.2.5",
         "react-native-screens": "^3.13.1",
         "react-native-svg": "^12.3.0",
@@ -31,6 +32,7 @@
         "@babel/runtime": "^7.12.5",
         "@training/config-typescript": "^0.0.1",
         "@training/eslint-config": "^0.0.1",
+        "@types/color": "^3.0.3",
         "@types/jest": "^26.0.23",
         "@types/react-native": "^0.70.0",
         "@types/react-test-renderer": "^18.0.0",

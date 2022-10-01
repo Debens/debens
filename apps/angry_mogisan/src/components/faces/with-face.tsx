@@ -55,11 +55,9 @@ export const withFace = <P extends FaceProps>(Component: React.ComponentType<P>)
 
         return (
             <Button.Frame overflow="visible" flex={1} onPress={onPress}>
-                {!isHidden && (
-                    <Grid.Animated flex={1} exiting={onExit} entering={onEnter}>
-                        <Component {...props} />
-                    </Grid.Animated>
-                )}
+                <Grid.Animated flex={1} key={isHidden.toString()} exiting={onExit} entering={onEnter}>
+                    {!isHidden && <Component {...props} />}
+                </Grid.Animated>
             </Button.Frame>
         );
     };

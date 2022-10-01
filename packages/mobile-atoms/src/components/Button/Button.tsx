@@ -2,8 +2,9 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { GestureResponderEvent, Pressable, PressableProps } from 'react-native';
 
 import shouldForwardProp from '@styled-system/should-forward-prop';
-import { SemanticSpacing, Theme } from '@training/theme';
+import { SemanticColor, SemanticSpacing, Theme } from '@training/theme';
 
+import Color from 'color';
 import styled from 'styled-components/native';
 import * as system from 'styled-system';
 
@@ -18,13 +19,11 @@ const variants: Record<ButtonVariantToken, StyledPressableProps> = {
         borderRadius: 'large',
         backgroundColor: '$button-primary',
         activeColor: '$button-primary-active',
-        color: '$text-on-color',
     },
     secondary: {
         borderRadius: 'large',
         backgroundColor: '$button-secondary',
         activeColor: '$button-secondary-active',
-        color: '$text-on-color',
     },
 };
 
@@ -106,9 +105,12 @@ export const Button: Button = props => {
     const variant = useVariant(props.variant);
     const button = Object.assign({}, variant, props);
 
+    const color = useColor(button.backgroundColor?.toString() as SemanticColor);
+    const textColor = color && Color(color).isDark() ? '$text-on-color' : '$text-primary';
+
     return (
         <ButtonFrame {...props}>
-            <Paragraph textAlign="center" color={button.color} padding="medium">
+            <Paragraph textAlign="center" color={textColor} padding="medium">
                 {props.children}
             </Paragraph>
         </ButtonFrame>

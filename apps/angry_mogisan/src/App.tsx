@@ -17,7 +17,7 @@ export const App = () => {
     return (
         <FaceProvider pack={FacePack.Morgan}>
             <GhostProvider>
-                <ThemeProvider theme={themes.light}>
+                <ThemeProvider theme={themes.mógan}>
                     <SafeAreaProvider>
                         <NavigationContainer>
                             <AppNavigator />
