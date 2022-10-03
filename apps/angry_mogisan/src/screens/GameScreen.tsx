@@ -15,6 +15,7 @@ import {
     useSelectEffect,
 } from '../components/GameProvider/game-hooks';
 import { withGame } from '../components/GameProvider/GameProvider';
+import ScaleProvider from '../components/ScaleProvider/ScaleProvider';
 import { AppRoute } from '../navigation/routes';
 
 export const GameScreen: React.FunctionComponent = () => {
@@ -55,7 +56,9 @@ export const GameScreen: React.FunctionComponent = () => {
             </Toolbar>
             <Grid flex={1} variant="gutter">
                 <Grid flex={1} variant="center">
-                    <Board zIndex={0} flex={1} state={board} />
+                    <ScaleProvider>
+                        <Board zIndex={0} flex={1} state={board} />
+                    </ScaleProvider>
                     {status === GameStatus.Resolved && <FinalFace zIndex={1} onPress={onReset} />}
                 </Grid>
             </Grid>

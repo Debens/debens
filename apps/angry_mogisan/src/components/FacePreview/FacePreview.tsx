@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Grid, GridProps, Paragraph, ThematicBreak } from '@training/mobile-atoms/src';
+import { Grid, GridProps, Paragraph, ThematicBreak } from '@training/mobile-atoms';
 
 import { Face } from '../../face-book/model';
 import FaceFacade from '../faces/FaceFacade/FaceFacade';

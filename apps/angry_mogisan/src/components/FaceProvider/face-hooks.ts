@@ -8,8 +8,6 @@ import context from './face-context';
 
 const useFaceContext = () => useContext(context);
 
-export const useFaceScale = () => useFaceContext().scaling;
-
 export const useFaceSource = () => useFaceContext().source;
 
 export const useFaceNames = () => {

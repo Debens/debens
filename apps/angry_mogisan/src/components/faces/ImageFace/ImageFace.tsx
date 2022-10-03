@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { Image, ImageResizeMode, Platform, StyleSheet } from 'react-native';
 
-import { Grid } from '@training/mobile-atoms/src';
+import { Grid } from '@training/mobile-atoms';
 
 import { ImageFace } from '../../../face-book/model';
 import { BaseFaceProps } from '../model';

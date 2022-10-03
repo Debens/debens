@@ -382,7 +382,7 @@ PODS:
     - React-jsi (= 0.70.1)
     - React-logger (= 0.70.1)
     - React-perflogger (= 0.70.1)
-  - RNReanimated (3.0.0-rc.3):
+  - RNReanimated (2.10.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec

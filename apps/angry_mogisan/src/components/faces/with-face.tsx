@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { SlideInUp, SlideOutUp } from 'react-native-reanimated';
+import { StyleSheet } from 'react-native';
+import Animated, { FadeOut, SlideInUp, SlideOutUp } from 'react-native-reanimated';
 
 import { Button, EASING, Grid } from '@training/mobile-atoms';
 
@@ -53,11 +54,14 @@ export const withFace = <P extends FaceProps>(Component: React.ComponentType<P>)
         const onEnter = useOnEnter(x, y, { duration: enterDuration, staggered });
         const onExit = useOnExit(exitDuration);
 
+        const key = isHidden.toString();
+
         return (
             <Button.Frame overflow="visible" flex={1} onPress={onPress}>
-                <Grid.Animated flex={1} key={isHidden.toString()} exiting={onExit} entering={onEnter}>
+                {/* FIXME: can't use Grid.Animated on android? */}
+                <Animated.View style={styles.flex} key={key} exiting={onExit} entering={onEnter}>
                     {!isHidden && <Component {...props} />}
-                </Grid.Animated>
+                </Animated.View>
             </Button.Frame>
         );
     };
@@ -66,3 +70,5 @@ export const withFace = <P extends FaceProps>(Component: React.ComponentType<P>)
 
     return memo(Wrapped);
 };
+
+const styles = StyleSheet.create({ flex: { flex: 1 } });

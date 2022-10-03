@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
-import { SemanticColor } from '../../../../theme/src';
+import { SemanticColor } from '@training/theme';
+
 import Grid, { GridProps } from '../Grid/Grid';
 
 export interface ThematicBreakProps extends GridProps {

@@ -376,7 +376,7 @@ PODS:
     - React-perflogger (= 0.70.1)
   - RNReactNativeHapticFeedback (1.14.0):
     - React-Core
-  - RNReanimated (3.0.0-rc.3):
+  - RNReanimated (2.10.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
