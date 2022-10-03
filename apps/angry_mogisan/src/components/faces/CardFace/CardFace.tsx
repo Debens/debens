@@ -3,8 +3,8 @@ import React, { useMemo } from 'react';
 import { Grid } from '@training/mobile-atoms';
 import { SemanticColor } from '@training/theme';
 
+import { FaceProps } from '../../../face-book/model';
 import { FaceEmotion } from '../../GameProvider/game-context';
-import { FaceProps } from '../model';
 
 const CardFace: React.FunctionComponent<FaceProps> = props => {
     const { emotion } = props;

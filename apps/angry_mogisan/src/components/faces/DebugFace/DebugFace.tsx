@@ -1,15 +1,12 @@
 import React, { useMemo } from 'react';
 
-import { Button, Grid, Paragraph } from '@training/mobile-atoms';
+import { Grid, Paragraph } from '@training/mobile-atoms';
 import { TypographyToken } from '@training/theme';
 
 import { FaceEmotion } from '../../GameProvider/game-context';
-import { FaceProps } from '../model';
-import { withFace } from '../with-face';
+import { BaseFaceProps } from '../model';
 
-interface DebugFace extends FaceProps, React.ComponentProps<typeof Button.Frame> {}
-
-const DebugFace: React.FunctionComponent<DebugFace> = props => {
+const DebugFace: React.FunctionComponent<BaseFaceProps> = props => {
     const { emotion } = props;
 
     const typeset = useMemo<`${TypographyToken}`>(() => {

@@ -20,7 +20,7 @@ const Face: React.FunctionComponent<FaceProps> = props => {
     const profile = useFaceProfile();
     const scale = useFaceScale();
 
-    return <FaceFacade profile={profile} emotion={emotion} scaling={scale} {...grid} />;
+    return profile ? <FaceFacade {...profile} emotion={emotion} scaling={scale} {...grid} /> : null;
 };
 
 export default withFace(Face);

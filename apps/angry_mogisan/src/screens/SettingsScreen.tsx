@@ -13,7 +13,6 @@ import {
 
 import { useFacePack } from '../components/FaceProvider/face-hooks';
 import FaceRadioOption from '../components/FaceRadioOption/FaceRadioOption';
-import { withGame } from '../components/GameProvider/GameProvider';
 import { FacePackType } from '../face-pack/model';
 
 const FACE_PACKS = Object.values(FacePackType);
@@ -46,4 +45,4 @@ export const SettingsScreen: React.FunctionComponent = () => {
     );
 };
 
-export default withGame(SettingsScreen);
+export default SettingsScreen;

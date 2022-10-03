@@ -1,22 +1,19 @@
 import React, { memo } from 'react';
 
-import { ComponentisedProfile } from '../../../face-book/componentised/model';
-import { ComponentFace } from '../../../face-pack/model';
+import { ComponentFace, ComponentProfileName } from '../../../face-book/model';
 import CardFace from '../CardFace/CardFace';
 import DebugFace from '../DebugFace/DebugFace';
-import { FaceProps } from '../model';
+import { BaseFaceProps } from '../model';
 
-interface ComponentFaceProps extends FaceProps {
-    profile: ComponentFace;
-}
+interface ComponentFaceProps extends ComponentFace, BaseFaceProps {}
 
 const ComponentFace: React.FunctionComponent<ComponentFaceProps> = props => {
-    const { profile, emotion, ...grid } = props;
+    const { component, emotion, ...grid } = props;
 
-    switch (profile.name) {
-        case ComponentisedProfile.Card:
+    switch (component) {
+        case ComponentProfileName.Card:
             return <CardFace emotion={emotion} {...grid} />;
-        case ComponentisedProfile.Debug:
+        case ComponentProfileName.Debug:
             return <DebugFace emotion={emotion} {...grid} />;
     }
 };

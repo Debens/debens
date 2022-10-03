@@ -3,18 +3,15 @@ import { Image, ImageResizeMode, Platform, StyleSheet } from 'react-native';
 
 import { Grid } from '@training/mobile-atoms/src';
 
-import { useBundledProfile } from '../../../face-book/bundled/use-bundled-profile';
-import { BundledFace } from '../../../face-pack/model';
-import { FaceProps } from '../model';
+import { ImageFace } from '../../../face-book/model';
+import { BaseFaceProps } from '../model';
 
-interface BundledFaceProps extends FaceProps {
-    profile: BundledFace;
+interface ImageFaceProps extends ImageFace, BaseFaceProps {
     resizeMode?: ImageResizeMode;
 }
 
-const BundledFace: React.FunctionComponent<BundledFaceProps> = props => {
-    const { profile, emotion, resizeMode: resize, scaling, ...grid } = props;
-    const { emotions } = useBundledProfile(profile.name);
+const ImageFace: React.FunctionComponent<ImageFaceProps> = props => {
+    const { emotions, emotion, resizeMode: resize, scaling, ...grid } = props;
 
     const size = useMemo(
         () => (scaling ? { height: `${scaling}%`, width: `${scaling}%` } : undefined),
@@ -34,10 +31,10 @@ const BundledFace: React.FunctionComponent<BundledFaceProps> = props => {
     );
 };
 
-BundledFace.defaultProps = { scaling: 100 };
+ImageFace.defaultProps = { scaling: 100 };
 
 const styles = StyleSheet.create({
     image: { overflow: 'visible' },
 });
 
-export default memo(BundledFace);
+export default memo(ImageFace);

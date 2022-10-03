@@ -1,81 +1,97 @@
-import { FaceEmotion } from '../../components/GameProvider/game-context';
+import { FaceEmotion } from '../../../components/GameProvider/game-context';
+import { ComponentProfileName, Face, FaceType } from '../../model';
 
-import { BundledProfile, BundledProfileName } from './model';
-
-type BundledProfiles = Record<BundledProfileName, BundledProfile>;
-
-export const BUNDLED_PROFILES: BundledProfiles = {
-    [BundledProfileName.Alex]: {
+export const LOCAL_SOURCES: Record<string, Face> = {
+    Debug: {
+        type: FaceType.Component,
+        component: ComponentProfileName.Debug,
+    },
+    Cards: {
+        type: FaceType.Component,
+        component: ComponentProfileName.Card,
+    },
+    Alex: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/alex/happy-alex.png'),
             [FaceEmotion.Calm]: require('./images/alex/happy-alex.png'),
             [FaceEmotion.Angry]: require('./images/taz/angry-taz.png'),
         },
     },
-    [BundledProfileName.Andrew]: {
+    Andrew: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/andrew/happy-andrew.png'),
             [FaceEmotion.Calm]: require('./images/andrew/happy-andrew.png'),
             [FaceEmotion.Angry]: require('./images/morgan/angry-morgan.png'),
         },
     },
-    [BundledProfileName.Dan]: {
+    Dan: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/dan/happy-dan.png'),
             [FaceEmotion.Calm]: require('./images/dan/happy-dan.png'),
             [FaceEmotion.Angry]: require('./images/taz/angry-taz.png'),
         },
     },
-    [BundledProfileName.Georgia]: {
+    Georgia: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/georgia/happy-georgia.png'),
             [FaceEmotion.Calm]: require('./images/georgia/happy-georgia.png'),
             [FaceEmotion.Angry]: require('./images/morgan/angry-morgan.png'),
         },
     },
-    [BundledProfileName.Mark]: {
+    Mark: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/mark/happy-mark.png'),
             [FaceEmotion.Calm]: require('./images/mark/happy-mark.png'),
             [FaceEmotion.Angry]: require('./images/morgan/angry-morgan.png'),
         },
     },
-    [BundledProfileName.Marlin]: {
+    Marlin: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/marlin/happy-marlin.png'),
             [FaceEmotion.Calm]: require('./images/marlin/happy-marlin.png'),
             [FaceEmotion.Angry]: require('./images/taz/angry-taz.png'),
         },
     },
-    [BundledProfileName.Morgan]: {
+    Morgan: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/morgan/happy-morgan.png'),
             [FaceEmotion.Calm]: require('./images/morgan/happy-morgan.png'),
             [FaceEmotion.Angry]: require('./images/morgan/angry-morgan.png'),
         },
     },
-    [BundledProfileName.Nikunj]: {
+    Nikunj: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/nikunj/happy-nikunj.png'),
             [FaceEmotion.Calm]: require('./images/nikunj/happy-nikunj.png'),
             [FaceEmotion.Angry]: require('./images/taz/angry-taz.png'),
         },
     },
-    [BundledProfileName.Sarah]: {
+    Sarah: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/sarah/happy-sarah.png'),
             [FaceEmotion.Calm]: require('./images/sarah/happy-sarah.png'),
             [FaceEmotion.Angry]: require('./images/taz/angry-taz.png'),
         },
     },
-    [BundledProfileName.Stefan]: {
+    Stefan: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/stefan/happy-stefan.png'),
             [FaceEmotion.Calm]: require('./images/stefan/happy-stefan.png'),
             [FaceEmotion.Angry]: require('./images/morgan/angry-morgan.png'),
         },
     },
-    [BundledProfileName.Taz]: {
+    Taz: {
+        type: FaceType.Image,
         emotions: {
             [FaceEmotion.Neutral]: require('./images/taz/happy-taz.png'),
             [FaceEmotion.Calm]: require('./images/taz/happy-taz.png'),

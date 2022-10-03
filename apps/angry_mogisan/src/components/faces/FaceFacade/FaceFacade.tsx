@@ -1,22 +1,20 @@
 import React, { memo } from 'react';
 
-import { FaceType, Profile } from '../../../face-pack/model';
-import BundledFace from '../BundledFace/BundledFace';
+import { Face, FaceType } from '../../../face-book/model';
 import ComponentFace from '../ComponentFace/ComponentFace';
-import { FaceProps } from '../model';
+import ImageFace from '../ImageFace/ImageFace';
+import { BaseFaceProps } from '../model';
 
-interface FaceFacadeProps extends FaceProps {
-    profile: Profile;
-}
+type FaceFacadeProps = Face & BaseFaceProps;
 
 const FaceFacade: React.FunctionComponent<FaceFacadeProps> = props => {
-    const { profile, emotion, ...grid } = props;
+    const { type, ...face } = props;
 
-    switch (profile.type) {
+    switch (type) {
         case FaceType.Component:
-            return <ComponentFace profile={profile} emotion={emotion} {...grid} />;
-        case FaceType.Bundled:
-            return <BundledFace profile={profile} emotion={emotion} {...grid} />;
+            return <ComponentFace {...face} />;
+        case FaceType.Image:
+            return <ImageFace {...face} />;
     }
 };
 

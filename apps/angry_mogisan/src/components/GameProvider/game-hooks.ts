@@ -16,7 +16,7 @@ export const useResetHandler = () => useGameContext().onReset;
 
 export const useSelectHandler = () => useGameContext().onSelect;
 
-export const useFace = (x: number, y: number) => useBoard()[y]![x];
+export const useFaceValue = (x: number, y: number) => useBoard()[y]![x];
 
 export const useSelectEffect = (fn: EffectCallback) => {
     const status = useGameStatus();
@@ -52,7 +52,7 @@ export const useFinalCheck = () => {
 };
 
 export const useFaceEmotion = (x: number, y: number) => {
-    const selected = useFace(x, y);
+    const selected = useFaceValue(x, y);
     const isFinal = useFinalCheck();
 
     return useMemo<FaceEmotion>(() => {

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 
 import { FacePackType } from '../../face-pack/model';
 import { useFaceConfiguration } from '../../face-pack/use-face-pack';
@@ -9,6 +9,20 @@ import context from './face-context';
 const useFaceContext = () => useContext(context);
 
 export const useFaceScale = () => useFaceContext().scaling;
+
+export const useFaceSource = () => useFaceContext().source;
+
+export const useFaceNames = () => {
+    const source = useFaceSource();
+
+    return useMemo(() => source.getNames(), [source]);
+};
+
+export const useFace = (name: string) => {
+    const source = useFaceSource();
+
+    return useMemo(() => source.get(name), [source, name]);
+};
 
 export const useFacePack = () => {
     const { pack, setPack } = useFaceContext();
@@ -39,5 +53,5 @@ export const useFaceProfile = () => {
 
     useStartEffect(next);
 
-    return profile;
+    return useFace(profile);
 };

@@ -12,7 +12,7 @@ import {
 import { SemanticColor } from '@training/theme';
 
 import { FacePackType } from '../../face-pack/model';
-import { useRandomProfile } from '../FaceProvider/face-hooks';
+import { useFace, useRandomProfile } from '../FaceProvider/face-hooks';
 import FaceFacade from '../faces/FaceFacade/FaceFacade';
 import { FaceEmotion } from '../GameProvider/game-context';
 
@@ -36,13 +36,19 @@ const FaceRadioOption = (props: FaceRadioOptionProps) => {
     }, [status]);
 
     const [profile] = useRandomProfile(value);
+    const face = useFace(profile);
+
+    if (!face) {
+        console.error(profile);
+        return null;
+    }
 
     return (
         <Button.Frame bg={backgroundColor} borderRadius="medium" {...button} onPress={onPressComposed}>
             <Grid height={150} flexDirection="row" justifyContent="flex-end" p="medium">
-                <FaceFacade profile={profile} emotion={FaceEmotion.Neutral} />
-                <FaceFacade profile={profile} emotion={FaceEmotion.Calm} />
-                <FaceFacade profile={profile} emotion={FaceEmotion.Angry} />
+                <FaceFacade {...face} emotion={FaceEmotion.Neutral} />
+                <FaceFacade {...face} emotion={FaceEmotion.Calm} />
+                <FaceFacade {...face} emotion={FaceEmotion.Angry} />
             </Grid>
         </Button.Frame>
     );

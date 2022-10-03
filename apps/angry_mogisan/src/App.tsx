@@ -7,6 +7,7 @@ import { GhostProvider } from '@training/mobile-atoms';
 import { ThemeProvider, themes } from '@training/theme';
 
 import FaceProvider from './components/FaceProvider/FaceProvider';
+import { facebook } from './face-book';
 import { FacePackType } from './face-pack/model';
 import AppNavigator from './navigation/AppNavigator';
 
@@ -15,7 +16,7 @@ enableFreeze();
 
 export const App = () => {
     return (
-        <FaceProvider pack={FacePackType.Mogan}>
+        <FaceProvider source={facebook} pack={FacePackType.Mogan}>
             <GhostProvider>
                 <ThemeProvider theme={themes.mógan}>
                     <SafeAreaProvider>
