@@ -38,10 +38,7 @@ export const SettingsScreen: React.FunctionComponent = () => {
                         <SVG.Person />
                     </Toolbar.Item>
                 </Toolbar>
-                <Grid flex={1} variant="gutter">
-                    <Paragraph typeset="$heading" my="medium">
-                        Face Pack
-                    </Paragraph>
+                <Grid flex={1} variant="gutter" my="medium">
                     <RadioGroup initial={current} onChange={update}>
                         {FACE_PACKS.map(pack => (
                             <FaceRadioOption key={pack} mb="medium" value={pack} />

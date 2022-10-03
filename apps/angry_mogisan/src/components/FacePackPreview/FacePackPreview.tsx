@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 
-import { Grid, GridProps, Paragraph, ThematicBreak } from '@training/mobile-atoms/src';
+import { Grid, GridProps, ThematicBreak } from '@training/mobile-atoms/src';
 
 import { FacePackType } from '../../face-pack/model';
 import { isDefined } from '../../utils/is-defined';
@@ -13,7 +13,7 @@ interface FacePackPreview extends GridProps {
 }
 
 const FacePackPreview: React.FunctionComponent<FacePackPreview> = props => {
-    const { type, ...grid } = props;
+    const { type, children, ...grid } = props;
 
     const profiles = useProfiles(type);
     const source = useFaceSource();
@@ -25,9 +25,7 @@ const FacePackPreview: React.FunctionComponent<FacePackPreview> = props => {
 
     return (
         <Grid borderRadius="medium" {...grid}>
-            <Grid variant="gutter">
-                <Paragraph py="medium">{type}</Paragraph>
-            </Grid>
+            <Grid variant="gutter">{children}</Grid>
             <ThematicBreak color="$background-primary" />
             <Grid variant="gutter" flexDirection="row" flexWrap="wrap" py="medium">
                 {faces.map(({ source }, i) => (

@@ -4,6 +4,8 @@ import { SvgProps, SvgXml, XmlProps } from 'react-native-svg';
 import Bowtie from '../../assets/svg/bowtie.svg';
 import ChevronLeft from '../../assets/svg/chevron-left.svg';
 import Person from '../../assets/svg/person.svg';
+import RadioSelected from '../../assets/svg/radio-selected.svg';
+import RadioUnselected from '../../assets/svg/radio-unselected.svg';
 import Refresh from '../../assets/svg/refresh.svg';
 import Settings from '../../assets/svg/settings.svg';
 
@@ -13,6 +15,8 @@ export enum SVGType {
     Refresh = 'Refresh',
     Settings = 'Settings',
     Person = 'Person',
+    RadioSelected = 'RadioSelected',
+    RadioUnselected = 'RadioUnselected',
 }
 
 interface SVGProps extends SvgProps {
@@ -27,6 +31,8 @@ export const mapping: Record<SVGType, SVGComponent> = {
     [SVGType.Refresh]: Refresh,
     [SVGType.Settings]: Settings,
     [SVGType.Person]: Person,
+    [SVGType.RadioSelected]: RadioSelected,
+    [SVGType.RadioUnselected]: RadioUnselected,
 };
 
 export type SVG = React.FunctionComponent<XmlProps> & {

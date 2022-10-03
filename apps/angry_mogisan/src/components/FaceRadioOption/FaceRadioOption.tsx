@@ -1,10 +1,13 @@
 import React, { memo, useCallback, useMemo } from 'react';
-import { GestureResponderEvent } from 'react-native';
+import { GestureResponderEvent, Platform, StyleSheet } from 'react-native';
 
 import {
     Button,
+    Grid,
+    Paragraph,
     RadioProps,
     RadioStatus,
+    SVG,
     useRadioHandler,
     useRadioStatus,
 } from '@training/mobile-atoms';
@@ -28,15 +31,48 @@ const FaceRadioOption = (props: FaceRadioOptionProps) => {
         [onPress, onSelect],
     );
 
-    const backgroundColor = useMemo<SemanticColor>(() => {
-        return status === RadioStatus.Selected ? '$field-selected-01' : '$field-01';
-    }, [status]);
+    const isSelected = status === RadioStatus.Selected;
+
+    const borderColor = useMemo<SemanticColor>(() => {
+        return isSelected ? '$field-selected-01' : '$background-primary';
+    }, [isSelected]);
+
+    const shadow = !isSelected ? styles.shadow : undefined;
 
     return (
-        <Button.Frame bg={backgroundColor} borderRadius="medium" {...button} onPress={onPressComposed}>
-            <FacePackPreview type={value} />
+        <Button.Frame
+            style={shadow}
+            bg="$field-01"
+            borderRadius="medium"
+            {...button}
+            onPress={onPressComposed}>
+            <FacePackPreview type={value}>
+                <Grid flexDirection="row" alignItems="center">
+                    <Paragraph my="medium" mr="auto">
+                        {value}
+                    </Paragraph>
+                    {isSelected ? <SVG.RadioSelected /> : <SVG.RadioUnselected />}
+                </Grid>
+            </FacePackPreview>
         </Button.Frame>
     );
 };
+
+const styles = StyleSheet.create({
+    shadow: Platform.select({
+        ios: {
+            shadowColor: '#000',
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+        },
+        android: {
+            elevation: 5,
+        },
+    }),
+});
 
 export default memo(FaceRadioOption);

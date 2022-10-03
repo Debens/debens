@@ -65,8 +65,8 @@ export const mógan: Theme = {
         '$button-disabled': Color.Gray30,
 
         '$field-01': Color.Magenta20,
-        '$field-error-01': Color.Red10,
-        '$field-selected-01': Color.Magenta40,
+        '$field-error-01': Color.Red20,
+        '$field-selected-01': Color.Magenta60,
 
         // other
         $ghost: Color.Gray30,
@@ -87,15 +87,6 @@ export const mógan: Theme = {
             fontSize: FontSize.Large,
             lineHeight: LineHeight.Large,
             fontWeight: FontWeight.Normal,
-        },
-    },
-    contextual: {
-        '$layer-01': {
-            colors: {
-                '$field-01': Color.White,
-                '$field-selected-01': Color.Blue20,
-                '$field-error-01': Color.Red20,
-            },
         },
     },
 };

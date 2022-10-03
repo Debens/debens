@@ -21,8 +21,8 @@ Object {
     "$button-secondary-active": "#ffafd2",
     "$button-secondary-hover": "#fff0f7",
     "$field-01": "#ffd6e8",
-    "$field-error-01": "#fff1f1",
-    "$field-selected-01": "#ff7eb6",
+    "$field-error-01": "#ffd7d9",
+    "$field-selected-01": "#d02670",
     "$ghost": "#c6c6c6",
     "$layer-01": "#ffd6e8",
     "$layer-02": "#ffffff",
@@ -44,15 +44,6 @@ Object {
     "$text-primary": "#d02670",
     "$text-secondary": "#ffffff",
     "$transparent": "transparent",
-  },
-  "contextual": Object {
-    "$layer-01": Object {
-      "colors": Object {
-        "$field-01": "#ffffff",
-        "$field-error-01": "#ffd7d9",
-        "$field-selected-01": "#d0e2ff",
-      },
-    },
   },
   "radii": Object {
     "large": 16,
