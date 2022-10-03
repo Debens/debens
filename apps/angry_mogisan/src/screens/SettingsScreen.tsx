@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
 import {
@@ -28,8 +28,8 @@ export const SettingsScreen: React.FunctionComponent = () => {
     }, [navigate]);
 
     return (
-        <ScrollView bounces={false}>
-            <Screen marginY="medium">
+        <Screen marginY="medium">
+            <ScrollView style={styles.grow} bounces={false}>
                 <Toolbar>
                     <Toolbar.Item onPress={goBack}>
                         <SVG.ChevronLeft />
@@ -48,9 +48,13 @@ export const SettingsScreen: React.FunctionComponent = () => {
                         ))}
                     </RadioGroup>
                 </Grid>
-            </Screen>
-        </ScrollView>
+            </ScrollView>
+        </Screen>
     );
 };
+
+const styles = StyleSheet.create({
+    grow: { flex: 1 },
+});
 
 export default SettingsScreen;

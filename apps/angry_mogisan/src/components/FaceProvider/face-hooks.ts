@@ -36,7 +36,7 @@ export const useCurrentFacePack = () => {
     return useFacePack(type);
 };
 
-const useProfiles = (type: FacePackType) => useFacePack(type).profiles;
+export const useProfiles = (type: FacePackType) => useFacePack(type).profiles;
 
 export const useRandomProfile = (type: FacePackType) => {
     const profiles = useProfiles(type);

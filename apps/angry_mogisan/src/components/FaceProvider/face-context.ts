@@ -3,7 +3,7 @@ import { createContext } from 'react';
 import { FaceBook, FaceSource } from '../../face-book/face-book';
 import { FacePackType } from '../../face-pack/model';
 
-export const DEFAULT_SCALING = 138;
+export const DEFAULT_SCALING = 125;
 
 export interface FaceState {
     pack: FacePackType;

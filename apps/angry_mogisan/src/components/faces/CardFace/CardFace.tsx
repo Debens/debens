@@ -3,11 +3,11 @@ import React, { useMemo } from 'react';
 import { Grid } from '@training/mobile-atoms';
 import { SemanticColor } from '@training/theme';
 
-import { FaceProps } from '../../../face-book/model';
 import { FaceEmotion } from '../../GameProvider/game-context';
+import { BaseFaceProps } from '../model';
 
-const CardFace: React.FunctionComponent<FaceProps> = props => {
-    const { emotion } = props;
+const CardFace: React.FunctionComponent<BaseFaceProps> = props => {
+    const { emotion, ...grid } = props;
 
     const backgroundColor = useMemo<SemanticColor>(() => {
         switch (emotion) {
@@ -20,7 +20,7 @@ const CardFace: React.FunctionComponent<FaceProps> = props => {
         }
     }, [emotion]);
 
-    return <Grid flex={1} backgroundColor={backgroundColor} margin="small" borderRadius="medium" />;
+    return <Grid flex={1} backgroundColor={backgroundColor} margin="small" borderRadius="medium" {...grid} />;
 };
 
 export default CardFace;

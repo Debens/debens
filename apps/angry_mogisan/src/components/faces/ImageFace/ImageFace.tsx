@@ -25,7 +25,7 @@ const ImageFace: React.FunctionComponent<ImageFaceProps> = props => {
     if (!emotions[emotion]) return null;
 
     return (
-        <Grid variant="center" flex={1} margin="small" borderRadius="medium" {...grid}>
+        <Grid variant="center" margin="small" borderRadius="medium" {...grid}>
             <Image resizeMode={resizeMode} style={[size, styles.image]} source={emotions[emotion]} />
         </Grid>
     );

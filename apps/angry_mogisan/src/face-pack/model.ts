@@ -1,9 +1,9 @@
 export enum FacePackType {
-    Debug = 'debug',
-    Cards = 'cards',
     Mogan = 'mógan',
     Sherif = 'sherif',
     Tandem = 'tandem',
+    Cards = 'cards',
+    Debug = 'debug',
 }
 
 export interface FacePack {

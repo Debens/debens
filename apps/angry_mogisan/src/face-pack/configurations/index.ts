@@ -7,9 +7,9 @@ import { sherif } from './sherif';
 import { tandem } from './tandem';
 
 export const configurations: Record<FacePackType, FacePack> = {
-    debug,
-    cards,
     mógan: mogan,
     sherif,
     tandem,
+    cards,
+    debug,
 };

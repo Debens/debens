@@ -3,7 +3,6 @@ import { GestureResponderEvent } from 'react-native';
 
 import {
     Button,
-    Grid,
     RadioProps,
     RadioStatus,
     useRadioHandler,
@@ -12,9 +11,7 @@ import {
 import { SemanticColor } from '@training/theme';
 
 import { FacePackType } from '../../face-pack/model';
-import { useFace, useRandomProfile } from '../FaceProvider/face-hooks';
-import FaceFacade from '../faces/FaceFacade/FaceFacade';
-import { FaceEmotion } from '../GameProvider/game-context';
+import FacePackPreview from '../FacePackPreview/FacePackPreview';
 
 interface FaceRadioOptionProps extends RadioProps<FacePackType>, React.ComponentProps<typeof Button.Frame> {}
 
@@ -35,21 +32,9 @@ const FaceRadioOption = (props: FaceRadioOptionProps) => {
         return status === RadioStatus.Selected ? '$field-selected-01' : '$field-01';
     }, [status]);
 
-    const [profile] = useRandomProfile(value);
-    const face = useFace(profile);
-
-    if (!face) {
-        console.error(profile);
-        return null;
-    }
-
     return (
         <Button.Frame bg={backgroundColor} borderRadius="medium" {...button} onPress={onPressComposed}>
-            <Grid height={150} flexDirection="row" justifyContent="flex-end" p="medium">
-                <FaceFacade {...face} emotion={FaceEmotion.Neutral} />
-                <FaceFacade {...face} emotion={FaceEmotion.Calm} />
-                <FaceFacade {...face} emotion={FaceEmotion.Angry} />
-            </Grid>
+            <FacePackPreview type={value} />
         </Button.Frame>
     );
 };
