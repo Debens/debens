@@ -1,3 +1,5 @@
+import * as EASING from './utils/easing';
+
 /// <reference path="./@types/styled-components.d.ts" />
 
 export { default as Break } from './components/Break/Break';
@@ -17,9 +19,8 @@ export { default as EmailInput } from './components/EmailInput/EmailInput';
 export { default as Toolbar } from './components/Toolbar/Toolbar';
 export { default as RadioGroup } from './components/RadioGroup/RadioGroup';
 export type { RadioProps } from './components/RadioGroup/RadioGroup';
+export { default as ThematicBreak } from './components/ThematicBreak/ThematicBreak';
 
 export * from './components/RadioGroup/radio-hooks';
-
-import * as EASING from './utils/easing';
 
 export { EASING };

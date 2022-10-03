@@ -3,6 +3,7 @@ import { SvgProps, SvgXml, XmlProps } from 'react-native-svg';
 
 import Bowtie from '../../assets/svg/bowtie.svg';
 import ChevronLeft from '../../assets/svg/chevron-left.svg';
+import Person from '../../assets/svg/person.svg';
 import Refresh from '../../assets/svg/refresh.svg';
 import Settings from '../../assets/svg/settings.svg';
 
@@ -11,6 +12,7 @@ export enum SVGType {
     ChevronLeft = 'ChevronLeft',
     Refresh = 'Refresh',
     Settings = 'Settings',
+    Person = 'Person',
 }
 
 interface SVGProps extends SvgProps {
@@ -24,6 +26,7 @@ export const mapping: Record<SVGType, SVGComponent> = {
     [SVGType.ChevronLeft]: ChevronLeft,
     [SVGType.Refresh]: Refresh,
     [SVGType.Settings]: Settings,
+    [SVGType.Person]: Person,
 };
 
 export type SVG = React.FunctionComponent<XmlProps> & {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GridProps } from '@training/mobile-atoms';
 
-import { useFaceProfile, useFaceScale } from '../../FaceProvider/face-hooks';
+import { useFaceScale, useRandomGameFace } from '../../FaceProvider/face-hooks';
 import { useFaceEmotion } from '../../GameProvider/game-hooks';
 import FaceFacade from '../FaceFacade/FaceFacade';
 import { withFace } from '../with-face';
@@ -17,7 +17,7 @@ const Face: React.FunctionComponent<FaceProps> = props => {
 
     const emotion = useFaceEmotion(x, y);
 
-    const profile = useFaceProfile();
+    const profile = useRandomGameFace();
     const scale = useFaceScale();
 
     return profile ? <FaceFacade {...profile} emotion={emotion} scaling={scale} {...grid} /> : null;

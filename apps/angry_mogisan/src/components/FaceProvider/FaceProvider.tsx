@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react';
 
-import { FaceSource } from '../../face-book/face-book';
+import { FaceSource } from '../../face-book.second/face-book';
 import { FacePackType } from '../../face-pack/model';
 
 import context, { DEFAULT_SCALING } from './face-context';

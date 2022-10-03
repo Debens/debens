@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
 import { FacePackType } from '../../face-pack/model';
-import { useFaceConfiguration } from '../../face-pack/use-face-pack';
+import { useFacePack } from '../../face-pack/use-face-pack';
 import { useStartEffect } from '../GameProvider/game-hooks';
 
 import context from './face-context';
@@ -24,14 +24,22 @@ export const useFace = (name: string) => {
     return useMemo(() => source.get(name), [source, name]);
 };
 
-export const useFacePack = () => {
+export const useCurrentFacePackType = () => {
     const { pack, setPack } = useFaceContext();
 
     return [pack, setPack] as const;
 };
 
+export const useCurrentFacePack = () => {
+    const [type] = useCurrentFacePackType();
+
+    return useFacePack(type);
+};
+
+const useProfiles = (type: FacePackType) => useFacePack(type).profiles;
+
 export const useRandomProfile = (type: FacePackType) => {
-    const { profiles } = useFaceConfiguration(type);
+    const profiles = useProfiles(type);
 
     /* Kinda janky, both disables are valid. */
     const getRandom = useCallback(
@@ -47,8 +55,8 @@ export const useRandomProfile = (type: FacePackType) => {
     return [profile, getNext] as const;
 };
 
-export const useFaceProfile = () => {
-    const [type] = useFacePack();
+export const useRandomGameFace = () => {
+    const [type] = useCurrentFacePackType();
     const [profile, next] = useRandomProfile(type);
 
     useStartEffect(next);

@@ -8,13 +8,13 @@ import { BaseFaceProps } from '../model';
 type FaceFacadeProps = Face & BaseFaceProps;
 
 const FaceFacade: React.FunctionComponent<FaceFacadeProps> = props => {
-    const { type, ...face } = props;
+    const { type } = props;
 
     switch (type) {
         case FaceType.Component:
-            return <ComponentFace {...face} />;
+            return <ComponentFace {...props} />;
         case FaceType.Image:
-            return <ImageFace {...face} />;
+            return <ImageFace {...props} />;
     }
 };
 

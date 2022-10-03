@@ -2,14 +2,6 @@ import { FaceEmotion } from '../../../components/GameProvider/game-context';
 import { ComponentProfileName, Face, FaceType } from '../../model';
 
 export const LOCAL_SOURCES: Record<string, Face> = {
-    Debug: {
-        type: FaceType.Component,
-        component: ComponentProfileName.Debug,
-    },
-    Cards: {
-        type: FaceType.Component,
-        component: ComponentProfileName.Card,
-    },
     Alex: {
         type: FaceType.Image,
         emotions: {
@@ -97,5 +89,13 @@ export const LOCAL_SOURCES: Record<string, Face> = {
             [FaceEmotion.Calm]: require('./images/taz/happy-taz.png'),
             [FaceEmotion.Angry]: require('./images/taz/angry-taz.png'),
         },
+    },
+    Debug: {
+        type: FaceType.Component,
+        component: ComponentProfileName.Debug,
+    },
+    Card: {
+        type: FaceType.Component,
+        component: ComponentProfileName.Card,
     },
 };
