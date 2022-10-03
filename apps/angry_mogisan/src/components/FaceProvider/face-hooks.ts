@@ -6,8 +6,12 @@ import { useStartEffect } from '../GameProvider/game-hooks';
 
 import context from './face-context';
 
+const useFaceContext = () => useContext(context);
+
+export const useFaceScale = () => useFaceContext().scaling;
+
 export const useFacePack = () => {
-    const { pack, setPack } = useContext(context);
+    const { pack, setPack } = useFaceContext();
 
     return [pack, setPack] as const;
 };

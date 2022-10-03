@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
 
 import { FaceType, Profile } from '../../../face-pack/model';
-import { FaceEmotion } from '../../GameProvider/game-context';
 import BundledFace from '../BundledFace/BundledFace';
 import ComponentFace from '../ComponentFace/ComponentFace';
+import { FaceProps } from '../model';
 
-interface FaceFacadeProps {
+interface FaceFacadeProps extends FaceProps {
     profile: Profile;
-    emotion: FaceEmotion;
 }
 
 const FaceFacade: React.FunctionComponent<FaceFacadeProps> = props => {
