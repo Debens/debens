@@ -14,9 +14,9 @@ const FinalFace: React.FunctionComponent<FinalFaceProps> = button => {
     const position = { x: final[0], y: final[1] };
 
     return (
-        <Button.Frame style={StyleSheet.absoluteFillObject} position="absolute" {...button}>
+        <Button.Frame style={StyleSheet.absoluteFill} position="absolute" {...button}>
             <Grid flex={1} pointerEvents="none">
-                <Face {...position} enterDuration={0} staggered={false} resizeMode="contain" />
+                <Face flex={1} {...position} enterDuration={0} staggered={false} />
             </Grid>
         </Button.Frame>
     );

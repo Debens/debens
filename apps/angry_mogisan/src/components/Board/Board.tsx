@@ -16,7 +16,7 @@ const Board: React.FunctionComponent<BoardProps> = props => {
             {state.map((row, y) => (
                 <Grid key={y} flex={1} flexDirection="row" justifyContent="space-around">
                     {row.map((_, x) => (
-                        <Face key={`${x}${y}`} x={x} y={y} />
+                        <Face key={`${x}${y}`} x={x} y={y} margin="small" />
                     ))}
                 </Grid>
             ))}

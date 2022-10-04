@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 
 import context from './scale-context';
 
-export const DEFAULT_SCALING = 125;
+export const DEFAULT_SCALING = 128;
 
 type ScaleProviderProps = React.PropsWithChildren<{
     scale?: number;

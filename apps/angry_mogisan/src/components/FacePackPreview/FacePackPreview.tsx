@@ -27,16 +27,16 @@ const FacePackPreview: React.FunctionComponent<FacePackPreview> = props => {
         <Grid borderRadius="medium" {...grid}>
             <Grid variant="gutter">{children}</Grid>
             <ThematicBreak color="$background-primary" />
-            <Grid variant="gutter" flexDirection="row" flexWrap="wrap" py="medium">
+            <Grid
+                variant="gutter"
+                flexDirection="row"
+                justifyContent="space-between"
+                flexWrap="wrap"
+                py="medium">
                 {faces.map(({ source }, i) => (
-                    <FaceFacade
-                        key={i}
-                        resizeMode="contain"
-                        height={48}
-                        width={48}
-                        emotion={FaceEmotion.Neutral}
-                        {...source}
-                    />
+                    <Grid key={i} height={48} width={48} margin="xsmall">
+                        <FaceFacade emotion={FaceEmotion.Neutral} {...source} />
+                    </Grid>
                 ))}
             </Grid>
         </Grid>

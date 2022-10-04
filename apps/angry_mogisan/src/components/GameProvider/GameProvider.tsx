@@ -38,9 +38,9 @@ const GameProvider: React.FunctionComponent<GameProviderProps> = props => {
 
     const onSelect = useCallback(
         (x: number, y: number) => {
-            if (status !== GameStatus.Resolved) setCurrent([x, y]);
+            if (status !== GameStatus.Resolved && !board[y]?.[x]) setCurrent([x, y]);
         },
-        [status],
+        [status, board],
     );
 
     useEffect(() => {

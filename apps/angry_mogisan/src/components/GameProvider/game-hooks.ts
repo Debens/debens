@@ -1,4 +1,11 @@
-import { EffectCallback, useCallback, useContext, useEffect, useMemo } from 'react';
+import {
+    DependencyList,
+    EffectCallback,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+} from 'react';
 
 import { context, FaceEmotion, GameStatus } from './game-context';
 
@@ -18,12 +25,13 @@ export const useSelectHandler = () => useGameContext().onSelect;
 
 export const useFaceValue = (x: number, y: number) => useBoard()[y]![x];
 
-export const useSelectEffect = (fn: EffectCallback) => {
+export const useSelectEffect = (fn: EffectCallback, deps: DependencyList = []) => {
     const status = useGameStatus();
     const current = useCurrentPosition();
+    const callback = useCallback(fn, deps);
     useEffect(() => {
-        if (status === GameStatus.Running) fn();
-    }, [status, current, fn]);
+        if (status === GameStatus.Running) callback();
+    }, [status, current, callback]);
 };
 
 export const useEndEffect = (fn: EffectCallback) => {

@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { Grid, GridProps } from '@training/mobile-atoms';
 
@@ -21,15 +22,9 @@ const Face: React.FunctionComponent<FaceProps> = props => {
     const profile = useRandomGameFace();
     const scale = useFaceScale();
 
-    const size = useMemo(() => (scale ? { height: `${scale}%`, width: `${scale}%` } : undefined), [scale]);
-
-    return profile ? (
-        <Grid variant="center" position="relative" flex={1}>
-            <Grid position="absolute" style={size}>
-                <FaceFacade {...profile} emotion={emotion} scaling={scale} {...grid} />
-            </Grid>
-        </Grid>
-    ) : null;
+    return profile ? <FaceFacade {...profile} emotion={emotion} scaling={scale} {...grid} /> : null;
 };
+
+Face.defaultProps = { scale: 100 };
 
 export default withFace(Face);
