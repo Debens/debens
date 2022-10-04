@@ -5,8 +5,8 @@
     "scripts": {
         "install:pods": "cd ios ; arch -x86_64 bundle exec pod install",
         "start": "react-native start",
-        "ios": "react-native run-ios",
-        "android": "react-native run-android",
+        "ios": "react-native run-ios --port 8082",
+        "android": "react-native run-android --port 8082",
         "bundle:ios": "yarn bundle:base --platform ios --bundle-output ios/main.jsbundle",
         "bundle:android": "yarn bundle:base --platform android",
         "bundle:base": "react-native bundle --entry-file index.ts --dev false",

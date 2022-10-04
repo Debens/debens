@@ -4,6 +4,16 @@ require_relative '../../../node_modules/@react-native-community/cli-platform-ios
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
+def set_metro_port(installer)
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+        if config.name == 'Debug' then
+            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', 'RCT_METRO_PORT=8082']
+        end
+    end
+  end
+end
+
 target 'angry_mogisan' do
   config = use_native_modules!
 
@@ -32,6 +42,7 @@ target 'angry_mogisan' do
   end
 
   post_install do |installer|
+    set_metro_port(installer)
     react_native_post_install(
       installer,
       # Set `mac_catalyst_enabled` to `true` in order to apply patches
