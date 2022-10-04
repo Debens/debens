@@ -45,6 +45,7 @@ Object {
     "$text-secondary": "#ffffff",
     "$transparent": "transparent",
   },
+  "contextual": Object {},
   "radii": Object {
     "large": 16,
     "medium": 8,

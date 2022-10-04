@@ -89,4 +89,5 @@ export const mógan: Theme = {
             fontWeight: FontWeight.Normal,
         },
     },
+    contextual: {},
 };
