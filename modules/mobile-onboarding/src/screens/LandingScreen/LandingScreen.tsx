@@ -1,8 +1,15 @@
 import React, { memo, useCallback } from 'react';
 
 import http from '@training/http';
-import { Button, EmailInput, Grid, Layer, Screen, SVG } from '@training/mobile-atoms';
-import { Break } from '@training/mobile-atoms/src/components/Break/Break';
+import {
+    Break,
+    Button,
+    EmailInput,
+    Grid,
+    Layer,
+    Screen,
+    SVG,
+} from '@training/mobile-atoms';
 import { Assertion, Attestation } from '@training/react-native-fido';
 import { AssertionService, AttestationService } from '@training/service-identity';
 

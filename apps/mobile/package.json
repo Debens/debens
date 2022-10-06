@@ -33,7 +33,7 @@
         "react-native": "0.70.1",
         "react-native-codegen": "^0.69.1",
         "react-native-config": "^1.4.6",
-        "react-native-reanimated": "2.10.0",
+        "react-native-reanimated": "3.0.0-rc.3",
         "react-native-safe-area-context": "^4.2.5",
         "react-native-screens": "^3.13.1",
         "react-native-svg": "^12.3.0",
@@ -42,7 +42,7 @@
     "devDependencies": {
         "@babel/core": "^7.17.9",
         "@babel/runtime": "^7.17.9",
-        "@callstack/repack": "^2.5.2",
+        "@callstack/repack": "^3.0.0",
         "@react-native-community/eslint-config": "^3.0.1",
         "@training/config-typescript": "^0.0.1",
         "@training/eslint-config": "^0.0.1",
