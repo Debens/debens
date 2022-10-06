@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Grid } from '@training/mobile-atoms';
+import { Grid } from '@debens/mobile-atoms';
 
 import Face from '../faces/Face/Face';
 

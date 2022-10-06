@@ -1,5 +1,5 @@
 {
-    "name": "@training/theme",
+    "name": "@debens/theme",
     "version": "0.0.1",
     "description": "core themes",
     "license": "MIT",
@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@styled-system/should-forward-prop": "^5.1.5",
-        "@training/utils": "^0.0.1",
+        "@debens/utils": "^0.0.1",
         "styled-system": "^5.1.5",
         "styled-components": "^5.3.5"
     },
@@ -24,7 +24,7 @@
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@training/config-typescript": "^0.0.1",
+        "@debens/config-typescript": "^0.0.1",
         "@types/jest": "^27.4.1",
         "babel-jest": "^27.5.1",
         "jest": "^27.5.1",

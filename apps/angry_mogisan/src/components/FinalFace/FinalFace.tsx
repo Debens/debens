@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Button, ButtonProps, Grid } from '@training/mobile-atoms';
+import { Button, ButtonProps, Grid } from '@debens/mobile-atoms';
 
 import Face from '../faces/Face/Face';
 import { useFinalPosition } from '../GameProvider/game-hooks';

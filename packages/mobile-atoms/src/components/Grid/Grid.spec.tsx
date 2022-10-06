@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { render } from '@training/mobile-testing';
+import { render } from '@debens/mobile-testing';
 
 import Grid from './Grid';
 

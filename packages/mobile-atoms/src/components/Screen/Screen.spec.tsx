@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { render, Workbench } from '@training/mobile-testing';
+import { render, Workbench } from '@debens/mobile-testing';
 
 import Screen from './Screen';
 

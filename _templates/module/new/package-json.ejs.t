@@ -2,7 +2,7 @@
 to: modules/<%=name%>/package.json
 ---
 {
-  "name": "@training/<%=name%>",
+  "name": "@debens/<%=name%>",
   "version": "0.0.1",
   "description": "> TODO: description",
   "license": "MIT",
@@ -25,8 +25,8 @@ to: modules/<%=name%>/package.json
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
-    "@training/config-typescript": "^0.0.1",
-    "@training/eslint-config": "^0.0.1",
+    "@debens/config-typescript": "^0.0.1",
+    "@debens/eslint-config": "^0.0.1",
     "@types/jest": "^27.4.1",
     "babel-jest": "^27.5.1",
     "jest": "^27.5.1",

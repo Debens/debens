@@ -1,1 +1,1 @@
-export { CalendarNavigator as default } from '@training/mobile-calendar';
+export { CalendarNavigator as default } from '@debens/mobile-calendar';

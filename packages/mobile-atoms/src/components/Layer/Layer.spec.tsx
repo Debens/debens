@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@training/mobile-testing';
+import { render } from '@debens/mobile-testing';
 
 import Grid from '../Grid/Grid';
 

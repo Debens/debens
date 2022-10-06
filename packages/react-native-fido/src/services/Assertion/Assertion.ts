@@ -1,6 +1,10 @@
 import { NativeModules } from 'react-native';
 
-import { AssertionResult, AssertionService, ChallengeRequest } from '@training/service-identity';
+import {
+    AssertionResult,
+    AssertionService,
+    ChallengeRequest,
+} from '@debens/service-identity';
 
 import { AssertionRequest } from '../../native-module';
 

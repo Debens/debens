@@ -10,8 +10,8 @@ import {
     SVG,
     useRadioHandler,
     useRadioStatus,
-} from '@training/mobile-atoms';
-import { SemanticColor } from '@training/theme';
+} from '@debens/mobile-atoms';
+import { SemanticColor } from '@debens/theme';
 
 import { FacePackType } from '../../face-pack/model';
 import FacePackPreview from '../FacePackPreview/FacePackPreview';

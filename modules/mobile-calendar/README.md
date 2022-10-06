@@ -1,11 +1,11 @@
-# `@training/mobile-calendar`
+# `@debens/mobile-calendar`
 
 > TODO: description
 
 ## Usage
 
 ```
-const testingLibrary = require('@training/mobile-calendar');
+const testingLibrary = require('@debens/mobile-calendar');
 
 // TODO: DEMONSTRATE API
 ```

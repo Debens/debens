@@ -2,7 +2,7 @@
 to: modules/<%=name%>/tsconfig.json
 ---
 {
-    "extends": "@training/config-typescript",
+    "extends": "@debens/config-typescript",
     "compilerOptions": {
         "composite": true,
         "strict": true,
@@ -15,7 +15,7 @@ to: modules/<%=name%>/tsconfig.json
         "isolatedModules": true,
         "baseUrl": "../../",
         "paths": {
-            "@training/*": ["packages/*/src"]
+            "@debens/*": ["packages/*/src"]
         }
     },
     "references": [],

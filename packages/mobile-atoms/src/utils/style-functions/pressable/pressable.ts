@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-import { SemanticColor } from '@training/theme';
+import { SemanticColor } from '@debens/theme';
 
 import { DefaultTheme, ThemedStyledProps } from 'styled-components';
 import * as system from 'styled-system';

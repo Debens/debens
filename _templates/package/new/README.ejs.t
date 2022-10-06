@@ -1,14 +1,14 @@
 ---
 to: packages/<%=name%>/README.md
 ---
-# `@training/<%=name%>`
+# `@debens/<%=name%>`
 
 > TODO: description
 
 ## Usage
 
 ```
-const testingLibrary = require('@training/<%=name%>');
+const testingLibrary = require('@debens/<%=name%>');
 
 // TODO: DEMONSTRATE API
 ```

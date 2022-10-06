@@ -1,1 +1,1 @@
-# `@training/service-graphql`
+# `@debens/service-graphql`

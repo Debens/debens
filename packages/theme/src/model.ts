@@ -7,7 +7,7 @@ import type { TypographyToken, TypeSet } from './tokens/typography';
 
 import type { Theme as BaseTheme } from 'styled-system';
 
-import type { DeepPartial } from '@training/utils';
+import type { DeepPartial } from '@debens/utils';
 
 export type SemanticColor = `${ColorToken}`;
 export type SemanticRadii = `${RadiiToken}`;

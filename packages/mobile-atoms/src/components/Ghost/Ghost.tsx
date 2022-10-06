@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAnimatedStyle } from 'react-native-reanimated';
 
-import { Theme } from '@training/theme';
+import { Theme } from '@debens/theme';
 
 import { useTheme } from 'styled-components';
 import * as system from 'styled-system';

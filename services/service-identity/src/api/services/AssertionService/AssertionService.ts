@@ -1,6 +1,11 @@
-import http from '@training/http';
+import http from '@debens/http';
 
-import { AssertionResult, ChallengeRequest, ChallengeResponse, VerifyRequest } from '../../models/identity';
+import {
+    AssertionResult,
+    ChallengeRequest,
+    ChallengeResponse,
+    VerifyRequest,
+} from '../../models/identity';
 
 export class AssertionService {
     constructor(private readonly client = http.client) {}

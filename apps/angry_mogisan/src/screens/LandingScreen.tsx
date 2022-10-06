@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 
+import { Button, Grid, Paragraph, Screen } from '@debens/mobile-atoms';
 import { useNavigation } from '@react-navigation/core';
-import { Button, Grid, Paragraph, Screen } from '@training/mobile-atoms';
 
 import { AppRoute } from '../navigation/routes';
 

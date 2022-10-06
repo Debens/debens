@@ -1,4 +1,4 @@
-import { GridProps } from '@training/mobile-atoms';
+import { GridProps } from '@debens/mobile-atoms';
 
 import { FaceEmotion } from '../GameProvider/game-context';
 

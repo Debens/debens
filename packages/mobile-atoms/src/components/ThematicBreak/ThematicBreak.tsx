@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { SemanticColor } from '@training/theme';
+import { SemanticColor } from '@debens/theme';
 
 import Grid, { GridProps } from '../Grid/Grid';
 

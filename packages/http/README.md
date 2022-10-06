@@ -1,11 +1,11 @@
-# `@training/http`
+# `@debens/http`
 
 > TODO: description
 
 ## Usage
 
 ```
-const testingLibrary = require('@training/http');
+const testingLibrary = require('@debens/http');
 
 // TODO: DEMONSTRATE API
 ```

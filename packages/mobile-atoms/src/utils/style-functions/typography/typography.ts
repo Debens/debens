@@ -1,4 +1,4 @@
-import { Theme } from '@training/theme';
+import { Theme } from '@debens/theme';
 
 import * as system from 'styled-system';
 

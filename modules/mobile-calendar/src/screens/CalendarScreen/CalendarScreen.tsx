@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
-import { gql, useQuery } from '@training/graphql';
-import { Ghost, Grid, Loader, Paragraph, Screen } from '@training/mobile-atoms';
+import { gql, useQuery } from '@debens/graphql';
+import { Ghost, Grid, Loader, Paragraph, Screen } from '@debens/mobile-atoms';
 
 export type CalendarScreenNavigationProps = undefined;
 

@@ -31,8 +31,8 @@ module.exports = {
             {
                 root: MONOREPO_ROOT,
                 alias: {
-                    '^@training/(.+)': ([_, name]) => getRelative(name),
-                    // '^@training/(.+)': '../../packages/\\1/src',
+                    '^@debens/(.+)': ([_, name]) => getRelative(name),
+                    // '^@debens/(.+)': '../../packages/\\1/src',
                 },
             },
         ],

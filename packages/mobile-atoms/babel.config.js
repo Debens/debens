@@ -30,7 +30,7 @@ module.exports = {
             {
                 root: MONOREPO_ROOT,
                 alias: {
-                    '^@training/(.+)': ([_, name]) => getRelative(name),
+                    '^@debens/(.+)': ([_, name]) => getRelative(name),
                 },
             },
         ],

@@ -1,11 +1,11 @@
-# `@training/eslint-config`
+# `@debens/eslint-config`
 
 > TODO: description
 
 ## Usage
 
 ```
-const testingLibrary = require('@training/eslint-config');
+const testingLibrary = require('@debens/eslint-config');
 
 // TODO: DEMONSTRATE API
 ```

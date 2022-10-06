@@ -15,7 +15,7 @@ class FidoModule(var reactContext: ReactApplicationContext) : ReactContextBaseJa
 
     private var mPromise: Promise? = null;
     private var domain: String = "api.debens.app";
-    private var name: String = "Training App";
+    private var name: String = "debens App";
 
     private val mActivityEventListener: ActivityEventListener = object : BaseActivityEventListener() {
         override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, intent: Intent) {

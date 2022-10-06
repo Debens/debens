@@ -1,11 +1,11 @@
-# `@training/react-native-fido`
+# `@debens/react-native-fido`
 
 > TODO: description
 
 ## Usage
 
 ```
-const testingLibrary = require('@training/react-native-fido');
+const testingLibrary = require('@debens/react-native-fido');
 
 // TODO: DEMONSTRATE API
 ```

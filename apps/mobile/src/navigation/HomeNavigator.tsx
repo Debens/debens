@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { Screen } from '@debens/mobile-atoms';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Screen } from '@training/mobile-atoms';
 
 import { HomeRoute } from '../routes';
 

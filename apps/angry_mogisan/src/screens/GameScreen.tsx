@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import Haptic from 'react-native-haptic-feedback';
 
+import { Grid, Screen, SVG, Toolbar } from '@debens/mobile-atoms';
 import { useNavigation } from '@react-navigation/core';
-import { Grid, Screen, SVG, Toolbar } from '@training/mobile-atoms';
 
 import Board from '../components/Board/Board';
 import FinalFace from '../components/FinalFace/FinalFace';

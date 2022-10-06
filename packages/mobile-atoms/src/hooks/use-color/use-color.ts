@@ -1,4 +1,4 @@
-import { SemanticColor } from '@training/theme';
+import { SemanticColor } from '@debens/theme';
 
 import { useTheme } from 'styled-components';
 import { get } from 'styled-system';

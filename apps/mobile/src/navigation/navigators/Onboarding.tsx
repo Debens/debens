@@ -1,1 +1,1 @@
-export { OnboardingNavigator as default } from '@training/mobile-onboarding';
+export { OnboardingNavigator as default } from '@debens/mobile-onboarding';

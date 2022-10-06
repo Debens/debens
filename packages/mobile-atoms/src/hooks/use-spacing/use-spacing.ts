@@ -1,4 +1,4 @@
-import { SemanticSpacing } from '@training/theme';
+import { SemanticSpacing } from '@debens/theme';
 
 import { useTheme } from 'styled-components';
 import { get } from 'styled-system';

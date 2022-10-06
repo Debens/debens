@@ -2,7 +2,7 @@
 to: packages/<%=name%>/.eslintrc.yml
 ---
 ---
-extends: "@training/eslint-config/react-native.yml"
+extends: "@debens/eslint-config/react-native.yml"
 overrides:
     - files:
           - '*.ts'

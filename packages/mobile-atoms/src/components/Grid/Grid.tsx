@@ -1,8 +1,8 @@
 import React from 'react';
 import Animated from 'react-native-reanimated';
 
+import { Theme } from '@debens/theme';
 import shouldForwardProp from '@styled-system/should-forward-prop';
-import { Theme } from '@training/theme';
 
 import styled from 'styled-components/native';
 import * as system from 'styled-system';

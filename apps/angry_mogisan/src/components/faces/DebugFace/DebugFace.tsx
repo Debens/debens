@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import { Grid, Paragraph } from '@training/mobile-atoms';
-import { TypographyToken } from '@training/theme';
+import { Grid, Paragraph } from '@debens/mobile-atoms';
+import { TypographyToken } from '@debens/theme';
 
 import { FaceEmotion } from '../../GameProvider/game-context';
 import { BaseFaceProps } from '../model';

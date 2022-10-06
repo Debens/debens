@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import { ApolloProvider } from '@apollo/client';
-import { OptionalKeys } from '@training/utils';
+import { OptionalKeys } from '@debens/utils';
 
 import { client } from '../../default-client';
 

@@ -1,5 +1,5 @@
 {
-    "name": "@training/service-identity",
+    "name": "@debens/service-identity",
     "version": "0.0.1",
     "description": "identity service",
     "license": "MIT",
@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "@teamhanko/hanko-node": "^1.0.0",
-        "@training/http": "^0.0.1",
+        "@debens/http": "^0.0.1",
         "@tsoa/runtime": "^4.1.0",
         "body-parser": "^1.20.0",
         "dotenv": "^16.0.1",
@@ -46,9 +46,9 @@
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@training/config-typescript": "^0.0.1",
-        "@training/eslint-config": "^0.0.1",
-        "@training/utils": "^0.0.1",
+        "@debens/config-typescript": "^0.0.1",
+        "@debens/eslint-config": "^0.0.1",
+        "@debens/utils": "^0.0.1",
         "@types/jest": "^27.4.1",
         "@types/swagger-ui-express": "^4.1.3",
         "@types/uuid": "^8.3.4",

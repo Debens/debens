@@ -1,4 +1,4 @@
-import http from '@training/http';
+import http from '@debens/http';
 
 import {
     AssertionResult,

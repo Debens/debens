@@ -2,8 +2,8 @@ import React, { memo, useMemo } from 'react';
 import { KeyboardAvoidingView, StatusBar, StyleSheet } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
+import { SemanticColor } from '@debens/theme';
 import { useHeaderHeight } from '@react-navigation/elements';
-import { SemanticColor } from '@training/theme';
 
 import { useColor } from '../../hooks/use-color/use-color';
 import Grid, { GridProps } from '../Grid/Grid';

@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { GestureResponderEvent, Pressable, PressableProps } from 'react-native';
 
+import { SemanticColor, SemanticSpacing, Theme } from '@debens/theme';
 import shouldForwardProp from '@styled-system/should-forward-prop';
-import { SemanticColor, SemanticSpacing, Theme } from '@training/theme';
 
 import Color from 'color';
 import styled from 'styled-components/native';

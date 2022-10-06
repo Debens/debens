@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: node.dockerfile
             args:
-                SCOPE: "@training/service-identity"
+                SCOPE: "@debens/service-identity"
         restart: unless-stopped
         ports:
             - 10800:3000

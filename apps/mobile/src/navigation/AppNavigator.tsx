@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 
+import { Screen } from '@debens/mobile-atoms';
 import { useNavigation } from '@react-navigation/core';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Screen } from '@training/mobile-atoms';
 
 import { AppRoute } from '../routes';
 

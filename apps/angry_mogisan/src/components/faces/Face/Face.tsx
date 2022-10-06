@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Grid, GridProps } from '@training/mobile-atoms';
+import { Grid, GridProps } from '@debens/mobile-atoms';
 
 import { useRandomGameFace } from '../../FaceProvider/face-hooks';
 import { useFaceEmotion } from '../../GameProvider/game-hooks';

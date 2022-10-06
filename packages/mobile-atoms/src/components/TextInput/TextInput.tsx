@@ -17,8 +17,8 @@ import {
     withTiming,
 } from 'react-native-reanimated';
 
+import { ColorToken } from '@debens/theme';
 import shouldForwardProp from '@styled-system/should-forward-prop';
-import { ColorToken } from '@training/theme';
 
 import styled from 'styled-components/native';
 

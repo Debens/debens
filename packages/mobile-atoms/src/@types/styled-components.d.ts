@@ -1,6 +1,6 @@
 import 'styled-components';
 
-import { Theme } from '@training/theme';
+import { Theme } from '@debens/theme';
 
 declare module 'styled-components' {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface

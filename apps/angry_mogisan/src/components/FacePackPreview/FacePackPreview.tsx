@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 
-import { Grid, GridProps, ThematicBreak } from '@training/mobile-atoms';
+import { Grid, GridProps, ThematicBreak } from '@debens/mobile-atoms';
 
 import { FacePackType } from '../../face-pack/model';
 import { isDefined } from '../../utils/is-defined';

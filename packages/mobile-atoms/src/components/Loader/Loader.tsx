@@ -1,7 +1,7 @@
 import React from 'react';
 import { FadeInDown, FadeOut } from 'react-native-reanimated';
 
-import { not } from '@training/utils';
+import { not } from '@debens/utils';
 
 import { standard } from '../../utils/easing';
 import { isElementName } from '../../utils/is-element';

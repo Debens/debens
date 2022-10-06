@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 
-import { SemanticColor, ThemeProvider, useTheme } from '@training/theme';
+import { SemanticColor, ThemeProvider, useTheme } from '@debens/theme';
 
 import merge from 'deepmerge';
 import { ResponsiveValue } from 'styled-system';

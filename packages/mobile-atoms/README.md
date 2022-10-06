@@ -1,4 +1,4 @@
-# `@training/mobile-atoms`
+# `@debens/mobile-atoms`
 
 > TODO: description
 

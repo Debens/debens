@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
 
-import http from '@training/http';
+import http from '@debens/http';
 import {
     Break,
     Button,
@@ -9,9 +9,9 @@ import {
     Layer,
     Screen,
     SVG,
-} from '@training/mobile-atoms';
-import { Assertion, Attestation } from '@training/react-native-fido';
-import { AssertionService, AttestationService } from '@training/service-identity';
+} from '@debens/mobile-atoms';
+import { Assertion, Attestation } from '@debens/react-native-fido';
+import { AssertionService, AttestationService } from '@debens/service-identity';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -35,7 +35,7 @@ const services = {
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
     const onRegister = useCallback(() => {
         new Attestation(services.attestation)
-            .register({ name: 'Training App' })
+            .register({ name: 'debens App' })
             .then(console.warn.bind(console))
             .catch(console.error.bind(console));
     }, []);
