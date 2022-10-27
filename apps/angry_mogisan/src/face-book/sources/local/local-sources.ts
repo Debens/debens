@@ -34,6 +34,14 @@ export const LOCAL_SOURCES: Record<string, Face> = {
             [FaceEmotion.Angry]: require('./images/morgan/angry-morgan.png'),
         },
     },
+    Josh: {
+        type: FaceType.Image,
+        emotions: {
+            [FaceEmotion.Neutral]: require('./images/josh/happy-josh.png'),
+            [FaceEmotion.Calm]: require('./images/josh/happy-josh.png'),
+            [FaceEmotion.Angry]: require('./images/sarah/angry-sarah.png'),
+        },
+    },
     Mark: {
         type: FaceType.Image,
         emotions: {
@@ -63,7 +71,7 @@ export const LOCAL_SOURCES: Record<string, Face> = {
         emotions: {
             [FaceEmotion.Neutral]: require('./images/nikunj/happy-nikunj.png'),
             [FaceEmotion.Calm]: require('./images/nikunj/happy-nikunj.png'),
-            [FaceEmotion.Angry]: require('./images/taz/angry-taz.png'),
+            [FaceEmotion.Angry]: require('./images/sarah/angry-sarah.png'),
         },
     },
     Sarah: {
@@ -71,7 +79,7 @@ export const LOCAL_SOURCES: Record<string, Face> = {
         emotions: {
             [FaceEmotion.Neutral]: require('./images/sarah/happy-sarah.png'),
             [FaceEmotion.Calm]: require('./images/sarah/happy-sarah.png'),
-            [FaceEmotion.Angry]: require('./images/taz/angry-taz.png'),
+            [FaceEmotion.Angry]: require('./images/sarah/angry-sarah.png'),
         },
     },
     Stefan: {
@@ -79,7 +87,7 @@ export const LOCAL_SOURCES: Record<string, Face> = {
         emotions: {
             [FaceEmotion.Neutral]: require('./images/stefan/happy-stefan.png'),
             [FaceEmotion.Calm]: require('./images/stefan/happy-stefan.png'),
-            [FaceEmotion.Angry]: require('./images/morgan/angry-morgan.png'),
+            [FaceEmotion.Angry]: require('./images/sarah/angry-sarah.png'),
         },
     },
     Taz: {

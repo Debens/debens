@@ -1,7 +1,8 @@
 export enum FacePackType {
     Mogan = 'mógan',
     Sherif = 'sherif',
-    Tandem = 'tandem',
+    AngySez = 'angy sez',
+    Mandem = 'mandem',
     Cards = 'cards',
     Debug = 'debug',
 }

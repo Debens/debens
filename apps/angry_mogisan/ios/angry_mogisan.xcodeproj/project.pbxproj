@@ -8,6 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* angry_mogisanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* angry_mogisanTests.m */; };
+		059BBF44290AC990007961FD /* angry-sarah.png in Resources */ = {isa = PBXBuildFile; fileRef = 059BBF43290AC990007961FD /* angry-sarah.png */; };
+		059BBF46290AC9A9007961FD /* happy-josh.png in Resources */ = {isa = PBXBuildFile; fileRef = 059BBF45290AC9A9007961FD /* happy-josh.png */; };
+		05B980AD2900A55F003BFE7E /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 05B980AC2900A55F003BFE7E /* assets */; };
+		05B980AF2900A99E003BFE7E /* happy-alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980AE2900A99E003BFE7E /* happy-alex.png */; };
+		05B980B12900A9D8003BFE7E /* happy-andrew.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980B02900A9D8003BFE7E /* happy-andrew.png */; };
+		05B980B32900A9DD003BFE7E /* happy-dan.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980B22900A9DD003BFE7E /* happy-dan.png */; };
+		05B980B52900A9E2003BFE7E /* happy-georgia.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980B42900A9E2003BFE7E /* happy-georgia.png */; };
+		05B980B72900A9E7003BFE7E /* happy-mark.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980B62900A9E7003BFE7E /* happy-mark.png */; };
+		05B980B92900A9ED003BFE7E /* happy-marlin.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980B82900A9ED003BFE7E /* happy-marlin.png */; };
+		05B980BC2900A9F2003BFE7E /* happy-morgan.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980BA2900A9F2003BFE7E /* happy-morgan.png */; };
+		05B980BD2900A9F2003BFE7E /* angry-morgan.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980BB2900A9F2003BFE7E /* angry-morgan.png */; };
+		05B980BF2900A9F8003BFE7E /* happy-nikunj.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980BE2900A9F8003BFE7E /* happy-nikunj.png */; };
+		05B980C12900A9FE003BFE7E /* happy-sarah.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980C02900A9FE003BFE7E /* happy-sarah.png */; };
+		05B980C32900AA02003BFE7E /* happy-stefan.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980C22900AA02003BFE7E /* happy-stefan.png */; };
+		05B980C62900AA08003BFE7E /* happy-taz.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980C42900AA08003BFE7E /* happy-taz.png */; };
+		05B980C72900AA08003BFE7E /* angry-taz.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980C52900AA08003BFE7E /* angry-taz.png */; };
 		05CCFAB628EB2E3100F90039 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 05CCFAB528EB2E3100F90039 /* main.jsbundle */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -31,6 +47,24 @@
 		00E356EE1AD99517003FC87E /* angry_mogisanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = angry_mogisanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* angry_mogisanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = angry_mogisanTests.m; sourceTree = "<group>"; };
+		059BBF43290AC990007961FD /* angry-sarah.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-sarah.png"; path = "build/assets/assets/src/face-book/sources/local/images/sarah/angry-sarah.png"; sourceTree = "<group>"; };
+		059BBF45290AC9A9007961FD /* happy-josh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-josh.png"; path = "build/assets/assets/src/face-book/sources/local/images/josh/happy-josh.png"; sourceTree = "<group>"; };
+		05B980A62900A4B8003BFE7E /* angry-morgan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-morgan.png"; path = "../src/face-book/sources/local/images/morgan/angry-morgan.png"; sourceTree = "<group>"; };
+		05B980A72900A4B8003BFE7E /* happy-morgan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-morgan.png"; path = "../src/face-book/sources/local/images/morgan/happy-morgan.png"; sourceTree = "<group>"; };
+		05B980AC2900A55F003BFE7E /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = build/assets/assets; sourceTree = "<group>"; };
+		05B980AE2900A99E003BFE7E /* happy-alex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-alex.png"; path = "build/assets/assets/src/face-book/sources/local/images/alex/happy-alex.png"; sourceTree = "<group>"; };
+		05B980B02900A9D8003BFE7E /* happy-andrew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-andrew.png"; path = "build/assets/assets/src/face-book/sources/local/images/andrew/happy-andrew.png"; sourceTree = "<group>"; };
+		05B980B22900A9DD003BFE7E /* happy-dan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-dan.png"; path = "build/assets/assets/src/face-book/sources/local/images/dan/happy-dan.png"; sourceTree = "<group>"; };
+		05B980B42900A9E2003BFE7E /* happy-georgia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-georgia.png"; path = "build/assets/assets/src/face-book/sources/local/images/georgia/happy-georgia.png"; sourceTree = "<group>"; };
+		05B980B62900A9E7003BFE7E /* happy-mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-mark.png"; path = "build/assets/assets/src/face-book/sources/local/images/mark/happy-mark.png"; sourceTree = "<group>"; };
+		05B980B82900A9ED003BFE7E /* happy-marlin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-marlin.png"; path = "build/assets/assets/src/face-book/sources/local/images/marlin/happy-marlin.png"; sourceTree = "<group>"; };
+		05B980BA2900A9F2003BFE7E /* happy-morgan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-morgan.png"; path = "build/assets/assets/src/face-book/sources/local/images/morgan/happy-morgan.png"; sourceTree = "<group>"; };
+		05B980BB2900A9F2003BFE7E /* angry-morgan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-morgan.png"; path = "build/assets/assets/src/face-book/sources/local/images/morgan/angry-morgan.png"; sourceTree = "<group>"; };
+		05B980BE2900A9F8003BFE7E /* happy-nikunj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-nikunj.png"; path = "build/assets/assets/src/face-book/sources/local/images/nikunj/happy-nikunj.png"; sourceTree = "<group>"; };
+		05B980C02900A9FE003BFE7E /* happy-sarah.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-sarah.png"; path = "build/assets/assets/src/face-book/sources/local/images/sarah/happy-sarah.png"; sourceTree = "<group>"; };
+		05B980C22900AA02003BFE7E /* happy-stefan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-stefan.png"; path = "build/assets/assets/src/face-book/sources/local/images/stefan/happy-stefan.png"; sourceTree = "<group>"; };
+		05B980C42900AA08003BFE7E /* happy-taz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-taz.png"; path = "build/assets/assets/src/face-book/sources/local/images/taz/happy-taz.png"; sourceTree = "<group>"; };
+		05B980C52900AA08003BFE7E /* angry-taz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-taz.png"; path = "build/assets/assets/src/face-book/sources/local/images/taz/angry-taz.png"; sourceTree = "<group>"; };
 		05CCFAB528EB2E3100F90039 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* angry_mogisan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = angry_mogisan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = angry_mogisan/AppDelegate.h; sourceTree = "<group>"; };
@@ -118,6 +152,24 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				059BBF45290AC9A9007961FD /* happy-josh.png */,
+				059BBF43290AC990007961FD /* angry-sarah.png */,
+				05B980C52900AA08003BFE7E /* angry-taz.png */,
+				05B980C42900AA08003BFE7E /* happy-taz.png */,
+				05B980C22900AA02003BFE7E /* happy-stefan.png */,
+				05B980C02900A9FE003BFE7E /* happy-sarah.png */,
+				05B980BE2900A9F8003BFE7E /* happy-nikunj.png */,
+				05B980BB2900A9F2003BFE7E /* angry-morgan.png */,
+				05B980BA2900A9F2003BFE7E /* happy-morgan.png */,
+				05B980B82900A9ED003BFE7E /* happy-marlin.png */,
+				05B980B62900A9E7003BFE7E /* happy-mark.png */,
+				05B980B42900A9E2003BFE7E /* happy-georgia.png */,
+				05B980B22900A9DD003BFE7E /* happy-dan.png */,
+				05B980B02900A9D8003BFE7E /* happy-andrew.png */,
+				05B980AE2900A99E003BFE7E /* happy-alex.png */,
+				05B980AC2900A55F003BFE7E /* assets */,
+				05B980A62900A4B8003BFE7E /* angry-morgan.png */,
+				05B980A72900A4B8003BFE7E /* happy-morgan.png */,
 				05CCFAB528EB2E3100F90039 /* main.jsbundle */,
 				13B07FAE1A68108700A75B9A /* angry_mogisan */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -245,6 +297,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				059BBF46290AC9A9007961FD /* happy-josh.png in Resources */,
+				059BBF44290AC990007961FD /* angry-sarah.png in Resources */,
+				05B980AF2900A99E003BFE7E /* happy-alex.png in Resources */,
+				05B980B12900A9D8003BFE7E /* happy-andrew.png in Resources */,
+				05B980B32900A9DD003BFE7E /* happy-dan.png in Resources */,
+				05B980B52900A9E2003BFE7E /* happy-georgia.png in Resources */,
+				05B980B72900A9E7003BFE7E /* happy-mark.png in Resources */,
+				05B980B92900A9ED003BFE7E /* happy-marlin.png in Resources */,
+				05B980BC2900A9F2003BFE7E /* happy-morgan.png in Resources */,
+				05B980BD2900A9F2003BFE7E /* angry-morgan.png in Resources */,
+				05B980BF2900A9F8003BFE7E /* happy-nikunj.png in Resources */,
+				05B980C12900A9FE003BFE7E /* happy-sarah.png in Resources */,
+				05B980C32900AA02003BFE7E /* happy-stefan.png in Resources */,
+				05B980C62900AA08003BFE7E /* happy-taz.png in Resources */,
+				05B980C72900AA08003BFE7E /* angry-taz.png in Resources */,
+				05B980AD2900A55F003BFE7E /* assets in Resources */,
 				05CCFAB628EB2E3100F90039 /* main.jsbundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
@@ -491,7 +559,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = S28MWP6479;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = angry_mogisan/Info.plist;
@@ -499,6 +567,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -521,13 +590,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = S28MWP6479;
 				INFOPLIST_FILE = angry_mogisan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

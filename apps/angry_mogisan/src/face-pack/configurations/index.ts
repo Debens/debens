@@ -1,15 +1,17 @@
 import { FacePack, FacePackType } from '../model';
 
+import { sez } from './angy-sez';
 import { cards } from './cards';
 import { debug } from './debug';
+import { mandem } from './mandem';
 import { mogan } from './mogan';
 import { sherif } from './sherif';
-import { tandem } from './tandem';
 
 export const configurations: Record<FacePackType, FacePack> = {
+    mandem,
     mógan: mogan,
     sherif,
-    tandem,
+    'angy sez': sez,
     cards,
     debug,
 };
