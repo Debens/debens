@@ -48,10 +48,7 @@ const useGameFaces = () => {
 
     return useMemo(() => {
         const concatenations = Math.ceil(count / options.length);
-        const profiles = Array.from<string[]>({ length: concatenations })
-            .fill(options)
-            .flat()
-            .slice(0, count);
+        const profiles = Array.from<string[]>({ length: concatenations }).fill(options).flat();
 
         return shuffle(profiles, seed).slice(0, count);
     }, [type, seed, count]);
