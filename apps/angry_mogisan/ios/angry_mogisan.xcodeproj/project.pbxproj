@@ -10,6 +10,9 @@
 		00E356F31AD99517003FC87E /* angry_mogisanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* angry_mogisanTests.m */; };
 		059BBF44290AC990007961FD /* angry-sarah.png in Resources */ = {isa = PBXBuildFile; fileRef = 059BBF43290AC990007961FD /* angry-sarah.png */; };
 		059BBF46290AC9A9007961FD /* happy-josh.png in Resources */ = {isa = PBXBuildFile; fileRef = 059BBF45290AC9A9007961FD /* happy-josh.png */; };
+		059BBF48290BD26E007961FD /* happy-george.png in Resources */ = {isa = PBXBuildFile; fileRef = 059BBF47290BD26E007961FD /* happy-george.png */; };
+		059BBF4A290BD27F007961FD /* angry-katy.png in Resources */ = {isa = PBXBuildFile; fileRef = 059BBF49290BD27F007961FD /* angry-katy.png */; };
+		059BBF4C290BD299007961FD /* happy-katy.png in Resources */ = {isa = PBXBuildFile; fileRef = 059BBF4B290BD298007961FD /* happy-katy.png */; };
 		05B980AD2900A55F003BFE7E /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 05B980AC2900A55F003BFE7E /* assets */; };
 		05B980AF2900A99E003BFE7E /* happy-alex.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980AE2900A99E003BFE7E /* happy-alex.png */; };
 		05B980B12900A9D8003BFE7E /* happy-andrew.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980B02900A9D8003BFE7E /* happy-andrew.png */; };
@@ -49,6 +52,9 @@
 		00E356F21AD99517003FC87E /* angry_mogisanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = angry_mogisanTests.m; sourceTree = "<group>"; };
 		059BBF43290AC990007961FD /* angry-sarah.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-sarah.png"; path = "build/assets/assets/src/face-book/sources/local/images/sarah/angry-sarah.png"; sourceTree = "<group>"; };
 		059BBF45290AC9A9007961FD /* happy-josh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-josh.png"; path = "build/assets/assets/src/face-book/sources/local/images/josh/happy-josh.png"; sourceTree = "<group>"; };
+		059BBF47290BD26E007961FD /* happy-george.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-george.png"; path = "build/assets/assets/src/face-book/sources/local/images/george/happy-george.png"; sourceTree = "<group>"; };
+		059BBF49290BD27F007961FD /* angry-katy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-katy.png"; path = "build/assets/assets/src/face-book/sources/local/images/katy/angry-katy.png"; sourceTree = "<group>"; };
+		059BBF4B290BD298007961FD /* happy-katy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-katy.png"; path = "build/assets/assets/src/face-book/sources/local/images/katy/happy-katy.png"; sourceTree = "<group>"; };
 		05B980A62900A4B8003BFE7E /* angry-morgan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-morgan.png"; path = "../src/face-book/sources/local/images/morgan/angry-morgan.png"; sourceTree = "<group>"; };
 		05B980A72900A4B8003BFE7E /* happy-morgan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-morgan.png"; path = "../src/face-book/sources/local/images/morgan/happy-morgan.png"; sourceTree = "<group>"; };
 		05B980AC2900A55F003BFE7E /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = build/assets/assets; sourceTree = "<group>"; };
@@ -152,6 +158,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				059BBF4B290BD298007961FD /* happy-katy.png */,
+				059BBF49290BD27F007961FD /* angry-katy.png */,
+				059BBF47290BD26E007961FD /* happy-george.png */,
 				059BBF45290AC9A9007961FD /* happy-josh.png */,
 				059BBF43290AC990007961FD /* angry-sarah.png */,
 				05B980C52900AA08003BFE7E /* angry-taz.png */,
@@ -297,6 +306,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				059BBF4C290BD299007961FD /* happy-katy.png in Resources */,
+				059BBF4A290BD27F007961FD /* angry-katy.png in Resources */,
+				059BBF48290BD26E007961FD /* happy-george.png in Resources */,
 				059BBF46290AC9A9007961FD /* happy-josh.png in Resources */,
 				059BBF44290AC990007961FD /* angry-sarah.png in Resources */,
 				05B980AF2900A99E003BFE7E /* happy-alex.png in Resources */,
