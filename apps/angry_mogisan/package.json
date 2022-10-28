@@ -7,7 +7,7 @@
         "start": "react-native start",
         "ios": "react-native run-ios --port 8082",
         "android": "react-native run-android --port 8082",
-        "bundle:ios": "yarn bundle:base --platform ios --bundle-output ios/main.jsbundle",
+        "bundle:ios": "yarn bundle:base --platform ios --bundle-output ios/main.jsbundle --assets-dest ./ios/build/assets",
         "bundle:android": "yarn bundle:base --platform android",
         "bundle:base": "react-native bundle --entry-file index.ts --dev false",
         "test": "jest --config jest.config.js",

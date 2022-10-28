@@ -90,6 +90,14 @@ export const LOCAL_SOURCES: Record<string, Face> = {
             [FaceEmotion.Angry]: require('./images/sarah/angry-sarah.png'),
         },
     },
+    Sandek: {
+        type: FaceType.Image,
+        emotions: {
+            [FaceEmotion.Neutral]: require('./images/sandek/happy-sandek.png'),
+            [FaceEmotion.Calm]: require('./images/sandek/happy-sandek.png'),
+            [FaceEmotion.Angry]: require('./images/sandek/angry-sandek.png'),
+        },
+    },
     Sarah: {
         type: FaceType.Image,
         emotions: {

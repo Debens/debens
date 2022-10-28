@@ -28,6 +28,8 @@
 		05B980C62900AA08003BFE7E /* happy-taz.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980C42900AA08003BFE7E /* happy-taz.png */; };
 		05B980C72900AA08003BFE7E /* angry-taz.png in Resources */ = {isa = PBXBuildFile; fileRef = 05B980C52900AA08003BFE7E /* angry-taz.png */; };
 		05CCFAB628EB2E3100F90039 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 05CCFAB528EB2E3100F90039 /* main.jsbundle */; };
+		05F1356C290C108B00C9E5C2 /* happy-sandek.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F1356A290C108B00C9E5C2 /* happy-sandek.png */; };
+		05F1356D290C108B00C9E5C2 /* angry-sandek.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F1356B290C108B00C9E5C2 /* angry-sandek.png */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -72,6 +74,8 @@
 		05B980C42900AA08003BFE7E /* happy-taz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-taz.png"; path = "build/assets/assets/src/face-book/sources/local/images/taz/happy-taz.png"; sourceTree = "<group>"; };
 		05B980C52900AA08003BFE7E /* angry-taz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-taz.png"; path = "build/assets/assets/src/face-book/sources/local/images/taz/angry-taz.png"; sourceTree = "<group>"; };
 		05CCFAB528EB2E3100F90039 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		05F1356A290C108B00C9E5C2 /* happy-sandek.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "happy-sandek.png"; path = "build/assets/assets/src/face-book/sources/local/images/sandek/happy-sandek.png"; sourceTree = "<group>"; };
+		05F1356B290C108B00C9E5C2 /* angry-sandek.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "angry-sandek.png"; path = "build/assets/assets/src/face-book/sources/local/images/sandek/angry-sandek.png"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* angry_mogisan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = angry_mogisan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = angry_mogisan/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = angry_mogisan/AppDelegate.mm; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				05F1356B290C108B00C9E5C2 /* angry-sandek.png */,
+				05F1356A290C108B00C9E5C2 /* happy-sandek.png */,
 				059BBF4B290BD298007961FD /* happy-katy.png */,
 				059BBF49290BD27F007961FD /* angry-katy.png */,
 				059BBF47290BD26E007961FD /* happy-george.png */,
@@ -306,6 +312,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05F1356C290C108B00C9E5C2 /* happy-sandek.png in Resources */,
+				05F1356D290C108B00C9E5C2 /* angry-sandek.png in Resources */,
 				059BBF4C290BD299007961FD /* happy-katy.png in Resources */,
 				059BBF4A290BD27F007961FD /* angry-katy.png in Resources */,
 				059BBF48290BD26E007961FD /* happy-george.png in Resources */,
