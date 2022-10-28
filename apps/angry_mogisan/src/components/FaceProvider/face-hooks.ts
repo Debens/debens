@@ -1,8 +1,11 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
+import { shuffle } from 'shuffle-seed';
+
 import { FacePackType } from '../../face-pack/model';
 import { useFacePack } from '../../face-pack/use-face-pack';
-import { useStartEffect } from '../GameProvider/game-hooks';
+import { ROW_COUNT } from '../GameProvider/game-context';
+import { usePositionCount, useSeed } from '../GameProvider/game-hooks';
 
 import context from './face-context';
 
@@ -36,28 +39,26 @@ export const useCurrentFacePack = () => {
 
 export const useProfiles = (type: FacePackType) => useFacePack(type).profiles;
 
-export const useRandomProfile = (type: FacePackType) => {
-    const profiles = useProfiles(type);
+const useGameFaces = () => {
+    const [type] = useCurrentFacePackType();
+    const options = useProfiles(type);
 
-    /* Kinda janky, both disables are valid. */
-    const getRandom = useCallback(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        () => profiles[Math.floor(Math.random() * profiles.length)]!,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [JSON.stringify(profiles)],
-    );
+    const seed = useSeed();
+    const count = usePositionCount();
 
-    const [profile, setProfile] = useState(getRandom());
-    const getNext = useCallback(() => setProfile(getRandom()), [getRandom]);
+    return useMemo(() => {
+        const concatenations = Math.ceil(count / options.length);
+        const profiles = Array.from<string[]>({ length: concatenations })
+            .fill(options)
+            .flat()
+            .slice(0, count);
 
-    return [profile, getNext] as const;
+        return shuffle(profiles, seed).slice(0, count);
+    }, [type, seed, count]);
 };
 
-export const useRandomGameFace = () => {
-    const [type] = useCurrentFacePackType();
-    const [profile, next] = useRandomProfile(type);
+export const useGameFace = (x: number, y: number) => {
+    const faces = useGameFaces();
 
-    useStartEffect(next);
-
-    return useFace(profile);
+    return useFace(faces[x * ROW_COUNT + y]!);
 };

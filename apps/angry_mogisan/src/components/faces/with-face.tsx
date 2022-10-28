@@ -1,8 +1,8 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import Animated, { FadeOut, SlideInUp, SlideOutUp } from 'react-native-reanimated';
+import Animated, { SlideInUp, SlideOutUp } from 'react-native-reanimated';
 
-import { Button, EASING, Grid } from '@debens/mobile-atoms';
+import { Button, EASING } from '@debens/mobile-atoms';
 
 import { COLUMN_COUNT, FaceEmotion, ROW_COUNT } from '../GameProvider/game-context';
 import { useFaceEmotion, useSelectHandler } from '../GameProvider/game-hooks';

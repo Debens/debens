@@ -15,6 +15,8 @@ export const useGameStatus = () => useGameContext().status;
 
 export const useBoard = () => useGameContext().board;
 
+export const useSeed = () => useGameContext().seed;
+
 export const useCurrentPosition = () => useGameContext().current;
 
 export const useFinalPosition = () => useGameContext().final;
@@ -24,6 +26,8 @@ export const useResetHandler = () => useGameContext().onReset;
 export const useSelectHandler = () => useGameContext().onSelect;
 
 export const useFaceValue = (x: number, y: number) => useBoard()[y]![x];
+
+export const usePositionCount = () => useBoard().flat().length;
 
 export const useSelectEffect = (fn: EffectCallback, deps: DependencyList = []) => {
     const status = useGameStatus();

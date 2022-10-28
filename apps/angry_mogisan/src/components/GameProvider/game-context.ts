@@ -1,5 +1,7 @@
 import { createContext } from 'react';
 
+import * as uuid from 'uuid';
+
 export enum GameStatus {
     Ready = 'ready',
     Running = 'running',
@@ -14,6 +16,7 @@ export enum FaceEmotion {
 
 export interface GameState {
     status: GameStatus;
+    seed: string;
     board: boolean[][];
     current: [number, number] | undefined;
     final: [number, number];
@@ -32,6 +35,7 @@ export const getInitialState = (): typeof START_MATRIX => JSON.parse(JSON.string
 const noop = () => void 0;
 export const context = createContext<GameState>({
     status: GameStatus.Ready,
+    seed: uuid.v4(),
     board: getInitialState(),
     current: undefined,
     final: [0, 0],

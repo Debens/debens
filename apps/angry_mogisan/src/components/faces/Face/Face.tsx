@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react';
-import { StyleSheet } from 'react-native';
+import React from 'react';
 
-import { Grid, GridProps } from '@debens/mobile-atoms';
+import { GridProps } from '@debens/mobile-atoms';
 
-import { useRandomGameFace } from '../../FaceProvider/face-hooks';
+import { useGameFace } from '../../FaceProvider/face-hooks';
 import { useFaceEmotion } from '../../GameProvider/game-hooks';
 import { useFaceScale } from '../../ScaleProvider/scale-hooks';
 import FaceFacade from '../FaceFacade/FaceFacade';
@@ -19,7 +18,7 @@ const Face: React.FunctionComponent<FaceProps> = props => {
 
     const emotion = useFaceEmotion(x, y);
 
-    const profile = useRandomGameFace();
+    const profile = useGameFace(x, y);
     const scale = useFaceScale();
 
     return profile ? <FaceFacade {...profile} emotion={emotion} scaling={scale} {...grid} /> : null;

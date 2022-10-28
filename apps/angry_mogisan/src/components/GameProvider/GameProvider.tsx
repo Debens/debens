@@ -1,5 +1,8 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
+import seedrandom from 'seedrandom';
+import * as uuid from 'uuid';
+
 import context, {
     COLUMN_COUNT,
     GameStatus,
@@ -9,22 +12,27 @@ import context, {
 
 type GameProviderProps = React.PropsWithChildren;
 
-const getRandom = (max: number) => Math.floor(Math.random() * (max + 1));
+const getRandom = (seed?: string) => (max: number) => Math.floor(seedrandom(seed)() * (max + 1));
 
 const MAX_FINAL = [ROW_COUNT, COLUMN_COUNT] as const;
-const getNewFinal = (): [number, number] =>
-    MAX_FINAL.map(count => count - 1).map(getRandom) as [number, number];
+const getNewFinal = (seed?: string): [number, number] =>
+    MAX_FINAL.map(count => count - 1).map(getRandom(seed)) as [number, number];
 
 const GameProvider: React.FunctionComponent<GameProviderProps> = props => {
-    const [current, setCurrent] = useState<[number, number]>();
-    const [final, setFinal] = useState<[number, number]>(getNewFinal());
+    const [seed, setSeed] = useState(uuid.v4());
     const [board, setBoard] = useState(getInitialState());
+    const [final, setFinal] = useState<[number, number]>(getNewFinal(seed));
+    const [current, setCurrent] = useState<[number, number]>();
 
     const onReset = useCallback(() => {
+        setSeed(uuid.v4());
         setCurrent(undefined);
-        setFinal(getNewFinal());
         setBoard(getInitialState());
     }, []);
+
+    useEffect(() => {
+        setFinal(getNewFinal(seed));
+    }, [seed]);
 
     const status = useMemo(() => {
         if (!current) {
@@ -56,7 +64,7 @@ const GameProvider: React.FunctionComponent<GameProviderProps> = props => {
     }, [current, status]);
 
     return (
-        <context.Provider value={{ status, board, current, final, onSelect, onReset }}>
+        <context.Provider value={{ status, seed, board, current, final, onSelect, onReset }}>
             {props.children}
         </context.Provider>
     );
