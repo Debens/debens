@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { GestureResponderEvent, Platform, StyleSheet } from 'react-native';
 
 import {
@@ -11,7 +11,6 @@ import {
     useRadioHandler,
     useRadioStatus,
 } from '@debens/mobile-atoms';
-import { SemanticColor } from '@debens/theme';
 
 import { FacePackType } from '../../face-pack/model';
 import FacePackPreview from '../FacePackPreview/FacePackPreview';
@@ -32,10 +31,6 @@ const FaceRadioOption = (props: FaceRadioOptionProps) => {
     );
 
     const isSelected = status === RadioStatus.Selected;
-
-    const borderColor = useMemo<SemanticColor>(() => {
-        return isSelected ? '$field-selected-01' : '$background-primary';
-    }, [isSelected]);
 
     const shadow = !isSelected ? styles.shadow : undefined;
 
@@ -60,7 +55,8 @@ const FaceRadioOption = (props: FaceRadioOptionProps) => {
 
 const styles = StyleSheet.create({
     shadow: Platform.select({
-        ios: {
+        android: { elevation: 5 },
+        default: {
             shadowColor: '#000',
             shadowOffset: {
                 width: 0,
@@ -68,9 +64,6 @@ const styles = StyleSheet.create({
             },
             shadowOpacity: 0.25,
             shadowRadius: 3.84,
-        },
-        android: {
-            elevation: 5,
         },
     }),
 });
