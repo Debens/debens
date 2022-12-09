@@ -1,7 +1,7 @@
 module.exports = {
-    cacheDirectory: '<rootDir>/test/cache',
-    coverageDirectory: '<rootDir>/test/coverage',
-    coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/test'],
+    cacheDirectory: '<rootDir>/.jest/cache',
+    coverageDirectory: '<rootDir>/.jest/coverage',
+    coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/.jest'],
     coverageReporters: ['lcov', 'json', 'text'],
     coverageThreshold: {
         global: {
@@ -18,10 +18,12 @@ module.exports = {
         },
     },
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+    modulePathIgnorePatterns: ['<rootDir>/build'],
     reporters: ['default'],
     transform: {
         '\\.[jt]sx?$': 'babel-jest',
     },
     transformIgnorePatterns: ['node_modules/(?!variables/.*)'],
+    setupFilesAfterEnv: ['cross-fetch/polyfill'],
     verbose: true,
 };

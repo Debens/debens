@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "mobile 🤖 (android)",
+            "type": "node-terminal",
+            "request": "launch",
+            "preLaunchTask": "npm: start - apps/mobile",
+            "command": "yarn lerna run android --stream --scope @debens/mobile"
+        },
+        {
+            "name": "mobile 🍎 (ios)",
+            "type": "node-terminal",
+            "request": "launch",
+            "preLaunchTask": "npm: start - apps/mobile",
+            "command": "yarn lerna run ios --stream --scope @debens/mobile"
+        },
+        {
+            "name": "backend 💽",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "yarn lerna run start:watch --stream --scope '@debens/service-*'"
+        }
+    ]
+}

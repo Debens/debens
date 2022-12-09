@@ -23,10 +23,12 @@
             "dependsOn": ["^lint:staged"]
         },
         "test": {
-            "dependsOn": ["lint", "^test"]
+            "dependsOn": ["lint", "^test"],
+            "outputs": [".jest/**"]
         },
         "test:ci": {
-            "dependsOn": ["build", "^test:ci"]
+            "dependsOn": ["build", "^test:ci"],
+            "outputs": [".jest/**"]
         }
     }
 }

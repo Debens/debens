@@ -2,9 +2,9 @@
 to: packages/<%=name%>/jest.config.js
 ---
 module.exports = {
-    cacheDirectory: "<rootDir>/test/cache",
-    coverageDirectory: "<rootDir>/test/coverage",
-    coveragePathIgnorePatterns: ["<rootDir>/node_modules", "<rootDir>/test"],
+    cacheDirectory: "<rootDir>/.jest/cache",
+    coverageDirectory: "<rootDir>/.jest/coverage",
+    coveragePathIgnorePatterns: ["<rootDir>/node_modules", "<rootDir>/.jest"],
     coverageReporters: ["lcov", "json", "text"],
     coverageThreshold: {
         global: {

@@ -1,6 +1,24 @@
 version: "3"
+
+networks:
+    debens:
+        driver: bridge
+
 services:
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+        container_name: "rabbitmq"
+        ports:
+            - 5672:5672
+            - 15672:15672
+        volumes:
+            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+        networks:
+            - debens
+
     service-identity:
+        container_name: "service-identity"
         build:
             context: .
             dockerfile: node.dockerfile
@@ -12,3 +30,31 @@ services:
         env_file: services/service-identity/.env
         environment:
             - PORT=3000
+        networks:
+            - debens
+
+    postgres:
+        image: postgres:14.1-alpine
+        container_name: "postgres"
+        restart: always
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_DB=root
+        ports:
+            - "5432:5432"
+        networks:
+            - debens
+
+    pgadmin-compose:
+        image: dpage/pgadmin4
+        container_name: "postgres-admin"
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "a.debens@gmail.com"
+            PGADMIN_DEFAULT_PASSWORD: "admin"
+        ports:
+            - "16543:80"
+        depends_on:
+            - postgres
+        networks:
+            - debens

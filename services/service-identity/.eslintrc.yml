@@ -1,10 +1,10 @@
 ---
-extends: '@debens/eslint-config/react-native.yml'
+extends: '@debens/eslint-config/typescript.yml'
+env:
+    node: true
 overrides:
     - files:
           - '*.ts'
           - '*.tsx'
       parserOptions:
           project: ./tsconfig.eslint.json
-          tsconfigRootDir: .
-          debugLevel: true

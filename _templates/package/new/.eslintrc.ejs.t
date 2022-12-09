@@ -9,4 +9,3 @@ overrides:
           - '*.tsx'
       parserOptions:
           project: ./tsconfig.eslint.json
-          tsconfigRootDir: .

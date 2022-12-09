@@ -20,7 +20,8 @@
     "references": [
         { "path": "../../packages/http" },
         { "path": "../../packages/mobile-atoms" },
-        { "path": "../../packages/react-native-fido" }
+        { "path": "../../packages/react-native-fido" },
+        { "path": "../../services/service-identity" }
     ],
     "include": ["src", "index.ts"],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"]

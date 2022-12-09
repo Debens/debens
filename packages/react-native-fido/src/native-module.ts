@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-import { ChallengeResponse, CreateIdentityResponse } from '@debens/service-identity';
+import { Assertion, Attestation } from '@debens/service-identity/src';
 
 export interface AssertionRequest {
     id: string;
@@ -33,8 +33,8 @@ declare module 'react-native' {
     export interface NativeModulesStatic {
         Fido: {
             configure: (config: Config) => void;
-            attestation: (request: CreateIdentityResponse) => Promise<AttestationRequest>;
-            assertion: (request: ChallengeResponse) => Promise<AssertionRequest>;
+            attestation: (request: Attestation) => Promise<AttestationRequest>;
+            assertion: (request: Assertion) => Promise<AssertionRequest>;
         };
     }
 }

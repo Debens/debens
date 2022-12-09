@@ -1,0 +1,146 @@
+version: '3'
+
+networks:
+    local:
+        driver: bridge
+
+volumes:
+    # build:
+    eventstore-volume-data:
+    eventstore-volume-logs:
+
+services:
+    rabbitmq:
+        container_name: rabbitmq
+        healthcheck:
+            test: ['CMD', 'nc', '-z', 'localhost', '5672']
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        image: rabbitmq:3-management-alpine
+        ports:
+            - 5672:5672
+            - 15672:15672
+        networks:
+            - local
+        volumes:
+            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+    # api:
+    #     build:
+    #         dockerfile: ./.dockerfile
+    #     command: node build/api
+    #     container_name: 'identity-api'
+    #     depends_on:
+    #         identity.database:
+    #             condition: service_started
+    #         rabbitmq:
+    #             condition: service_healthy
+    #     ports:
+    #         - 10800:3000
+    #     env_file: .env
+    #     environment:
+    #         - PORT=3000
+
+    #         - PG_USER=${PG_DEFAULT_USER:-root}
+    #         - PG_HOST=${PG_DEFAULT_HOST:-database}
+    #         - PG_PASSWORD=${PG_DEFAULT_PASSWORD:-root}
+    #         - PG_DATABASE=${PG_DEFAULT_DATABASE:-root}
+    #         - PG_PORT=${PG_DEFAULT_PORT:-5432}
+
+    #         - RMQ_USER=${RMQ_DEFAULT_USER:-username}
+    #         - RMQ_PASS=${RMQ_DEFAULT_PASS:-password}
+    #         - RMQ_HOST=${RMQ_DEFAULT_HOST:-rabbitmq}
+    #         - RMQ_PORT=${RMQ_DEFAULT_PORT:-5672}
+    #     links:
+    #         - rabbitmq
+    #         - identity.database
+    #     networks:
+    #         - local
+    #     restart: unless-stopped
+    #     volumes:
+    #         - ./build:/app/build
+
+    # host:
+    #     build:
+    #         dockerfile: ./.dockerfile
+    #     command: node build/host
+    #     container_name: 'identity-host'
+    #     depends_on:
+    #         identity.database:
+    #             condition: service_started
+    #         rabbitmq:
+    #             condition: service_healthy
+    #     env_file: .env
+    #     environment:
+    #         - PGUSER=${PG_DEFAULT_USER:-root}
+    #         - PGHOST=${PG_DEFAULT_HOST:-database}
+    #         - PGPASSWORD=${PG_DEFAULT_PASSWORD:-root}
+    #         - PGDATABASE=${PG_DEFAULT_DATABASE:-root}
+    #         - PGPORT=${PG_DEFAULT_PORT:-5432}
+
+    #         - RMQ_USER=${RMQ_DEFAULT_USER:-username}
+    #         - RMQ_PASS=${RMQ_DEFAULT_PASS:-password}
+    #         - RMQ_HOST=${RMQ_DEFAULT_HOST:-rabbitmq}
+    #         - RMQ_PORT=${RMQ_DEFAULT_PORT:-5672}
+    #     links:
+    #         - rabbitmq
+    #         - identity.database
+    #     networks:
+    #         - local
+    #     restart: unless-stopped
+    #     volumes:
+    #         - ./build:/app/build
+
+    identity.eventstore:
+        container_name: identity.eventstore
+        image: ghcr.io/eventstore/eventstore:21.10.0-alpha-arm64v8
+        environment:
+            - EVENTSTORE_CLUSTER_SIZE=1
+            - EVENTSTORE_RUN_PROJECTIONS=All
+            - EVENTSTORE_START_STANDARD_PROJECTIONS=true
+            - EVENTSTORE_EXT_TCP_PORT=1113
+            - EVENTSTORE_HTTP_PORT=2113
+            - EVENTSTORE_INSECURE=true
+            - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
+            - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
+        ports:
+            - '1113:1113'
+            - '2113:2113'
+        volumes:
+            - type: volume
+              source: eventstore-volume-data
+              target: /var/lib/eventstore
+            - type: volume
+              source: eventstore-volume-logs
+              target: /var/log/eventstore
+
+    # identity.database:
+    #     container_name: identity.database
+    #     environment:
+    #         - POSTGRES_USER=${PG_DEFAULT_USER:-root}
+    #         - POSTGRES_PASSWORD=${PG_DEFAULT_PASSWORD:-root}
+    #         - POSTGRES_DB=${PG_DEFAULT_DATABASE:-root}
+    #     image: postgres:14.1-alpine
+    #     ports:
+    #         - 5432:5432
+    #     restart: unless-stopped
+    #     networks:
+    #         - local
+
+    # identity.database.admin:
+    #     container_name: identity.database.admin
+    #     depends_on:
+    #         - identity.database
+    #     environment:
+    #         PGADMIN_DEFAULT_EMAIL: a.debens@gmail.com
+    #         PGADMIN_DEFAULT_PASSWORD: admin
+    #     image: dpage/pgadmin4
+    #     links:
+    #         - identity.database
+    #     ports:
+    #         - 16543:80
+    #     restart: unless-stopped
+    #     networks:
+    #         - local
