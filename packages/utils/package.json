@@ -3,6 +3,9 @@
     "version": "0.0.1",
     "description": "> TODO: description",
     "license": "MIT",
+    "files": [
+        "build"
+    ],
     "scripts": {
         "build": "tsc -b",
         "compile": "yarn build --noEmit",

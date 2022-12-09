@@ -4,6 +4,11 @@
     "description": "> TODO: description",
     "license": "MIT",
     "main": "build/index.js",
+    "files": [
+        "typescript.yml",
+        "react.yml",
+        "react-native.yml"
+    ],
     "scripts": {
         "build": "tsc -b",
         "compile": "yarn build --noEmit",

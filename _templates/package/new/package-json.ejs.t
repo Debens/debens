@@ -7,6 +7,9 @@ to: packages/<%=name%>/package.json
   "description": "> TODO: description",
   "license": "MIT",
   "main": "build/index.js",
+  "files": [
+      "build"
+  ],
   "scripts": {
     "build": "tsc -b",
     "compile": "yarn build --noEmit",

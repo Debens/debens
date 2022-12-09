@@ -4,6 +4,9 @@
     "description": "> TODO: description",
     "license": "MIT",
     "main": "build/src/index.js",
+    "files": [
+        "build"
+    ],
     "scripts": {
         "build": "tsc -b",
         "compile": "yarn build --noEmit",
