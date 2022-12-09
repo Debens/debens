@@ -1,0 +1,9 @@
+
+# For more information about the Appfile, see: https://docs.fastlane.tools/advanced/#appfile
+
+Dotenv.load ".env.secrets"
+
+# iOS
+app_identifier ENV['MOGISAN_IOS_APP_IDENTIFIER']
+team_id ENV['MOGISAN_IOS_TEAM_ID']
+apple_id ENV['MOGISAN_APPLE_ID']

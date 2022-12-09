@@ -4,6 +4,8 @@ yarn.lock
 
 .jest
 
+.env.secrets
+
 .turbo
 
 # Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio,dotenv,fastlane,git,java,kotlin,macos,maven,osx,react,reactnative,sonarqube,storybookjs,visualstudiocode,xcode,yarn,node
@@ -51,7 +53,7 @@ gen-external-apklibs
 # with Android Studio 3.5.
 
 ### dotenv ###
-.env
+# .env
 
 ### fastlane ###
 # fastlane - A streamlined workflow tool for Cocoa deployment
