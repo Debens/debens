@@ -4,12 +4,6 @@
 
 ## Usage
 
-```
-const testingLibrary = require('@debens/react-native-fido');
-
-// TODO: DEMONSTRATE API
-```
-
 ## Debugging
 
 To expose service-identity running on localhost. You cannot use localhost to extract the AASA, it needs to be under SSL.

@@ -7,8 +7,4 @@ to: packages/<%=name%>/README.md
 
 ## Usage
 
-```
-const testingLibrary = require('@debens/<%=name%>');
 
-// TODO: DEMONSTRATE API
-```
