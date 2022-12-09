@@ -3,9 +3,9 @@ const package = require('./package');
 module.exports = {
     name: package.name,
     preset: 'react-native',
-    cacheDirectory: '<rootDir>/test/cache',
-    coverageDirectory: '<rootDir>/test/coverage',
-    coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/test'],
+    cacheDirectory: '<rootDir>/.jest/cache',
+    coverageDirectory: '<rootDir>/.jest/coverage',
+    coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/.jest'],
     // setupFiles: ['<rootDir>/jest/globals.ts'],
     coverageReporters: ['lcov', 'json', 'text'],
     coverageThreshold: {
@@ -22,8 +22,8 @@ module.exports = {
     },
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     reporters: ['default'],
-    // snapshotSerializers: ['<rootDir>/test/serializer.ts'],
-    testPathIgnorePatterns: ['\\.snap$', 'node_modules/', 'test/'],
+    // snapshotSerializers: ['<rootDir>/.jest/serializer.ts'],
+    testPathIgnorePatterns: ['\\.snap$', 'node_modules/', '.jest/'],
     transform: {
         '\\.[jt]sx?$': 'babel-jest',
     },

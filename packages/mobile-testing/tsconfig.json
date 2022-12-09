@@ -3,8 +3,8 @@
     "compilerOptions": {
         "composite": true,
         "strict": true,
-        "outDir": "build",
-        "rootDir": "src",
+        "outDir": "./build",
+        "rootDir": "./src",
         "moduleResolution": "node",
         "jsx": "react-native",
         "lib": ["es2017"],

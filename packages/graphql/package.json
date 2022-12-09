@@ -8,7 +8,7 @@
         "build": "tsc -b",
         "compile": "yarn build --noEmit",
         "clean": "yarn build --clean",
-        "test": "jest",
+        "test": "jest --passWithNoTests",
         "test:coverage": "yarn test --coverage",
         "test:ci": "yarn test:coverage --ci --maxWorkers 1",
         "lint": "eslint .",
@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@apollo/client": "^3.6.6",
+        "cross-fetch": "^3.1.5",
         "graphql": "^15.3.0"
     },
     "devDependencies": {

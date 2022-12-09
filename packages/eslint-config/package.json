@@ -7,10 +7,7 @@
     "scripts": {
         "build": "tsc -b",
         "compile": "yarn build --noEmit",
-        "clean": "yarn build --clean",
-        "test": "jest",
-        "test:coverage": "yarn test --coverage",
-        "test:ci": "yarn test:coverage --ci --maxWorkers 1"
+        "clean": "yarn build --clean"
     },
     "dependencies": {
         "@react-native-community/eslint-config": "^3.0.1",

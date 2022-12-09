@@ -1,9 +1,9 @@
 const package = require('./package');
 
 module.exports = {
-    cacheDirectory: '<rootDir>/test/cache',
-    coverageDirectory: '<rootDir>/test/coverage',
-    coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/test'],
+    cacheDirectory: '<rootDir>/.jest/cache',
+    coverageDirectory: '<rootDir>/.jest/coverage',
+    coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/.jest'],
     // setupFiles: ['<rootDir>/jest/globals.ts'],
     coverageReporters: ['lcov', 'json', 'text'],
     coverageThreshold: {
@@ -21,8 +21,8 @@ module.exports = {
     moduleFileExtensions: ['js', 'ts'],
     name: package.name,
     reporters: ['default'],
-    // snapshotSerializers: ['<rootDir>/test/serializer.ts'],
-    testPathIgnorePatterns: ['\\.snap$', 'node_modules/', 'test/'],
+    // snapshotSerializers: ['<rootDir>/.jest/serializer.ts'],
+    testPathIgnorePatterns: ['\\.snap$', 'node_modules/', '.jest/'],
     transform: {
         '\\.[jt]sx?$': 'babel-jest',
     },

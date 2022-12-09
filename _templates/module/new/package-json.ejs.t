@@ -11,7 +11,7 @@ to: modules/<%=name%>/package.json
     "build": "tsc -b",
     "compile": "yarn build --noEmit",
     "clean": "yarn build --clean",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:coverage": "yarn test --coverage",
     "test:ci": "yarn test:coverage --ci --maxWorkers 1",
     "lint": "eslint .",
