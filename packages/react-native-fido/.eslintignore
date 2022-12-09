@@ -2,3 +2,5 @@ ios
 android
 
 *.podspec
+
+build

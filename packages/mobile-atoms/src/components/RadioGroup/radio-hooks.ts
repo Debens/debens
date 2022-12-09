@@ -8,7 +8,7 @@ export enum RadioStatus {
     NotSelected = 'not-selected',
 }
 
-export const useRadioContext = <T extends unknown>() => {
+export const useRadioContext = <T>() => {
     const shared = useContext<RadioState<T>>(context as unknown as React.Context<RadioState<T>>);
 
     if (!shared) {

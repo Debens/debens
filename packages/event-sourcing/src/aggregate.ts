@@ -13,7 +13,7 @@ export abstract class Aggregate implements IAggregate {
     #history: IEvent[] = [];
     #changes: IEvent[] = [];
 
-    #version: number = 0;
+    #version = 0;
 
     get version(): number {
         return this.#version;
@@ -41,6 +41,7 @@ export abstract class Aggregate implements IAggregate {
 
     private handle(event: IEvent) {
         const { constructor } = Object.getPrototypeOf(event);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this[`on${constructor.name}`]?.(event);
     }

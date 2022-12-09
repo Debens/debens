@@ -1,9 +1,10 @@
 import { StorableEvent } from '@debens/event-sourcing';
+import { JSONType } from '@eventstore/db-client';
 
-type IdentityVerifiedData = {};
+export class IdentityVerified extends StorableEvent {
+    data: JSONType = {};
 
-export class IdentityVerified extends StorableEvent<IdentityVerifiedData> {
-    constructor(public readonly id: string, public readonly data: IdentityVerifiedData = {}) {
+    constructor(public readonly id: string) {
         super(id, 'identity');
     }
 }
