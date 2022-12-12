@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "install:pods": "cd ios ; arch -x86_64 bundle exec pod install",
+        "version": "react-native-version --skip-tag --never-amend",
         "start": "react-native start",
         "ios": "react-native run-ios --port 8082",
         "android": "react-native run-android --port 8082",
@@ -51,6 +52,7 @@
         "lint-staged": "^12.4.1",
         "metro-react-native-babel-preset": "^0.72.1",
         "react-native-typescript-transformer": "^1.2.13",
+        "react-native-version": "^4.0.0",
         "react-test-renderer": "18.1.0",
         "tslib": "^2.4.0",
         "typescript": "^4.8.3"
