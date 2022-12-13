@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "install:pods": "cd ios ; arch -x86_64 bundle exec pod install",
-        "version": "react-native-version --skip-tag --never-amend",
+        "version": "react-native-version --skip-tag",
         "start": "react-native webpack-start",
         "ios": "yarn ios:development",
         "ios:development": "react-native run-ios --scheme Development",

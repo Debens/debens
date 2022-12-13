@@ -1,0 +1,38 @@
+name: version
+
+on: workflow_dispatch
+
+jobs:
+    version:
+        name: Version
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+        # To use Remote Caching, uncomment the next lines and follow the steps below.
+        # env:
+        #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+        #  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 2
+
+            - name: Setup git config
+              run: |
+                  git config user.name "GitHub Actions Bot"
+                  git config user.email "<>"
+
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+                  cache: "yarn"
+
+            - name: Install dependencies
+              run: yarn
+
+            - name: Publish Alpha
+              env:
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+              run: yarn lerna version --conventional-commits --conventional-prerelease --create-release github --yes
