@@ -1,6 +1,6 @@
 {
     "name": "@debens/react-native-fido",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "> TODO: description",
     "homepage": "https://github.com/Debens",
     "author": "Andrew Debens",
@@ -24,16 +24,16 @@
         "lint:staged": "lint-staged"
     },
     "dependencies": {
-        "@debens/http": "^0.0.1",
-        "@debens/service-identity": "^0.0.1"
+        "@debens/http": "0.0.2-alpha.0",
+        "@debens/service-identity": "0.0.2-alpha.0"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@debens/config-typescript": "^0.0.1",
-        "@debens/eslint-config": "^0.0.1",
-        "@debens/mobile-testing": "^0.0.1",
+        "@debens/config-typescript": "0.0.2-alpha.0",
+        "@debens/eslint-config": "0.0.2-alpha.0",
+        "@debens/mobile-testing": "0.0.2-alpha.0",
         "@types/jest": "^27.4.1",
         "babel-jest": "^27.5.1",
         "jest": "^27.5.1",

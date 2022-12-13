@@ -1,6 +1,6 @@
 {
     "name": "@debens/mobile-testing",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "> TODO: description",
     "homepage": "",
     "license": "MIT",
@@ -17,16 +17,16 @@
         "test:ci": "yarn test:coverage --ci --maxWorkers 1"
     },
     "dependencies": {
+        "@debens/theme": "0.0.2-alpha.0",
         "@testing-library/jest-native": "^4.0.4",
         "@testing-library/react-native": "^9.1.0",
-        "@debens/theme": "^0.0.1",
         "deepmerge": "^4.2.2"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@debens/config-typescript": "^0.0.1",
+        "@debens/config-typescript": "0.0.2-alpha.0",
         "@types/jest": "^27.4.1",
         "babel-jest": "^27.5.1",
         "jest": "^27.5.1",

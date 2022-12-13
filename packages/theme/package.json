@@ -1,6 +1,6 @@
 {
     "name": "@debens/theme",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "core themes",
     "license": "MIT",
     "files": [
@@ -15,16 +15,16 @@
         "test:ci": "yarn test:coverage --ci --maxWorkers 1"
     },
     "dependencies": {
+        "@debens/utils": "0.0.2-alpha.0",
         "@styled-system/should-forward-prop": "^5.1.5",
-        "@debens/utils": "^0.0.1",
-        "styled-system": "^5.1.5",
-        "styled-components": "^5.3.5"
+        "styled-components": "^5.3.5",
+        "styled-system": "^5.1.5"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@debens/config-typescript": "^0.0.1",
+        "@debens/config-typescript": "0.0.2-alpha.0",
         "@types/jest": "^27.4.1",
         "babel-jest": "^27.5.1",
         "jest": "^27.5.1",

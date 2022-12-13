@@ -1,6 +1,6 @@
 {
     "name": "@debens/graphql",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "> TODO: description",
     "license": "MIT",
     "main": "build/index.js",
@@ -27,8 +27,8 @@
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@debens/config-typescript": "^0.0.1",
-        "@debens/eslint-config": "^0.0.1",
+        "@debens/config-typescript": "0.0.2-alpha.0",
+        "@debens/eslint-config": "0.0.2-alpha.0",
         "@types/jest": "^27.4.1",
         "babel-jest": "^27.5.1",
         "jest": "^27.5.1",

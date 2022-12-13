@@ -1,6 +1,6 @@
 {
     "name": "@debens/mobile-atoms",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "react-native atomic component",
     "license": "MIT",
     "files": [
@@ -25,10 +25,10 @@
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@debens/config-typescript": "^0.0.1",
-        "@debens/eslint-config": "^0.0.1",
-        "@debens/mobile-testing": "^0.0.1",
-        "@debens/utils": "^0.0.1",
+        "@debens/config-typescript": "0.0.2-alpha.0",
+        "@debens/eslint-config": "0.0.2-alpha.0",
+        "@debens/mobile-testing": "0.0.2-alpha.0",
+        "@debens/utils": "0.0.2-alpha.0",
         "@types/jest": "^27.4.1",
         "@types/styled-components-react-native": "^5.1.0",
         "@types/styled-system": "^5.1.14",

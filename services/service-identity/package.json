@@ -1,6 +1,6 @@
 {
     "name": "@debens/service-identity",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "identity service",
     "license": "MIT",
     "main": "build/src/index.js",
@@ -22,8 +22,8 @@
         "lint:staged": "lint-staged"
     },
     "dependencies": {
-        "@debens/event-sourcing": "^0.0.1",
-        "@debens/http": "^0.0.1",
+        "@debens/event-sourcing": "0.0.2-alpha.0",
+        "@debens/http": "0.0.2-alpha.0",
         "@nestjs/cli": "^9.1.5",
         "@nestjs/common": "^9.2.0",
         "@nestjs/config": "^2.2.0",
@@ -51,9 +51,9 @@
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@debens/config-typescript": "^0.0.1",
-        "@debens/eslint-config": "^0.0.1",
-        "@debens/utils": "^0.0.1",
+        "@debens/config-typescript": "0.0.2-alpha.0",
+        "@debens/eslint-config": "0.0.2-alpha.0",
+        "@debens/utils": "0.0.2-alpha.0",
         "@nestjs/schematics": "^9.0.0",
         "@nestjs/testing": "^9.0.0",
         "@types/amqplib": "^0.8.2",

@@ -1,6 +1,6 @@
 {
     "name": "@debens/config-typescript",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "base configuration for typescript",
     "license": "MIT",
     "main": "tsconfig.json",

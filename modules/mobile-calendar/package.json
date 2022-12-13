@@ -1,6 +1,6 @@
 {
     "name": "@debens/mobile-calendar",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "> TODO: description",
     "license": "MIT",
     "main": "build/index.js",
@@ -16,16 +16,16 @@
         "lint:staged": "lint-staged"
     },
     "dependencies": {
-        "@react-navigation/native-stack": "^6.2.5",
-        "@debens/graphql": "^0.0.1",
-        "@debens/mobile-atoms": "^0.0.1"
+        "@debens/graphql": "0.0.2-alpha.0",
+        "@debens/mobile-atoms": "0.0.2-alpha.0",
+        "@react-navigation/native-stack": "^6.2.5"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@debens/config-typescript": "^0.0.1",
-        "@debens/eslint-config": "^0.0.1",
+        "@debens/config-typescript": "0.0.2-alpha.0",
+        "@debens/eslint-config": "0.0.2-alpha.0",
         "@types/jest": "^27.4.1",
         "babel-jest": "^27.5.1",
         "jest": "^27.5.1",
