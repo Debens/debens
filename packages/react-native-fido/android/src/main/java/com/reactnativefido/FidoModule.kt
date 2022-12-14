@@ -18,17 +18,19 @@ class FidoModule(var reactContext: ReactApplicationContext) : ReactContextBaseJa
     private var name: String = "debens";
 
     private val mActivityEventListener: ActivityEventListener = object : BaseActivityEventListener() {
-        override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, intent: Intent) {
-            mPromise?.let {
-                when (resultCode) {
-                    Activity.RESULT_OK -> {
-                        when (requestCode) {
-                            REGISTER_REQUEST_CODE ->  complete(intent)
-                            SIGN_REQUEST_CODE ->  verify(intent)
+        override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, intent: Intent?) {
+            intent?.let {
+                mPromise?.let { promise ->
+                    when (resultCode) {
+                        Activity.RESULT_OK -> {
+                            when (requestCode) {
+                                REGISTER_REQUEST_CODE ->  complete(it)
+                                SIGN_REQUEST_CODE ->  verify(it)
+                            }
                         }
+                        Activity.RESULT_CANCELED -> promise.reject("FIDO", "Intent Cancelled")
+                        else -> promise.reject("FIDO", "Intent Failed")
                     }
-                    Activity.RESULT_CANCELED -> it.reject("FIDO", "Intent Cancelled")
-                    else -> it.reject("FIDO", "Intent Failed")
                 }
             }
         }
