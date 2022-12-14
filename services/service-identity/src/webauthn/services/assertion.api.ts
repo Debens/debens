@@ -1,9 +1,9 @@
 import http from '@debens/http';
 
-import { Tokens } from '../../auth/responses/tokens.dto';
-import { ChallengeIdentityDTO } from '../requests/challenge-identity.dto';
-import { VerifyIdentityDTO } from '../requests/verify-identity.dto';
-import { Assertion } from '../responses/assertion.dto';
+import type { Tokens } from '../../auth/responses/tokens.dto';
+import type { ChallengeIdentityDTO } from '../requests/challenge-identity.dto';
+import type { VerifyIdentityDTO } from '../requests/verify-identity.dto';
+import type { Assertion } from '../responses/assertion.dto';
 
 export class AssertionAPI {
     constructor(private readonly client = http.client) {}

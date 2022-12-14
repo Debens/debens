@@ -1,9 +1,9 @@
 import http from '@debens/http';
 
-import { Tokens } from '../../auth/responses/tokens.dto';
-import { CompleteIdentityDTO } from '../requests/complete-identity.dto';
-import { CreateIdentityDTO } from '../requests/create-identity.dto';
-import { Attestation } from '../responses/attestation.dto';
+import type { Tokens } from '../../auth/responses/tokens.dto';
+import type { CompleteIdentityDTO } from '../requests/complete-identity.dto';
+import type { CreateIdentityDTO } from '../requests/create-identity.dto';
+import type { Attestation } from '../responses/attestation.dto';
 
 export class AttestationAPI {
     constructor(private readonly client = http.client) {}
