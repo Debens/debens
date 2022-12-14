@@ -1,6 +1,7 @@
 platform :ios do    
     desc 'Fetch certificates and provisioning profiles'
     lane :certificates do
+        setup_ci if ENV['CI']
         match(app_identifier: ENV["MOGISAN_IOS_APP_IDENTIFIER"])
     end
 
