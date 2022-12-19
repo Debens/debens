@@ -1,7 +1,11 @@
 {
     "name": "@debens/mobile",
     "version": "0.0.2-alpha.0",
-    "private": true,
+    "files": [
+        "ios/release/assets",
+        "ios/release/main.jsbundle",
+        "android/app/build/generated/assets"
+    ],
     "scripts": {
         "install:pods": "cd ios ; arch -x86_64 bundle exec pod install",
         "version": "react-native-version --skip-tag",
