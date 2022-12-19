@@ -10,6 +10,20 @@ volumes:
     eventstore-volume-logs:
 
 services:
+    # identity:
+    #     image: debens/service-identity
+    #     container_name: 'identity'
+    #     ports:
+    #         - 3000:3000
+    #     env_file: .env
+    #     environment:
+    #         - RMQ_HOST=rabbitmq
+    #     depends_on:
+    #         rabbitmq:
+    #             condition: service_healthy
+    #     networks:
+    #         - local
+
     rabbitmq:
         container_name: rabbitmq
         healthcheck:

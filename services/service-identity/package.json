@@ -8,6 +8,10 @@
         "build"
     ],
     "scripts": {
+        "prepublish": "docker build --build-arg SCOPE=@debens/service-identity -f ../../node.dockerfile ../../ -t service-identity",
+        "publish": "npm-run-all publish:*",
+        "publish:tag": "docker tag service-identity debens/service-identity",
+        "publish:push": "docker push debens/service-identity",
         "launch": "node build/src/main.js",
         "start": "nest start",
         "start:watch": "yarn start --watch",
@@ -65,6 +69,7 @@
         "babel-jest": "^28.0.3",
         "jest": "^28.0.3",
         "lint-staged": "^12.4.1",
+        "npm-run-all": "^4.1.5",
         "prettier": "^2.6.2",
         "tslib": "^2.4.0",
         "typescript": "^4.6.3"
