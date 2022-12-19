@@ -1,60 +1,64 @@
 version: "3"
 
 networks:
-    debens:
+    local:
         driver: bridge
 
-services:
-    rabbitmq:
-        image: rabbitmq:3-management-alpine
-        container_name: "rabbitmq"
-        ports:
-            - 5672:5672
-            - 15672:15672
-        volumes:
-            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-        networks:
-            - debens
+volumes:
+    eventstore-volume-data:
+    eventstore-volume-logs:
 
-    service-identity:
-        container_name: "service-identity"
-        build:
-            context: .
-            dockerfile: node.dockerfile
-            args:
-                SCOPE: "@debens/service-identity"
-        restart: unless-stopped
+services:
+    identity:
+        image: debens/service-identity
+        container_name: "identity"
         ports:
             - 10800:3000
         env_file: services/service-identity/.env
         environment:
-            - PORT=3000
-        networks:
-            - debens
-
-    postgres:
-        image: postgres:14.1-alpine
-        container_name: "postgres"
-        restart: always
-        environment:
-            - POSTGRES_USER=root
-            - POSTGRES_PASSWORD=root
-            - POSTGRES_DB=root
-        ports:
-            - "5432:5432"
-        networks:
-            - debens
-
-    pgadmin-compose:
-        image: dpage/pgadmin4
-        container_name: "postgres-admin"
-        environment:
-            PGADMIN_DEFAULT_EMAIL: "a.debens@gmail.com"
-            PGADMIN_DEFAULT_PASSWORD: "admin"
-        ports:
-            - "16543:80"
+            - RMQ_HOST=rabbitmq
         depends_on:
-            - postgres
+            rabbitmq:
+                condition: service_healthy
         networks:
-            - debens
+            - local
+
+    rabbitmq:
+        container_name: rabbitmq
+        healthcheck:
+            test: ["CMD", "nc", "-z", "localhost", "5672"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        image: rabbitmq:3-management-alpine
+        ports:
+            - 5672:5672
+            - 15672:15672
+        networks:
+            - local
+        volumes:
+            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+    identity.eventstore:
+        container_name: identity.eventstore
+        image: ghcr.io/eventstore/eventstore:21.10.0-alpha-arm64v8
+        environment:
+            - EVENTSTORE_CLUSTER_SIZE=1
+            - EVENTSTORE_RUN_PROJECTIONS=All
+            - EVENTSTORE_START_STANDARD_PROJECTIONS=true
+            - EVENTSTORE_EXT_TCP_PORT=1113
+            - EVENTSTORE_HTTP_PORT=2113
+            - EVENTSTORE_INSECURE=true
+            - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
+            - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
+        ports:
+            - "1113:1113"
+            - "2113:2113"
+        volumes:
+            - type: volume
+              source: eventstore-volume-data
+              target: /var/lib/eventstore
+            - type: volume
+              source: eventstore-volume-logs
+              target: /var/log/eventstore
