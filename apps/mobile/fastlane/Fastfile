@@ -1,0 +1,48 @@
+platform :ios do    
+    desc 'Fetch certificates and provisioning profiles'
+    lane :certificates do
+        setup_ci if ENV['CI']
+        match(app_identifier: ENV["DEBENS_IOS_APP_IDENTIFIER"])
+    end
+
+    desc 'Fetch certificates. Build the iOS application.'
+    lane :build do
+        certificates
+        gym(
+            scheme: "Production",
+            configuration: "Release",
+            workspace: "./ios/mobile.xcworkspace",
+            export_method: "ad-hoc"
+        )
+    end
+
+    desc 'Fetch certificates, build and upload to App Center.'
+    lane :beta do
+        build
+        appcenter_upload(
+            api_token: ENV["DEBENS_IOS_APPCENTER_API_TOKEN"],
+            owner_name: "adebens-googlemail.com",
+            app_name: "debens-iOS",
+            ipa: ENV["DEBENS_IOS_APPCENTER_DISTRIBUTE_IPA"]
+        )
+    end
+end
+
+platform :android do
+    desc 'Build the Android application.'
+    lane :build do
+        gradle(task: 'clean', project_dir: 'android/')
+        gradle(task: 'assemble', build_type: 'ProductionRelease', project_dir: 'android/')
+    end
+
+    desc 'Build and upload to App Center.'
+    lane :beta do
+        build
+        appcenter_upload(
+            api_token: ENV["DEBENS_ANDROID_APPCENTER_API_TOKEN"],
+            owner_name: "adebens-googlemail.com",
+            app_name: "debens-Android",
+            apk: ENV["DEBENS_ANDROID_APPCENTER_DISTRIBUTE_APK"]
+        )
+    end
+end

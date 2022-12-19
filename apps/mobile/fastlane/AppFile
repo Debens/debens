@@ -1,0 +1,9 @@
+
+# For more information about the Appfile, see: https://docs.fastlane.tools/advanced/#appfile
+
+Dotenv.load ".env.secrets"
+
+# iOS
+app_identifier ENV['DEBENS_IOS_APP_IDENTIFIER']
+team_id ENV['DEBENS_IOS_TEAM_ID']
+apple_id ENV['DEBENS_APPLE_ID']

@@ -279,6 +279,7 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods (~> 1.11, >= 1.11.2)
+  dotenv
   fastlane
   fastlane-plugin-appcenter
 
