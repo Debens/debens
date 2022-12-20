@@ -26,7 +26,7 @@ interface FormValues {
     email: string;
 }
 
-const client = http.client.extend([http.modules.domain('https://596a-77-108-159-165.eu.ngrok.io')]);
+const client = http.client.extend([http.modules.domain('https://api.debens.app/identity')]);
 const apis = {
     assertion: new AssertionAPI(client),
     attestation: new AttestationAPI(client),
