@@ -1,5 +1,8 @@
 test
 
+.env
+tmp.xcconfig
+
 # OSX
 #
 .DS_Store

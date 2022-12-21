@@ -4,7 +4,7 @@ import { GestureResponderEvent, Pressable, PressableProps } from 'react-native';
 import { SemanticColor, SemanticSpacing, Theme } from '@debens/theme';
 import shouldForwardProp from '@styled-system/should-forward-prop';
 
-import Color from 'color';
+import isDarkColor from 'is-dark-color';
 import styled from 'styled-components/native';
 import * as system from 'styled-system';
 
@@ -106,7 +106,7 @@ export const Button: Button = props => {
     const button = Object.assign({}, variant, props);
 
     const color = useColor(button.backgroundColor?.toString() as SemanticColor);
-    const textColor = color && Color(color).isDark() ? '$text-on-color' : '$text-primary';
+    const textColor = color && isDarkColor(color) ? '$text-on-color' : '$text-primary';
 
     return (
         <ButtonFrame {...props}>
