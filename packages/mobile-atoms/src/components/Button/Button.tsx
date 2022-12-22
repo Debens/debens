@@ -4,7 +4,8 @@ import { GestureResponderEvent, Pressable, PressableProps } from 'react-native';
 import { SemanticColor, SemanticSpacing, Theme } from '@debens/theme';
 import shouldForwardProp from '@styled-system/should-forward-prop';
 
-import isDarkColor from 'is-dark-color';
+import { colord, extend } from 'colord';
+import mixPlugin from 'colord/plugins/mix';
 import styled from 'styled-components/native';
 import * as system from 'styled-system';
 
@@ -12,6 +13,8 @@ import { useColor } from '../../hooks/use-color/use-color';
 import { useSpacing } from '../../hooks/use-spacing/use-spacing';
 import * as custom from '../../utils/style-functions';
 import Paragraph from '../Paragraph/Paragraph';
+
+extend([mixPlugin]);
 
 type ButtonVariantToken = 'primary' | 'secondary';
 const variants: Record<ButtonVariantToken, StyledPressableProps> = {
@@ -49,6 +52,7 @@ const StyledButton = styled(Pressable).withConfig({
     ${system.position}
     ${custom.pressable}
     ${custom.debug}
+    ${custom.disabled}
 `;
 
 type VariantProps<V> = { variant?: keyof V };
@@ -106,7 +110,7 @@ export const Button: Button = props => {
     const button = Object.assign({}, variant, props);
 
     const color = useColor(button.backgroundColor?.toString() as SemanticColor);
-    const textColor = color && isDarkColor(color) ? '$text-on-color' : '$text-primary';
+    const textColor = color && colord(color).isDark() ? '$text-on-color' : '$text-primary';
 
     return (
         <ButtonFrame {...props}>
