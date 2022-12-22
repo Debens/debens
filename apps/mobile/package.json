@@ -44,7 +44,12 @@
         "react-native-safe-area-context": "^4.2.5",
         "react-native-screens": "^3.13.1",
         "react-native-svg": "^12.3.0",
-        "react-native-svg-transformer": "^0.20.0"
+        "react-native-svg-transformer": "^0.20.0",
+        "react-redux": "^8.0.5",
+        "redux": "^4.2.0",
+        "redux-dynamic-modules": "^5.2.3",
+        "redux-dynamic-modules-saga": "^5.2.3",
+        "redux-saga": "^1.2.2"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",

@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import http from '@debens/http';
 import {
     Break,
     Button,
@@ -10,8 +10,7 @@ import {
     Screen,
     SVG,
 } from '@debens/mobile-atoms';
-import { Assertion, Attestation } from '@debens/react-native-fido';
-import { AssertionAPI, AttestationAPI } from '@debens/service-identity';
+import auth from '@debens/mobile-auth';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -23,35 +22,46 @@ export interface LandingScreenProps {
 }
 
 interface FormValues {
+    type?: 'register' | 'login';
     email: string;
 }
 
-const client = http.client.extend([http.modules.domain('https://api.debens.app/identity')]);
-const apis = {
-    assertion: new AssertionAPI(client),
-    attestation: new AttestationAPI(client),
+const useSubmit = () => {
+    const dispatch = useDispatch();
+    return useCallback(
+        ({ email, type }: FormValues) => {
+            switch (type) {
+                case 'login':
+                    return void dispatch(auth.actions.login({ email }));
+                case 'register':
+                    return void dispatch(auth.actions.register({ email }));
+                default:
+                    return;
+            }
+        },
+        [dispatch],
+    );
 };
 
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
+    const { values, handleSubmit, setFieldValue, touched, errors, handleChange, handleBlur } =
+        useFormik<FormValues>({
+            initialValues: { email: '' },
+            onSubmit: useSubmit(),
+            validationSchema,
+        });
+
     const onRegister = useCallback(() => {
-        new Attestation(apis.attestation)
-            .register({ email: 'a.debens@gmail.com' })
-            .then(console.warn.bind(console))
-            .catch(console.error.bind(console));
-    }, []);
+        setFieldValue('type', 'register');
+        handleSubmit();
+    }, [setFieldValue, handleSubmit]);
 
-    const onSubmit = useCallback((values: FormValues) => {
-        new Assertion(apis.assertion)
-            .login({ email: values.email })
-            .then(console.warn.bind(console))
-            .catch(console.error.bind(console));
-    }, []);
+    const onLogin = useCallback(() => {
+        setFieldValue('type', 'login');
+        handleSubmit();
+    }, [setFieldValue, handleSubmit]);
 
-    const { values, handleSubmit, touched, errors, handleChange, handleBlur } = useFormik<FormValues>({
-        initialValues: { email: '' },
-        onSubmit,
-        validationSchema,
-    });
+    const loading = useSelector(auth.selectors.loading);
 
     return (
         <Screen bottom="$layer-01">
@@ -76,10 +86,10 @@ export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => 
                     error={touched.email ? errors.email : undefined}
                 />
                 <Break />
-                <Button onPress={onRegister} marginBottom="small">
+                <Button onPress={onRegister} marginBottom="small" disabled={loading}>
                     Sign up
                 </Button>
-                <Button variant="secondary" onPress={handleSubmit}>
+                <Button variant="secondary" onPress={onLogin} disabled={loading}>
                     Login
                 </Button>
             </Layer>
