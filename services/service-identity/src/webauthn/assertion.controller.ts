@@ -1,9 +1,9 @@
+import { AuthService } from '@debens/nestjs-auth';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { WebAuthnCredential } from '@teamhanko/hanko-node';
 
-import { AuthService } from '../auth/auth.service';
 import { Tokens } from '../auth/responses/tokens.dto';
 
 import { Assert } from './commands/assert.command';

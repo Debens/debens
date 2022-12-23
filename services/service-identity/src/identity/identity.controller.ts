@@ -1,7 +1,6 @@
+import { AccessTokenGuard } from '@debens/nestjs-auth';
 import { Controller, Get, Inject, Param, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
-
-import { AccessTokenGuard } from '../auth/guards/access-token.guard';
 
 import { IdentityAggregate } from './identity.aggregate';
 import { IdentityRepository } from './identity.repository';

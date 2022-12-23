@@ -1,8 +1,7 @@
 import { EventSourcingModule } from '@debens/event-sourcing';
+import { AuthModule } from '@debens/nestjs-auth';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-
-import { AuthModule } from '../auth/auth.module';
 
 import { CreateIdentityHandler } from './handlers/create-identity.handler';
 import { VerifyIdentityHandler } from './handlers/verify-identity.handler';

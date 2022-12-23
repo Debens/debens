@@ -1,7 +1,7 @@
+import { AuthModule } from '@debens/nestjs-auth';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 
-import { AuthModule } from '../auth/auth.module';
 import { HankoModule } from '../hanko/hanko.module';
 import { IdentityModule } from '../identity/identity.module';
 

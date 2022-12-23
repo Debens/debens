@@ -19,7 +19,11 @@
             "@debens/*": ["packages/*/src"]
         }
     },
-    "references": [{ "path": "../../packages/http" }, { "path": "../../packages/event-sourcing" }],
+    "references": [
+        { "path": "../../packages/http" },
+        { "path": "../../packages/nestjs-auth" },
+        { "path": "../../packages/event-sourcing" }
+    ],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"],
     "include": ["src", "src/**/*.json", "index.ts"]
 }
