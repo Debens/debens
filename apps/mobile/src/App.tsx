@@ -4,8 +4,8 @@ import { enableFreeze, enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 
 import { GhostProvider } from '@debens/mobile-atoms';
+import { NavigationProvider } from '@debens/mobile-navigation';
 import { ThemeProvider, themes } from '@debens/theme';
-import { NavigationContainer } from '@react-navigation/native';
 
 import AppNavigator from './navigation/AppNavigator';
 import store from './redux/store';
@@ -18,9 +18,9 @@ export const App = () => (
         <GhostProvider>
             <ThemeProvider theme={themes.light}>
                 <SafeAreaProvider>
-                    <NavigationContainer>
+                    <NavigationProvider>
                         <AppNavigator />
-                    </NavigationContainer>
+                    </NavigationProvider>
                 </SafeAreaProvider>
             </ThemeProvider>
         </GhostProvider>

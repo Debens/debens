@@ -46,7 +46,7 @@ const useSubmit = () => {
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
     const { values, handleSubmit, setFieldValue, touched, errors, handleChange, handleBlur } =
         useFormik<FormValues>({
-            initialValues: { email: '' },
+            initialValues: { email: 'a.debens@gmail.com' },
             onSubmit: useSubmit(),
             validationSchema,
         });

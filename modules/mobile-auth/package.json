@@ -17,7 +17,6 @@
     },
     "dependencies": {
         "@debens/http": "0.0.2-alpha.0",
-        "@debens/mobile-atoms": "0.0.2-alpha.0",
         "@debens/react-native-fido": "0.0.2-alpha.0",
         "@debens/service-identity": "0.0.2-alpha.0",
         "redux-actions": "^2.6.5",

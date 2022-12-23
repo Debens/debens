@@ -1,5 +1,7 @@
+import { SessionState, SessionStatus } from './session/state';
+
 export interface AuthState {
-    loading: boolean;
+    session: SessionState;
 }
 
 export interface AuthModuleState {
@@ -8,6 +10,8 @@ export interface AuthModuleState {
 
 export const INITIAL_STATE: AuthModuleState = {
     auth: {
-        loading: false,
+        session: {
+            status: SessionStatus.Unauthenticated,
+        },
     },
 };

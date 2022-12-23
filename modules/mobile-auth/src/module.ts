@@ -1,13 +1,17 @@
+import { combineReducers } from 'redux';
 import { ISagaModule } from 'redux-dynamic-modules-saga';
 
-import reducer from './reducer';
-import { sagas } from './saga';
+import login from './login';
+import registration from './registration';
+import session from './session';
 import { AuthModuleState } from './state';
 
 export const module: ISagaModule<AuthModuleState> = {
     id: 'auth',
     reducerMap: {
-        auth: reducer,
+        auth: combineReducers({
+            session: session.reducer,
+        }),
     },
-    sagas: [sagas.start],
+    sagas: [login.saga.start, registration.saga.start],
 };

@@ -3,8 +3,10 @@ import React, { memo } from 'react';
 import { DynamicModuleLoader } from 'redux-dynamic-modules';
 
 import auth from '@debens/mobile-auth';
+import navigation from '@debens/mobile-navigation';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { module } from '../../module';
 import LandingScreen, { LandingScreenNavigationProps } from '../../screens/LandingScreen/LandingScreen';
 import { OnboardingRoute } from '../routes';
 
@@ -27,7 +29,7 @@ interface OnboardingNavigatorProps {
 }
 
 export const OnboardingNavigator: React.FunctionComponent<OnboardingNavigatorProps> = props => (
-    <DynamicModuleLoader modules={[auth.module]}>
+    <DynamicModuleLoader modules={[module, auth.module, navigation.module]}>
         <Stack.Navigator initialRouteName={OnboardingRoute.Landing}>
             <Stack.Group screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={OnboardingRoute.Landing}>
