@@ -13,7 +13,7 @@ export class AuthService {
 
     getAccessToken(user: string) {
         return this.jwtService.sign(
-            { user },
+            { sub: user },
             {
                 secret: this.config.access.secret,
                 expiresIn: `${this.config.access.expiry}s`,
