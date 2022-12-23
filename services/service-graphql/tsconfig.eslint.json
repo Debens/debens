@@ -1,6 +1,6 @@
 {
     "extends": "./tsconfig.json",
-    "references": [],
+    "references": [{ "path": "../../packages/nestjs-auth" }],
     "exclude": ["node_modules", "test/**/*", "build/**/*"],
     "include": ["src/**/*"]
 }

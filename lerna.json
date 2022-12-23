@@ -5,6 +5,7 @@
     "parallel": false,
     "packages": ["apps/*", "modules/*", "packages/*", "services/*"],
     "ignoreChanges": ["**/__fixtures__/**", "**.spec.**", "**/*.md"],
+    "nohoist": ["**/@nestjs", "**/@nestjs/**"],
     "command": {
         "version": {
             "message": "chore(release): version [skip ci]",

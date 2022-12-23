@@ -7,8 +7,14 @@
         "build"
     ],
     "scripts": {
-        "start": "ts-node src/server.ts",
-        "build": "tsc -b",
+        "prepublish": "docker build --build-arg SCOPE=@debens/service-identity -f ../../node.dockerfile ../../ -t service-identity",
+        "publish": "npm-run-all publish:*",
+        "publish:tag": "docker tag service-identity debens/service-identity",
+        "publish:push": "docker push debens/service-identity",
+        "launch": "node build/src/main.js",
+        "start": "nest start",
+        "start:watch": "yarn start --watch",
+        "build": "nest build",
         "compile": "yarn build --noEmit",
         "clean": "yarn build --clean",
         "test": "jest --passWithNoTests",
@@ -19,15 +25,14 @@
         "lint:staged": "lint-staged"
     },
     "dependencies": {
-        "@graphql-modules/core": "^0.7.17",
-        "apollo-server": "^3.8.1",
-        "dotenv": "^16.0.1",
-        "graphql": "^15.3.0",
-        "graphql-modules": "^2.0.0",
-        "reflect-metadata": "^0.1.13",
-        "rxjs": "^7.5.7",
-        "ts-node": "^10.8.1",
-        "type-graphql": "^1.1.1"
+        "@debens/nestjs-auth": "^0.0.1",
+        "@nestjs/apollo": "^10.1.7",
+        "@nestjs/cli": "^9.1.5",
+        "@nestjs/config": "^2.2.0",
+        "@nestjs/graphql": "^10.1.7",
+        "apollo-server-express": "^3.11.1",
+        "graphql": "^16.6.0",
+        "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",
