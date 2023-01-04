@@ -8,7 +8,7 @@ import { supervise } from '@debens/toolkit-redux-saga';
 
 import session from '../session';
 
-import * as actions from './actions';
+import * as actions from './login.actions';
 
 const client = http.client.extend([http.modules.domain('https://api.debens.app/identity')]);
 const api = new AssertionAPI(client);

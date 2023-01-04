@@ -3,9 +3,9 @@ import { handleActions } from 'redux-actions';
 
 import { INITIAL_STATE } from '../state';
 
-import * as actions from './actions';
-import * as selectors from './selectors';
-import { SessionState, SessionStatus } from './state';
+import * as actions from './session.actions';
+import * as selectors from './session.selectors';
+import { SessionState, SessionStatus } from './session.state';
 
 const status = handleActions<SessionStatus>(
     {

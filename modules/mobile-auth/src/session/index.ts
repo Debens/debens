@@ -1,6 +1,8 @@
-import * as actions from './actions';
-import reducer from './reducer';
-import * as selectors from './selectors';
+import * as actions from './session.actions';
+import reducer from './session.reducer';
+import * as selectors from './session.selectors';
+
+export * from './session.state'
 
 export const session = { actions, selectors, reducer };
 

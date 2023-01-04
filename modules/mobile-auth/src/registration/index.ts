@@ -1,5 +1,5 @@
-import * as actions from './actions';
-import saga from './saga';
+import * as actions from './registration.actions';
+import saga from './registration.saga';
 
 export const registration = { actions, saga };
 

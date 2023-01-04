@@ -2,7 +2,7 @@ import { createSelector, Selector } from 'reselect';
 
 import { AuthModuleState } from '../state';
 
-import { SessionState, SessionStatus } from './state';
+import { SessionState, SessionStatus } from './session.state';
 
 export const session: Selector<AuthModuleState, SessionState> = state => state.auth.session;
 

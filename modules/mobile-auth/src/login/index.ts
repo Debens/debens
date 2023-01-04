@@ -1,5 +1,5 @@
-import * as actions from './actions';
-import saga from './saga';
+import * as actions from './login.actions';
+import saga from './login.saga';
 
 export const session = { actions, saga };
 
