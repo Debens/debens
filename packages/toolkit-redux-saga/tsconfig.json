@@ -4,9 +4,7 @@
         "composite": true,
         "strict": true,
         "outDir": "build",
-        "rootDir": "src",
         "moduleResolution": "node",
-        "jsx": "react-native",
         "lib": ["es2017"],
         "target": "esnext",
         "allowSyntheticDefaultImports": true,
@@ -14,16 +12,10 @@
         "isolatedModules": true,
         "baseUrl": "../../",
         "paths": {
-            "@debens/*": ["packages/*/src", "services/*/src"]
+            "@debens/*": ["packages/*/src"]
         }
     },
-    "references": [
-        { "path": "../../packages/http" },
-        { "path": "../../packages/mobile-atoms" },
-        { "path": "../../packages/react-native-fido" },
-        { "path": "../../packages/toolkit-redux-saga" },
-        { "path": "../../services/service-identity" }
-    ],
+    "references": [],
     "include": ["src", "index.ts"],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"]
 }

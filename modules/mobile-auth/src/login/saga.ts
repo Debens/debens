@@ -4,6 +4,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import http from '@debens/http';
 import { Assertion } from '@debens/react-native-fido';
 import { AssertionAPI, Tokens } from '@debens/service-identity';
+import { supervise } from '@debens/toolkit-redux-saga';
 
 import session from '../session';
 
@@ -13,23 +14,21 @@ const client = http.client.extend([http.modules.domain('https://api.debens.app/i
 const api = new AssertionAPI(client);
 const service = new Assertion(api);
 
-export const saga = {
-    *start() {
-        yield all([takeLatest(actions.LOGIN, saga.login)]);
-    },
+export function* start() {
+    yield all([supervise(takeLatest)(actions.LOGIN, login)]);
+}
 
-    *login({ payload }: Action<actions.ILoginPayload>) {
-        try {
-            yield put(session.actions.loading());
+function* login({ payload }: Action<actions.ILoginPayload>) {
+    try {
+        yield put(session.actions.loading());
 
-            const response: Tokens = yield call([service, 'login'], payload);
-            console.warn(response);
+        const response: Tokens = yield call([service, 'login'], payload);
+        console.warn(response);
 
-            yield put(session.actions.started());
-        } catch (_error) {
-            yield put(session.actions.error());
-        }
-    },
-};
+        yield put(session.actions.started());
+    } catch (_error) {
+        yield put(session.actions.error());
+    }
+}
 
-export default saga;
+export default start;

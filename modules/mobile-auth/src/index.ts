@@ -7,7 +7,7 @@ const actions = {
     login: login.actions.login,
     register: registration.actions.register,
     LOGGED_IN: session.actions.STARTED,
-    LOGGED_PUT: session.actions.STOPPED,
+    LOGGED_OUT: session.actions.STOPPED,
 };
 
 const selectors = {
