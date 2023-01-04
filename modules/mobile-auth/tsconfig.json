@@ -19,9 +19,9 @@
     },
     "references": [
         { "path": "../../packages/http" },
-        { "path": "../../packages/mobile-atoms" },
+        { "path": "../mobile-messaging" },
         { "path": "../../packages/react-native-fido" },
-        { "path": "../../packages/toolkit-redux-saga" },
+        { "path": "../../packages/toolkit-redux" },
         { "path": "../../services/service-identity" }
     ],
     "include": ["src", "index.ts"],

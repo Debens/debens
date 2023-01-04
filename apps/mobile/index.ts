@@ -1,3 +1,5 @@
+import 'react-native-get-random-values';
+
 import { AppRegistry } from 'react-native';
 
 import { Script, ScriptManager } from '@callstack/repack/client';

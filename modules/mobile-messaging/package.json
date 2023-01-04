@@ -1,6 +1,6 @@
 {
-    "name": "@debens/mobile-onboarding",
-    "version": "0.0.2-alpha.0",
+    "name": "@debens/mobile-messaging",
+    "version": "0.0.1",
     "description": "> TODO: description",
     "license": "MIT",
     "main": "build/index.js",
@@ -16,18 +16,13 @@
         "lint:staged": "lint-staged"
     },
     "dependencies": {
-        "@debens/http": "0.0.2-alpha.0",
-        "@debens/mobile-atoms": "0.0.2-alpha.0",
-        "@debens/mobile-auth": "0.0.1",
-        "@debens/mobile-navigation": "0.0.1",
+        "@debens/mobile-molecules": "0.0.1",
         "@debens/toolkit-redux": "0.0.1",
-        "@react-navigation/native-stack": "^6.2.5",
-        "formik": "^2.2.9",
         "redux-actions": "^2.6.5",
         "redux-dynamic-modules": "^5.2.3",
         "redux-dynamic-modules-saga": "^5.2.3",
         "redux-saga": "^1.2.2",
-        "yup": "^0.32.11"
+        "reselect": "^4.1.7"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",

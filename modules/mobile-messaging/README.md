@@ -1,4 +1,4 @@
-# `@debens/toolkit-redux-saga`
+# `@debens/mobile-messaging`
 
 > TODO: description
 

@@ -1,4 +1,4 @@
-import { SessionState, SessionStatus } from './session';
+import { SessionState, SessionStatus } from './session/session.state';
 
 export interface AuthState {
     session: SessionState;

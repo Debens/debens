@@ -4,6 +4,7 @@ import { enableFreeze, enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 
 import { GhostProvider } from '@debens/mobile-atoms';
+import { SnackbarView } from '@debens/mobile-messaging';
 import { NavigationProvider } from '@debens/mobile-navigation';
 import { ThemeProvider, themes } from '@debens/theme';
 
@@ -19,7 +20,9 @@ export const App = () => (
             <ThemeProvider theme={themes.light}>
                 <SafeAreaProvider>
                     <NavigationProvider>
-                        <AppNavigator />
+                        <SnackbarView>
+                            <AppNavigator />
+                        </SnackbarView>
                     </NavigationProvider>
                 </SafeAreaProvider>
             </ThemeProvider>

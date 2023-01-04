@@ -1,9 +1,8 @@
-import React, { memo } from 'react';
-
-import { DynamicModuleLoader } from 'redux-dynamic-modules';
+import React from 'react';
 
 import auth from '@debens/mobile-auth';
 import navigation from '@debens/mobile-navigation';
+import { withModules } from '@debens/toolkit-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { module } from '../../module';
@@ -29,15 +28,13 @@ interface OnboardingNavigatorProps {
 }
 
 export const OnboardingNavigator: React.FunctionComponent<OnboardingNavigatorProps> = props => (
-    <DynamicModuleLoader modules={[module, auth.module, navigation.module]}>
-        <Stack.Navigator initialRouteName={OnboardingRoute.Landing}>
-            <Stack.Group screenOptions={{ headerShown: false }}>
-                <Stack.Screen name={OnboardingRoute.Landing}>
-                    {() => <LandingScreen onSignUp={props.onDone} />}
-                </Stack.Screen>
-            </Stack.Group>
-        </Stack.Navigator>
-    </DynamicModuleLoader>
+    <Stack.Navigator initialRouteName={OnboardingRoute.Landing}>
+        <Stack.Group screenOptions={{ headerShown: false }}>
+            <Stack.Screen name={OnboardingRoute.Landing}>
+                {() => <LandingScreen onSignUp={props.onDone} />}
+            </Stack.Screen>
+        </Stack.Group>
+    </Stack.Navigator>
 );
 
-export default memo(OnboardingNavigator);
+export default withModules([module, auth.module, navigation.module])(OnboardingNavigator);

@@ -4,26 +4,19 @@
         "composite": true,
         "strict": true,
         "outDir": "build",
-        "rootDir": "src",
         "moduleResolution": "node",
-        "jsx": "react-native",
         "lib": ["es2017"],
+        "jsx": "react",
         "target": "esnext",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "isolatedModules": true,
         "baseUrl": "../../",
         "paths": {
-            "@debens/*": ["packages/*/src", "services/*/src"]
+            "@debens/*": ["packages/*/src"]
         }
     },
-    "references": [
-        { "path": "../mobile-auth" },
-        { "path": "../mobile-navigation" },
-        { "path": "../../packages/http" },
-        { "path": "../../packages/mobile-atoms" },
-        { "path": "../../packages/toolkit-redux" }
-    ],
+    "references": [],
     "include": ["src", "index.ts"],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"]
 }

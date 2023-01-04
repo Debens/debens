@@ -5,6 +5,7 @@
         "strict": true,
         "outDir": "build",
         "moduleResolution": "node",
+        "jsx": "react-native",
         "lib": ["es2017"],
         "target": "esnext",
         "allowSyntheticDefaultImports": true,
@@ -15,7 +16,7 @@
             "@debens/*": ["packages/*/src"]
         }
     },
-    "references": [],
-    "include": ["src", "index.ts"],
-    "exclude": ["node_modules", "*.config.*", "*.spec.*"]
+    "references": [{ "path": "../mobile-atoms" }, { "path": "../mobile-testing" }],
+    "exclude": ["node_modules", "*.config.*", "*.spec.*"],
+    "include": ["src", "index.ts"]
 }

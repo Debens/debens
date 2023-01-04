@@ -23,4 +23,7 @@ export { default as ThematicBreak } from './components/ThematicBreak/ThematicBre
 
 export * from './components/RadioGroup/radio-hooks';
 
+export * from './utils/easing';
+export * from './utils/speeds';
+
 export { EASING };

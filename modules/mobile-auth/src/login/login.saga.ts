@@ -2,9 +2,10 @@ import { Action } from 'redux-actions';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import http from '@debens/http';
+import messaging from '@debens/mobile-messaging';
 import { Assertion } from '@debens/react-native-fido';
 import { AssertionAPI, Tokens } from '@debens/service-identity';
-import { supervise } from '@debens/toolkit-redux-saga';
+import { supervise } from '@debens/toolkit-redux';
 
 import session from '../session';
 
@@ -26,7 +27,9 @@ function* login({ payload }: Action<actions.ILoginPayload>) {
         console.warn(response);
 
         yield put(session.actions.started());
-    } catch (_error) {
+    } catch (error: unknown) {
+        yield put(messaging.actions.snackbar({ message: `${error}`, type: 'error' }));
+
         yield put(session.actions.error());
     }
 }

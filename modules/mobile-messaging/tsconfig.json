@@ -17,13 +17,7 @@
             "@debens/*": ["packages/*/src", "services/*/src"]
         }
     },
-    "references": [
-        { "path": "../mobile-auth" },
-        { "path": "../mobile-navigation" },
-        { "path": "../../packages/http" },
-        { "path": "../../packages/mobile-atoms" },
-        { "path": "../../packages/toolkit-redux" }
-    ],
+    "references": [{ "path": "../../packages/mobile-molecules" }, { "path": "../../packages/toolkit-redux" }],
     "include": ["src", "index.ts"],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"]
 }

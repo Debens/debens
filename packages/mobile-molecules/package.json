@@ -1,9 +1,8 @@
 {
-    "name": "@debens/toolkit-redux-saga",
+    "name": "@debens/mobile-molecules",
     "version": "0.0.1",
-    "description": "> TODO: description",
+    "description": "react-native atomic component",
     "license": "MIT",
-    "main": "build/index.js",
     "files": [
         "build"
     ],
@@ -14,12 +13,12 @@
         "test": "jest --passWithNoTests",
         "test:coverage": "yarn test --coverage",
         "test:ci": "yarn test:coverage --ci --maxWorkers 1",
-        "lint": "eslint .",
+        "lint": "eslint src",
         "lint:fix": "yarn lint --fix",
         "lint:staged": "lint-staged"
     },
     "dependencies": {
-        "redux-saga": "^1.2.2"
+        "@debens/mobile-atoms": "0.0.2-alpha.0"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",
@@ -27,9 +26,10 @@
         "@babel/preset-typescript": "^7.16.7",
         "@debens/config-typescript": "0.0.2-alpha.0",
         "@debens/eslint-config": "0.0.2-alpha.0",
+        "@debens/mobile-testing": "0.0.2-alpha.0",
         "@types/jest": "^27.4.1",
-        "babel-jest": "^27.5.1",
-        "jest": "^27.5.1",
+        "babel-jest": "^28.0.3",
+        "jest": "^28.0.3",
         "lint-staged": "^12.4.1",
         "prettier": "^2.6.2",
         "tslib": "^2.4.0",
