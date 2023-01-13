@@ -8,24 +8,29 @@
     "scripts": {
         "install:pods": "cd ios ; arch -x86_64 bundle exec pod install",
         "version": "react-native-version --skip-tag",
-        "start": "react-native start",
+        "start": "react-native webpack-start --port 8082 --webpackConfig .webpack/webpack.config.mjs",
         "ios": "react-native run-ios --port 8082",
         "ios:release": "bundle exec fastlane ios beta",
         "android": "react-native run-android --port 8082",
         "android:release": "bundle exec fastlane android beta",
         "bundle:ios": "yarn bundle:base --platform ios --bundle-output ios/main.jsbundle --assets-dest ./ios/build/assets",
         "bundle:android": "yarn bundle:base --platform android",
-        "bundle:base": "react-native bundle --entry-file index.ts --dev false",
+        "bundle:base": "react-native webpack-bundle --entry-file index.ts --dev false",
         "test": "jest --passWithNoTests",
         "lint": "eslint .",
         "lint:fix": "yarn lint --fix",
         "lint:staged": "lint-staged"
     },
     "dependencies": {
+        "@callstack/repack": "^3.0.1",
+        "@react-navigation/native": "^6.0.6",
+        "@react-navigation/native-stack": "^6.2.5",
+        "babel-loader": "^8.2.5",
         "color": "^4.2.3",
         "react": "18.1.0",
         "react-native": "0.70.1",
         "react-native-codegen": "^0.69.1",
+        "react-native-gesture-handler": "^2.8.0",
         "react-native-get-random-values": "^1.8.0",
         "react-native-haptic-feedback": "^1.14.0",
         "react-native-reanimated": "3.0.0-rc.3",
@@ -35,7 +40,9 @@
         "react-native-svg-transformer": "^0.20.0",
         "seedrandom": "^3.0.5",
         "shuffle-seed": "^1.1.6",
-        "uuid": "^9.0.0"
+        "terser-webpack-plugin": "^5.3.6",
+        "uuid": "^9.0.0",
+        "webpack": "^5.75.0"
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { ScrollView, StyleSheet, useWindowDimensions } from 'react-native';
 
 import { Grid, Screen, SVG, Toolbar } from '@debens/mobile-atoms';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 
 import FacePreview from '../components/FacePreview/FacePreview';
 import { useFaceNames, useFaceSource } from '../components/FaceProvider/face-hooks';

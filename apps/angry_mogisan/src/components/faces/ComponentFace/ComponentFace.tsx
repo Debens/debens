@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 
-import { ComponentFace, ComponentProfileName } from '../../../face-book/model';
+import { ComponentFaceDef, ComponentProfileName } from '../../../face-book/model';
 import CardFace from '../CardFace/CardFace';
 import DebugFace from '../DebugFace/DebugFace';
 import { BaseFaceProps } from '../model';
 
-interface ComponentFaceProps extends ComponentFace, BaseFaceProps {}
+interface ComponentFaceProps extends ComponentFaceDef, BaseFaceProps {}
 
 const ComponentFace: React.FunctionComponent<ComponentFaceProps> = props => {
     const { component, emotion, ...grid } = props;

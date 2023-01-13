@@ -28,5 +28,8 @@
     },
     "dependencies": {
         "@nestjs/microservices": "9.2.0"
+    },
+    "resolutions": {
+        "react-native": "0.70.1"
     }
 }

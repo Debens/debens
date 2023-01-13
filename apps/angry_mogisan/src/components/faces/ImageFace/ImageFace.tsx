@@ -3,10 +3,10 @@ import { Image, StyleSheet } from 'react-native';
 
 import { Grid } from '@debens/mobile-atoms';
 
-import { ImageFace } from '../../../face-book/model';
+import { ImageFaceDef } from '../../../face-book/model';
 import { BaseFaceProps } from '../model';
 
-interface ImageFaceProps extends ImageFace, BaseFaceProps {}
+interface ImageFaceProps extends ImageFaceDef, BaseFaceProps {}
 
 const useScale = (scaling: number) => {
     /* Android doesn't allow image view clipping without native methods. */

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
 import { Grid, Paragraph, RadioGroup, Screen, SVG, Toolbar } from '@debens/mobile-atoms';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 
 import { useCurrentFacePackType } from '../components/FaceProvider/face-hooks';
 import FaceRadioOption from '../components/FaceRadioOption/FaceRadioOption';

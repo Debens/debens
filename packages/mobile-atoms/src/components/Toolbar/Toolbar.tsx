@@ -20,7 +20,6 @@ const ToolbarItem: React.FunctionComponent<ToolbarItemProps> = props => {
 };
 
 ToolbarItem.defaultProps = {
-    hitSlop: 'large',
     activeColor: '$layer-01',
     borderRadius: 'xlarge',
     padding: 'small',

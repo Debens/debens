@@ -1,11 +1,13 @@
 export enum AppRoute {
     Onboarding = 'onboarding',
     Home = 'home',
+    AngryMogisan = 'angry_mogisan',
 }
 
 interface AppParamList {
     [AppRoute.Onboarding]: undefined;
     [AppRoute.Home]: undefined;
+    [AppRoute.AngryMogisan]: undefined;
 }
 
 /* eslint-disable @typescript-eslint/no-namespace, @typescript-eslint/no-empty-interface */

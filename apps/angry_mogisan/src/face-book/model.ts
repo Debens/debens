@@ -7,7 +7,7 @@ export enum FaceType {
     Component = 'component',
 }
 
-export interface ImageFace {
+export interface ImageFaceDef {
     type: FaceType.Image;
     emotions: Record<FaceEmotion, ImageSourcePropType>;
 }
@@ -17,9 +17,9 @@ export enum ComponentProfileName {
     Card = 'card',
 }
 
-export interface ComponentFace {
+export interface ComponentFaceDef {
     type: FaceType.Component;
     component: ComponentProfileName;
 }
 
-export type Face = ImageFace | ComponentFace;
+export type Face = ImageFaceDef | ComponentFaceDef;

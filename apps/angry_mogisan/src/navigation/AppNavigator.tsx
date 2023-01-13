@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 
 export const AppNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName={AppRoute.Landing}>
+        <Stack.Navigator initialRouteName={AppRoute.Game}>
             <Stack.Group screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={AppRoute.Landing} component={LandingScreen} />
                 <Stack.Screen name={AppRoute.Game} component={GameScreen} />

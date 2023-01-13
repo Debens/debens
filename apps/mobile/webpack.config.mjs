@@ -1,6 +1,7 @@
-const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
-const Repack = require('@callstack/repack');
+import path from 'path';
+import TerserPlugin from 'terser-webpack-plugin';
+import * as Repack from '@callstack/repack';
+import URL from 'url';
 
 /**
  * More documentation, installation, usage, motivation and differences with Metro is available at:
@@ -17,36 +18,28 @@ const Repack = require('@callstack/repack');
  * @param env Environment options passed from either Webpack CLI or React Native CLI
  *            when running with `react-native start/bundle`.
  */
-module.exports = env => {
+export default env => {
     const {
         mode = 'development',
-        context = __dirname,
+        context = Repack.getDirname(import.meta.url),
         entry = './index.ts',
-        platform,
+        platform = process.env.PLATFORM,
         minimize = mode === 'production',
         devServer = undefined,
         bundleFilename = undefined,
         sourceMapFilename = undefined,
         assetsPath = undefined,
-        reactNativePath = require.resolve('react-native'),
+        reactNativePath = new URL('./node_modules/react-native', import.meta.url).pathname,
     } = env;
+    const dirname = Repack.getDirname(import.meta.url);
 
     if (!platform) {
         throw new Error('Missing platform');
     }
 
-    /**
-     * Using Module Federation might require disabling hmr.
-     * Uncomment below to set `devServer.hmr` to `false`.
-     *
-     * Keep in mind that `devServer` object is not available
-     * when running `webpack-bundle` command. Be sure
-     * to check its value to avoid accessing undefined value,
-     * otherwise an error might occur.
-     */
-    // if (devServer) {
-    //   devServer.hmr = false;
-    // }
+    if (devServer) {
+        devServer.hmr = true;
+    }
 
     /**
      * Depending on your Babel configuration you might want to keep it.
@@ -104,7 +97,7 @@ module.exports = env => {
          */
         output: {
             clean: true,
-            path: path.join(__dirname, 'build/generated', platform),
+            path: path.join(dirname, 'build/generated', platform),
             filename: 'index.bundle',
             chunkFilename: '[name].chunk.bundle',
             publicPath: Repack.getPublicPath({ platform, devServer }),
@@ -167,7 +160,7 @@ module.exports = env => {
                  */
                 {
                     test: /\.[jt]sx?$/,
-                    exclude: /node_modules\/(?!(yup)\/).*/,
+                    exclude: /node_modules/,
                     use: {
                         loader: 'babel-loader',
                         options: {
@@ -250,6 +243,65 @@ module.exports = env => {
                     bundleFilename,
                     sourceMapFilename,
                     assetsPath,
+                },
+            }),
+            new Repack.plugins.ModuleFederationPlugin({
+                name: 'mobile',
+                shared: {
+                    '@react-native-async-storage/async-storage': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    '@react-navigation/native': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    '@react-navigation/native-stack': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    'react-native-reanimated': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    'react-native-screens': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    'react-native-safe-area-context': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    'react-native-svg': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    'react-native-gesture-handler': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    'react-native-get-random-values': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    'react-native-haptic-feedback': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    '@debens/react-native-fido': {
+                        singleton: true,
+                        eager: true,
+                    },
+                    react: {
+                        ...Repack.Federated.SHARED_REACT,
+                        eager: true,
+                        requiredVersion: '18.1.0',
+                    },
+                    'react-native': {
+                        ...Repack.Federated.SHARED_REACT_NATIVE,
+                        eager: true,
+                        requiredVersion: '0.70.1',
+                    },
                 },
             }),
         ],

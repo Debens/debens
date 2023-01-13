@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import Haptic from 'react-native-haptic-feedback';
 
 import { Grid, Screen, SVG, Toolbar } from '@debens/mobile-atoms';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 
 import Board from '../components/Board/Board';
 import FinalFace from '../components/FinalFace/FinalFace';
@@ -19,11 +19,11 @@ import ScaleProvider from '../components/ScaleProvider/ScaleProvider';
 import { AppRoute } from '../navigation/routes';
 
 export const GameScreen: React.FunctionComponent = () => {
-    const { navigate } = useNavigation();
+    const { navigate, goBack } = useNavigation();
 
     const onStop = useCallback(() => {
-        navigate(AppRoute.Landing);
-    }, [navigate]);
+        goBack();
+    }, [goBack]);
 
     const onSettings = useCallback(() => {
         navigate(AppRoute.Settings);

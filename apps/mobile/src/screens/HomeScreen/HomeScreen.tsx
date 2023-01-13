@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import { gql, useQuery } from '@debens/graphql';
 import {
@@ -12,6 +12,9 @@ import {
     Toolbar,
 } from '@debens/mobile-atoms';
 import { NavigationRow } from '@debens/mobile-molecules';
+import { useNavigation } from '@react-navigation/native';
+
+import { AppRoute } from '../../routes';
 
 export type HomeScreenNavigationProps = undefined;
 
@@ -26,6 +29,11 @@ const SCREEN_QUERY = gql`
 export const HomeScreen: React.FunctionComponent = () => {
     const { data, loading, error } = useQuery(SCREEN_QUERY);
 
+    const navigation = useNavigation();
+    const onAngryMogisan = useCallback(() => {
+        navigation.navigate(AppRoute.AngryMogisan);
+    }, [navigation]);
+
     return (
         <Screen>
             <Toolbar>
@@ -33,7 +41,10 @@ export const HomeScreen: React.FunctionComponent = () => {
                     <SVG.Person />
                 </Toolbar.Item>
             </Toolbar>
-            <Grid flex={1} justifyContent="flex-end" margin="medium">
+            <Grid flex={1} margin="medium">
+                <Grid flex={1}>
+                    <Paragraph typeset="$heading">Hi, Andrew.</Paragraph>
+                </Grid>
                 <Loader alignItems="center" loading={loading} margin="medium">
                     <Loader.Loading>
                         <Ghost.Text typeset="$body" chars={32} />
@@ -49,9 +60,13 @@ export const HomeScreen: React.FunctionComponent = () => {
                         You: &quot;I live life on my terms, not TFLs&quot;
                     </Paragraph>
                 </NavigationRow>
-                <NavigationRow heading="Angry Mogisán" image={SVGType.Face} marginTop="small">
+                <NavigationRow
+                    heading="Angry Mogisán"
+                    image={SVGType.Face}
+                    marginTop="small"
+                    onPress={onAngryMogisan}>
                     <Paragraph fontStyle="italic" typeset="$body" color="$text-placeholder" numberOfLines={1}>
-                        12 faces
+                        15 faces
                     </Paragraph>
                 </NavigationRow>
             </Grid>

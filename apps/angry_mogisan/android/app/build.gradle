@@ -86,6 +86,7 @@ project.ext.react = [
     composeSourceMapsPath: "../../node_modules/react-native/scripts/compose-source-maps.js",
     hermesCommand: "../../../../node_modules/react-native/sdks/hermesc/%OS-BIN%/hermesc",
 
+    bundleCommand: "webpack-bundle",
     bundleInDebug: false
 ]
 

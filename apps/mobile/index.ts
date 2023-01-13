@@ -1,10 +1,33 @@
 import 'react-native-get-random-values';
 
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Platform } from 'react-native';
 
-import { Script, ScriptManager } from '@callstack/repack/client';
+import { Federated, Script, ScriptManager } from '@callstack/repack/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { App } from './src/App';
+
+const resolveURL = Federated.createURLResolver({
+    containers: {
+        AngryMogisan: 'http://localhost:8082/[name][ext]',
+    },
+});
+
+ScriptManager.shared.setStorage(AsyncStorage);
+ScriptManager.shared.addResolver(async (scriptId, caller) => {
+    const url = caller === 'main' ? Script.getDevServerURL(scriptId) : resolveURL(scriptId, caller);
+    if (!url) {
+        return undefined;
+    }
+
+    return {
+        url,
+        cache: false, // For development
+        query: {
+            platform: Platform.OS,
+        },
+    };
+});
 
 ScriptManager.shared.addResolver(async scriptId => {
     // In development, get all the chunks from dev server.
@@ -12,6 +35,9 @@ ScriptManager.shared.addResolver(async scriptId => {
         return {
             url: Script.getDevServerURL(scriptId),
             cache: false,
+            query: {
+                platform: Platform.OS,
+            },
         };
     }
 
@@ -23,6 +49,9 @@ ScriptManager.shared.addResolver(async scriptId => {
     } else {
         return {
             url: Script.getRemoteURL(`https://api.debens.app/chunks/${scriptId}`),
+            query: {
+                platform: Platform.OS,
+            },
         };
     }
 });
