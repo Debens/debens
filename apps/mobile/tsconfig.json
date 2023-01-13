@@ -17,10 +17,11 @@
         }
     },
     "references": [
-        { "path": "../../modules/mobile-calendar" },
         { "path": "../../modules/mobile-messaging" },
         { "path": "../../modules/mobile-onboarding" },
         { "path": "../../packages/mobile-atoms" },
+        { "path": "../../packages/mobile-molecules" },
+        { "path": "../../packages/graphql" },
         { "path": "../../packages/theme" }
     ],
     "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"],

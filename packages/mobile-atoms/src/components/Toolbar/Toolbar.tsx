@@ -10,7 +10,7 @@ export interface Toolbar extends React.FunctionComponent<React.PropsWithChildren
 }
 
 export const Toolbar: Toolbar = props => (
-    <Grid flexDirection="row" justifyContent="space-between" mx="medium">
+    <Grid flexDirection="row" justifyContent="flex-end" mx="medium">
         {props.children}
     </Grid>
 );
@@ -21,6 +21,9 @@ const ToolbarItem: React.FunctionComponent<ToolbarItemProps> = props => {
 
 ToolbarItem.defaultProps = {
     hitSlop: 'large',
+    activeColor: '$layer-01',
+    borderRadius: 'xlarge',
+    padding: 'small',
 };
 
 Toolbar.Item = ToolbarItem;

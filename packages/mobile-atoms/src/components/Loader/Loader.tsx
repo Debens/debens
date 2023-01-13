@@ -4,28 +4,37 @@ import { FadeInDown, FadeOut } from 'react-native-reanimated';
 import { not } from '@debens/utils';
 
 import { standard } from '../../utils/easing';
-import { isElementName } from '../../utils/is-element';
+import { isElement } from '../../utils/is-element';
 import { ENTERING, EXITING } from '../../utils/speeds';
 import Grid from '../Grid/Grid';
 
-export type LoaderProps = React.ComponentProps<typeof Grid.Animated> &
-    React.PropsWithChildren<{
-        loading?: boolean;
-    }>;
+type Children<P> = React.ReactNode | React.JSXElementConstructor<{ data: NonNullable<P> }>;
+export type LoaderProps<D> = React.ComponentProps<typeof Grid.Animated> & {
+    loading?: boolean;
+    data?: D;
+    children?: Children<D>;
+};
 
-interface LoadingType extends React.FunctionComponent<LoaderProps> {
-    Loading: React.FunctionComponent<LoadingProps>;
-}
+const toArray = <D,>(children: Children<D>): Array<Children<D>> =>
+    Array.isArray(children) ? children : [children];
 
-export const Loader: LoadingType = props => {
-    const children = React.Children.toArray(props.children);
+const isReady = <D, P extends { data?: D }>(props: P): props is P & { data: NonNullable<D> } =>
+    Object.keys(props).includes('data') ? !!props.data : true;
 
-    const content = props.loading
-        ? children.filter(isElementName('Loading'))
-        : children.filter(not(isElementName('Loading')));
+export const Loader = <D,>(props: LoaderProps<D>) => {
+    const children = toArray(props.children);
+
+    const rendered = isReady(props) && !props.loading;
+    const content = rendered
+        ? children
+              .filter(not(isElement(Loading)))
+              .map((Element, index) =>
+                  typeof Element === 'function' ? <Element key={index} data={props.data} /> : Element,
+              )
+        : children.filter(isElement(Loading));
 
     return (
-        <Grid.Animated key={`${props.loading}`} {...props}>
+        <Grid.Animated key={`${rendered}`} {...props}>
             {content}
         </Grid.Animated>
     );

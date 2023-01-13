@@ -213,7 +213,7 @@ module.exports = env => {
                                 native: true,
                                 // You might want to uncomment the following line.
                                 // More info: https://react-svgr.com/docs/options/#dimensions
-                                dimensions: false,
+                                // dimensions: false,
                             },
                         },
                     ],

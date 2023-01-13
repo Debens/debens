@@ -1,3 +1,5 @@
+import { Text } from 'react-native';
+
 import { Theme } from '@debens/theme';
 import shouldForwardProp from '@styled-system/should-forward-prop';
 
@@ -6,13 +8,14 @@ import * as system from 'styled-system';
 
 import * as custom from '../../utils/style-functions';
 
-export type ParagraphProps = React.PropsWithChildren<
-    system.ColorProps<Theme> | system.SpaceProps<Theme> | custom.TypographyProps
->;
+export type ParagraphProps = React.ComponentProps<typeof Text> &
+    React.PropsWithChildren<system.ColorProps<Theme> | system.SpaceProps<Theme> | custom.TypographyProps>;
 
-const Paragraph = styled.Text.withConfig({
+const allowedProps: Record<string, boolean> = { numberOfLines: true };
+
+const Paragraph: React.ComponentType<ParagraphProps> = styled.Text.withConfig({
     displayName: 'Paragraph',
-    shouldForwardProp: prop => shouldForwardProp(prop),
+    shouldForwardProp: prop => allowedProps[prop] || shouldForwardProp(prop),
 })<ParagraphProps>`
     ${system.color}
     ${system.space}
