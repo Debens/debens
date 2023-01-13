@@ -1,4 +1,4 @@
-import { AnyAction, combineReducers } from 'redux';
+import { AnyAction, combineReducers, Reducer } from 'redux';
 import { handleActions } from 'redux-actions';
 
 import { INITIAL_STATE } from '../state';
@@ -23,5 +23,10 @@ const hide = handleActions<Snackbar[], string>(
 
 export default combineReducers<SnackbarState>({
     snackbars: (state: Snackbar[] | undefined, action: AnyAction): Snackbar[] =>
-        [show, hide].reduce((previousState, currentReducer) => currentReducer(previousState, action), state!),
+        [show, hide]
+            .map(reducer => reducer as Reducer<Snackbar[]>)
+            .reduce<Snackbar[]>(
+                (previousState, currentReducer): Snackbar[] => currentReducer(previousState, action),
+                state!,
+            ),
 });
