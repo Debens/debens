@@ -8,6 +8,7 @@
         "lib": ["es2017"],
         "target": "esnext",
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "isolatedModules": true,

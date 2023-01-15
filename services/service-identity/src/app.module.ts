@@ -11,10 +11,10 @@ import { WellKnownModule } from './well-known/well-known.module';
 @Module({
     imports: [
         ConfigModule.forRoot({ cache: true, load: [eventstore, rabbitmq] }),
-        EventSourcingModule.forRoot(),
         IdentityModule,
         WebAuthnModule,
         WellKnownModule,
+        EventSourcingModule.forRoot(),
     ],
     controllers: [],
     providers: [],

@@ -1,11 +1,13 @@
 import { EventStoreDBClient, StreamNotFoundError } from '@eventstore/db-client';
 import { Inject } from '@nestjs/common';
 
+import { StorableEvent } from './storeable-event';
+
 export class EventStreams {
     @Inject(EventStoreDBClient)
     private readonly client!: EventStoreDBClient;
 
-    async *read(aggregate: string, id: string) {
+    async *read(aggregate: string, id: string): AsyncGenerator<StorableEvent> {
         try {
             const events = this.client.readStream(`${aggregate}-${id}`);
 

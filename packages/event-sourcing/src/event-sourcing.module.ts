@@ -8,6 +8,7 @@ import { EventStore } from './event-store';
 import { EventStoreBus } from './event-store-bus';
 import { EventStorePublisher } from './event-store-publisher';
 import { EventStreams } from './event-streams';
+import { StreamController } from './streams.controller';
 
 export class EventSourcingModule {
     static forRoot(): DynamicModule {
@@ -26,9 +27,11 @@ export class EventSourcingModule {
                         );
                     },
                 },
+                EventStreams,
             ],
             imports: [ConfigModule],
             exports: [EventStoreDBClient],
+            controllers: [StreamController],
             global: true,
         };
     }
