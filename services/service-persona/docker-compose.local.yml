@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+    local:
+        driver: bridge
+
+services:
+    rabbitmq:
+        container_name: rabbitmq
+        healthcheck:
+            test: ['CMD', 'nc', '-z', 'localhost', '5672']
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        image: rabbitmq:3-management-alpine
+        ports:
+            - 5672:5672
+            - 15672:15672
+        networks:
+            - local
+        volumes:
+            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+            - ./conf/rabbitmq:/etc/rabbitmq
+
+    neo4j:
+        container_name: neo4j
+        environment:
+            - NEO4J_AUTH=none
+        image: neo4j:latest
+        ports:
+            - 7474:7474
+            - 7687:7687
+        networks:
+            - local
+        volumes:
+            - ~/.docker-conf/neo4j/data:/data

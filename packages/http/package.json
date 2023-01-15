@@ -3,7 +3,7 @@
     "version": "0.0.2-alpha.0",
     "description": "> TODO: description",
     "license": "MIT",
-    "main": "build/index.js",
+    "main": "build/src/index.js",
     "files": [
         "build"
     ],

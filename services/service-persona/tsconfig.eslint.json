@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "references": [
+        { "path": "../../packages/http" },
+        { "path": "../../packages/nestjs-auth" },
+        { "path": "../../packages/event-sourcing" },
+        { "path": "../service-identity" }
+    ],
+    "exclude": ["node_modules", "test/**/*", "build/**/*", "generated/**/*"],
+    "include": ["src", "*.ts"]
+}

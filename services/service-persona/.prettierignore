@@ -1,0 +1,9 @@
+.eslintignore
+.gitignore
+.prettierignore
+
+.npmrc
+
+.env.example
+
+DockerFile

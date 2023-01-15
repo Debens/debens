@@ -19,7 +19,6 @@ export class EventStoreBus {
     }
 
     publishAll(events: IEvent[], options: IWriteOptions) {
-        console.warn(events, options);
         /* TODO: handle unstorable events */
         return this.store
             .write(events.filter(StorableEvent.isStorable), options)
