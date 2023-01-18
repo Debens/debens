@@ -21,7 +21,8 @@
     "dependencies": {
         "@nestjs/config": "^2.2.0",
         "@nestjs/jwt": "^9.0.0",
-        "@nestjs/passport": "^9.0.0"
+        "@nestjs/passport": "^9.0.0",
+        "nestjs-cls": "^3.0.5"
     },
     "devDependencies": {
         "@babel/core": "^7.17.9",

@@ -28,6 +28,8 @@ export class PersonaController {
 
     @Post()
     @ApiResponse({ type: 'PersonaState' })
+    @ApiBearerAuth()
+    @UseGuards(AccessTokenGuard)
     async create(@Body() dto: CreatePersonaDTO): Promise<PersonaState> {
         return await this.commandBus.execute(new CreatePersona(dto));
     }

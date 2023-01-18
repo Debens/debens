@@ -1,6 +1,6 @@
 import http from '@debens/http';
 
-import { IdentityState } from '../identity.aggregate';
+import type { IdentityState } from '../identity.aggregate';
 
 export class IdentityAPI {
     constructor(private readonly client = http.client) {}

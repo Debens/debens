@@ -30,6 +30,7 @@
         "@nestjs/microservices": "9.2.0"
     },
     "resolutions": {
-        "react-native": "0.70.1"
+        "react-native": "0.70.1",
+        "rxjs": "7.5.7"
     }
 }

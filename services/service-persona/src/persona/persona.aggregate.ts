@@ -1,6 +1,6 @@
 import { Aggregate } from '@debens/event-sourcing';
-import { IdentityService } from '@debens/service-identity';
-import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
+import { IdentityAPI } from '@debens/service-identity';
+import { BadRequestException, ConflictException } from '@nestjs/common';
 
 import { CreatePersona } from './commands/create-persona.command';
 import { PersonaCreated } from './events/persona-created';
@@ -11,11 +11,10 @@ export type PersonaState = Partial<{
     createdOn: Date;
 }>;
 
-@Injectable()
 export class PersonaAggregate extends Aggregate {
     state: PersonaState = {};
 
-    constructor(private readonly identity: IdentityService, state?: PersonaState) {
+    constructor(private readonly identity: IdentityAPI, state?: PersonaState) {
         super();
 
         Object.assign(this, state);
@@ -26,7 +25,8 @@ export class PersonaAggregate extends Aggregate {
             throw new ConflictException(`persona ${command.id} already exists`);
         }
 
-        await this.identity.get(command.identity).catch(() => {
+        await this.identity.get(command.identity).catch(error => {
+            console.error(error);
             throw new BadRequestException(`identity '${command.identity}' does not exist`);
         });
 

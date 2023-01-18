@@ -1,8 +1,9 @@
 import { EventSourcingModule } from '@debens/event-sourcing';
-import { AuthModule } from '@debens/nestjs-auth';
-import { IdentityModule } from '@debens/service-identity';
+import { AuthModule, User } from '@debens/nestjs-auth';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+
+import { ClsModule } from 'nestjs-cls';
 
 import { CreatePersonaHandler } from './handlers/create-persona.handler';
 import { PersonaController } from './persona.controller';
@@ -13,7 +14,7 @@ export const CommandHandlers = [CreatePersonaHandler];
 export const EventHandlers = [];
 
 @Module({
-    imports: [CqrsModule, AuthModule, EventSourcingModule.forModule(), IdentityModule.forModule()],
+    imports: [ClsModule.forFeature(User), CqrsModule, AuthModule, EventSourcingModule.forModule()],
     controllers: [PersonaController],
     providers: [...CommandHandlers, ...EventHandlers, PersonaRepository, PersonaFactory],
 })

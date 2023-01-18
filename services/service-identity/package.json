@@ -38,6 +38,7 @@
         "@teamhanko/hanko-node": "^1.0.0",
         "amqp-connection-manager": "^4.1.9",
         "amqplib": "^0.10.3",
+        "autobind-decorator": "^2.4.0",
         "class-transformer": "^0.5.1",
         "class-validator": "^0.13.2",
         "morgan": "^1.10.0",
