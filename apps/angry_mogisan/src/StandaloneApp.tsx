@@ -5,16 +5,17 @@ import { enableFreeze, enableScreens } from 'react-native-screens';
 import { GhostProvider } from '@debens/mobile-atoms';
 import { NavigationContainer } from '@react-navigation/native';
 
+import App from './App';
+
 enableScreens();
 enableFreeze();
 
 export const StandaloneApp = () => {
-    console.error('RENDERED');
     return (
         <NavigationContainer>
             <SafeAreaProvider>
                 <GhostProvider>
-                    <StandaloneApp />
+                    <App />
                 </GhostProvider>
             </SafeAreaProvider>
         </NavigationContainer>
