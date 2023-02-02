@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import {
     NativeSyntheticEvent,
+    Platform,
     Pressable,
     StyleSheet,
     TextInput as BaseComponent,
@@ -21,6 +22,7 @@ import { ColorToken } from '@debens/theme';
 import shouldForwardProp from '@styled-system/should-forward-prop';
 
 import styled from 'styled-components/native';
+import * as system from 'styled-system';
 
 import { useColor } from '../../hooks/use-color/use-color';
 import { acceleration, deceleration } from '../../utils/easing';
@@ -29,7 +31,9 @@ import { StyledProps } from '../../utils/styled-components/styled-props';
 import Grid, { GridProps } from '../Grid/Grid';
 import Paragraph from '../Paragraph/Paragraph';
 
-const StyledTextInput = styled.TextInput``;
+const StyledTextInput = styled.TextInput`
+    ${system.color}
+`;
 
 type BaseProps = StyledProps<typeof styled.TextInput>;
 export type TextInputProps = BaseProps &
@@ -99,6 +103,8 @@ const useBackground = (props: TextInputProps, isFocused: boolean) => {
     );
 };
 
+const isInputProp = (name: string) => name === 'color' || shouldForwardProp(name);
+
 export const TextInput: React.FunctionComponent<TextInputProps> = props => {
     const [value, setValue] = useState<string | undefined>(props.value);
     const { onChangeText: change } = props;
@@ -110,8 +116,9 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
         [change],
     );
 
-    const style = Object.fromEntries(Object.entries(props).filter(([prop]) => !shouldForwardProp(prop)));
-    const input = Object.fromEntries(Object.entries(props).filter(([prop]) => shouldForwardProp(prop)));
+    const entries = Object.entries(props);
+    const style = Object.fromEntries(entries.filter(([prop]) => !isInputProp(prop)));
+    const input = Object.fromEntries(entries.filter(([prop]) => isInputProp(prop)));
 
     const ref = useRef<BaseComponent>(null);
     const onPress = useCallback(() => {
@@ -132,6 +139,7 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
                     <StyledTextInput
                         ref={ref as unknown as any}
                         placeholder={props.label}
+                        style={styles.input}
                         {...input}
                         {...selection}
                         onChangeText={onChangeText}
@@ -165,10 +173,15 @@ TextInput.defaultProps = {
     borderRadius: 'large',
     padding: 'medium',
     backgroundColor: '$field-01',
+    color: '$text-primary',
 };
 
 const styles = StyleSheet.create({
     front: { zIndex: 1 },
+    input: Platform.select({
+        android: { padding: 0, margin: 0, underlineColorAndroid: 'transparent' },
+        default: {},
+    }),
 });
 
 export default memo(TextInput);

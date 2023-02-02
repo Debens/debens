@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { KeyboardAvoidingView, StatusBar, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Platform, StatusBar, StyleSheet } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
 import { SemanticColor } from '@debens/theme';
@@ -42,7 +42,8 @@ export const Screen: React.FunctionComponent<ScreenProps> = props => {
                 <KeyboardAvoidingView
                     style={styles.grow}
                     behavior="padding"
-                    keyboardVerticalOffset={headerHeight}>
+                    keyboardVerticalOffset={headerHeight}
+                    enabled={Platform.select({ android: false, default: true })}>
                     <Grid flex={1} backgroundColor="$background-primary" {...grid}>
                         {props.children}
                     </Grid>

@@ -46,7 +46,7 @@ export const AppNavigator = () => {
     }
 
     return (
-        <Stack.Navigator initialRouteName="home">
+        <Stack.Navigator initialRouteName="onboarding">
             <Stack.Group screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={AppRoute.Onboarding}>
                     {props => (
