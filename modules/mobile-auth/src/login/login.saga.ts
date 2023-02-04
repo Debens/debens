@@ -23,10 +23,9 @@ function* login({ payload }: Action<actions.ILoginPayload>) {
     try {
         yield put(session.actions.loading());
 
-        const response: Tokens = yield call([service, 'login'], payload);
-        console.warn(response);
+        const tokens: Tokens = yield call([service, 'login'], payload);
 
-        yield put(session.actions.started());
+        yield put(session.actions.started(tokens));
     } catch (error: unknown) {
         yield put(messaging.actions.snackbar({ message: `${error}`, type: 'error' }));
 

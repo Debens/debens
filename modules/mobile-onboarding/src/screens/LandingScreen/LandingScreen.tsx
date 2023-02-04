@@ -1,4 +1,5 @@
 import React, { memo, useCallback } from 'react';
+import { Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -46,7 +47,12 @@ const useSubmit = () => {
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
     const { values, handleSubmit, setFieldValue, touched, errors, handleChange, handleBlur } =
         useFormik<FormValues>({
-            initialValues: { email: 'a.debens@gmail.com' },
+            initialValues: {
+                email: Platform.select({
+                    android: 'a.debens@gmail.co.uk',
+                    default: 'a.debens@gmail.com',
+                }),
+            },
             onSubmit: useSubmit(),
             validationSchema,
         });

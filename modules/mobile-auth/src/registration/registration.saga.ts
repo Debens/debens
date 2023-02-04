@@ -23,10 +23,9 @@ function* register({ payload }: Action<actions.IRegisterPayload>) {
     try {
         yield put(session.actions.loading());
 
-        const response: Tokens = yield call([service, 'register'], payload);
-        console.warn(response);
+        const tokens: Tokens = yield call([service, 'register'], payload);
 
-        yield put(session.actions.started());
+        yield put(session.actions.started(tokens));
     } catch (error) {
         yield put(messaging.actions.snackbar({ message: `${error}`, type: 'error' }));
 
