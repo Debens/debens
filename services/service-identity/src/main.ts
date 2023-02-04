@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService, ConfigType } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';

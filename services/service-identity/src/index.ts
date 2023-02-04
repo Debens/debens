@@ -1,7 +1,5 @@
-import 'reflect-metadata';
-
 export * from './identity/services/identity.api';
-export * from './identity/identity.module';
+// export * from './identity/identity.module';
 
 export * from './webauthn/services/attestation.api';
 export * from './webauthn/services/assertion.api';
