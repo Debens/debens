@@ -88,15 +88,9 @@ class FidoModule(var reactContext: ReactApplicationContext) : ReactContextBaseJa
                     .setRpId(domain)
                     .setChallenge(publicKey?.getString("challenge")?.toBase64())
                     .setAllowList(
-                            /**
-                             * FIXME: List requires valid credentials, these need to come from the BE.
-                             *
-                             * This means we require a user id to fetch them all.
-                             *
-                             * e.g. "AVzcoBLs1thQb584d-U-GPA71s75VdZ-2Q-DyhO9E8kS5Symkgz5hv3qxtzZ38b4WvVEmHtv-WaOFS_fPsKXh5U".toBase64(),
-                             */
-                            publicKey?.getArray("allowList")?.toArrayList()?.filterIsInstance<String>()
-                                ?.map { PublicKeyCredentialDescriptor(PublicKeyCredentialType.PUBLIC_KEY.toString(), it.toBase64(), null) }
+                        publicKey?.getArray("allowCredentials")?.toArrayList()
+                            ?.filterIsInstance<HashMap<String, String>>()
+                            ?.map { PublicKeyCredentialDescriptor(it["type"]!!, it["id"]!!.toBase64(), null) }
                     )
                     .build()
 
@@ -155,7 +149,9 @@ class FidoModule(var reactContext: ReactApplicationContext) : ReactContextBaseJa
                     response.putString("clientDataJSON", signedData.clientDataJSON.toBase64().toBase64URL())
                     response.putString("authenticatorData", signedData.authenticatorData.toBase64().toBase64URL())
                     response.putString("signature", signedData.signature.toBase64().toBase64URL())
-                    response.putString("userHandle", signedData.userHandle.toBase64().toBase64URL())
+                    signedData.userHandle?.let { handle ->
+                        response.putString("userHandle", handle.toBase64().toBase64URL())
+                    }
                     result.putMap("response", response)
 
                     it.resolve(result)

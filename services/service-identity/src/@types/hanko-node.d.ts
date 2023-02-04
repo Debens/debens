@@ -154,7 +154,7 @@ declare module '@teamhanko/hanko-node' {
             clientDataJSON: string;
             authenticatorData: string;
             signature: string;
-            userHandle: string;
+            userHandle?: string;
         };
     }
 

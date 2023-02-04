@@ -19,9 +19,8 @@ class AssertionResponse {
     signature!: string;
 
     @IsString()
-    @IsNotEmpty()
     @ApiProperty()
-    userHandle!: string;
+    userHandle?: string;
 }
 
 export class VerifyIdentityDTO {

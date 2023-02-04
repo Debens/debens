@@ -14,14 +14,9 @@ export class AssertionService {
     @Inject(HankoClient)
     private readonly hanko!: HankoClient;
 
-    async challenge(user?: string): Promise<CredentialRequestOptions> {
+    async challenge(id: string): Promise<CredentialRequestOptions> {
         return await this.hanko.initializeAuthentication({
-            /*
-             * TODO: get from db
-             *
-             * When using requireResidentKey we don't need to provide a user object
-             */
-            user: user ? { id: user } : undefined,
+            user: { id },
             options: {
                 userVerification: UserVerificationRequirement.REQUIRED,
                 authenticatorAttachment: AuthenticatorAttachment.PLATFORM,
