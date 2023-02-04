@@ -11,9 +11,11 @@ import { AppRoute } from './routes';
 
 const Stack = createNativeStackNavigator();
 
-export const AppNavigator = () => {
+export type AppNavigatorProps = Partial<React.ComponentProps<typeof Stack.Navigator>>;
+
+export const AppNavigator: React.FC<AppNavigatorProps> = props => {
     return (
-        <Stack.Navigator initialRouteName={AppRoute.Landing}>
+        <Stack.Navigator initialRouteName={AppRoute.Game} {...props}>
             <Stack.Group screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={AppRoute.Landing} component={LandingScreen} />
                 <Stack.Screen name={AppRoute.Game} component={GameScreen} />

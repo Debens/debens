@@ -86,7 +86,7 @@ fastlane/FastlaneRunner
 
 # Created by git when using merge tools for conflicts
 *.BACKUP.*
-*.BASE.*
+# *.BASE.*
 *.LOCAL.*
 *.REMOTE.*
 *_BACKUP_*.txt
@@ -312,10 +312,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-### Node Patch ###
-# Serverless Webpack directories
-.webpack/
 
 # Optional stylelint cache
 

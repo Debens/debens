@@ -7,7 +7,7 @@ import seedrandom from 'seedrandom';
 import FaceProvider from './components/FaceProvider/FaceProvider';
 import { facebook } from './face-book';
 import { FacePackType } from './face-pack/model';
-import AppNavigator from './navigation/AppNavigator';
+import AppNavigator, { AppNavigatorProps } from './navigation/AppNavigator';
 
 Object.assign(Math, { seedrandom });
 
@@ -18,11 +18,11 @@ declare global {
     }
 }
 
-export const App = () => {
+export const App = (props: AppNavigatorProps) => {
     return (
         <FaceProvider source={facebook} pack={FacePackType.Mogan}>
             <ThemeProvider theme={themes.mógan}>
-                <AppNavigator />
+                <AppNavigator {...props} />
             </ThemeProvider>
         </FaceProvider>
     );

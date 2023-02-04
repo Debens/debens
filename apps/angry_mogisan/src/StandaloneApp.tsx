@@ -6,6 +6,7 @@ import { GhostProvider } from '@debens/mobile-atoms';
 import { NavigationContainer } from '@react-navigation/native';
 
 import App from './App';
+import { AppRoute } from './navigation/routes';
 
 enableScreens();
 enableFreeze();
@@ -15,7 +16,7 @@ export const StandaloneApp = () => {
         <NavigationContainer>
             <SafeAreaProvider>
                 <GhostProvider>
-                    <App />
+                    <App initialRouteName={AppRoute.Landing} />
                 </GhostProvider>
             </SafeAreaProvider>
         </NavigationContainer>
