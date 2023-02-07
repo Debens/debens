@@ -66,6 +66,8 @@ buck-out/
 *.jsbundle.*
 *.chunk.bundle
 *.chunk.bundle.*
+*.android.bundle
+*.android.bundle.*
 
 # Ruby / CocoaPods
 /ios/Pods/

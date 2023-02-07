@@ -12,3 +12,17 @@
 # Renaimated
 -keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
+
+# https://reactnative.dev/docs/hermes
+-keep class com.facebook.hermes.unicode.** { *; }
+-keep,allowobfuscation @interface com.facebook.jni.annotations.DoNotStrip
+-keep @com.facebook.jni.annotations.DoNotStrip class *
+-keepclassmembers class * {
+    @com.facebook.jni.annotations.DoNotStrip *;
+}
+
+# React Native SVG
+-keep public class com.horcrux.svg.** {*;}
+
+# React Native Keychain  
+-keep class com.facebook.crypto.** { *; }

@@ -25,7 +25,7 @@ export class PersonaAggregate extends Aggregate {
             throw new ConflictException(`persona ${command.id} already exists`);
         }
 
-        await this.identity.get(command.identity).catch(error => {
+        await this.identity.get(command.identity).catch(() => {
             throw new BadRequestException(`identity '${command.identity}' does not exist`);
         });
 

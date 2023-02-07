@@ -20,7 +20,7 @@ export const AppNavigator = () => {
         navigation.navigate(AppRoute.Home);
     }, [navigation]);
 
-    type ErrorBoundaryProps = React.PropsWithChildren<{}>;
+    type ErrorBoundaryProps = React.PropsWithChildren<void>;
     type ErrorBoundaryState = { hasError: boolean };
 
     class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
