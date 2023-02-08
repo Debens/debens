@@ -9,6 +9,7 @@ yarn.lock
 .turbo
 
 *--secret.yml
+apps/angry_mogisan/src/face-book/sources/local/images
 
 # Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio,dotenv,fastlane,git,java,kotlin,macos,maven,osx,react,reactnative,sonarqube,storybookjs,visualstudiocode,xcode,yarn,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=android,androidstudio,dotenv,fastlane,git,java,kotlin,macos,maven,osx,react,reactnative,sonarqube,storybookjs,visualstudiocode,xcode,yarn,node
