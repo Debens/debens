@@ -9,6 +9,9 @@ jest.mock('react-native-reanimated', () => {
     ReanimatedMock.default.call = () => {};
 
     return Object.assign(ReanimatedMock, {
+        Layout: {
+            springify: jest.fn(),
+        },
         SlideInRight: Reanimated.SlideInRight,
         SlideOutRight: Reanimated.SlideOutRight,
         SlideInUp: Reanimated.SlideInUp,

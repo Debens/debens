@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: identity
+    namespace: debens-dev
+spec:
+    selector:
+        app: identity
+    ports:
+        - name: api
+          port: 80
+          targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: identity
+    name: identity
+    namespace: debens-dev
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: identity
+    template:
+        metadata:
+            labels:
+                app: identity
+        spec:
+            containers:
+                - name: identity
+                  image: debens/service-identity
+                  ports:
+                      - containerPort: 3000
+                  resources: {}
+                  env:
+                      - name: EVENTSTORE_HOST
+                        value: eventstore
+                      - name: RMQ_HOST
+                        value: rabbitmq
+                      - name: PORT
+                        value: "3000"
+                      - name: ACCESS_TOKEN_EXPIRATION_TIME
+                        value: "900"
+                      - name: ACCESS_TOKEN_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: tokens
+                                key: access_secret
+                      - name: REFRESH_TOKEN_EXPIRATION_TIME
+                        value: "2592000"
+                      - name: REFRESH_TOKEN_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: tokens
+                                key: refresh_secret
+                      - name: HANKO_API_KEY_ID
+                        valueFrom:
+                            secretKeyRef:
+                                name: hanko
+                                key: api_key
+                      - name: HANKO_API_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: hanko
+                                key: secret
+                      - name: HANKO_API_URL
+                        value: https://e616cd28-7dd1-40b9-8d29-33241dfce139.authentication.hanko.io
+                      - name: KNOWN_APPLINKS_APPS
+                        value: S28MWP6479.app.debens,S28MWP6479.app.debens.staging,S28MWP6479.app.debens.development,S28MWP6479.app.debens.debug,S28MWP6479.app.debens.staging.debug,S28MWP6479.app.debens.development.debug
+                      - name: KNOWN_WEBCREDENTIALS_APPS
+                        value: S28MWP6479.app.debens,S28MWP6479.app.debens.staging,S28MWP6479.app.debens.development,S28MWP6479.app.debens.debug,S28MWP6479.app.debens.staging.debug,S28MWP6479.app.debens.development.debug

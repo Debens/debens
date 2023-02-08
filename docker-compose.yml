@@ -19,6 +19,8 @@ services:
         env_file: services/service-identity/.env
         environment:
             - RMQ_HOST=rabbitmq
+            - RMQ_USER=username
+            - RMQ_PASS=password
             - EVENTSTORE_HOST=eventstore
         depends_on:
             rabbitmq:
