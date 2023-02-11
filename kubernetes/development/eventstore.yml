@@ -45,7 +45,7 @@ spec:
         spec:
             containers:
                 - name: eventstorage
-                  image: ghcr.io/eventstore/eventstore:latest
+                  image: ghcr.io/eventstore/eventstore:21.10.0-alpha-arm64v8
                   ports:
                       - containerPort: 1113
                       - containerPort: 2113
