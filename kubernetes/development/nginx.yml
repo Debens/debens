@@ -1,67 +1,36 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: debens.app
+    name: dev.debens.app
     namespace: debens-dev
     annotations:
-        nginx.ingress.kubernetes.io/rewrite-target: /$1
-        nginx.ingress.kubernetes.io/ssl-redirect: \"false\"
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
     rules:
-        - host: identity.dev.debens.app
+        - host: api.dev.debens.app
           http:
               paths:
-                  - path: /
+                  - path: /.well-known/apple-app-site-association
                     pathType: Prefix
                     backend:
                         service:
                             name: identity
                             port:
                                 name: api
-        - host: persona.dev.debens.app
-          http:
-              paths:
-                  - path: /
+                  - path: /.well-known/assetlinks.json
                     pathType: Prefix
                     backend:
                         service:
-                            name: persona
+                            name: identity
                             port:
                                 name: api
-        - host: rabbitmq.dev.debens.app
+        - host: static.dev.debens.app
           http:
               paths:
                   - path: /
-                    pathType: Prefix
-                    backend:
-                        service:
-                            name: rabbitmq
-                            port:
-                                name: management
-        - host: eventstore.dev.debens.app
-          http:
-              paths:
-                  - path: /
-                    pathType: Prefix
-                    backend:
-                        service:
-                            name: eventstorage
-                            port:
-                                name: http
-        - host: minio.dev.debens.app
-          http:
-              paths:
-                  - path: /static/(.*)
                     pathType: Prefix
                     backend:
                         service:
                             name: minio
                             port:
                                 name: s3
-                  - path: /
-                    pathType: Prefix
-                    backend:
-                        service:
-                            name: minio
-                            port:
-                                name: console

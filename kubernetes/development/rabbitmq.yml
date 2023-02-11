@@ -47,7 +47,6 @@ spec:
                   image: rabbitmq:latest
                   ports:
                       - containerPort: 5672
-                      - containerPort: 15672
                   volumeMounts:
                       - name: config
                         mountPath: /etc/rabbitmq/enabled_plugins

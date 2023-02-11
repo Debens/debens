@@ -10,6 +10,8 @@ spec:
         - name: api
           port: 80
           targetPort: 3000
+          nodePort: 30800
+    type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -68,6 +70,6 @@ spec:
                       - name: HANKO_API_URL
                         value: https://e616cd28-7dd1-40b9-8d29-33241dfce139.authentication.hanko.io
                       - name: KNOWN_APPLINKS_APPS
-                        value: S28MWP6479.app.debens,S28MWP6479.app.debens.staging,S28MWP6479.app.debens.development,S28MWP6479.app.debens.debug,S28MWP6479.app.debens.staging.debug,S28MWP6479.app.debens.development.debug
+                        value: S28MWP6479.app.debens.development,S28MWP6479.app.debens.development.debug
                       - name: KNOWN_WEBCREDENTIALS_APPS
-                        value: S28MWP6479.app.debens,S28MWP6479.app.debens.staging,S28MWP6479.app.debens.development,S28MWP6479.app.debens.debug,S28MWP6479.app.debens.staging.debug,S28MWP6479.app.debens.development.debug
+                        value: S28MWP6479.app.debens.development,S28MWP6479.app.debens.development.debug
