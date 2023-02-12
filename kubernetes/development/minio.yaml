@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
     name: minio
-    namespace: debens-dev
+    namespace: dev
 spec:
     selector:
         app: minio
@@ -17,7 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: minio
-    namespace: debens-dev
+    namespace: dev
     labels:
         app: minio
 spec:

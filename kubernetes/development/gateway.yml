@@ -2,10 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
     name: dev.debens.app
-    namespace: debens-dev
+    namespace: dev
     annotations:
-        nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        cert-manager.io/issuer: "letsencrypt-dev"
 spec:
+    ingressClassName: nginx
+    tls:
+        - hosts:
+              - api.dev.debens.app
+              - static.dev.debens.app
+          secretName: tls-dev-ingress-http
     rules:
         - host: api.dev.debens.app
           http:
@@ -34,3 +40,21 @@ spec:
                             name: minio
                             port:
                                 name: s3
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+    name: letsencrypt-dev
+    namespace: dev
+spec:
+    acme:
+        email: a.debens@gmail.com
+        server: https://acme-v02.api.letsencrypt.org/directory
+        privateKeySecretRef:
+            name: letsencrypt-dev
+        solvers:
+            - http01:
+                  ingress:
+                      class: nginx
+---
+

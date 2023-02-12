@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
     name: rabbitmq-volume
-    namespace: debens-dev
+    namespace: dev
 spec:
     accessModes:
         - ReadWriteOnce
@@ -14,7 +14,7 @@ apiVersion: v1
 kind: Service
 metadata:
     name: rabbitmq
-    namespace: debens-dev
+    namespace: dev
 spec:
     selector:
         app: rabbitmq
@@ -29,7 +29,7 @@ metadata:
     labels:
         app: rabbitmq
     name: rabbitmq
-    namespace: debens-dev
+    namespace: dev
 spec:
     replicas: 1
     selector:
@@ -71,7 +71,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
     name: rabbitmq-config
-    namespace: debens-dev
+    namespace: dev
 data:
     enabled_plugins: |
         [rabbitmq_peer_discovery_k8s, rabbitmq_management, rabbitmq_prometheus].
