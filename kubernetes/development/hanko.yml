@@ -1,0 +1,571 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: hanko-data
+    namespace: dev
+spec:
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: hanko
+    namespace: dev
+spec:
+    selector:
+        app: hanko
+    ports:
+        - port: 8000
+          name: public
+        - port: 8001
+          name: admin
+    type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: hanko
+    namespace: dev
+    labels:
+        app: hanko
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: hanko
+    template:
+        metadata:
+            name: hanko
+            labels:
+                app: hanko
+        spec:
+            containers:
+                - name: hanko
+                  image: debens/hanko:latest
+                  command:
+                      - "/hanko"
+                  args:
+                      - "serve"
+                      - "all"
+                      - "--config"
+                      - "/etc/config/config.yaml"
+                  livenessProbe:
+                      httpGet:
+                          path: /health/alive
+                          port: 8000
+                      initialDelaySeconds: 120
+                      periodSeconds: 20
+                  readinessProbe:
+                      httpGet:
+                          path: /health/ready
+                          port: 8000
+                      initialDelaySeconds: 120
+                      periodSeconds: 20
+                  volumeMounts:
+                      - name: config
+                        mountPath: /etc/config/config.yaml
+                        subPath: config.yml
+            initContainers:
+                - name: hanko-db-migrations
+                  image: debens/hanko:latest
+                  command:
+                      - "/hanko"
+                  args:
+                      - "--config"
+                      - "/etc/config/config.yaml"
+                      - "migrate"
+                      - "up"
+                  volumeMounts:
+                      - name: config
+                        mountPath: /etc/config/config.yaml
+                        subPath: config.yml
+            volumes:
+                - name: config
+                  configMap:
+                      name: hanko-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: hanko-db
+    namespace: dev
+spec:
+    selector:
+        app: hanko-db
+    ports:
+        - port: 5432
+          name: database
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: hanko-db
+    namespace: dev
+    labels:
+        app: hanko-db
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: hanko-db
+    template:
+        metadata:
+            name: hanko-db
+            labels:
+                app: hanko-db
+        spec:
+            containers:
+                - name: hanko-db
+                  image: postgres:12-alpine
+                  ports:
+                      - containerPort: 5432
+                  volumeMounts:
+                      - mountPath: /var/lib/postgresql/data
+                        name: storage
+                  env:
+                      - name: POSTGRES_USER
+                        value: hanko
+                      - name: POSTGRES_PASSWORD
+                        value: hanko
+                      - name: POSTGRES_DB
+                        value: hanko
+                  readinessProbe:
+                      exec:
+                          command:
+                              [
+                                  "psql",
+                                  "-w",
+                                  "-U",
+                                  "hanko",
+                                  "-d",
+                                  "hanko",
+                                  "-c",
+                                  "SELECT 1",
+                              ]
+                      initialDelaySeconds: 15
+                      timeoutSeconds: 2
+                  livenessProbe:
+                      exec:
+                          command:
+                              [
+                                  "psql",
+                                  "-w",
+                                  "-U",
+                                  "hanko",
+                                  "-d",
+                                  "hanko",
+                                  "-c",
+                                  "SELECT 1",
+                              ]
+                      initialDelaySeconds: 45
+                      timeoutSeconds: 2
+            volumes:
+                - name: storage
+                  persistentVolumeClaim:
+                      claimName: hanko-data
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: hanko-config
+    namespace: dev
+data:
+    config.yml: |
+        ## Hanko Service configuration ##
+        #
+
+        server:
+          ## public ##
+          #
+          # Configuration for the public API.
+          #
+          public:
+            ## address ##
+            #
+            # The address the public API will listen and handle requests on.
+            #
+            address: ":8000"
+            ## cors ##
+            #
+            # Cross Origin Resource Sharing for public endpoints.
+            #
+            cors:
+              ## enabled ##
+              #
+              # Sets whether cors is enabled or not.
+              #
+              # Default value: false
+              #
+              enabled: true
+              allow_credentials: true
+              allow_origins:
+                - "*"
+              allow_methods:
+                - ""
+              allow_headers:
+                - ""
+              expose_headers:
+                - ""
+              max_age: 0
+          ## admin ##
+          #
+          # Configuration for the admin API.
+          #
+          admin:
+            ## address ##
+            #
+            # The address the admin API will listen and handle requests on.
+            #
+            address: ":8001"
+        ## database ##
+        #
+        # Configures the backend where to persist data.
+        #
+        database:
+          host: "hanko-db"
+          ## port ##
+          #
+          # Default value: 5432
+          #
+          port: "5432"
+          ## dialect ##
+          #
+          # Which database will be used.
+          #
+          # One of:
+          # - cockroach
+          # - mariadb
+          # - mysql
+          # - postgres
+          #
+          dialect: "postgres"
+          user: "hanko"
+          password: "hanko"
+          database: "hanko"
+          ## url ##
+          #
+          # Instead of using the individual fields above this field can be used.
+          # When this field is set, it will be used and the fields above have no effect.
+          #
+          # Url schema: `dialect://username:password@host:port/database`
+          #
+          # Examples:
+          # - postgres://hanko:hanko@localhost:5432/hanko
+          #
+          # url: "CHANGE-ME"
+        service:
+          ## name ##
+          #
+          # The name of the service. This value will be used in the subject header of emails.
+          #
+          name: "debens-dev"
+        ## secrets ##
+        #
+        # Configures secrets used for en-/decrypting JWKs.
+        #
+        secrets:
+          ## keys ##
+          #
+          # Keys secrets are used to en- and decrypt the JWKs which get used to sign the JWTs.
+          # For every key a JWK is generated, encrypted with the key and persisted in the database.
+          #
+          # You can use this list for key rotation: add a new key to the beginning of the list and the corresponding
+          # JWK will then be used for signing JWTs. All tokens signed with the previous JWK(s) will still
+          # be valid until they expire. Removing a key from the list does not remove the corresponding
+          # database record. If you remove a key, you also have to remove the database record, otherwise
+          # application startup will fail.
+          #
+          # Each key must be at least 16 characters long.
+          #
+          keys:
+            - "abcedfghijklmnopqrstuvwxyz"
+        session:
+          ## lifespan ##
+          #
+          # How long a session JWT is valid.
+          #
+          # Default value: 1h
+          #
+          # Examples:
+          # - 1h
+          # - 10m
+          # - 720h
+          # - 15h115m
+          #
+          lifespan: "1h"
+          cookie:
+            ## domain ##
+            #
+            # The domain the cookie will be bound to. Works for subdomains, but not cross-domain.
+            #
+            domain: "CHANGE-ME"
+            ## http_only ##
+            #
+            # HTTP-only cookies or accessible by javascript.
+            #
+            # Default value: true
+            #
+            http_only: true
+            ## same_site ##
+            #
+            # Same-site attribute of the session cookie.
+            #
+            # Default value: strict
+            #
+            # One of:
+            # - strict
+            # - lax
+            # - none
+            #
+            same_site: "strict"
+            ## secure ##
+            #
+            # Sets whether the cookie can only be read on secure sites.
+            #
+            # Default value: true
+            #
+            secure: false
+          ## enable_auth_token_header ##
+          #
+          # The JWT will be transmitted via the X-Auth-Token header. Enable during cross-domain operations.
+          #
+          enable_auth_token_header: true
+        password:
+          ## enabled ##
+          #
+          # Enables or disables passwords for all users.
+          #
+          # Default value: false
+          #
+          enabled: false
+          ## min_password_length ##
+          #
+          # Sets the minimum password length.
+          #
+          # Default value: 8
+          #
+          min_password_length: 8
+        passcode:
+          ## ttl ##
+          #
+          # How long a passcode is valid. Value is in seconds.
+          #
+          # Default value: 300
+          #
+          ttl: 300
+          email:
+            ## from_address ##
+            #
+            # The sender of emails sent to users.
+            #
+            # Default value: passcode@hanko.io
+            #
+            from_address: no-reply@debens.app"
+            ## from_name ##
+            #
+            # The sender name of emails sent to users.
+            #
+            # Default value: Hanko
+            #
+            from_name: "debens"
+          ## smtp ##
+          #
+          # SMTP server config to send emails.
+          #
+          smtp:
+            host: "smtp.dev.debens.app"
+            ## port ##
+            #
+            # Default: 465
+            #
+            port: "2500"
+            user: "CHANGE-ME"
+            password: "CHANGE-ME"
+        ## webauthn ##
+        #
+        # Configures Web Authentication (WebAuthn).
+        #
+        webauthn:
+          ## timeout ##
+          #
+          # How long a WebAuthn request is valid and the user can confirm it. Value is in milliseconds.
+          #
+          # Default: 60000
+          #
+          timeout: 60000
+          relying_party:
+            ## id ##
+            #
+            # The effective domain the WebAuthn credentials will be bound to.
+            #
+            # Examples:
+            # - localhost
+            # - example.com
+            # - subdomain.example.com
+            #
+            id: "api.dev.debens.app"
+            ## display_name ##
+            #
+            # The service's name that some WebAuthn Authenticators will display to the user during registration and authentication ceremonies.
+            #
+            # Examples:
+            # - Example Project
+            # - Hanko GmbH
+            # - Acme, Inc.
+            #
+            display_name: "debens-dev"
+            ## origin ##
+            #
+            # DEPRECATED: use "origins" instead
+            #
+            # The origin for which WebAuthn credentials will be accepted by the server. Must include the protocol and can only be the effective domain,
+            # or a registrable domain suffix of the effective domain, as specified in the id. Except for localhost, the protocol must always be https for WebAuthn to work.
+            #
+            # Example:
+            # - http://localhost
+            # - https://example.com
+            # - https://subdomain.example.com
+            #
+            origin: "http://localhost"
+            ## origins ##
+            #
+            # A list of origins for which WebAuthn credentials will be accepted by the server. Must include the protocol and can only be the effective domain,
+            # or a registrable domain suffix of the effective domain, as specified in the id. Except for localhost, the protocol must always be https for WebAuthn to work.
+            #
+            # For an Android app the origin must be the base64 url encoded SHA256 fingerprint of the signing certificate.
+            #
+            # Example:
+            # - android:apk-key-hash:nLSu7wVTbnMOxLgC52f2faTnvCbXQrUn_wF9aCrr-l0
+            # - https://login.example.com
+            #
+            origins:
+              - "android:apk-key-hash:nLSu7wVTbnMOxLgC52f2faTnv..."
+              - "https://dev.example.app"
+              - "https://api.dev.example.app"
+        ## audit_log ##
+        #
+        # Configures audit logging
+        #
+        audit_log:
+          console_output:
+            ## enabled ##
+            #
+            # Sets whether the output to console is enabled or disabled.
+            #
+            # Default: true
+            #
+            enabled: true
+            ## output ##
+            #
+            # The output stream which audit logs are sent to.
+            #
+            # Possible values:
+            # - stdout
+            # - stderr
+            #
+            # Default: stdout
+            #
+            output: "stdout"
+          storage:
+            ## enabled ##
+            #
+            # Sets whether the audit logs are persisted in the database or not.
+            #
+            # Default: false
+            #
+            enabled: false
+        rate_limiter:
+          ## enabled ##
+          #
+          # Sets whether the rate limiting is enabled or disabled
+          #
+          # Default: true
+          #
+          enabled: true
+          ## store ##
+          #
+          # Sets the store for the rate limiter. When you have multiple instances of Hanko running, it is recommended to use
+          # the "redis" store else your instances have their own states.
+          #
+          # One of:
+          # - in_memory
+          # - redis
+          #
+          # Default: in_memory
+          #
+          store: "in_memory"
+          ## password_limits
+          #
+          # rate limits specific to the password/login endpoint
+          #
+          password_limits:
+            ## tokens
+            #
+            # How many operations can occur in the given interval
+            #
+            # Default: 5
+            tokens: 5
+            ## interval
+            #
+            # When to reset the token interval
+            #
+            # Default: 1m
+            #
+            interval: 1m
+          ## password_limits
+          #
+          # rate limits specific to the passcode/init endpoint
+          #
+          passcode_limits:
+            ## tokens
+            #
+            # How many operations can occur in the given interval
+            #
+            # Default: 3
+            tokens: 3
+            ## interval
+            #
+            # When to reset the token interval
+            #
+            # Default: 1m
+            #
+            interval: 1m
+          ## redis_config
+          #
+          # If you specify redis as backend you have to specify these values
+          #
+          redis_config:
+            ## address
+            #
+            # Address of your redis instance in the form of host[:port][/database]
+            #
+            address: "CHANGE-ME"
+            ## password
+            #
+            # The password of the redis instance
+            #
+            password: "CHANGE_ME"
+        emails:
+          ## require_verification
+          #
+          # If turned on (true), email addresses must be verified to be assigned to a user. During account creation the user has
+          # to verify the email address before a JWT can be issued and further email addresses can only be added after they have
+          # been verified. If require_verification is turned off, the mentioned verification steps aren't necessary (and will be
+          # skipped by hanko-elements), so the user can create an account without email verification and further email addresses
+          # can be added directly.
+          #
+          # Default: true
+          #
+          require_verification: true
+          ## max_num_of_addresses
+          #
+          # How many email addresses can be added to a user account
+          #
+          # Default: 5
+          #
+          max_num_of_addresses: 5

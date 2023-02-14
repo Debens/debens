@@ -1,7 +1,10 @@
 import { StorableEvent } from '@debens/event-sourcing';
 
 type IdentityCreatedData = {
-    email: string;
+    email: {
+        id: string;
+        address: string;
+    };
 };
 
 export class IdentityCreated extends StorableEvent<IdentityCreatedData> {
