@@ -17,7 +17,7 @@ export class PersonaAggregate extends Aggregate {
     constructor(private readonly identity: IdentityAPI, state?: PersonaState) {
         super();
 
-        Object.assign(this, state);
+        Object.assign(this.state, state);
     }
 
     async create(command: CreatePersona) {

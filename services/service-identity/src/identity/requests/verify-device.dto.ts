@@ -2,19 +2,29 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { IsNotEmpty, IsObject, IsString } from 'class-validator';
 
-class AttestationResponse {
+class AssertionResponse {
     @IsString()
     @IsNotEmpty()
     @ApiProperty()
-    clientDataJSON!: string;
+    clientDataJson!: string;
 
     @IsString()
     @IsNotEmpty()
     @ApiProperty()
-    attestationObject!: string;
+    authenticatorData!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @ApiProperty()
+    signature!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @ApiProperty()
+    userHandle!: string;
 }
 
-export class CompleteIdentityDTO {
+export class VerifyDeviceDTO {
     @ApiProperty()
     id!: string;
 
@@ -30,5 +40,5 @@ export class CompleteIdentityDTO {
 
     @IsObject()
     @ApiProperty()
-    response!: AttestationResponse;
+    response!: AssertionResponse;
 }

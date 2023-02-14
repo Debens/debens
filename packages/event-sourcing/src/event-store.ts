@@ -1,9 +1,4 @@
-import {
-    EventStoreDBClient,
-    jsonEvent,
-    JSONType,
-    NO_STREAM,
-} from '@eventstore/db-client';
+import { EventStoreDBClient, jsonEvent, JSONType, NO_STREAM } from '@eventstore/db-client';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { StorableEvent } from './storeable-event';

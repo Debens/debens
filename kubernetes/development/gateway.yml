@@ -9,11 +9,11 @@ spec:
     ingressClassName: nginx
     tls:
         - hosts:
-              - api.dev.debens.app
               - static.dev.debens.app
+              - identity.dev.debens.app
           secretName: tls-dev-ingress-http
     rules:
-        - host: api.dev.debens.app
+        - host: identity.dev.debens.app
           http:
               paths:
                   - path: /.well-known/apple-app-site-association
@@ -24,6 +24,20 @@ spec:
                             port:
                                 name: api
                   - path: /.well-known/assetlinks.json
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: identity
+                            port:
+                                name: api
+                  - path: /.well-known
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: hanko
+                            port:
+                                name: public
+                  - path: /webauthn
                     pathType: Prefix
                     backend:
                         service:
@@ -49,7 +63,7 @@ metadata:
 spec:
     acme:
         email: a.debens@gmail.com
-        server: https://acme-v02.api.letsencrypt.org/directory
+        server: https://acme-staging-v02.api.letsencrypt.org/directory
         privateKeySecretRef:
             name: letsencrypt-dev
         solvers:

@@ -7,6 +7,10 @@ import hankoConfig from '../../config/hanko.config';
 @Injectable()
 export class HankoClient extends HankoWebAuthnClient {
     constructor(@Inject(hankoConfig.KEY) config: ConfigType<typeof hankoConfig>) {
-        super(config);
+        super({
+            apiUrl: config.apiUrl,
+            apiSecret: config.apiSecret,
+            apiKeyId: config.apiKeyId,
+        });
     }
 }

@@ -1,7 +1,8 @@
 import { EventStorePublisher } from '@debens/event-sourcing';
-import { Inject } from '@nestjs/common';
+import { Inject, InternalServerErrorException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
+import { HankoAdminService } from '../../hanko/services/hank-admin.service';
 import { CreateIdentity } from '../commands/create-identity.command';
 import { IdentityRepository } from '../identity.repository';
 
@@ -13,10 +14,21 @@ export class CreateIdentityHandler implements ICommandHandler<CreateIdentity, un
     @Inject(EventStorePublisher)
     private readonly publisher!: EventStorePublisher;
 
-    async execute(command: CreateIdentity): Promise<void> {
-        const identity = this.publisher.mergeObjectContext(await this.identities.findById(command.id));
+    @Inject(HankoAdminService)
+    private readonly hanko!: HankoAdminService;
+
+    async execute(command: CreateIdentity) {
+        const id = await this.hanko.getUserByEmail(command.email).catch((error: any) => {
+            if (error?.response?.status !== 404) {
+                throw new InternalServerErrorException();
+            }
+        });
+
+        const identity = this.publisher.mergeObjectContext(await this.identities.findById(id));
 
         await identity.create(command);
         await identity.commit();
+
+        return identity;
     }
 }
