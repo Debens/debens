@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: grafana-nfs-volume
+    namespace: monitoring
+spec:
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: grafana-service
+    namespace: monitoring
+spec:
+    selector:
+        app: grafana
+    ports:
+        - port: 3000
+          name: grafana
+          protocol: TCP
+          targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: grafana
+    namespace: monitoring
+    labels:
+        app: grafana
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: grafana
+    template:
+        metadata:
+            labels:
+                app: grafana
+                name: grafana
+        spec:
+            securityContext:
+                runAsUser: 1001
+                runAsGroup: 1001
+            containers:
+                - name: grafana
+                  image: grafana/grafana
+                  imagePullPolicy: Always
+                  volumeMounts:
+                      - name: grafana-nfs-volume
+                        mountPath: "/var/lib/grafana"
+            volumes:
+                - name: grafana-nfs-volume
+                  persistentVolumeClaim:
+                      claimName: grafana-nfs-volume
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: monitor.debens.app
+    namespace: monitoring
+    annotations:
+        cert-manager.io/issuer: "letsencrypt-monitoring"
+        nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+    ingressClassName: nginx
+    tls:
+        - hosts:
+              - monitor.debens.app
+          secretName: tls-monitoring-ingress-http
+    rules:
+        - host: monitor.debens.app
+          http:
+              paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: grafana-service
+                            port:
+                                name: grafana
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+    name: letsencrypt-monitoring
+    namespace: monitoring
+spec:
+    acme:
+        email: a.debens@gmail.com
+        server: https://acme-v02.api.letsencrypt.org/directory
+        privateKeySecretRef:
+            name: letsencrypt-monitoring
+        solvers:
+            - http01:
+                  ingress:
+                      class: nginx
+---
+
