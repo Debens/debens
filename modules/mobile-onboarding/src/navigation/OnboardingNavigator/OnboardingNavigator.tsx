@@ -7,13 +7,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { module } from '../../module';
 import LandingScreen, { LandingScreenNavigationProps } from '../../screens/LandingScreen/LandingScreen';
+import { PasscodeScreen, PasscodeScreenNavigationProps } from '../../screens/PasscodeScreen/PasscodeScreen';
 import { OnboardingRoute } from '../routes';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<ReactNavigation.RootParamList>();
 
-export interface OnboardingParamList {
+export type OnboardingParamList = {
     [OnboardingRoute.Landing]: LandingScreenNavigationProps;
-}
+    [OnboardingRoute.Passcode]: PasscodeScreenNavigationProps;
+};
 
 /* eslint-disable @typescript-eslint/no-namespace, @typescript-eslint/no-empty-interface */
 declare global {
@@ -33,6 +35,7 @@ export const OnboardingNavigator: React.FunctionComponent<OnboardingNavigatorPro
             <Stack.Screen name={OnboardingRoute.Landing}>
                 {() => <LandingScreen onSignUp={props.onDone} />}
             </Stack.Screen>
+            <Stack.Screen name={OnboardingRoute.Passcode} component={PasscodeScreen} />
         </Stack.Group>
     </Stack.Navigator>
 );

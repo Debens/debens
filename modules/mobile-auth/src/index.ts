@@ -1,11 +1,8 @@
-import login from './login';
 import { module } from './module';
-import registration from './registration';
 import session from './session';
 
 const actions = {
-    login: login.actions.login,
-    register: registration.actions.register,
+    session: session.actions.started,
     LOGGED_IN: session.actions.STARTED,
     LOGGED_OUT: session.actions.STOPPED,
 };

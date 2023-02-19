@@ -11,7 +11,7 @@ import session from '../session';
 
 import * as actions from './registration.actions';
 
-const client = http.client.extend([http.modules.domain('https://api.debens.app/identity')]);
+const client = http.client.extend([http.modules.domain('https://identity.dev.debens.app')]);
 const api = new AttestationAPI(client);
 const service = new Attestation(api);
 

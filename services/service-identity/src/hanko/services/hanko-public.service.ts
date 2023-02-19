@@ -3,13 +3,14 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 
 import hankoConfig from '../../config/hanko.config';
+import { Hanko } from '../context/hanko.proxy';
 
 /*
  * documentation: https://docs.hanko.io/api/public
  */
 @Injectable()
 export class HankoPublicService {
-    constructor(@Inject(hankoConfig.KEY) config: ConfigType<typeof hankoConfig>) {
+    constructor(@Inject(hankoConfig.KEY) config: ConfigType<typeof hankoConfig>, private context: Hanko) {
         this.client = http.client.extend([http.modules.domain(config.publicUrl)]);
     }
 
@@ -36,7 +37,15 @@ export class HankoPublicService {
                 .post<
                     { user_id: string; email_id?: string },
                     { id: string; ttl: number; created_at: string }
-                >('/passcode/login/initialize', { user_id: user, email_id: email })
+                >(
+                    '/passcode/login/initialize',
+                    { user_id: user, email_id: email },
+                    {
+                        headers: {
+                            Cookie: `hanko_email_id=${this.context.email}`,
+                        },
+                    },
+                )
                 .then(({ data }) => data),
 
         /**
@@ -49,8 +58,7 @@ export class HankoPublicService {
                     payload,
                 )
                 .then(({ data, headers }) => {
-                    console.error(headers);
-                    return data;
+                    return Object.assign(data, { token: headers['x-auth-token'] });
                 }),
     };
 
@@ -76,7 +84,11 @@ export class HankoPublicService {
                                 attestation: string;
                             };
                         }
-                    >('/webauthn/registration/initialize', undefined)
+                    >('/webauthn/registration/initialize', undefined, {
+                        headers: {
+                            Authorization: `Bearer ${this.context.token}`,
+                        },
+                    })
                     .then(({ data }) => data),
 
             finalize: async (payload: {
@@ -89,8 +101,15 @@ export class HankoPublicService {
                     .post<typeof payload, { credential_id: string; user_id: string }>(
                         '/webauthn/registration/finalize',
                         payload,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${this.context.token}`,
+                            },
+                        },
                     )
-                    .then(({ data }) => data),
+                    .then(({ data, headers }) => {
+                        return Object.assign(data, { token: headers['x-auth-token'] });
+                    }),
         },
         assertion: {
             initalize: async (id: string) =>
@@ -125,7 +144,9 @@ export class HankoPublicService {
                         '/webauthn/login/finalize',
                         payload,
                     )
-                    .then(({ data }) => data),
+                    .then(({ data, headers }) => {
+                        return Object.assign(data, { token: headers['x-auth-token'] });
+                    }),
         },
     };
 }

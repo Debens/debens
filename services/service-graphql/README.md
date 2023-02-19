@@ -1,1 +1,0 @@
-# `@debens/service-graphql`

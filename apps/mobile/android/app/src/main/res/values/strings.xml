@@ -2,7 +2,7 @@
     <string name="app_name">mobile</string>
     <string name="asset_statements" translatable="false">
     [{
-    \"include\": \"https://api.debens.app/.well-known/assetlinks.json\"
+    \"include\": \"https://identity.dev.debens.app/.well-known/assetlinks.json\"
     }]
     </string>
 </resources>

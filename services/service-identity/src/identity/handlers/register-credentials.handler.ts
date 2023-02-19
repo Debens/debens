@@ -16,7 +16,9 @@ export class RegisterCredentialsHandler implements ICommandHandler<RegisterCrede
     async execute(command: RegisterCredentials): Promise<any> {
         const identity = this.publisher.mergeObjectContext(await this.identities.findById(command.identity));
 
-        await identity.register(command);
+        const response = await identity.register(command);
         await identity.commit();
+
+        return response;
     }
 }

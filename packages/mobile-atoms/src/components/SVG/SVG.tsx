@@ -5,6 +5,7 @@ import { SvgProps, SvgXml, XmlProps } from 'react-native-svg';
 import Bowtie from '../../assets/svg/bowtie.svg';
 import ChevronLeft from '../../assets/svg/chevron-left.svg';
 import Face from '../../assets/svg/face.svg';
+import MarkunreadMailbox from '../../assets/svg/markunread-mailbox.svg';
 import Person from '../../assets/svg/person.svg';
 import Quote from '../../assets/svg/quote.svg';
 import RadioSelected from '../../assets/svg/radio-selected.svg';
@@ -22,6 +23,7 @@ export enum SVGType {
     RadioUnselected = 'RadioUnselected',
     Quote = 'Quote',
     Face = 'Face',
+    MarkunreadMailbox = 'MarkunreadMailbox',
 }
 
 interface SVGProps extends SvgProps {
@@ -40,6 +42,7 @@ export const mapping: Record<SVGType, SVGComponent> = {
     [SVGType.RadioUnselected]: RadioUnselected,
     [SVGType.Quote]: Quote,
     [SVGType.Face]: Face,
+    [SVGType.MarkunreadMailbox]: MarkunreadMailbox,
 };
 
 export type SVG = React.FunctionComponent<XmlProps> & {

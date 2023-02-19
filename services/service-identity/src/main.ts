@@ -6,6 +6,7 @@ import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
 import { AppModule } from './app.module';
@@ -16,14 +17,17 @@ import rabbitmqConfig from './config/rabbitmq.config';
 
     app.useGlobalPipes(new ValidationPipe());
     app.use(morgan('combined'));
+    app.use(cookieParser());
 
-    const config = new DocumentBuilder()
-        .setTitle('service-identity')
-        .setVersion('1.0')
-        .addBearerAuth()
-        .build();
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('swagger', app, document);
+    if (process.env.SWAGGER_ENABLED) {
+        const config = new DocumentBuilder()
+            .setTitle('service-identity')
+            .setVersion('1.0')
+            .addBearerAuth()
+            .build();
+        const document = SwaggerModule.createDocument(app, config);
+        SwaggerModule.setup('swagger', app, document);
+    }
 
     await ConfigModule.envVariablesLoaded;
     const rmq = app.get(ConfigService).get<ConfigType<typeof rabbitmqConfig>>('rabbitmq');

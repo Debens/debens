@@ -10,7 +10,7 @@ export interface Toolbar extends React.FunctionComponent<React.PropsWithChildren
 }
 
 export const Toolbar: Toolbar = props => (
-    <Grid flexDirection="row" justifyContent="flex-end" mx="medium">
+    <Grid flexDirection="row" mx="medium">
         {props.children}
     </Grid>
 );

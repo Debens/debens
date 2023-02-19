@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>webcredentials:api.debens.app?mode=developer</string>
+		<string>webcredentials:identity.dev.debens.app?mode=developer</string>
 	</array>
 </dict>
 </plist>

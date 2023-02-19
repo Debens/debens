@@ -1,0 +1,52 @@
+{
+    "name": "@debens/service-gateway",
+    "version": "0.0.2-alpha.0",
+    "description": "graphql frontend service",
+    "license": "MIT",
+    "files": [
+        "build"
+    ],
+    "scripts": {
+        "prepublish": "docker build --build-arg SCOPE=@debens/service-identity -f ../../node.dockerfile ../../ -t service-identity",
+        "publish": "npm-run-all publish:*",
+        "publish:tag": "docker tag service-identity debens/service-identity",
+        "publish:push": "docker push debens/service-identity",
+        "launch": "node build/src/main.js",
+        "start": "nest start",
+        "start:watch": "yarn start --watch",
+        "build": "nest build",
+        "compile": "yarn build --noEmit",
+        "clean": "yarn build --clean",
+        "test": "jest --passWithNoTests",
+        "test:coverage": "yarn test --coverage",
+        "test:ci": "yarn test:coverage --ci --maxWorkers 1",
+        "lint": "eslint src",
+        "lint:fix": "yarn lint --fix",
+        "lint:staged": "lint-staged"
+    },
+    "dependencies": {
+        "@debens/nestjs-auth": "^0.0.1",
+        "@nestjs/apollo": "^10.1.7",
+        "@nestjs/cli": "^9.1.5",
+        "@nestjs/config": "^2.2.0",
+        "@nestjs/graphql": "^10.1.7",
+        "apollo-server-express": "^3.11.1",
+        "graphql": "^16.6.0",
+        "reflect-metadata": "^0.1.13"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.9",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-typescript": "^7.16.7",
+        "@debens/config-typescript": "0.0.2-alpha.0",
+        "@debens/eslint-config": "0.0.2-alpha.0",
+        "@debens/utils": "0.0.2-alpha.0",
+        "@types/jest": "^27.4.1",
+        "babel-jest": "^28.0.3",
+        "jest": "^28.0.3",
+        "lint-staged": "^12.4.1",
+        "prettier": "^2.6.2",
+        "tslib": "^2.4.0",
+        "typescript": "^4.6.3"
+    }
+}
