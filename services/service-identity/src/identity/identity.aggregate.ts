@@ -1,5 +1,9 @@
 import { Aggregate } from '@debens/event-sourcing';
-import { ConflictException, NotImplementedException } from '@nestjs/common';
+import {
+    BadRequestException,
+    ConflictException,
+    NotImplementedException,
+} from '@nestjs/common';
 
 import merge from 'deepmerge';
 import { DateTime } from 'luxon';
@@ -19,6 +23,7 @@ import {
     VerifyIdentity,
 } from './commands/verify-identity.command';
 import { DeviceChallenged } from './events/device-challenged';
+import { DeviceRegistered } from './events/device-registered';
 import { DeviceVerified } from './events/device-verified';
 import { EmailChallenged } from './events/email-challenged';
 import { EmailVerified } from './events/email-verified';
@@ -93,7 +98,7 @@ export class IdentityAggregate extends Aggregate {
 
                 this.apply(new DeviceChallenged(this.state.id, response));
 
-                return this.state.challenges.at(-1);
+                return response;
             }
         }
     }
@@ -101,16 +106,31 @@ export class IdentityAggregate extends Aggregate {
     async verify(command: VerifyIdentity) {
         switch (command.type) {
             case ChallengeType.Passcode: {
-                const challenge = await this.hanko.passcode.finalize(
-                    command.countersign as PasscodeVerifyCountersign,
-                );
+                const countersign = command.countersign as PasscodeVerifyCountersign;
+                const id = countersign.id
+                    ? countersign.id
+                    : this.state.challenges.filter(this.isPasscodeChallenge).at(-1)?.id;
 
-                return this.apply(new EmailVerified(this.state.id, { challenge: challenge.id }));
+                if (!id) {
+                    throw new BadRequestException('cannot infer passcode challenge id');
+                }
+
+                const challenge = await this.hanko.passcode.finalize(Object.assign({ id }, countersign));
+
+                this.apply(new EmailVerified(this.state.id, { challenge: challenge.id }));
+
+                return challenge;
             }
             case ChallengeType.Passkey: {
-                await this.hanko.webauthn.assertion.finalize(command.countersign as PasskeyVerifyCountersign);
+                const response = await this.hanko.webauthn.assertion.finalize(
+                    command.countersign as PasskeyVerifyCountersign,
+                );
 
-                return this.apply(new DeviceVerified(this.state.id));
+                return this.apply(
+                    new DeviceVerified(this.state.id, {
+                        credentials: response.credential_id,
+                    }),
+                );
             }
         }
     }
@@ -132,8 +152,14 @@ export class IdentityAggregate extends Aggregate {
                 throw new NotImplementedException();
             }
             case ChallengeType.Passkey: {
-                return await this.hanko.webauthn.attestation.finalize(
+                const response = await this.hanko.webauthn.attestation.finalize(
                     command.countersign as PasskeyFinalizeCountersign,
+                );
+
+                return this.apply(
+                    new DeviceRegistered(this.state.id, {
+                        credentials: response.credential_id,
+                    }),
                 );
             }
         }
@@ -167,14 +193,6 @@ export class IdentityAggregate extends Aggregate {
         if (challenge) {
             challenge.status = ChallengeStatus.Passed;
         }
-    }
-
-    onDeviceChallenged(event: DeviceChallenged) {
-        this.state.challenges.push({
-            type: ChallengeType.Passkey,
-            status: ChallengeStatus.Presented,
-            lifetime: { seconds: event.data.publicKey.timeout },
-        });
     }
 
     private isPasscodeChallenge = (challenge: Challenge): challenge is PasscodeChallenge =>

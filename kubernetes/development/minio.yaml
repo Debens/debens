@@ -7,11 +7,21 @@ spec:
     selector:
         app: minio
     ports:
-        - port: 9090
-          name: console
         - port: 9000
           name: s3
-    type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: minio-admin
+    namespace: dev
+spec:
+    selector:
+        app: minio
+    ports:
+        - port: 9090
+          name: console
+    type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -2,16 +2,17 @@ import { EventSourcingModule } from '@debens/event-sourcing';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
+import { ClsModule } from 'nestjs-cls';
+
 import eventstore from './config/eventstore.config';
 import rabbitmq from './config/rabbitmq.config';
 import { IdentityModule } from './identity/identity.module';
-import { WellKnownModule } from './well-known/well-known.module';
 
 @Module({
     imports: [
+        ClsModule.forRoot({ middleware: { mount: true } }),
         ConfigModule.forRoot({ cache: true, load: [eventstore, rabbitmq] }),
         IdentityModule.forRoot(),
-        WellKnownModule,
         EventSourcingModule.forRoot(),
     ],
     controllers: [],

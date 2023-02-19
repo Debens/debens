@@ -2,19 +2,12 @@ import React, { memo, useCallback } from 'react';
 import { Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-    Break,
-    Button,
-    EmailInput,
-    Grid,
-    Layer,
-    Screen,
-    SVG,
-} from '@debens/mobile-atoms';
-import auth from '@debens/mobile-auth';
+import { Break, Button, EmailInput, Grid, Layer, Screen, SVG } from '@debens/mobile-atoms';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+
+import login from '../../login';
 
 export type LandingScreenNavigationProps = undefined;
 
@@ -23,51 +16,33 @@ export interface LandingScreenProps {
 }
 
 interface FormValues {
-    type?: 'register' | 'login';
+    type?: 'enter' | 'passkey';
     email: string;
 }
 
 const useSubmit = () => {
     const dispatch = useDispatch();
     return useCallback(
-        ({ email, type }: FormValues) => {
-            switch (type) {
-                case 'login':
-                    return void dispatch(auth.actions.login({ email }));
-                case 'register':
-                    return void dispatch(auth.actions.register({ email }));
-                default:
-                    return;
-            }
+        ({ email }: FormValues) => {
+            return void dispatch(login.actions.enter({ email }));
         },
         [dispatch],
     );
 };
 
 export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => {
-    const { values, handleSubmit, setFieldValue, touched, errors, handleChange, handleBlur } =
-        useFormik<FormValues>({
-            initialValues: {
-                email: Platform.select({
-                    android: 'a.debens@gmail.co.uk',
-                    default: 'a.debens@gmail.com',
-                }),
-            },
-            onSubmit: useSubmit(),
-            validationSchema,
-        });
+    const { values, handleSubmit, touched, errors, handleChange, handleBlur } = useFormik<FormValues>({
+        initialValues: {
+            email: Platform.select({
+                android: 'a.debens@gmail.co.uk',
+                default: 'a.debens@gmail.com',
+            }),
+        },
+        onSubmit: useSubmit(),
+        validationSchema,
+    });
 
-    const onRegister = useCallback(() => {
-        setFieldValue('type', 'register');
-        handleSubmit();
-    }, [setFieldValue, handleSubmit]);
-
-    const onLogin = useCallback(() => {
-        setFieldValue('type', 'login');
-        handleSubmit();
-    }, [setFieldValue, handleSubmit]);
-
-    const loading = useSelector(auth.selectors.loading);
+    const loading = useSelector(login.selectors.loading);
 
     return (
         <Screen bottom="$layer-01">
@@ -91,12 +66,8 @@ export const LandingScreen: React.FunctionComponent<LandingScreenProps> = () => 
                     value={values.email}
                     error={touched.email ? errors.email : undefined}
                 />
-                <Break />
-                <Button onPress={onRegister} marginBottom="small" disabled={loading}>
-                    Sign up
-                </Button>
-                <Button variant="secondary" onPress={onLogin} disabled={loading}>
-                    Login
+                <Button onPress={handleSubmit} marginTop="small" disabled={loading}>
+                    Continue
                 </Button>
             </Layer>
         </Screen>

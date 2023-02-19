@@ -7,9 +7,12 @@ import {
     Param,
     Post,
     Query,
+    Res,
 } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+
+import { Response } from 'express';
 
 import { HankoAdminService } from '../../hanko/services/hank-admin.service';
 import { CreateIdentity } from '../commands/create-identity.command';
@@ -30,10 +33,12 @@ export class IdentityController {
     private readonly admin!: HankoAdminService;
 
     @Post()
-    async create(@Body() identity: CreateIdentityDTO) {
-        const response = await this.commandBus.execute(new CreateIdentity(identity));
+    async create(@Body() identity: CreateIdentityDTO, @Res() response: Response) {
+        const result = await this.commandBus.execute(new CreateIdentity(identity));
 
-        return response.state;
+        response.cookie('hanko_email_id', result.state.email[0]?.id);
+
+        response.send(result.state);
     }
 
     @Get('[:]search')

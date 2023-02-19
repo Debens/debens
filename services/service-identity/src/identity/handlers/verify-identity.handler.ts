@@ -13,10 +13,12 @@ export class VerifyIdentityHandler implements ICommandHandler<VerifyIdentity, un
     @Inject(EventStorePublisher)
     private readonly publisher!: EventStorePublisher;
 
-    async execute(command: VerifyIdentity): Promise<void> {
+    async execute(command: VerifyIdentity) {
         const identity = this.publisher.mergeObjectContext(await this.identities.findById(command.identity));
 
-        await identity.verify(command);
+        const response = await identity.verify(command);
         await identity.commit();
+
+        return response;
     }
 }

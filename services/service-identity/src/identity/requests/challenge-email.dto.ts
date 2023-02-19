@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsOptional } from 'class-validator';
 
 export class ChallengeEmailDTO {
     @IsEmail()
-    @IsNotEmpty()
-    @ApiProperty()
-    email!: string;
+    @IsOptional()
+    @ApiProperty({ nullable: true })
+    email?: string;
 }

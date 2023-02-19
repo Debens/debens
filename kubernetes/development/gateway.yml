@@ -17,14 +17,14 @@ spec:
           http:
               paths:
                   - path: /.well-known/apple-app-site-association
-                    pathType: Prefix
+                    pathType: Exact
                     backend:
                         service:
                             name: identity
                             port:
                                 name: api
                   - path: /.well-known/assetlinks.json
-                    pathType: Prefix
+                    pathType: Exact
                     backend:
                         service:
                             name: identity
@@ -63,7 +63,7 @@ metadata:
 spec:
     acme:
         email: a.debens@gmail.com
-        server: https://acme-staging-v02.api.letsencrypt.org/directory
+        server: https://acme-v02.api.letsencrypt.org/directory
         privateKeySecretRef:
             name: letsencrypt-dev
         solvers:

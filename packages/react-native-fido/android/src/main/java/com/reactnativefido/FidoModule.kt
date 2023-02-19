@@ -14,7 +14,7 @@ import com.google.android.gms.fido.fido2.api.common.AuthenticatorSelectionCriter
 class FidoModule(var reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     private var mPromise: Promise? = null;
-    private var domain: String = "api.debens.app";
+    private var domain: String = "identity.dev.debens.app";
     private var name: String = "debens";
 
     private val mActivityEventListener: ActivityEventListener = object : BaseActivityEventListener() {
@@ -123,7 +123,7 @@ class FidoModule(var reactContext: ReactApplicationContext) : ReactContextBaseJa
                     result.putString("rawId", publicKeyCredential.rawId.toBase64().toBase64URL())
 
                     val response = Arguments.createMap()
-                    response.putString("clientDataJSON", signedData.clientDataJSON.toBase64().toBase64URL())
+                    response.putString("clientDataJson", signedData.clientDataJSON.toBase64().toBase64URL())
                     response.putString("attestationObject", signedData.attestationObject.toBase64().toBase64URL())
                     result.putMap("response", response)
 
@@ -146,7 +146,7 @@ class FidoModule(var reactContext: ReactApplicationContext) : ReactContextBaseJa
                     result.putString("rawId", publicKeyCredential.rawId.toBase64().toBase64URL())
 
                     val response = Arguments.createMap()
-                    response.putString("clientDataJSON", signedData.clientDataJSON.toBase64().toBase64URL())
+                    response.putString("clientDataJson", signedData.clientDataJSON.toBase64().toBase64URL())
                     response.putString("authenticatorData", signedData.authenticatorData.toBase64().toBase64URL())
                     response.putString("signature", signedData.signature.toBase64().toBase64URL())
                     signedData.userHandle?.let { handle ->

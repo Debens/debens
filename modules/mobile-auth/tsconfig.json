@@ -22,6 +22,7 @@
         { "path": "../mobile-messaging" },
         { "path": "../../packages/react-native-fido" },
         { "path": "../../packages/toolkit-redux" },
+        { "path": "../../services/service-gateway" },
         { "path": "../../services/service-identity" }
     ],
     "include": ["src", "index.ts"],

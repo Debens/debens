@@ -17,13 +17,15 @@ import rabbitmqConfig from './config/rabbitmq.config';
     app.useGlobalPipes(new ValidationPipe());
     app.use(morgan('combined'));
 
-    const config = new DocumentBuilder()
-        .setTitle('service-persona')
-        .setVersion('1.0')
-        .addBearerAuth()
-        .build();
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('swagger', app, document);
+    if (process.env.SWAGGER_ENABLED) {
+        const config = new DocumentBuilder()
+            .setTitle('service-persona')
+            .setVersion('1.0')
+            .addBearerAuth()
+            .build();
+        const document = SwaggerModule.createDocument(app, config);
+        SwaggerModule.setup('swagger', app, document);
+    }
 
     await ConfigModule.envVariablesLoaded;
     const rmq = app.get(ConfigService).get<ConfigType<typeof rabbitmqConfig>>('rabbitmq');

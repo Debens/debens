@@ -8,7 +8,7 @@ export interface AssertionRequest {
     type: string;
     response: {
         authenticatorData: string;
-        clientDataJSON: string;
+        clientDataJson: string;
         signature: string;
         userHandle: string;
     };
@@ -20,11 +20,11 @@ export interface AttestationRequest {
     type: string;
     response: {
         attestationObject: string;
-        clientDataJSON: string;
+        clientDataJson: string;
     };
 }
 
-interface Config {
+export interface Config {
     name: string;
     domain: string;
 }

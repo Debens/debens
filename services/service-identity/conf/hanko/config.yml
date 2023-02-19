@@ -186,7 +186,7 @@ passcode:
         #
         # Default value: passcode@hanko.io
         #
-        from_address: no-reply@hanko.io
+        from_address: no-reply@debens.app
         ## from_name ##
         #
         # The sender name of emails sent to users.

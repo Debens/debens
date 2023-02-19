@@ -5,7 +5,7 @@ import AuthenticationServices
 @objc(Fido)
 class Fido: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
-    var domain: String = "api.debens.app"
+    var domain: String = "identity.dev.debens.app"
     var name: String = "debens"
     
     var resolve: RCTPromiseResolveBlock?
@@ -97,7 +97,7 @@ class Fido: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControll
             "type": "public-key",
             "response": [
                 "attestationObject": params.rawAttestationObject!.toBase64Url(),
-                "clientDataJSON": params.rawClientDataJSON.toBase64Url()
+                "clientDataJson": params.rawClientDataJSON.toBase64Url()
             ]
         ]);
     }
@@ -109,7 +109,7 @@ class Fido: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControll
             "type": "public-key",
             "response": [
                 "authenticatorData": params.rawAuthenticatorData.toBase64Url(),
-                "clientDataJSON": params.rawClientDataJSON.toBase64Url(),
+                "clientDataJson": params.rawClientDataJSON.toBase64Url(),
                 "signature": params.signature.toBase64Url(),
                 "userHandle": params.userID.toBase64Url()
             ]

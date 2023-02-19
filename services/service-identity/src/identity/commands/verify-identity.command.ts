@@ -3,7 +3,7 @@ import { ICommand } from '@nestjs/cqrs';
 import { ChallengeType } from '../identity.model';
 
 export interface PasscodeVerifyCountersign {
-    id: string /* passcode id */;
+    id?: string /* passcode id */;
     code: string;
 }
 
