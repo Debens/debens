@@ -1,12 +1,14 @@
 export enum AppRoute {
     Onboarding = 'onboarding',
     Home = 'home',
+    Profile = 'profile',
     AngryMogisan = 'angry_mogisan',
 }
 
 interface AppParamList {
     [AppRoute.Onboarding]: undefined;
     [AppRoute.Home]: undefined;
+    [AppRoute.Profile]: undefined;
     [AppRoute.AngryMogisan]: undefined;
 }
 

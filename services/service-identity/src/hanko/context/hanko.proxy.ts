@@ -10,7 +10,7 @@ export class Hanko {
     email?: string;
 
     constructor(@Inject(CLS_REQ) request: Request) {
-        this.token = request.cookies['hanko'];
-        this.email = request.cookies['hanko_email_id'];
+        this.token = request.cookies?.['hanko'];
+        this.email = request.cookies?.['hanko_email_id'];
     }
 }

@@ -3,6 +3,7 @@ export * from './identity/services/identity.api';
 
 export type { Tokens } from './identity/responses/tokens.dto';
 export type { EmailChallengeDTO } from './identity/responses/email-challenge.dto';
+export type { DeviceChallengeDTO } from './identity/responses/device-challenge.dto';
 
 export type { ChallengeEmailDTO } from './identity/requests/challenge-email.dto';
 export type { CreateIdentityDTO } from './identity/requests/create-identity.dto';

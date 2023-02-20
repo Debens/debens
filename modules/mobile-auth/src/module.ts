@@ -11,4 +11,5 @@ export const module: ISagaModule<AuthModuleState> = {
             session: session.reducer,
         }),
     },
+    sagas: [session.saga],
 };

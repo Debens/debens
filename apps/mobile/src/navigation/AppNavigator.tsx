@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { AppRoute } from '../routes';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 
 const Onboarding = React.lazy(() => import(/* webpackChunkName: "onboarding" */ './navigators/Onboarding'));
 
@@ -46,7 +47,7 @@ export const AppNavigator = () => {
     }
 
     return (
-        <Stack.Navigator initialRouteName="onboarding">
+        <Stack.Navigator initialRouteName="profile">
             <Stack.Group screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={AppRoute.Onboarding}>
                     {props => (
@@ -56,6 +57,7 @@ export const AppNavigator = () => {
                     )}
                 </Stack.Screen>
                 <Stack.Screen name={AppRoute.Home} component={HomeScreen} />
+                <Stack.Screen name={AppRoute.Profile} component={ProfileScreen} />
                 <Stack.Screen name={AppRoute.AngryMogisan}>
                     {() => (
                         <ErrorBoundary>

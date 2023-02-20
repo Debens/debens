@@ -1,7 +1,16 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Break, Button, Grid, Paragraph, Screen, SVG, TextInput, Toolbar } from '@debens/mobile-atoms';
+import {
+    Break,
+    Button,
+    Grid,
+    Paragraph,
+    Screen,
+    SVG,
+    TextInput,
+    Toolbar,
+} from '@debens/mobile-atoms';
 import { WithPasscodeChallenge } from '@debens/service-gateway';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -40,13 +49,7 @@ const useCountdown = (toDate: DateTime) => {
 const CODE_LENGTH = 6;
 const useSubmit = () => {
     const dispatch = useDispatch();
-    return useCallback(
-        (values: FormValues) => {
-            console.warn(values);
-            return void dispatch(passcode.actions.complete(values));
-        },
-        [dispatch],
-    );
+    return useCallback((values: FormValues) => void dispatch(passcode.actions.complete(values)), [dispatch]);
 };
 
 export const PasscodeScreen: React.FunctionComponent<PasscodeScreenProps> = ({ navigation, route }) => {
