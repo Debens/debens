@@ -2,10 +2,10 @@ import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Grid } from '@debens/mobile-atoms';
 import { Snackbar } from '@debens/mobile-molecules';
 import { withModules } from '@debens/toolkit-redux';
 
-import { Grid } from '../../../../../packages/mobile-atoms/src';
 import { module } from '../../module';
 import snackbar, { Snackbar as SnackbarModel } from '../../snackbar';
 

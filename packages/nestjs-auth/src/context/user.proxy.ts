@@ -10,7 +10,7 @@ export class User {
     token?: string;
 
     constructor(@Inject(CLS_REQ) request: Request) {
-        this.token = request.cookies['debens'];
+        this.token = request.cookies?.['debens'];
         if (!this.token) {
             this.token = request.headers.authorization?.split(' ')[1];
         }

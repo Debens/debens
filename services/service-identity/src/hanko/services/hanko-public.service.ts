@@ -31,6 +31,48 @@ export class HankoPublicService {
                 .then(({ data }) => data),
     };
 
+    readonly email = {
+        list: async () =>
+            await this.client
+                .get<Array<{ id: string; address: string; is_verified: boolean; is_primary: boolean }>>(
+                    '/emails',
+                    {
+                        headers: {
+                            Authorization: `Bearer ${this.context.token}`,
+                        },
+                    },
+                )
+                .then(({ data }) => data),
+
+        create: async (address: string) =>
+            await this.client.post<
+                { address: string },
+                { address: string; created_at: string; id: string; updated_at: string; verified: boolean }
+            >(
+                '/emails',
+                { address },
+                {
+                    headers: {
+                        Authorization: `Bearer ${this.context.token}`,
+                    },
+                },
+            ),
+
+        delete: async (id: string) =>
+            await this.client.delete(`/emails/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${this.context.token}`,
+                },
+            }),
+
+        markPrimary: async (id: string) =>
+            await this.client.post(`/emails/${id}/set_primary`, undefined, {
+                headers: {
+                    Authorization: `Bearer ${this.context.token}`,
+                },
+            }),
+    };
+
     readonly passcode = {
         initialize: async (user: string, email?: string) =>
             await this.client
@@ -148,5 +190,43 @@ export class HankoPublicService {
                         return Object.assign(data, { token: headers['x-auth-token'] });
                     }),
         },
+
+        list: async () =>
+            await this.client
+                .get<
+                    Array<{
+                        id: string;
+                        name: string;
+                        public_key: string;
+                        aaguid: string;
+                        transports: string[];
+                        created_at: string;
+                    }>
+                >('/webauthn/credentials', {
+                    headers: {
+                        Authorization: `Bearer ${this.context.token}`,
+                    },
+                })
+                .then(({ data }) => data),
+
+        update: async (id: string, name: string) =>
+            await this.client
+                .put<{ name: string }>(
+                    `/webauthn/credentials/${id}`,
+                    { name },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${this.context.token}`,
+                        },
+                    },
+                )
+                .then(({ data }) => data),
+
+        delete: async (id: string) =>
+            await this.client.delete(`/webauthn/credentials/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${this.context.token}`,
+                },
+            }),
     };
 }

@@ -25,7 +25,7 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
     }
 
     private static fromCookie(request: Request) {
-        return request.cookies['debens'] ?? null;
+        return request.cookies?.['debens'] ?? null;
     }
 
     validate(payload: JwtPayload) {

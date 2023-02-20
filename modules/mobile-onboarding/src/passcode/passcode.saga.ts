@@ -36,7 +36,6 @@ function* complete({ payload }: Action<actions.ICompletePayload>) {
 
         yield put(auth.actions.session(tokens.data));
     } catch (error: unknown) {
-        console.warn(error);
         yield put(messaging.actions.snackbar({ message: `${error}`, type: 'error' }));
 
         yield put(actions.error());

@@ -24,9 +24,10 @@ export const SettingsScreen: React.FunctionComponent = () => {
         <Screen marginY="medium">
             <ScrollView style={styles.grow} bounces={false}>
                 <Toolbar>
-                    <Toolbar.Item onPress={goBack}>
+                    <Toolbar.Item onPress={goBack} left>
                         <SVG.ChevronLeft />
                     </Toolbar.Item>
+                    <Toolbar.Spacer />
                     <Toolbar.Item onPress={onProfiles}>
                         <SVG.Person />
                     </Toolbar.Item>

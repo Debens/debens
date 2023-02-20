@@ -47,6 +47,7 @@ export const GameScreen: React.FunctionComponent = () => {
                 <Toolbar.Item onPress={onStop}>
                     <SVG.ChevronLeft />
                 </Toolbar.Item>
+                <Toolbar.Spacer />
                 <Toolbar.Item onPress={onSettings}>
                     <SVG.Settings />
                 </Toolbar.Item>

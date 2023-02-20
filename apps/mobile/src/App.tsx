@@ -9,6 +9,7 @@ import { SnackbarView } from '@debens/mobile-messaging';
 import { NavigationProvider } from '@debens/mobile-navigation';
 import { ThemeProvider, themes } from '@debens/theme';
 
+import { client } from './graphql/apollo-client';
 import AppNavigator from './navigation/AppNavigator';
 import store from './redux/store';
 
@@ -16,7 +17,7 @@ enableScreens();
 enableFreeze();
 
 export const App = () => (
-    <GraphQLProvider>
+    <GraphQLProvider client={client}>
         <Provider store={store}>
             <GhostProvider>
                 <ThemeProvider theme={themes.light}>

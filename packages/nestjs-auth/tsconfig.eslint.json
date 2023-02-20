@@ -1,6 +1,6 @@
 {
     "extends": "./tsconfig.json",
-    "references": [],
+    "references": [{ "path": "../../services/service-gateway" }],
     "exclude": ["node_modules", "test", "build"],
     "include": ["src", "*.ts"]
 }

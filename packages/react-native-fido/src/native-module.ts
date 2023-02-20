@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-import { Assertion, Attestation } from '@debens/service-identity/src';
+import { Assertion, Attestation } from '@debens/service-identity';
 
 export interface AssertionRequest {
     id: string;

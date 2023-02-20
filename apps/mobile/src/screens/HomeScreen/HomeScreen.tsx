@@ -1,16 +1,6 @@
 import React, { memo, useCallback } from 'react';
 
-import { gql, useQuery } from '@debens/graphql';
-import {
-    Ghost,
-    Grid,
-    Loader,
-    Paragraph,
-    Screen,
-    SVG,
-    SVGType,
-    Toolbar,
-} from '@debens/mobile-atoms';
+import { Grid, Paragraph, Screen, SVG, SVGType, Toolbar } from '@debens/mobile-atoms';
 import { NavigationRow } from '@debens/mobile-molecules';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,43 +8,26 @@ import { AppRoute } from '../../routes';
 
 export type HomeScreenNavigationProps = undefined;
 
-const SCREEN_QUERY = gql`
-    query HomeScreen {
-        viewer {
-            id
-        }
-    }
-`;
-
 export const HomeScreen: React.FunctionComponent = () => {
-    const { data, loading, error } = useQuery(SCREEN_QUERY);
-
     const navigation = useNavigation();
     const onAngryMogisan = useCallback(() => {
         navigation.navigate(AppRoute.AngryMogisan);
+    }, [navigation]);
+    const onProfile = useCallback(() => {
+        navigation.navigate(AppRoute.Profile);
     }, [navigation]);
 
     return (
         <Screen>
             <Toolbar>
                 <Toolbar.Item>
-                    <SVG.Person />
+                    <SVG.Person onPress={onProfile} />
                 </Toolbar.Item>
             </Toolbar>
             <Grid flex={1} margin="medium">
                 <Grid flex={1}>
                     <Paragraph typeset="$heading">Hi, Andrew.</Paragraph>
                 </Grid>
-                <Loader alignItems="center" loading={loading} margin="medium">
-                    <Loader.Loading>
-                        <Ghost.Text typeset="$body" chars={32} />
-                    </Loader.Loading>
-                    {error ? (
-                        <Paragraph typeset="$body">error: {error?.message}</Paragraph>
-                    ) : (
-                        <Paragraph typeset="$body">data: {data?.viewer?.id}</Paragraph>
-                    )}
-                </Loader>
                 <NavigationRow heading="Quote Book" image={SVGType.Quote}>
                     <Paragraph fontStyle="italic" typeset="$body" color="$text-placeholder" numberOfLines={1}>
                         You: &quot;I live life on my terms, not TFLs&quot;
