@@ -27,7 +27,10 @@ export class UserController {
             const user = await this.identity.create(email).then(response => response.data);
             return Object.assign({}, { user: user.id }, user.challenges[0]);
         } else {
-            const challenge = await this.identity.email.challenge(user.id).then(response => response.data);
+            const challenge = user.credentials.length
+                ? await this.identity.device.challenge(user.id).then(response => response.data)
+                : await this.identity.email.challenge(user.id).then(response => response.data);
+
             return Object.assign({}, { user: user.id }, challenge);
         }
     }

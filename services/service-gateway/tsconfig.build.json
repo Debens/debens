@@ -1,4 +1,8 @@
 {
     "extends": "./tsconfig.json",
-    "references": [{ "path": "../../packages/http" }, { "path": "../../packages/nestjs-auth" }]
+    "references": [
+        { "path": "../../packages/http" },
+        { "path": "../../packages/nestjs-auth" },
+        { "path": "../service-identity" }
+    ]
 }

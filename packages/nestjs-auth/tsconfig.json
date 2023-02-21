@@ -16,7 +16,7 @@
             "@debens/*": ["packages/*/src"]
         }
     },
-    "references": [{ "path": "../../services/service-gateway" }],
+    "references": [],
     "include": ["src", "index.ts"],
     "exclude": ["node_modules", "*.spec.*"]
 }

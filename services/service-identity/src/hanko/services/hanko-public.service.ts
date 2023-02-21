@@ -100,7 +100,8 @@ export class HankoPublicService {
                     payload,
                 )
                 .then(({ data, headers }) => {
-                    return Object.assign(data, { token: headers['x-auth-token'] });
+                    this.context.token = headers['x-auth-token'];
+                    return data;
                 }),
     };
 
@@ -137,7 +138,7 @@ export class HankoPublicService {
                 id: string;
                 rawId: string;
                 type: string;
-                response: { clientDataJson: string; attestationObject: string; transports: string };
+                response: { clientDataJson: string; attestationObject: string; transports?: string };
             }) =>
                 await this.client
                     .post<typeof payload, { credential_id: string; user_id: string }>(
@@ -149,9 +150,7 @@ export class HankoPublicService {
                             },
                         },
                     )
-                    .then(({ data, headers }) => {
-                        return Object.assign(data, { token: headers['x-auth-token'] });
-                    }),
+                    .then(({ data }) => data),
         },
         assertion: {
             initalize: async (id: string) =>
@@ -187,7 +186,8 @@ export class HankoPublicService {
                         payload,
                     )
                     .then(({ data, headers }) => {
-                        return Object.assign(data, { token: headers['x-auth-token'] });
+                        this.context.token = headers['x-auth-token'];
+                        return data;
                     }),
         },
 

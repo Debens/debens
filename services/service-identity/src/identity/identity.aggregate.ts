@@ -1,9 +1,5 @@
 import { Aggregate } from '@debens/event-sourcing';
-import {
-    BadRequestException,
-    ConflictException,
-    NotImplementedException,
-} from '@nestjs/common';
+import { BadRequestException, ConflictException, NotImplementedException } from '@nestjs/common';
 
 import merge from 'deepmerge';
 import { DateTime } from 'luxon';
@@ -12,10 +8,7 @@ import { HankoPublicService } from '../hanko/services/hanko-public.service';
 
 import { ChallengeIdentity } from './commands/challenge-identity.command';
 import { CreateIdentity } from './commands/create-identity.command';
-import {
-    FinalizeCredentials,
-    PasskeyFinalizeCountersign,
-} from './commands/finalize-credentials.command';
+import { FinalizeCredentials, PasskeyFinalizeCountersign } from './commands/finalize-credentials.command';
 import { RegisterCredentials } from './commands/register-credentials.command';
 import {
     PasscodeVerifyCountersign,
@@ -41,6 +34,7 @@ const DEFAULT_STATE: Partial<IdentityState> = {
     createdOn: undefined,
     email: undefined,
     challenges: [],
+    credentials: [],
 };
 
 export class IdentityAggregate extends Aggregate {
@@ -98,7 +92,11 @@ export class IdentityAggregate extends Aggregate {
 
                 this.apply(new DeviceChallenged(this.state.id, response));
 
-                return response;
+                return {
+                    type: ChallengeType.Passkey,
+                    status: ChallengeStatus.Presented,
+                    publicKey: response.publicKey,
+                };
             }
         }
     }
@@ -193,6 +191,10 @@ export class IdentityAggregate extends Aggregate {
         if (challenge) {
             challenge.status = ChallengeStatus.Passed;
         }
+    }
+
+    onDeviceRegistered(event: DeviceRegistered) {
+        this.state.credentials.push({ id: event.data.credentials });
     }
 
     private isPasscodeChallenge = (challenge: Challenge): challenge is PasscodeChallenge =>

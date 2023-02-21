@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "references": [
+        { "path": "../mobile-atoms" },
+        { "path": "../mobile-molecules" },
+        { "path": "../mobile-testing" }
+    ],
+    "exclude": ["node_modules", "test/**/*", "build/**/*"],
+    "include": ["src/**/*"]
+}

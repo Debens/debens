@@ -2,6 +2,7 @@ export type IdentityState = {
     id: string;
     email: { id: string; address: string }[];
     challenges: Challenge[];
+    credentials: Credential[];
     createdOn: Date;
 };
 
@@ -30,5 +31,15 @@ export interface PasscodeChallenge {
 export interface PasskeyChallenge {
     type: ChallengeType.Passkey;
     status: ChallengeStatus;
-    lifetime: { seconds: number };
+    publicKey: {
+        challenge: string;
+        timeout: number;
+        rpId: string;
+        allowCredentials: { type: string; id: string }[];
+        userVerification: string;
+    };
+}
+
+export interface Credential {
+    id: string;
 }

@@ -1,8 +1,12 @@
 import http from '@debens/http';
 
-import { VerifyDeviceDTO } from '../requests/verify-device.dto';
-import { EmailChallengeDTO } from '../responses/email-challenge.dto';
+import { DeviceChallengeDTO } from '../responses/device-challenge.dto';
 
+import type { FinalizeDeviceDTO } from '../requests/finalize-device.dto';
+import type { VerifyDeviceDTO } from '../requests/verify-device.dto';
+import type { DeviceCredentalsDTO } from '../responses/device-credentials.dto';
+import type { DeviceRegisterDTO } from '../responses/device-register.dto';
+import type { EmailChallengeDTO } from '../responses/email-challenge.dto';
 import type { IdentityState } from '../identity.model';
 import type { CreateIdentityDTO } from '../requests/create-identity.dto';
 import type { ChallengeEmailDTO } from './../requests/challenge-email.dto';
@@ -37,8 +41,15 @@ export class IdentityAPI {
     };
 
     readonly device = {
+        credentials: async () => await this.client.get<DeviceCredentalsDTO>('/identity/device/credentials'),
+
+        register: async (id: string) =>
+            await this.client.post<void, DeviceRegisterDTO>(`/identity/${id}/device/:register`, undefined),
+        finalize: async (id: string, payload: FinalizeDeviceDTO) =>
+            await this.client.post<FinalizeDeviceDTO>(`/identity/${id}/device/:finalize`, payload),
+
         challenge: async (id: string) =>
-            await this.client.post(`/identity/${id}/device/:challenge`, undefined),
+            await this.client.post<void, DeviceChallengeDTO>(`/identity/${id}/device/:challenge`, undefined),
         verify: async (id: string, dto: VerifyDeviceDTO) =>
             await this.client.post<VerifyDeviceDTO, Tokens>(`/identity/${id}/device/:verify`, dto),
     };

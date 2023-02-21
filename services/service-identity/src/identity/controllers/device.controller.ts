@@ -1,8 +1,22 @@
-import { AuthService } from '@debens/nestjs-auth';
-import { Body, Controller, Inject, NotFoundException, Param, Post } from '@nestjs/common';
+import { AccessTokenGuard } from '@debens/nestjs-auth';
+import {
+    Body,
+    Controller,
+    Get,
+    Inject,
+    NotFoundException,
+    Param,
+    Post,
+    Res,
+    UseGuards,
+} from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 
+import { Response } from 'express';
+
+import { Hanko } from '../../hanko/context/hanko.proxy';
+import { HankoPublicService } from '../../hanko/services/hanko-public.service';
 import { ChallengeIdentity } from '../commands/challenge-identity.command';
 import { FinalizeCredentials } from '../commands/finalize-credentials.command';
 import { RegisterCredentials } from '../commands/register-credentials.command';
@@ -11,7 +25,8 @@ import { ChallengeType } from '../identity.model';
 import { IdentityRepository } from '../identity.repository';
 import { FinalizeDeviceDTO } from '../requests/finalize-device.dto';
 import { VerifyDeviceDTO } from '../requests/verify-device.dto';
-import { Tokens } from '../responses/tokens.dto';
+import { DeviceCredentalDTO, DeviceCredentalsDTO } from '../responses/device-credentials.dto';
+import { DeviceRegisterDTO } from '../responses/device-register.dto';
 
 @ApiTags('Device')
 @Controller('identity/:id/device')
@@ -22,13 +37,33 @@ export class DeviceController {
     @Inject(CommandBus)
     private readonly commandBus!: CommandBus;
 
-    @Inject(AuthService)
-    private readonly auth!: AuthService;
+    @Inject(Hanko)
+    private readonly hanko!: Hanko;
+
+    @Inject(HankoPublicService)
+    private readonly service!: HankoPublicService;
+
+    @Get('credentials')
+    @ApiParam({ name: 'id' })
+    async credentials(): Promise<DeviceCredentalsDTO> {
+        const credentials = await this.service.webauthn.list();
+
+        return {
+            count: credentials.length,
+            results: credentials.map<DeviceCredentalDTO>(credentials => ({
+                id: credentials.id,
+                name: credentials.name,
+                createdOn: credentials.created_at,
+                publicKey: credentials.public_key,
+            })),
+        };
+    }
 
     @Post('[:]register')
     @ApiParam({ name: 'id' })
+    @UseGuards(AccessTokenGuard)
     async register(@Param('id') id: string) {
-        const response = await this.commandBus.execute(
+        const response: DeviceRegisterDTO = await this.commandBus.execute(
             new RegisterCredentials({ identity: id, type: ChallengeType.Passkey, sign: undefined }),
         );
 
@@ -37,12 +72,10 @@ export class DeviceController {
 
     @Post('[:]finalize')
     @ApiParam({ name: 'id' })
-    async finalize(@Param('id') id: string, @Body() countersign: FinalizeDeviceDTO): Promise<Tokens> {
-        const response = await this.commandBus.execute(
+    async finalize(@Param('id') id: string, @Body() countersign: FinalizeDeviceDTO) {
+        await this.commandBus.execute(
             new FinalizeCredentials({ identity: id, type: ChallengeType.Passkey, countersign }),
         );
-
-        return this.tokens(response.user.id);
     }
 
     @Post('[:]challenge')
@@ -66,16 +99,18 @@ export class DeviceController {
 
     @Post('[:]verify')
     @ApiParam({ name: 'id' })
-    async verify(@Param('id') id: string, @Body() countersign: VerifyDeviceDTO): Promise<Tokens> {
-        const response = await this.commandBus.execute(
+    async verify(@Param('id') id: string, @Body() countersign: VerifyDeviceDTO, @Res() response: Response) {
+        await this.commandBus.execute(
             new VerifyIdentity({ identity: id, type: ChallengeType.Passkey, countersign }),
         );
 
-        return this.tokens(response.user.id);
+        response
+            .cookie('debens', this.hanko.token, {
+                httpOnly: true,
+                sameSite: 'strict',
+                domain: process.env.TOKEN_DOMAIN || 'localhost',
+            })
+            .status(200)
+            .send({ access_token: this.hanko.token });
     }
-
-    private readonly tokens = async (id: string) => ({
-        access_token: await this.auth.getAccessToken(id),
-        refresh_token: await this.auth.getRefreshToken(id),
-    });
 }

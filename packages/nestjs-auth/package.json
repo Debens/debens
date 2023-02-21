@@ -19,7 +19,6 @@
         "lint:staged": "lint-staged"
     },
     "dependencies": {
-        "@debens/service-gateway": "^0.0.1",
         "@nestjs/config": "^2.2.0",
         "@nestjs/jwt": "^9.0.0",
         "@nestjs/passport": "^9.0.0",

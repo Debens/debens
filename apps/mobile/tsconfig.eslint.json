@@ -8,6 +8,7 @@
         { "path": "../../modules/mobile-onboarding" },
         { "path": "../../packages/mobile-atoms" },
         { "path": "../../packages/mobile-molecules" },
+        { "path": "../../packages/mobile-organisms" },
         { "path": "../../packages/graphql" },
         { "path": "../../packages/theme" }
     ],

@@ -1,1 +1,3 @@
 APP_NAME=debens (development)
+GRAPHQL_ENPOINT=http:/$()/localhost:3001/graphql
+GATEWAY_ENPOINT=http:/$()/localhost:3001

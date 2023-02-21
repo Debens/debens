@@ -1,0 +1,26 @@
+{
+    "extends": "@debens/config-typescript",
+    "compilerOptions": {
+        "composite": true,
+        "strict": true,
+        "outDir": "build",
+        "moduleResolution": "node",
+        "jsx": "react-native",
+        "lib": ["es2017"],
+        "target": "esnext",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "baseUrl": "../../",
+        "paths": {
+            "@debens/*": ["packages/*/src"]
+        }
+    },
+    "references": [
+        { "path": "../mobile-atoms" },
+        { "path": "../mobile-molecules" },
+        { "path": "../mobile-testing" }
+    ],
+    "exclude": ["node_modules", "*.config.*", "*.spec.*"],
+    "include": ["src", "index.ts"]
+}

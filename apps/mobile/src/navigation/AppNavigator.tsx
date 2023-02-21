@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { AppRoute } from '../routes';
+import AttestationScreen from '../screens/AttestationScreen/AttestationScreen';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 
@@ -47,7 +48,7 @@ export const AppNavigator = () => {
     }
 
     return (
-        <Stack.Navigator initialRouteName="profile">
+        <Stack.Navigator initialRouteName="onboarding">
             <Stack.Group screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={AppRoute.Onboarding}>
                     {props => (
@@ -58,6 +59,9 @@ export const AppNavigator = () => {
                 </Stack.Screen>
                 <Stack.Screen name={AppRoute.Home} component={HomeScreen} />
                 <Stack.Screen name={AppRoute.Profile} component={ProfileScreen} />
+                <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                    <Stack.Screen name={AppRoute.Attestation} component={AttestationScreen} />
+                </Stack.Group>
                 <Stack.Screen name={AppRoute.AngryMogisan}>
                     {() => (
                         <ErrorBoundary>

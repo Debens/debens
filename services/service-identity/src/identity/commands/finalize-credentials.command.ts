@@ -13,7 +13,7 @@ export interface PasskeyFinalizeCountersign {
     response: {
         clientDataJson: string;
         attestationObject: string;
-        transports: string;
+        transports?: string;
     };
 }
 

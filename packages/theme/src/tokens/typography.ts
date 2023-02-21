@@ -12,9 +12,16 @@ export enum LineHeight {
     Large = '24px',
 }
 
+export enum FontWeightToken {
+    Light = 'light',
+    Normal = 'normal',
+    Bold = 'bold',
+}
+
 export enum FontWeight {
     Light = 400,
     Normal = 600,
+    Bold = 800,
 }
 
 export interface TypeSet {

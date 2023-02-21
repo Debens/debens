@@ -25,6 +25,7 @@ const ToolbarSpacer: React.FunctionComponent<ToolbarItemProps> = () => {
 };
 
 ToolbarItem.defaultProps = {
+    backgroundColor: '$background-primary',
     activeColor: '$layer-01',
     borderRadius: 'xlarge',
     padding: 'small',

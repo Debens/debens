@@ -7,7 +7,7 @@
         "build"
     ],
     "scripts": {
-        "prepublish": "docker build --build-arg SCOPE=@debens/service-identity -f ../../node.dockerfile ../../ -t service-identity",
+        "prepublishOnly": "docker build --build-arg SCOPE=@debens/service-identity -f ../../node.dockerfile ../../ -t service-identity",
         "publish": "npm-run-all publish:*",
         "publish:tag": "docker tag service-identity debens/service-identity",
         "publish:push": "docker push debens/service-identity",

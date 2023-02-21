@@ -19,7 +19,11 @@
             "@debens/*": ["packages/*/src"]
         }
     },
-    "references": [{ "path": "../../packages/http" }, { "path": "../../packages/nestjs-auth" }],
+    "references": [
+        { "path": "../../packages/http" },
+        { "path": "../../packages/nestjs-auth" },
+        { "path": "../service-identity" }
+    ],
     "exclude": ["node_modules", "*.config.*", "*.spec.*"],
     "include": ["src", "index.ts"]
 }

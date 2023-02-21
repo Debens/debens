@@ -17,4 +17,5 @@ rules:
         - skip:
               - Paragraph
               - Button
+              - AuxButton
     react-native/no-single-element-style-arrays: error
