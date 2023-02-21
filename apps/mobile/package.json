@@ -33,6 +33,7 @@
         "@debens/mobile-atoms": "0.0.2-alpha.0",
         "@debens/mobile-messaging": "0.0.1",
         "@debens/mobile-molecules": "0.0.1",
+        "@debens/mobile-organisms": "0.0.1",
         "@debens/mobile-onboarding": "0.0.2-alpha.0",
         "@debens/react-native-fido": "0.0.2-alpha.0",
         "@debens/theme": "0.0.2-alpha.0",

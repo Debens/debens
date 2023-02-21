@@ -1,8 +1,12 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import { gql, useQuery } from '@debens/graphql';
-import { Break, Button, Ghost, Grid, Loader, Paragraph, Screen, SVG, Toolbar } from '@debens/mobile-atoms';
+import { Break, Ghost, Grid, Loader, Paragraph, Screen, SVG, SVGType, Toolbar } from '@debens/mobile-atoms';
+import { AuxButton } from '@debens/mobile-molecules';
+import { PanelList } from '@debens/mobile-organisms';
 import { useNavigation } from '@react-navigation/native';
+
+import { AppRoute } from '../../routes';
 
 export type ProfileScreenNavigationProps = undefined;
 
@@ -10,6 +14,20 @@ const SCREEN_QUERY = gql`
     query ProfileScreen {
         viewer {
             id
+            names {
+                display
+            }
+            email {
+                id
+                address
+            }
+            credentials {
+                passkeys {
+                    registered {
+                        id
+                    }
+                }
+            }
         }
     }
 `;
@@ -18,6 +36,9 @@ export const ProfileScreen: React.FunctionComponent = () => {
     const { data, loading, error } = useQuery(SCREEN_QUERY);
 
     const navigation = useNavigation();
+    const onCreatePasskey = useCallback(() => {
+        navigation.navigate(AppRoute.Attestation);
+    }, [navigation]);
 
     return (
         <Screen>
@@ -27,9 +48,9 @@ export const ProfileScreen: React.FunctionComponent = () => {
                 </Toolbar.Item>
             </Toolbar>
             <Paragraph typeset="$heading" textAlign="center">
-                Andrew Debens
+                {data?.viewer.names.display}
             </Paragraph>
-            <Loader alignItems="center" loading={loading} marginBottom="small">
+            <Loader alignItems="center" loading={loading} marginY="small">
                 <Loader.Loading>
                     <Ghost.Text typeset="$body" chars={32} />
                 </Loader.Loading>
@@ -43,54 +64,23 @@ export const ProfileScreen: React.FunctionComponent = () => {
                 <Break flex={1} />
             </Grid>
             <Grid flex={1} margin="medium">
-                <Grid backgroundColor="$layer-01" borderRadius="medium" p="medium" mb="medium">
-                    <Paragraph fontWeight="bold" marginBottom="small">
-                        Emails
-                    </Paragraph>
-                    <Loader alignItems="center" loading={loading} marginY="small">
-                        <Loader.Loading>
-                            <Ghost.Text typeset="$body" chars={32} />
-                        </Loader.Loading>
-                        <Paragraph typeset="$body" color="$text-placeholder">
-                            No email
-                        </Paragraph>
-                    </Loader>
-                    <Button.Frame
-                        flexDirection="row"
-                        alignItems="center"
-                        activeColor="$layer-active-01"
-                        padding="small"
-                        borderRadius="xlarge"
-                        onPress={() => void 0}
-                        alignSelf="flex-end">
-                        <SVG.Add preserveAspectRatio="xMidyMid meet" size="medium" />
-                        <Paragraph marginLeft="xsmall">Add</Paragraph>
-                    </Button.Frame>
-                </Grid>
-                <Grid backgroundColor="$layer-01" borderRadius="medium" p="medium">
-                    <Paragraph fontWeight="bold" marginBottom="small">
-                        Passkeys
-                    </Paragraph>
-                    <Loader alignItems="center" loading={loading} marginY="small">
-                        <Loader.Loading>
-                            <Ghost.Text typeset="$body" chars={32} />
-                        </Loader.Loading>
-                        <Paragraph typeset="$body" color="$text-placeholder">
-                            No passkeys
-                        </Paragraph>
-                    </Loader>
-                    <Button.Frame
-                        flexDirection="row"
-                        alignItems="center"
-                        activeColor="$layer-active-01"
-                        padding="small"
-                        borderRadius="xlarge"
-                        onPress={() => void 0}
-                        alignSelf="flex-end">
-                        <SVG.Add preserveAspectRatio="xMidyMid meet" size="medium" />
-                        <Paragraph marginLeft="xsmall">Create</Paragraph>
-                    </Button.Frame>
-                </Grid>
+                <PanelList<{ address: string }>
+                    mb="medium"
+                    data={data?.viewer?.email}
+                    renderItem={({ item }) => <Paragraph>{item.address}</Paragraph>}>
+                    <Paragraph fontWeight="bold">Emails</Paragraph>
+                    <AuxButton image={SVGType.Add} marginLeft="auto">
+                        New
+                    </AuxButton>
+                </PanelList>
+                <PanelList<{ id: string }>
+                    data={data?.viewer?.credentials.passkeys.registered}
+                    renderItem={({ item }) => <Paragraph>{item.id}</Paragraph>}>
+                    <Paragraph fontWeight="bold">Passkeys</Paragraph>
+                    <AuxButton image={SVGType.Add} onPress={onCreatePasskey} marginLeft="auto">
+                        New
+                    </AuxButton>
+                </PanelList>
             </Grid>
         </Screen>
     );

@@ -12,7 +12,7 @@ import { AxiosResponse } from 'axios';
 
 import * as actions from './passkey.actions';
 
-const client = http.client.extend([http.modules.domain('https://localhost:3001')]);
+const client = http.client.extend([http.modules.domain('http://localhost:3001')]);
 const api = new UserAPI(client);
 
 export function* start() {
@@ -27,7 +27,7 @@ function* login({ payload }: Action<actions.ILoginPayload>) {
 
         const tokens: AxiosResponse<Tokens> = yield call([api.login, 'withPasskey'], {
             ...assertion,
-            user: '',
+            user: payload.user,
         });
 
         yield put(auth.actions.session(tokens.data));

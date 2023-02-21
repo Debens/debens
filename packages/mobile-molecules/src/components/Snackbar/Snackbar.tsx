@@ -1,14 +1,7 @@
 import React, { memo } from 'react';
 import { FadeOutUp, Layout, SlideInDown } from 'react-native-reanimated';
 
-import {
-    Button,
-    ENTERING,
-    EXITING,
-    Grid,
-    Paragraph,
-    standard,
-} from '@debens/mobile-atoms';
+import { Button, ENTERING, EXITING, Grid, Paragraph, standard } from '@debens/mobile-atoms';
 
 export type SnackbarProps = React.ComponentProps<typeof Grid.Animated> & {
     message: string;

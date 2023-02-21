@@ -3,6 +3,9 @@ import { AuthModule } from '@debens/nestjs-auth';
 import { DynamicModule } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 
+import { ClsModule } from 'nestjs-cls';
+
+import { Hanko } from '../hanko/context/hanko.proxy';
 import { HankoModule } from '../hanko/hanko.module';
 
 import { DeviceController } from './controllers/device.controller';
@@ -30,7 +33,13 @@ export class IdentityModule {
     static forRoot(): DynamicModule {
         return {
             module: IdentityModule,
-            imports: [CqrsModule, AuthModule, EventSourcingModule.forModule(), HankoModule],
+            imports: [
+                ClsModule.forFeature(Hanko),
+                CqrsModule,
+                AuthModule,
+                EventSourcingModule.forModule(),
+                HankoModule,
+            ],
             controllers: [IdentityController, EmailController, DeviceController],
             providers: [...CommandHandlers, ...EventHandlers, IdentityFactory, IdentityRepository],
         };

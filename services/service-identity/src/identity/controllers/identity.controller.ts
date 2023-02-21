@@ -1,14 +1,4 @@
-import {
-    Body,
-    Controller,
-    Get,
-    Inject,
-    NotFoundException,
-    Param,
-    Post,
-    Query,
-    Res,
-} from '@nestjs/common';
+import { Body, Controller, Get, Inject, NotFoundException, Param, Post, Query, Res } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
@@ -45,7 +35,6 @@ export class IdentityController {
     @ApiQuery({ name: 'email' })
     async search(@Query('email') email: string): Promise<IdentityState> {
         const user = await this.admin.getUserByEmail(email);
-
         if (!user) {
             throw new NotFoundException();
         }

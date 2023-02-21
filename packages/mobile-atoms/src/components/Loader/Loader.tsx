@@ -12,10 +12,10 @@ type Children<P> = React.ReactNode | React.JSXElementConstructor<{ data: NonNull
 export type LoaderProps<D> = React.ComponentProps<typeof Grid.Animated> & {
     loading?: boolean;
     data?: D;
-    children?: Children<D>;
+    children?: [React.ReactNode, Children<D>] | Children<D>;
 };
 
-const toArray = <D,>(children: Children<D>): Array<Children<D>> =>
+const toArray = <D,>(children?: [React.ReactNode, Children<D>] | Children<D>): Array<Children<D>> =>
     Array.isArray(children) ? children : [children];
 
 const isReady = <D, P extends { data?: D }>(props: P): props is P & { data: NonNullable<D> } =>

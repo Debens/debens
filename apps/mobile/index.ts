@@ -9,27 +9,16 @@ import { App } from './src/App';
 
 const resolveURL = Federated.createURLResolver({
     containers: {
-        AngryMogisan: 'http://localhost:8082/[name][ext]',
+        main: 'https://api.debens.app/static/android/[name][ext]',
+        AngryMogisan: 'https://api.debens.app/static/android/[name][ext]',
+    },
+    chunks: {
+        main: 'https://api.debens.app/static/android/[name][ext]',
     },
 });
 
 ScriptManager.shared.setStorage(AsyncStorage);
 ScriptManager.shared.addResolver(async (scriptId, caller) => {
-    const url = caller === 'main' ? Script.getDevServerURL(scriptId) : resolveURL(scriptId, caller);
-    if (!url) {
-        return undefined;
-    }
-
-    return {
-        url,
-        cache: false, // For development
-        query: {
-            platform: Platform.OS,
-        },
-    };
-});
-
-ScriptManager.shared.addResolver(async scriptId => {
     // In development, get all the chunks from dev server.
     if (__DEV__) {
         return {
@@ -47,8 +36,13 @@ ScriptManager.shared.addResolver(async scriptId => {
             url: Script.getFileSystemURL(scriptId),
         };
     } else {
+        const url = resolveURL(scriptId, caller);
+        if (!url) {
+            return undefined;
+        }
+
         return {
-            url: Script.getRemoteURL(`https://api.debens.app/chunks/${scriptId}`),
+            url,
             query: {
                 platform: Platform.OS,
             },

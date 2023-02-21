@@ -9,7 +9,12 @@ import * as system from 'styled-system';
 import * as custom from '../../utils/style-functions';
 
 export type ParagraphProps = React.ComponentProps<typeof Text> &
-    React.PropsWithChildren<system.ColorProps<Theme> | system.SpaceProps<Theme> | custom.TypographyProps>;
+    React.PropsWithChildren<
+        | system.ColorProps<Theme>
+        | system.SpaceProps<Theme>
+        | system.TypographyProps<Theme>
+        | custom.TypographyProps
+    >;
 
 const allowedProps: Record<string, boolean> = { numberOfLines: true };
 
@@ -19,6 +24,7 @@ const Paragraph: React.ComponentType<ParagraphProps> = styled.Text.withConfig({
 })<ParagraphProps>`
     ${system.color}
     ${system.space}
+    ${system.typography}
     ${custom.typography}
 `;
 

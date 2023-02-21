@@ -264,8 +264,8 @@ webauthn:
         #
         origins:
             - 'android:apk-key-hash:nLSu7wVTbnMOxLgC52f2faTnv...'
-            - 'https://dev.example.app'
-            - 'https://api.dev.example.app'
+            - 'https://api.dev.debens.app'
+            - 'http://localhost'
 ## audit_log ##
 #
 # Configures audit logging

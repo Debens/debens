@@ -3,6 +3,8 @@ import { Inject } from '@nestjs/common';
 import { Request } from 'express';
 import { CLS_REQ, InjectableProxy } from 'nestjs-cls';
 
+import { getTokenFromRequest } from '../utils/token-extractor';
+
 @InjectableProxy()
 export class User {
     id?: string;
@@ -10,9 +12,9 @@ export class User {
     token?: string;
 
     constructor(@Inject(CLS_REQ) request: Request) {
-        this.token = request.cookies?.['debens'];
-        if (!this.token) {
-            this.token = request.headers.authorization?.split(' ')[1];
+        const token = getTokenFromRequest(request);
+        if (token) {
+            this.token = token;
         }
     }
 }

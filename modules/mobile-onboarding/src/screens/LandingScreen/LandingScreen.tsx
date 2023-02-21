@@ -2,7 +2,7 @@ import React, { memo, useCallback } from 'react';
 import { Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Break, Button, EmailInput, Grid, Layer, Screen, SVG } from '@debens/mobile-atoms';
+import { Button, EmailInput, Grid, Layer, Screen, SVG } from '@debens/mobile-atoms';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';

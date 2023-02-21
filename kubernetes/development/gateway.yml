@@ -10,10 +10,10 @@ spec:
     tls:
         - hosts:
               - static.dev.debens.app
-              - identity.dev.debens.app
+              - api.dev.debens.app
           secretName: tls-dev-ingress-http
     rules:
-        - host: identity.dev.debens.app
+        - host: api.dev.debens.app
           http:
               paths:
                   - path: /.well-known/apple-app-site-association

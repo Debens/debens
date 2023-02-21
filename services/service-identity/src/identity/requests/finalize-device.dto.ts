@@ -15,8 +15,8 @@ class AttestationResponse {
 
     // @IsString()
     // @IsNotEmpty()
-    @ApiProperty()
-    transports!: string;
+    @ApiProperty({ nullable: true })
+    transports?: string;
 }
 
 export class FinalizeDeviceDTO {

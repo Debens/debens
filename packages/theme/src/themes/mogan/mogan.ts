@@ -75,6 +75,11 @@ export const mógan: Theme = {
         none: 0,
         small: 1,
     },
+    fontWeights: {
+        light: FontWeight.Light,
+        normal: FontWeight.Normal,
+        bold: FontWeight.Bold,
+    },
     typography: {
         $body: {
             fontFamily: FontFamily.Unknown,

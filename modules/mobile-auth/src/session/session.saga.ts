@@ -14,7 +14,7 @@ function* session({ payload }: Action<actions.IStartPayload>) {
     try {
         yield all({
             access: call([tokens.access, 'set'], payload.access_token),
-            refresh: call([tokens.refresh, 'set'], payload.refresh_token),
+            // refresh: call([tokens.refresh, 'set'], payload.refresh_token),
         });
 
         yield put(actions.started());
