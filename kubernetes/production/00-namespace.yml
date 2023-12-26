@@ -4,6 +4,7 @@ metadata:
     name: prod
     labels:
         name: prod
+        secrets-injection: enabled
 ---
 apiVersion: v1
 kind: ServiceAccount
