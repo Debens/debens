@@ -75,9 +75,9 @@ spec:
           - mountPath: /config/configuration.yaml
             subPath: configuration.yaml
             name: configmap-file
-          - mountPath: /config/automations.yaml
-            subPath: automations.yaml
-            name: configmap-file
+          # - mountPath: /config/automations.yaml
+          #   subPath: automations.yaml
+          #   name: configmap-file
       restartPolicy: Always
       volumes:
         - name: ha-config-root
@@ -107,7 +107,7 @@ metadata:
 data:
   known_devices.yaml: |
   automations.yaml: |
-  configuration.yaml: |-
+  configuration.yaml: |
     default_config:
     frontend:
       themes: !include_dir_merge_named themes

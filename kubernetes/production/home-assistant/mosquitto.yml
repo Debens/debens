@@ -44,6 +44,9 @@ spec:
             - name: mosquitto-conf
               mountPath: /tmp/mosquitto.conf
               subPath: mosquitto.conf
+            - name: mosquitto-conf
+              mountPath: /tmp/password_file
+              subPath: password_file
       containers:
         - name: mosquitto
           image: "eclipse-mosquitto:2.0.18"
@@ -104,6 +107,8 @@ metadata:
   namespace: home-assistant
   name: mosquitto-conf
 data:
+  password_file: |
+
   mosquitto.conf: |
     listener 1883
     persistence true
