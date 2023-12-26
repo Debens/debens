@@ -1,0 +1,131 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: home-assistant
+  name: home-assistant
+spec:
+  selector:
+    app: home-assistant
+  ports:
+  - port: 8123
+    name: console
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: home-assistant
+  name: home-assistant
+  labels:
+    app: home-assistant
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+#      securityContext:
+#        fsGroup: 33
+#        fsGroupChangePolicy: "OnRootMismatch"
+      containers:
+      - name: home-assistant-app
+        image: "ghcr.io/home-assistant/home-assistant:2022.12.1"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: null
+        envFrom:
+          - configMapRef:
+              name: home-assistant-config
+        ports:
+          - name: http
+            containerPort: 8123
+            protocol: TCP
+        resources: {}
+        livenessProbe:
+          tcpSocket:
+            port: 8123
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          timeoutSeconds: 1
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 8123
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          timeoutSeconds: 1
+          periodSeconds: 10
+        startupProbe:
+          tcpSocket:
+            port: 8123
+          initialDelaySeconds: 0
+          failureThreshold: 30
+          timeoutSeconds: 1
+          periodSeconds: 5
+        volumeMounts:
+          - name: ha-config-root
+            mountPath: /config
+
+          - mountPath: /config/configuration.yaml
+            subPath: configuration.yaml
+            name: configmap-file
+          - mountPath: /config/automations.yaml
+            subPath: automations.yaml
+            name: configmap-file
+      restartPolicy: Always
+      volumes:
+        - name: ha-config-root
+          persistentVolumeClaim:
+            claimName: home-assistant-config-root
+        - name: configmap-file
+          configMap:
+            name: home-assistant-config
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: home-assistant
+  name: home-assistant-config-root
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: home-assistant
+  name: home-assistant-config
+data:
+  known_devices.yaml: |
+  automations.yaml: |
+  configuration.yaml: |-
+    default_config:
+    frontend:
+      themes: !include_dir_merge_named themes
+    automation: !include automations.yaml
+    http:
+      cors_allowed_origins:
+        - https://home.debens.app
+      use_x_forwarded_for: true
+      trusted_proxies:
+        - 10.42.0.1
+        - 10.42.0.208
+    homeassistant:
+      name: Home
+      country: GP
+      currency: GBP
+      time_zone: "Europe/London"
+      elevation: 11
+      unit_system: metric
+      latitude: 51.5072
+      longitude: 0.1276
+      external_url: https://home.debens.app

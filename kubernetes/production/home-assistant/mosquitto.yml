@@ -1,0 +1,111 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: home-assistant
+  name: mosquitto
+  labels:
+    app: mosquitto
+spec:
+  type: ClusterIP
+  ports:
+  - port: 1883
+    targetPort: mqtt
+    protocol: TCP
+    name: mqtt
+  selector:
+    app: mosquitto
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: home-assistant
+  name: mosquitto
+  labels:
+    app: mosquitto
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      initContainers:
+        - name: create-config
+          image: "eclipse-mosquitto:2.0.18"
+          command: ['sh', '-c', "cd /mosquitto/config/ && cp -v /tmp/mosquitto.conf mosquitto.conf && cp -v /tmp/password_file password_file"]
+          volumeMounts:
+            - name: mosquitto-conf
+              mountPath: /tmp/mosquitto.conf
+              subPath: mosquitto.conf
+      containers:
+        - name: mosquitto
+          image: "eclipse-mosquitto:2.0.18"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: mqtt
+              containerPort: 1883
+              protocol: TCP
+          volumeMounts:
+            - name: mosquitto-data
+              mountPath: /mosquitto/data
+            - name: mosquitto-conf
+              mountPath: /mosquitto/config
+          livenessProbe:
+            tcpSocket:
+              port: 1883
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 60
+          readinessProbe:
+            tcpSocket:
+              port: 1883
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 60
+          startupProbe:
+            tcpSocket:
+              port: 1883
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: mosquitto-data
+          persistentVolumeClaim:
+            claimName: mosquitto-data
+        - name: mosquitto-conf
+          configMap:
+            name: mosquitto-conf
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: home-assistant
+  name: mosquitto-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: home-assistant
+  name: mosquitto-conf
+data:
+  mosquitto.conf: |
+    listener 1883
+    persistence true
+    persistence_location /mosquitto/data
+    autosave_interval 1800
