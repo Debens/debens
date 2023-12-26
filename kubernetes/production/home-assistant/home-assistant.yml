@@ -117,8 +117,7 @@ data:
         - https://home.debens.app
       use_x_forwarded_for: true
       trusted_proxies:
-        - 10.42.0.1
-        - 10.42.0.208
+        - 10.42.0.0/24
     homeassistant:
       name: Home
       country: GP
