@@ -33,25 +33,31 @@ metadata:
         app: minio
 spec:
     replicas: 1
+    selector:
+        matchLabels:
+            app: minio
     template:
         metadata:
             name: minio
             labels:
                 app: minio
         spec:
-            volumes:
-                - name: data
-                  emptyDir:
-                      sizeLimit: 500Mi
+            restartPolicy: Always
             containers:
                 - name: minio
                   image: quay.io/minio/minio:latest
                   imagePullPolicy: IfNotPresent
-                  #          env:
-                  #            - name: MINIO_ACCESS_KEY
-                  #              value: "minio"
-                  #            - name: MINIO_SECRET_KEY
-                  #              value: "minio123"
+                  env:
+                      - name: MINIO_ROOT_USER
+                        valueFrom:
+                            secretKeyRef:
+                                name: minio-root-user
+                                key: username
+                      - name: MINIO_ROOT_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: minio-root-user
+                                key: password
                   livenessProbe:
                       httpGet:
                           path: /minio/health/live
@@ -79,7 +85,23 @@ spec:
                       - -c
                   args:
                       - minio server /data --console-address :9090
-            restartPolicy: Always
-    selector:
-        matchLabels:
-            app: minio
+            volumes:
+                - name: data
+                  emptyDir:
+                      sizeLimit: 500Mi
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: minio-root-user
+  namespace: prod
+spec:
+  encryptedData:
+    password: AgA/FBbaImAqb+BlADE0ohCF5wj8DMoDDTzlUAgHTRHtnL2vmQWMWZo8cgnHdHsXRBb/Mt2Shb5qD72Y0G3H/RgtX9p2y+upmBbxuS9TahV+fZEHU4ZwpAXfKeeszjLv5W1vSZGWF8bMNguyQasUFo2fDHRr106EN1Wcmp0hU2x2ZkZCk4S694jOYhw2CDFCDfX+6ZbXCIWsl0/3fxRjHLNVbzL/hqlMTr0fPl8h3j83qzOfjfvNSSIRBE7uvGIHLGZPPdpox+jhJpFoBLKRi6XRkb4k7kg/lDdYnsL2PmLewunNNED0i2h2oudp33dzSYjW+ym0cL2lZA7V51fZZtDi5rF7atItPm96mFz7b4uIC+VJiF1EczAGHVU7X2wZsXbxExc/TtgBw/hDNDixjV6wA9Y9TdU6jbx6ZErrEW7iMvPfFo6r7zWhWYRFwBv7I2fBIggS6eTAiSN3npkS2xbIiRYd4j9y15iTHGEUyAHVRQLD8OzXbHh2P673Dl6dE1s8B+KOHn7LlyLTuZ4qOwoa2m3JroESGZwYlXSukn5pQFbsWhQjdPq6eKO3MD4qGYHMlyb4CHr8vxKF64qr1y4alXVgOdBAJAGXeYHmSXOCO/gmsMW/u1QsnBZT2Xd78zTVXQhh26mIAG5ur3uqoi2byTHUhZaa8+OQ7IVVrRvl5ONy2N5b/uCGXjHKYHigIYMsS7EqdYb/Oy/FHjjvDX6EdIHGoA==
+    username: AgA0ZySMLQaRGJu2DWUfNWoVuSF0eF5RaPCwO6yQIN5i6Dq0gmoFgSefRXRFQgCLCSyu+P2+yRd8YIrQpFQNTa8s0mZGcu4/MRZzBQYGsk838Z7DaFY4SRklwGHwu5ZXVVDYbsFH15KkPj3a3G82ZvzHcyLPX12aPB7RQURFk12fNbvMw7WIMeRo/evXeBPmwt1KM4Rrw2/Gvo9mRKVTaHGJWXRQM+OuzgjKgwv1ZhOEYeTjb8xJpPACE8IP6FkHV/mqZYx2MrbA10j6NXAvn25fYaWWgI3+4Ny9wQ7/n9ANvF4bcQ6c8yIXkTcMctx5YuWvej6rlCnorx8Lckf9NHaM8tKdkCFL5gPpOMXmq2F4BbXnOQc7hWshFocQpPjQL+mLPcJRs8DteNMWtP1CmjJBSIJb0XkOeAwXL1VoLdUtAKAMYbJR8ApEFyDLf9B8/Z9D+O3liWxDk0PLTvRgUhZRid0JbTexPMfFR+GNLkEZv6ruwKSQpo14c0U3KTr+itk9PWnPJgNt9I2fODuIhSniqO4rvxhLBvVFUrvDIHU/ttxfWI/4MJoHOQwZAfqbGcXnPrm2FDPMoRwopsXeh0NZggAGifONfh/bRes+o8ODn8hXKUaA0jRvDAtsN6XPa6om8HHL791tuCDAOgWijETPpf+qhxjZtwAoa33xNo/dIH8lEP8ghwOf806pGViEyRMJQqEf
+  template:
+    metadata:
+      creationTimestamp: null
+      name: minio-root-user
+      namespace: prod

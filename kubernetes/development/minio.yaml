@@ -48,9 +48,9 @@ spec:
                   image: quay.io/minio/minio:latest
                   imagePullPolicy: IfNotPresent
                   #          env:
-                  #            - name: MINIO_ACCESS_KEY
-                  #              value: "minio"
-                  #            - name: MINIO_SECRET_KEY
+                  #            - name: MINIO_ROOT_USER
+                  #              value: "root"
+                  #            - name: MINIO_ROOT_PASSWORD
                   #              value: "minio123"
                   livenessProbe:
                       httpGet:

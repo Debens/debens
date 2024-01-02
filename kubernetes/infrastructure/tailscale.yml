@@ -1,0 +1,197 @@
+# Copyright (c) Tailscale Inc & AUTHORS
+# SPDX-License-Identifier: BSD-3-Clause
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tailscale
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: oauth-client
+  namespace: tailscale
+spec:
+  encryptedData:
+    client_id: AgBrfPoCrM6rSCpWpQkbD2ykk13OJ2uPmlcvx3k+/iWqXIM2976fk+Igc76tDI0ms5sCKGOk1oiLqtnT1otrd37Sj2cr52EVIVvy94CWAPwf1d605j9IENBD0Htqmcr/ancZ+mXg5pg8Gg5M3O5Ft2xBaTzFLt/dwiygZR8EOEIj4U6zNuE9+ilUgrcekjghcO67kWOIeQl7eEGtG46yAUOfNDcVRaNPLK75CNsQ5miis5P81cLFqOSYjUQBDpViqLvRvHqo3XCfXoXj3MxRRibwlnUkJ/9MgSFOBiVCyYGZY6otElUIsMoibhq1NsxRlAJflixDGCLElOWeiG55OHCuytB/TwMy9CisKwgFyL1YsFofTum7YGlB/iQiXWkEP286+6umVGgyUdKrKlWocvnpGFFXTM0AJw4tZ+KQWtgvCwFKcd7xkhJuKw5PDMgOa2X046akx4cGUdhbc5LMxrjFKRVrYo2ysKKlZLNEvyiT6AX5hmGyf5Gs/GozzRGo32c8W2UVlMXF8baQvJLwOgYbwoYegmXmjeum+ApY9uj0lOP2NeyUFV9+4l1xeJKd/QRxlBCexmrs9rCm+tGuGToWA5iD2GUF2ANGduyqm8V7oyDItSFmXny5ZUwc3vUHZ/thW5yXcjhHzky+qsyH00qO0iupkcmUjCtouIkwi7FeAwsJp4osjPeeBiRpfkmVOoLED9vm5SPwx5NHrOI=
+    client_secret: AgBUeRVL7/V/Rc7D7ho9ZFcb00iRx5Kn14jZEEHxb9W53Yn/hyYYKAnBrHuMuzj5mc895TpaavI7PRJMJLVslUu4d3tdN8r1lzORWBYpV3hR71VjIvleVOJ7BM1riBuXDxzIYOOpaPudvAb8hUo9cMRU6zpDWFaREu/PmhgI0oCLmXvigkFx5MLyFT8XGdTo+kDmg1jlsQRDNR5FBVLgOkoTRRWiZryyKe3pCqfkvEDc99K+bGesPJRRmsV7aVYIjT2C2uV2n31iCeU+2QUN7tYT4QApBzrcZT+CUP156NCmTrkQwokrPhlf5/155ojovuvvL2mY5Pe90luwXTaimEvhbF76Bw7X98OnlkBHyGrRdk+xS4sKeGeEFiFsrMO04mzEl0OiDKLWuEImRdXI02xmxiSeXWXUDPF/MrDM8GhjG74Pc71iEyQ0TyIj5w6ww3VoR/ZQCitF1+/hBpqeXMawDj0NVkdmzJtUXOUXLoRbwcB5JTMPpGMlEFN1SoYUnzJ+1Oc26NXu3P+tCkKZrVBfZ6QQuFg/N126ZrYF0YkqhZgEHy5s78blqLFaYqM6yGhIRSqbYBpyTwSgrb/9oNJbdUEECSSsF2A4gGphbQAvaYY2LwgKtXqO3gJxuoPBr37G9U5pZnrvNZ3dGA36N8B8gt6e4GFBdguTR940+LCiCzY3Ua7rP5hD5WayM/b2gd2S5mj1UVlfAnDVQRbIHBGjP6AGW1KNYZE/Zf69VkGWnc0Fm5++iPYPlCEGyA6pV62SCAWJOM7dJWe/
+  template:
+    metadata:
+      creationTimestamp: null
+      name: oauth-client
+      namespace: tailscale
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+    name: operator
+    namespace: tailscale
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+    name: proxies
+    namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: tailscale-operator
+rules:
+    - apiGroups:
+        - ""
+      resources:
+        - events
+        - services
+        - services/status
+      verbs:
+        - '*'
+    - apiGroups:
+        - networking.k8s.io
+      resources:
+        - ingresses
+        - ingresses/status
+      verbs:
+        - '*'
+    - apiGroups:
+        - tailscale.com
+      resources:
+        - connectors
+        - connectors/status
+      verbs:
+        - get
+        - list
+        - watch
+        - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+    name: tailscale-operator
+roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: tailscale-operator
+subjects:
+    - kind: ServiceAccount
+      name: operator
+      namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+    name: operator
+    namespace: tailscale
+rules:
+    - apiGroups:
+        - ""
+      resources:
+        - secrets
+      verbs:
+        - '*'
+    - apiGroups:
+        - apps
+      resources:
+        - statefulsets
+      verbs:
+        - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+    name: proxies
+    namespace: tailscale
+rules:
+    - apiGroups:
+        - ""
+      resources:
+        - secrets
+      verbs:
+        - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: operator
+    namespace: tailscale
+roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: operator
+subjects:
+    - kind: ServiceAccount
+      name: operator
+      namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: proxies
+    namespace: tailscale
+roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: proxies
+subjects:
+    - kind: ServiceAccount
+      name: proxies
+      namespace: tailscale
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: operator
+    namespace: tailscale
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: operator
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                app: operator
+        spec:
+            containers:
+                - env:
+                    - name: OPERATOR_HOSTNAME
+                      value: tailscale-operator
+                    - name: OPERATOR_SECRET
+                      value: operator
+                    - name: OPERATOR_LOGGING
+                      value: info
+                    - name: OPERATOR_NAMESPACE
+                      valueFrom:
+                        fieldRef:
+                            fieldPath: metadata.namespace
+                    - name: ENABLE_CONNECTOR
+                      value: "false"
+                    - name: CLIENT_ID_FILE
+                      value: /oauth/client_id
+                    - name: CLIENT_SECRET_FILE
+                      value: /oauth/client_secret
+                    - name: PROXY_IMAGE
+                      value: tailscale/tailscale:unstable-v1.51.178
+                    - name: PROXY_TAGS
+                      value: tag:k8s
+                    - name: APISERVER_PROXY
+                      value: "false"
+                    - name: PROXY_FIREWALL_MODE
+                      value: auto
+                  image: tailscale/k8s-operator:unstable-v1.51.178
+                  imagePullPolicy: Always
+                  name: operator
+                  volumeMounts:
+                    - mountPath: /oauth
+                      name: oauth
+                      readOnly: true
+            nodeSelector:
+                kubernetes.io/os: linux
+            serviceAccountName: operator
+            volumes:
+                - name: oauth
+                  secret:
+                    secretName: oauth-client

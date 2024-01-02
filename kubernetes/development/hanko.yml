@@ -2,187 +2,246 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    name: hanko-data
-    namespace: dev
+  name: hanko-data
+  namespace: dev
 spec:
-    accessModes:
-        - ReadWriteOnce
-    resources:
-        requests:
-            storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: hanko
-    namespace: dev
+  name: hanko
+  namespace: dev
 spec:
-    selector:
-        app: hanko
-    ports:
-        - port: 80
-          targetPort: public
-          protocol: TCP
-          name: http
+  selector:
+    app: hanko
+  ports:
+    - port: 80
+      targetPort: public
+      protocol: TCP
+      name: http
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: hanko-admin
-    namespace: dev
+  name: hanko-admin
+  namespace: dev
 spec:
-    selector:
-        app: hanko
-    ports:
-        - port: 80
-          targetPort: admin
-          protocol: TCP
-          name: http
+  selector:
+    app: hanko
+  ports:
+    - port: 80
+      targetPort: public
+      protocol: TCP
+      name: admin
+
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: hanko
-    namespace: dev
-    labels:
-        app: hanko
+  name: hanko
+  namespace: dev
+  labels:
+    app: hanko
 spec:
-    replicas: 1
-    selector:
-        matchLabels:
-            app: hanko
-    template:
-        metadata:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hanko
+  template:
+    metadata:
+      name: hanko
+      labels:
+        app: hanko
+    spec:
+      containers:
+        - name: hanko
+          image: ghcr.io/teamhanko/hanko:latest
+          command:
+            - /hanko
+          args:
+            - serve
+            - all
+            - --config
+            - /etc/config/config.yaml
+          ports:
+            - containerPort: 8000
+              name: public
+            - containerPort: 8001
+              name: admin
+          env: &env
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hanko
+                  key: db-user
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hanko
+                  key: db-password
+            - name: SECRETS_KEYS
+              valueFrom:
+                secretKeyRef:
+                  name: hanko
+                  key: secret-key
+          livenessProbe:
+            httpGet:
+              path: /health/alive
+              port: 8000
+            initialDelaySeconds: 120
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 120
+            periodSeconds: 20
+          volumeMounts:
+            - name: config
+              mountPath: /etc/config/config.yaml
+              subPath: config.yml
+      initContainers:
+        - name: hanko-db-migrations
+          image: ghcr.io/teamhanko/hanko:latest
+          command:
+            - /hanko
+          args:
+            - --config
+            - /etc/config/config.yaml
+            - migrate
+            - up
+          env: *env
+          volumeMounts:
+            - name: config
+              mountPath: /etc/config/config.yaml
+              subPath: config.yml
+      volumes:
+        - name: config
+          configMap:
             name: hanko
-            labels:
-                app: hanko
-        spec:
-            containers:
-                - name: hanko
-                  image: debens/hanko:latest
-                  command:
-                      - "/hanko"
-                  args:
-                      - "serve"
-                      - "all"
-                      - "--config"
-                      - "/etc/config/config.yaml"
-                  ports:
-                      - containerPort: 8000
-                        name: public
-                      - containerPort: 8001
-                        name: admin
-                  livenessProbe:
-                      httpGet:
-                          path: /health/alive
-                          port: 8000
-                      initialDelaySeconds: 120
-                      periodSeconds: 20
-                  readinessProbe:
-                      httpGet:
-                          path: /health/ready
-                          port: 8000
-                      initialDelaySeconds: 120
-                      periodSeconds: 20
-                  volumeMounts:
-                      - name: config
-                        mountPath: /etc/config/config.yaml
-                        subPath: config.yml
-            initContainers:
-                - name: hanko-db-migrations
-                  image: debens/hanko:latest
-                  command:
-                      - "/hanko"
-                  args:
-                      - "--config"
-                      - "/etc/config/config.yaml"
-                      - "migrate"
-                      - "up"
-                  volumeMounts:
-                      - name: config
-                        mountPath: /etc/config/config.yaml
-                        subPath: config.yml
-            volumes:
-                - name: config
-                  secret:
-                      secretName: hanko-config
+            defaultMode: 420
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hanko
+  namespace: dev
+data:
+  config.yml: |-
+    database:
+        host: hanko-db
+        port: 5432
+        database: hanko
+        dialect: postgres
+    passcode:
+      email:
+        from_address: no-reply@hanko.io
+      smtp:
+        host: "mailhog"
+        port: "2500"
+    service:
+      name: Hanko Authentication Service
+    server:
+      public:
+        cors:
+          enabled: true
+          allow_credentials: true
+          allow_origins:
+            - 'https://api.dev.debens.app'
+    webauthn:
+      relying_party:
+        origin: "https://api.dev.debens.app"
+
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: hanko
+  namespace: dev
+spec:
+  encryptedData:
+    db-password: AgC6mukGhwzhnYzzGeW91NwKlIS/MNfvmlBtM5dcC1eouJhaNkrPp4ZNfjfGdy0Ih7vJgkWtX5O5gbzpzEUKEwST2WcY2aeTdZR8iFzbqoRVbTHazEm4LoXqBrDT6Fq0s1sOrGZFaR0M6u09bv29Hwk92PIl3p4R1jNqdRUZdO6IgWSdrhQtXVZuRoFGxzzPKFyCHtN7Jgs7RgsnpXFtAd6puXbCzjoyU+mFFuCGbypSNxIzdjUnLF6tndsB8aZAjhYzV6LJcPjwhYcqh2wZK3eknzcThzVJhho9pi7Sba/ZBXvbwwD0gwJHIDc8ntaTFFELmGsji6GQog3qw/kSvGLzaW1A9dm91jJBe8I1Kgo3twVmOSnoFMCfg0kmEVy/m/iQdDqn2DsqcXVNWry4bOX27SeYdJgqX7LEyhwGRZwCVaEAnFopx2wxGiWu8Bp8GeerMLbhWgivk/WcWWZWWgNMbJbxC3EvqkicA/no99+0oU1HxgWPUWMU3j/Go307QDMuXFaIrCKyO7BWSAIUs55Msut6iY7RTOgbXZp1NHtcoe31TyXANlCXMmuXKHuS8WwbuRriMF11kNfE2eqzdraE5KXc4/7Fi3BUAR0J/jew8qSNG2fVhvEixhO1zNwiwmiH+VCpErj4nzIltTNT6S/QpJUJxC9yn1in03cYEkb7BIXX2GzH962EQA0/XSxcPNE3QJ7ICNjM0WjfrKe6DF2QW9R2vg==
+    db-user: AgBWnqHJnWznCb7mVPrdApREax14SiZS33ZEQg6j43vbWlh7qmJ8oXlJYWYgA1SuIgIJEPhpvoQn/D9++zN773w9q7hgOYDQid+26foOzFuYAMegrLFM/2+AHNWNxZGsfjABi4u9cv9bbAyUiF7QWyoCNwCc2vA2jYx9xL0KfQGBaQnRvtt+SAuFfzclOgBeQvUOhFWXETbmRrXMwtxOKYSIrKTpbSjOkGu0MisFPdlAb8nMao69/4MUFHm9kbnMqR8xZoo9m5lGV1/aVuNF1yYe3tCuCi0kH9GTONslpKOAEt1x0IveJTBBWdwt9bsOysSr1BmkRx8eCGz4sA0A6kdSwTdyw/OhrS2xxZt7ZqKAIKE0vG1eJlIr4hNmOQCu+26KYL6kds54YVEjzgNy7WrqqesIbXNCJ41Zy/9GJyRwsTPbv81iQygUSC9vywCAJnNSu3HRRyuSC8yZpXYEV97nb77x0aM++hiRAB4Oj8qd2eoPQja8ubJKi1aR1SmY10QPlc8YgNcMtQZGvc9Ct+S+pt5rRtE1HruCLZIYObYN+SLJpV0vfGHoU7xIMbbjHrF5KOEoBSXEEwW+qs7oFU2w6txhOud1PN3bDyt5rAC1giNHltTTtEvistZZt74FG45WkeFNhTQ4nu7iiVchQuaeN1yLks/mULG2iQTrN8azoMOfhuLdN07CEDzcWYysq7m5mqn3Yw==
+    secret-key: AgCrHhyAWJ/BCIFdGOUjx1aOXNzYpCStcEfztxMxojwivnTy2cr3VxQ2AA8s8khWsXVJOwsAPsmBy9kz1cfAre4vMBWUXsy0XAC5DMIZ9P9wlJFZ0Vfl3MxpZAxymWcrjTwMzJ02i64hL/l2cBxCrGy8wP8vp+WyRwX4dhyaCXCtw/lV2UtaO6RTmLpSYmrkRaNFRaSfb6wtqvLs7eYJANxN/uRGEeYt+4kB3fD5tKOaE7CzLQwX6lT/KNl1tLm1xBPx8oDrCh3eV9cCB53/ZMHErMnjMtElot53AdpBgajKfTyKs12OeVnfHqxE1GtflfcivnILgxXrrN3XBG1WcLBgWLSA7JPZqFZ3pwiHgHaQIj++TvC0dcOjANoNI3AVs20kdGC7Hg/r2DHPbyItpG/qhcrfOfqXoAUYzIdhenm6NAYvVYPTXjvJ3116pMyX+1+kGHvHJvKiR2rxDZdEDOecWPtCahHUpaNeH0RkZuK2og+v4ojyCl1A+A07QN7LUvJ2+obnCLHP1134RU6lA94r6eTJwWZ277INpQKgeBfuNEPhLXAYZSLozQgqDpFKOpBLyEZ5iOLMpdaqv6gfPfFVEYQCyLaZXVphrIYEuqy0H+mMSmdSZIwhgzCgw5BQuuT8zHIXeLA/MOs7F8NDKqWD89uLZkEfcLPg4m+1sQXerTJB+d7vNFbzMi4mMbsW5b+jY2ahVuF+0nl9RfiJPy6i0o7ZEl7ig/eLtJwOwNsEvroHsJI=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: hanko
+      namespace: dev
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: hanko-db
-    namespace: dev
+  name: hanko-db
+  namespace: dev
 spec:
-    selector:
-        app: hanko-db
-    ports:
-        - port: 5432
-          name: database
+  selector:
+    app: hanko-db
+  ports:
+    - port: 5432
+      name: database
+
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: hanko-db
-    namespace: dev
-    labels:
-        app: hanko-db
+  name: hanko-db
+  namespace: dev
+  labels:
+    app: hanko-db
 spec:
-    replicas: 1
-    selector:
-        matchLabels:
-            app: hanko-db
-    template:
-        metadata:
-            name: hanko-db
-            labels:
-                app: hanko-db
-        spec:
-            containers:
-                - name: hanko-db
-                  image: postgres:12-alpine
-                  ports:
-                      - containerPort: 5432
-                  volumeMounts:
-                      - mountPath: /var/lib/postgresql/data
-                        name: storage
-                  env:
-                      - name: POSTGRES_USER
-                        value: hanko
-                      - name: POSTGRES_PASSWORD
-                        value: hanko
-                      - name: POSTGRES_DB
-                        value: hanko
-                  readinessProbe:
-                      exec:
-                          command:
-                              [
-                                  "psql",
-                                  "-w",
-                                  "-U",
-                                  "hanko",
-                                  "-d",
-                                  "hanko",
-                                  "-c",
-                                  "SELECT 1",
-                              ]
-                      initialDelaySeconds: 15
-                      timeoutSeconds: 2
-                  livenessProbe:
-                      exec:
-                          command:
-                              [
-                                  "psql",
-                                  "-w",
-                                  "-U",
-                                  "hanko",
-                                  "-d",
-                                  "hanko",
-                                  "-c",
-                                  "SELECT 1",
-                              ]
-                      initialDelaySeconds: 45
-                      timeoutSeconds: 2
-            volumes:
-                - name: storage
-                  persistentVolumeClaim:
-                      claimName: hanko-data
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hanko-db
+  template:
+    metadata:
+      name: hanko-db
+      labels:
+        app: hanko-db
+    spec:
+      containers:
+        - name: hanko-db
+          image: postgres:12-alpine
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: storage
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hanko
+                  key: db-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hanko
+                  key: db-password
+            - name: POSTGRES_DB
+              value: hanko
+          readinessProbe:
+            exec:
+              command: ["psql", "-w", "-U", "hanko", "-d", "hanko", "-c", "SELECT 1"]
+            initialDelaySeconds: 15
+            timeoutSeconds: 2
+          livenessProbe:
+            exec:
+              command: ["psql", "-w", "-U", "hanko", "-d", "hanko", "-c", "SELECT 1"]
+            initialDelaySeconds: 45
+            timeoutSeconds: 2
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: hanko-data
