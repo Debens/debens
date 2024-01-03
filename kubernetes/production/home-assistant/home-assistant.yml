@@ -1,3 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: home-assistant
+  name: home-internal
+spec:
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+      - home
+  defaultBackend:
+    service:
+      name: home-assistant
+      port: 
+        name: console
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -106,7 +122,9 @@ metadata:
   name: home-assistant-config
 data:
   known_devices.yaml: |
+    
   automations.yaml: |
+
   configuration.yaml: |
     default_config:
     frontend:
@@ -114,10 +132,12 @@ data:
     automation: !include automations.yaml
     http:
       cors_allowed_origins:
-        - https://home.debens.app
+        - https://home.fox-polaris.ts.net
       use_x_forwarded_for: true
       trusted_proxies:
         - 10.42.0.0/24
+        - 10.42.1.0/24
+        - 100.0.0.0/24
     homeassistant:
       name: Home
       country: GP
@@ -127,4 +147,3 @@ data:
       unit_system: metric
       latitude: 51.5072
       longitude: 0.1276
-      external_url: https://home.debens.app
