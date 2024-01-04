@@ -1,75 +1,91 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eventstorage
+  namespace: dev
+spec:
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+      - dev-eventstore
+  defaultBackend:
+    service:
+      name: eventstorage
+      port: 
+        name: http
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    name: eventstorage-volume
-    namespace: dev
+  name: eventstorage-volume
+  namespace: dev
 spec:
-    accessModes:
-        - ReadWriteOnce
-    resources:
-        requests:
-            storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: eventstorage # cannot user `eventstore` as this creates `EVENTSTORE_` envvars, https://developers.eventstore.com/server/v20.10/configuration.html#environment-variables
-    namespace: dev
+  name: eventstorage # cannot user `eventstore` as this creates `EVENTSTORE_` envvars, https://developers.eventstore.com/server/v20.10/configuration.html#environment-variables
+  namespace: dev
 spec:
-    selector:
-        app: eventstorage
-    ports:
-        - name: tcp
-          port: 1113
-          targetPort: 1113
-        - name: http
-          port: 2113
-          targetPort: 2113
+  selector:
+    app: eventstorage
+  ports:
+    - name: tcp
+      port: 1113
+    - name: http
+      port: 2113
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-    labels:
-        app: eventstorage
-    name: eventstorage
-    namespace: dev
+  labels:
+    app: eventstorage
+  name: eventstorage
+  namespace: dev
 spec:
-    replicas: 1
-    selector:
-        matchLabels:
-            app: eventstorage
-    template:
-        metadata:
-            labels:
-                app: eventstorage
-        spec:
-            containers:
-                - name: eventstorage
-                  image: ghcr.io/eventstore/eventstore:21.10.0-alpha-arm64v8
-                  ports:
-                      - containerPort: 1113
-                      - containerPort: 2113
-                  volumeMounts:
-                      - mountPath: /var/lib/eventstore
-                        name: stroage
-                  env:
-                      - name: EVENTSTORE_CLUSTER_SIZE
-                        value: "1"
-                      - name: EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
-                        value: "true"
-                      - name: EVENTSTORE_ENABLE_EXTERNAL_TCP
-                        value: "true"
-                      - name: EVENTSTORE_EXT_TCP_PORT
-                        value: "1113"
-                      - name: EVENTSTORE_HTTP_PORT
-                        value: "2113"
-                      - name: EVENTSTORE_INSECURE
-                        value: "true"
-                      - name: EVENTSTORE_RUN_PROJECTIONS
-                        value: All
-                      - name: EVENTSTORE_START_STANDARD_PROJECTIONS
-                        value: "true"
-            volumes:
-                - name: stroage
-                  persistentVolumeClaim:
-                      claimName: eventstorage-volume
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventstorage
+  template:
+    metadata:
+      labels:
+        app: eventstorage
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: eventstorage
+          image: ghcr.io/eventstore/eventstore:21.10.10-alpha-arm64v8
+          ports:
+            - containerPort: 1113
+            - containerPort: 2113
+          volumeMounts:
+            - mountPath: /var/lib/eventstore
+              name: stroage
+          env:
+            - name: EVENTSTORE_CLUSTER_SIZE
+              value: "1"
+            - name: EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
+              value: "true"
+            - name: EVENTSTORE_ENABLE_EXTERNAL_TCP
+              value: "true"
+            - name: EVENTSTORE_EXT_TCP_PORT
+              value: "1113"
+            - name: EVENTSTORE_HTTP_PORT
+              value: "2113"
+            - name: EVENTSTORE_INSECURE
+              value: "true"
+            - name: EVENTSTORE_RUN_PROJECTIONS
+              value: All
+            - name: EVENTSTORE_START_STANDARD_PROJECTIONS
+              value: "true"
+      volumes:
+        - name: stroage
+          persistentVolumeClaim:
+            claimName: eventstorage-volume

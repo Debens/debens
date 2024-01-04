@@ -1,55 +1,69 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: persona
+  namespace: dev
+spec:
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+      - dev-persona
+  defaultBackend:
+    service:
+      name: persona
+      port: 
+        name: api
+---
 apiVersion: v1
 kind: Service
 metadata:
-    name: persona
-    namespace: dev
+  name: persona
+  namespace: dev
 spec:
-    selector:
-        app: persona
-    ports:
-        - name: api
-          port: 80
-          targetPort: 3000
-          nodePort: 30801
-    type: NodePort
+  selector:
+    app: persona
+  ports:
+    - name: api
+      port: 80
+      targetPort: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    labels:
-        app: persona
-    name: persona
-    namespace: dev
+  labels:
+    app: persona
+  name: persona
+  namespace: dev
 spec:
-    replicas: 1
-    selector:
-        matchLabels:
-            app: persona
-    template:
-        metadata:
-            labels:
-                app: persona
-        spec:
-            containers:
-                - name: persona
-                  image: debens/service-persona
-                  ports:
-                      - containerPort: 3000
-                  resources: {}
-                  env:
-                      - name: EVENTSTORE_HOST
-                        value: eventstore
-                      - name: RMQ_HOST
-                        value: rabbitmq
-                      - name: PORT
-                        value: "3000"
-                      - name: ACCESS_TOKEN_SECRET
-                        valueFrom:
-                            secretKeyRef:
-                                name: tokens
-                                key: access_secret
-                      - name: REFRESH_TOKEN_SECRET
-                        valueFrom:
-                            secretKeyRef:
-                                name: tokens
-                                key: refresh_secret
+  replicas: 1
+  selector:
+    matchLabels:
+      app: persona
+  template:
+    metadata:
+      labels:
+        app: persona
+    spec:
+      containers:
+        - name: persona
+          image: debens/service-persona
+          ports:
+            - containerPort: 3000
+          resources: {}
+          env:
+            - name: EVENTSTORE_HOST
+              value: eventstore
+            - name: RMQ_HOST
+              value: rabbitmq
+            - name: PORT
+              value: "3000"
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: tokens
+                  key: access_secret
+            - name: REFRESH_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: tokens
+                  key: refresh_secret

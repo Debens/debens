@@ -17,6 +17,9 @@ kind: Service
 metadata:
   name: hanko
   namespace: dev
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: dev-hanko
 spec:
   selector:
     app: hanko
@@ -31,12 +34,15 @@ kind: Service
 metadata:
   name: hanko-admin
   namespace: dev
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: dev-hanko-admin
 spec:
   selector:
     app: hanko
   ports:
     - port: 80
-      targetPort: public
+      targetPort: admin
       protocol: TCP
       name: admin
 

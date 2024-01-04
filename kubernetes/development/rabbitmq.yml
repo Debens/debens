@@ -10,6 +10,22 @@ spec:
         requests:
             storage: 1Gi
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rabbitmq
+  namespace: dev
+spec:
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+      - dev-rabbitmq
+  defaultBackend:
+    service:
+      name: rabbitmq
+      port: 
+        name: management
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -21,7 +37,8 @@ spec:
     ports:
         - name: ampq
           port: 5672
-          targetPort: 5672
+        - name: management
+          port: 15672
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -47,6 +64,7 @@ spec:
                   image: rabbitmq:latest
                   ports:
                       - containerPort: 5672
+                      - containerPort: 15672
                   volumeMounts:
                       - name: config
                         mountPath: /etc/rabbitmq/enabled_plugins

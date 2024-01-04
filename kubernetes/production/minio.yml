@@ -38,6 +38,21 @@ spec:
         - port: 9090
           name: console
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-storage
+  namespace: prod
+  labels:
+    app: minio
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -101,8 +116,8 @@ spec:
                       - minio server /data --console-address :9090
             volumes:
                 - name: data
-                  emptyDir:
-                      sizeLimit: 500Mi
+                  persistentVolumeClaim:
+                    claimName: minio-storage
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
