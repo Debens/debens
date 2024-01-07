@@ -28,6 +28,7 @@ spec:
       targetPort: public
       protocol: TCP
       name: http
+      
 ---
 apiVersion: v1
 kind: Service
@@ -151,7 +152,7 @@ data:
       email:
         from_address: no-reply@hanko.io
       smtp:
-        host: "mailhog"
+        host: "mailslurper"
         port: "2500"
     service:
       name: Hanko Authentication Service
@@ -251,3 +252,4 @@ spec:
         - name: storage
           persistentVolumeClaim:
             claimName: hanko-data
+

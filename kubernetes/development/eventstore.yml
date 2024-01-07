@@ -7,7 +7,7 @@ spec:
   ingressClassName: tailscale
   tls:
     - hosts:
-      - dev-eventstore
+      - dev-eventstore-admin
   defaultBackend:
     service:
       name: eventstorage
@@ -31,6 +31,9 @@ kind: Service
 metadata:
   name: eventstorage # cannot user `eventstore` as this creates `EVENTSTORE_` envvars, https://developers.eventstore.com/server/v20.10/configuration.html#environment-variables
   namespace: dev
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: dev-eventstore
 spec:
   selector:
     app: eventstorage
@@ -67,7 +70,7 @@ spec:
             - containerPort: 2113
           volumeMounts:
             - mountPath: /var/lib/eventstore
-              name: stroage
+              name: storage
           env:
             - name: EVENTSTORE_CLUSTER_SIZE
               value: "1"
@@ -86,6 +89,6 @@ spec:
             - name: EVENTSTORE_START_STANDARD_PROJECTIONS
               value: "true"
       volumes:
-        - name: stroage
+        - name: storage
           persistentVolumeClaim:
             claimName: eventstorage-volume

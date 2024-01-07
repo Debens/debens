@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mailslurper
+  namespace: dev
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: dev-mail
+spec:
+  selector:
+    app: mailslurper
+  ports:
+    - name: http 
+      port: 80
+      targetPort: webapp
+    - name: service 
+      port: 8085
+      targetPort: service
+    - name: smtp 
+      port: 2500
+      targetPort: smtp
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailslurper
+  namespace: dev
+  labels:
+    app: mailslurper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mailslurper
+  template:
+    metadata:
+      name: mailslurper
+      labels:
+        app: mailslurper
+    spec:
+      containers:
+        - name: mailslurper
+          image: moohii/mail-server:1 # arm64 of https://github.com/mailslurper/mailslurper 
+          ports: 
+            - name: webapp
+              containerPort: 8080 
+            - name: service
+              containerPort: 8085 
+            - name: smtp
+              containerPort: 2500
+          volumeMounts:
+            - name: config
+              mountPath: config.json
+              subPath: config.json
+      volumes:
+        - name: config
+          configMap:
+            name: mailslurper
+            defaultMode: 420
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mailslurper
+  namespace: dev
+data:
+  config.json: |
+    {
+      "wwwAddress": "0.0.0.0",
+      "wwwPort": 8080,
+      "wwwPublicURL": "http://dev-mail",
+      "serviceAddress": "0.0.0.0",
+      "servicePort": 8085,
+      "servicePublicURL": "http://dev-mail:8085",
+      "smtpAddress": "0.0.0.0",
+      "smtpPort": 2500,
+      "dbEngine": "SQLite",
+      "dbHost": "",
+      "dbPort": 0,
+      "dbDatabase": "./mailslurper.db",
+      "dbUserName": "",
+      "dbPassword": "",
+      "maxWorkers": 1000,
+      "autoStartBrowser": false,
+      "keyFile": "",
+      "certFile": "",
+      "adminKeyFile": "",
+      "adminCertFile": "",
+      "authenticationScheme": "",
+      "authSecret": "",
+      "authSalt": "",
+      "authTimeoutInMinutes": 120,
+      "credentials": {}
+    }
